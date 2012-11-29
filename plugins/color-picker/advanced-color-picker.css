@@ -1,0 +1,39 @@
+.acp-picker-palette{
+  position: relative;
+  width: 150px;
+  height: 150px;
+  /*top:20;
+  left: 20;*/
+  display: inline-block;
+
+}
+
+.acp-slider-palette{
+  position: relative;
+  width: 18px;
+  height: 150px;
+  //top:20;
+  display: inline-block;
+
+}
+
+.acp-slider{
+	position: absolute; 
+	width: 18px;
+	height:	12px;
+	border: 1px single black;
+    background-image: url("http://dl.dropbox.com/u/120228035/hueBar.png");
+	background-repeat: no-repeat;	
+	top: -6px;
+}
+
+.acp-selector{
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	border: 4px double black;
+	border-image: initial;
+	border-radius: 6px;
+    top: -7px;
+    left:-7px;
+}

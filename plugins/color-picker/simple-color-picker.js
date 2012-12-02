@@ -59,7 +59,7 @@
     };
 
     Plugin.prototype.newRow = function() {
-        return $('<ul>', {
+        return $('<div>', {
             class: "palette-row"
         }).appendTo(this.$el);
     };
@@ -67,14 +67,18 @@
     Plugin.prototype.createColor = function (colorHex) {
         var opt = this.options;
 
-        var colorInner = $('<span>', {
-            class: opt.colorUnitInner
-        }).css('background-color', colorHex);
-
-        var colorWrapper = $('<li>', {
+        var colorWrapper = $('<div>', {
             class: opt.colorUnit,
             hvalue: colorHex
-        }).append(colorInner);
+        });
+
+        var colorInner = $('<div>', {
+            class: opt.colorUnitInner
+        }).css('background-color', colorHex).appendTo(colorWrapper);
+
+        var colorIcon = $('<div>', {
+            class: 'color-icon'
+        }).appendTo(colorWrapper);
 
         if (colorInner.css('background-color') === opt.initColor) {
             colorWrapper.addClass(opt.active);

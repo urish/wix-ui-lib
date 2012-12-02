@@ -80,7 +80,7 @@
 
 		var colorWrapper = $('<div>', {
 			class: opt.colorUnit,
-			value: colorHex,
+			value: colorHex
 		}).append(colorInner);
 		
 		if (colorHex === opt.initColor) {

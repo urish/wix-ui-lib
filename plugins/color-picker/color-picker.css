@@ -1,3 +1,10 @@
+.popover{
+    background: url("img/bg-gradient.png") 0 100% repeat-x #F9FAFC;
+}
+
+.popover-title {
+    background: #F9FAFC;
+}
 ul, li {
     margin: 0;
     padding: 0;
@@ -16,30 +23,46 @@ ul, li {
 }
 
 .color-unit {
+    -webkit-border-radius: 3px;
+   	-moz-border-radius: 3px;
+   	border-radius: 3px;
+    margin: 1px 2px;
+    overflow: hidden;
+    border: 1px solid #c4c4c4;
+    position: relative;
 	display: inline-block;
-	border: 2px solid transparent;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;	
+    cursor: pointer;
+    width: 28px;
+    height: 28px;
 }
 
 .color-unit:hover {
-    border-color: #fff;
-    box-shadow: #444 0 0 1em;
-	cursor: pointer;
-}
-
-.color-unit.active {
-	border-color: #fff;
-    box-shadow: #444 0 0 1em;
+    box-shadow: 0 2px 3px 0 rgba(0,0,0,.35), 0 1px 2px 0 rgba(255,255,255,.7) inset;
 }
 
 .color-unit-inner {
-	width: 30px;
-	height: 30px;
-	display: block;
-	border: 1px solid #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 23px;
+    height: 22px;
+    margin: -11px 0 0 -11px;
 }
+
+.color-icon {
+    background: url("img/drop_down_picker_frame.png") 0px 0px no-repeat;
+    margin: -12px 0 0 -12px;
+    width: 25px;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+}
+
+.color-unit.active {
+	/*border-color: #fff;*/
+    /*box-shadow: #444 0 0 1em;*/
+}
+
 
 #preview {
     width: 100%;
@@ -78,7 +101,7 @@ ul, li {
     width: 48px;
     height: 25px;
     margin: 5px 0px 0px 6px;
-    background-color: #26464B;
+    background-color: black;
     position: absolute;
     z-index: -1;
 }

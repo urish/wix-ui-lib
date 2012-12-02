@@ -12,7 +12,7 @@
   position: relative;
   width: 18px;
   height: 150px;
-  //top:20;
+  /*top:20;*/
   display: inline-block;
 
 }
@@ -36,4 +36,13 @@
 	border-radius: 6px;
     top: -7px;
     left:-7px;
+}
+
+.acp-readout label {
+}
+
+.acp-readout input {
+    margin-left: 10px;
+    width: 24px;
+    display: inline-block;
 }

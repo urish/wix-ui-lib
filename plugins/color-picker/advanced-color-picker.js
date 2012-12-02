@@ -65,11 +65,17 @@
     Plugin.prototype.setContent = function () {
         $(this.options.template).appendTo(this.$el);
 
+        var readoutsWrapper = $('<div>', {
+            class: 'readouts'
+        });
+
         for (var i = 0; i < (this.options.readouts.length - 1); i++) {
-            this.createReadout(this.options.readouts[i]).appendTo(this.$el);
+            this.createReadout(this.options.readouts[i]).appendTo(readoutsWrapper);
         }
 
-        this.createReadout(this.options.readouts[i], '#').appendTo(this.$el);
+        this.createReadout(this.options.readouts[i], '#').appendTo(readoutsWrapper);
+
+        this.$el.append(readoutsWrapper);
     };
 
     Plugin.prototype.paddingHex = function (hex) {

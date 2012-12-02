@@ -1,6 +1,3 @@
-body {
-    margin: 500px;
-}
 ul, li {
     margin: 0;
     padding: 0;
@@ -62,10 +59,10 @@ ul, li {
 }
 
 .color-selector {
-    position: absolute;
+    display: block;
     width: 80px;
     height: 40px;
-    background-image: url("http://static.wix.com/services/html-web-skins/1.199.2//images/wysiwyg/core/themes/editor_web/button/color_picker_btn.png");
+    background-image: url("../../lib/img/color-picket-states.png");
     background-position: 0 0;
 }
 

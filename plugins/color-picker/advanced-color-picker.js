@@ -223,9 +223,9 @@
 		};
 	};
 
-    Plugin.prototype.isHexInput = function (el) {
-        return (el.id === (this.options.readoutInput + "_" +  opt.readouts[3]));
-    };
+//    Plugin.prototype.isHexInput = function (el) {
+//        return (el.id === (this.options.readoutInput + "_" +  opt.readouts[3]));
+//    };
 
     Plugin.prototype.RenderByHslInputs = function () {
         var opt = this.options;

@@ -59,7 +59,9 @@
     };
 
     Plugin.prototype.newRow = function() {
-        return $('<ul>', {class: "palette-row"}).appendTo(this.$el);
+        return $('<ul>', {
+            class: "palette-row"
+        }).appendTo(this.$el);
     };
 
     Plugin.prototype.createColor = function (colorHex) {

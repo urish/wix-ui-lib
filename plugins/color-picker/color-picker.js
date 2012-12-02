@@ -28,9 +28,7 @@
 	};
 	
 	Plugin.prototype.init = function () {
-		var colors = this.options.colors;
-		
-		this.bindEvents();		
+		this.bindEvents();
 		
 		if (this.options.layout.type === "horizontal") {
 			this.arrangeHorizontal();

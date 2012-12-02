@@ -22,44 +22,57 @@
     // The actual plugin constructor
     function Plugin(element, options) {
         this.$el = $(element);
+
         this.options = $.extend({}, defaults, options);
+
         this.options = $.extend({}, this.options, {
             title: "Color Picker",
             html: true,
             content: '<div id="colorPicker"></div>',
             template: '<div class="popover"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"></div></div></div>'
         });
+
         this._defaults = defaults;
         this._name = pluginName;
+
         this.init("popover", this.$el, this.options);
 
         this.$el.hover(
             function() {
                 this.$el.addClass('over');
             }.bind(this),
-
             function() {
                 this.$el.removeClass('over');
             }.bind(this)
         );
-
-
     }
 
     Plugin.prototype = $.extend({}, $.fn.popover.Constructor.prototype, {
 
         constructor: Plugin,
 
-        toggle: function() {
+        _data: {},
+
+        toggle: function(ev) {
             !$('.popover').hasClass('in') ? this.show() :  this.hide();
             this.$el.toggleClass('active');
             this.$el.toggleClass('up');
         },
 
+        show: function() {
+            $.extend.show();
+
+            debugger;
+            this.$el.blur(function() {
+                debugger;
+            });
+
+        },
+
         setContent: function() {
-            this.$tip = this.tip() ;
-            var title = this.getTitle()
-                ,content = this.getContent()
+            this.$tip = this.tip();
+            var title = this.getTitle(),
+                content = this.getContent();
 
             this.$tip.find('.popover-title')[this.options.html ? 'html' : 'text'](title)
             this.$tip.find('.popover-content')[this.options.html ? 'html' : 'text'](content)
@@ -71,7 +84,6 @@
 
         startColorPicker: function(node) {
             this.options.node = node;
-
             this.createContainers();
             this.renderColorPickers();
             this.renderButtons();
@@ -114,6 +126,7 @@
             $.each(this.options.ColorPickers, function(picker) {
                 var pickerName = this.options.colorPickerTypes[picker];
                 var pickerOptions = this.options.ColorPickers[picker];
+
                 pickerOptions.wrapperId = "colorpicker_" + new Date().getTime();
                 pickerOptions.initColor =  this.$el.find('.inner').css('background-color');
 
@@ -130,6 +143,12 @@
 
                 pickerWrapper[pickerName](pickerOptions);
                 pickerWrapper.hide();
+
+                this._data[picker] = {
+                    options: pickerOptions,
+                    view: this.$el
+                };
+
             }.bind(this));
         },
 
@@ -150,8 +169,7 @@
         },
 
         renderButtons: function() {
-
-            $('<button>', {id: "selectColor"})
+            $('<button>', { id: "selectColor" })
                 .html(this.options.actions)
                 .find('button').addClass('btn btn-large')
                 .appendTo(this.actions);
@@ -172,7 +190,7 @@
         },
 
         onColorChange: function(ev, data) {
-            var selected = this.preview.find('#selectedColor')
+            var selected = this.preview.find('#selectedColor');
             selected.css('background-color', data);
             selected.data('selected', data);
         },

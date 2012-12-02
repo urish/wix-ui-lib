@@ -31,7 +31,7 @@
 	position: absolute;
 	width: 10px;
 	height: 10px;
-	border: 4px double black;
+	border: 2px double #fff;
 	border-image: initial;
 	border-radius: 6px;
     top: -7px;
@@ -45,4 +45,15 @@
     margin-left: 10px;
     width: 24px;
     display: inline-block;
+    font-size: 11px;
+    text-align: center;
+}
+
+.advanced-color-palette {
+    float: left;
+}
+
+.readouts {
+    float: left;
+    margin-left: 10px;
 }

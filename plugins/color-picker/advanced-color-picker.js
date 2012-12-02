@@ -1,16 +1,23 @@
 (function ($, window, document, undefined) {
-	'use strict';
-	
-	var pluginName = 'AdvancedColorPicker';
-	
-	var defaults = {
-		initColor : '#20872',
-		palettePicker : "acpPalettePicker",
-		paletteSlider : "acpPaletteSlider",
-		slider : "acpSlider",
-		selector : "acpSelector",
-        template: "<div id=\"acpPalettePicker\" class=\"acp-picker-palette\"><div id=\"acpSelector\" class=\"acp-selector\"></div></div><div id=\"acpPaletteSlider\" class=\"acp-slider-palette\"><div id=\"acpSlider\" class=\"acp-slider\"></div></div>",
-		draggable : false,
+    'use strict';
+
+    var pluginName = 'AdvancedColorPicker';
+
+    var defaults = {
+        initColor : '#20872',
+        palettePicker : "acpPalettePicker",
+        paletteSlider : "acpPaletteSlider",
+        slider : "acpSlider",
+        selector : "acpSelector",
+        template: "<div class=\"advanced-color-palette\">" +
+            "<div id=\"acpPalettePicker\" class=\"acp-picker-palette\"></div>" +
+            "<div id=\"acpSelector\" class=\"acp-selector\"></div>" +
+            "<div id=\"acpPaletteSlider\" class=\"acp-slider-palette\">" +
+            "<div id=\"acpSlider\" class=\"acp-slider\"></div>" +
+            "</div>"  +
+            "</div>",
+
+        draggable : false,
         readout : "acpReadoutWrapper",
         readoutInput: "acpReadoutInput",
         readouts: ['H', 'S', 'L', 'HEX'],
@@ -18,20 +25,20 @@
         paletteSliderHeight: 150,
         sliderHeight : 12,
         selectorSize : 10
-	};
-	
-	// Contain the present location of the slider bar
-	var _sliderPosY = 0;
+    };
 
-	// The actual plugin constructor
-	function Plugin(element, options) {
-		this.$el = $(element);
-		this.options = $.extend({}, defaults, options);
+    // Contain the present location of the slider bar
+    var _sliderPosY = 0;
+
+    // The actual plugin constructor
+    function Plugin(element, options) {
+        this.$el = $(element);
+        this.options = $.extend({}, defaults, options);
 
         this._defaults = defaults;
-		this._name = pluginName;
-		this.init();
-	};
+        this._name = pluginName;
+        this.init();
+    };
 
     Plugin.prototype.convertColor = function (color) {
 
@@ -45,22 +52,22 @@
         return color;
     };
 
-	Plugin.prototype.init = function () {
+    Plugin.prototype.init = function () {
 
         this.setContent();
         this.setConstants();
 
         var hex = this.paddingHex(this.convertColor(this.options.initColor));
         this.renderSlider();
-		this.setSliderPos((this.convertHexToHslParts(hex)).h);
+        this.setSliderPos((this.convertHexToHslParts(hex)).h);
 
         this.renderPicker(this.getHslColor(hex, true));
-		this.setSelectorPos(this.convertHexToHslParts(hex));
+        this.setSelectorPos(this.convertHexToHslParts(hex));
 
         this.$el.find('#' + this.options.readoutInput + "_" + this.options.readouts[3]).val(hex);
         this.updateHslReadoutValues(this.getHslColor(hex));
-		this.bindEvents();
-	};
+        this.bindEvents();
+    };
 
     Plugin.prototype.setContent = function () {
         $(this.options.template).appendTo(this.$el);
@@ -69,13 +76,15 @@
             class: 'readouts'
         });
 
+        this.createReadout(this.options.readouts[i], '#').appendTo(readoutsWrapper);
+
         for (var i = 0; i < (this.options.readouts.length - 1); i++) {
             this.createReadout(this.options.readouts[i]).appendTo(readoutsWrapper);
         }
 
-        this.createReadout(this.options.readouts[i], '#').appendTo(readoutsWrapper);
-
         this.$el.append(readoutsWrapper);
+
+        this.$el.parent().css('overflow','hidden');
     };
 
     Plugin.prototype.paddingHex = function (hex) {
@@ -137,97 +146,97 @@
         this._SELECTOR_OFFSET_X = this.options.selectorSize / 2;
         this._SELECTOR_OFFSET_Y = this.options.selectorSize / 2;
     };
-	
-	Plugin.prototype.renderPicker = function (color) {
-		var opt = this.options;
+
+    Plugin.prototype.renderPicker = function (color) {
+        var opt = this.options;
         var palettePicker = this.$el.find('#' + opt.palettePicker);
-		if (window.ieG) {
-			var photoshopG2 = ieG('left', [{
-							offset : '0%',
-							color : color,
-							opacity : '1'
-						}, {
-							offset : '100%',
-							color : 'white',
-							opacity : '1'
-						}
-					]);
+        if (window.ieG) {
+            var photoshopG2 = ieG('left', [{
+                offset : '0%',
+                color : color,
+                opacity : '1'
+            }, {
+                offset : '100%',
+                color : 'white',
+                opacity : '1'
+            }
+            ]);
             palettePicker.css("background-image", 'url("' + photoshopG1 + '"),url("' + photoshopG2 + '")');
-		} else {
+        } else {
             palettePicker.css("background-image", '-webkit-linear-gradient(bottom, black, rgba(0,0,0,0)),-webkit-linear-gradient(left, ' + color + ', white)');
             palettePicker.css("background-image", '-moz-linear-gradient(bottom, black, rgba(0,0,0,0)),-moz-linear-gradient(left, ' + color + ', white)');
-		}
-	};
-	
-	Plugin.prototype.renderSlider = function () {
-		var opt = this.options;
+        }
+    };
+
+    Plugin.prototype.renderSlider = function () {
+        var opt = this.options;
         var sliderPlt = this.$el.find('#' + opt.paletteSlider);
 
-		if (window.ieG) {
+        if (window.ieG) {
             sliderPlt.css("background-image", 'url("' + hslGrad + '")');
-		} else {
+        } else {
             sliderPlt.css("background-image", '-webkit-linear-gradient(top, #FF0000, #FFFF00, #00FF00, #00FFFF, #0000FF, #FF00FF, #FF0000)');
             sliderPlt.css("background-image", '-moz-linear-gradient(top, #FF0000, #FFFF00, #00FF00, #00FFFF, #0000FF, #FF00FF, #FF0000)');
-		}
-	};
-	
-	Plugin.prototype.colorFromPosPicker = function (pos) {
+        }
+    };
+
+    Plugin.prototype.colorFromPosPicker = function (pos) {
         var hVal = (this._sliderPosY/ (this._SLIDER_PALETTE_HEIGHT - 1)) * 360;
-		var sVal = 100 - pos.x * 100;
-		var lVal = (pos.y * -50) + (50 * pos.x) + 50 - (pos.y * pos.x * 50);
-		
-		return { h : hVal, s : sVal, l : lVal };
-	};
-	
-	Plugin.prototype.colorFromPosSlider = function (pos) {
-		return {h : pos.y * 360, s : 100, l : 50 };
-	};
-	
-	Plugin.prototype.convertHexToHslParts = function (colorHex) {
+        var sVal = 100 - pos.x * 100;
+        var lVal = (pos.y * -50) + (50 * pos.x) + 50 - (pos.y * pos.x * 50);
+
+        return { h : hVal, s : sVal, l : lVal };
+    };
+
+    Plugin.prototype.colorFromPosSlider = function (pos) {
+        return {h : pos.y * 360, s : 100, l : 50 };
+    };
+
+    Plugin.prototype.convertHexToHslParts = function (colorHex) {
         colorHex = this.paddingHex(colorHex);
 
-		var colorRgb = hexToRgb(colorHex);
-		var colorHsl = rgbToHsv(colorRgb.r, colorRgb.g, colorRgb.b);
+        var colorRgb = hexToRgb(colorHex);
+        var colorHsl = rgbToHsv(colorRgb.r, colorRgb.g, colorRgb.b);
 
-		return {
-			h : colorHsl[0],
-			s : colorHsl[1],
-			l : colorHsl[2]
-		};
-	};
-	
-	Plugin.prototype.setSelectorPos = function (hslParts) {
-		var opt = this.options;
+        return {
+            h : colorHsl[0],
+            s : colorHsl[1],
+            l : colorHsl[2]
+        };
+    };
+
+    Plugin.prototype.setSelectorPos = function (hslParts) {
+        var opt = this.options;
         var pos = { x : 0, y : 0 };
 
-		pos.x = ((100 - hslParts.s * 100) / 100);
-		pos.y = Math.floor(((hslParts.l * 100 + (-50 * pos.x) - 50) / ((-50 * pos.x) - 50)) * (this._PICKER_PALETTE_HEIGHT - 1));
-      	pos.x = Math.floor(pos.x * (this._PICKER_PALETTE_WIDTH - 1));
+        pos.x = ((100 - hslParts.s * 100) / 100);
+        pos.y = Math.floor(((hslParts.l * 100 + (-50 * pos.x) - 50) / ((-50 * pos.x) - 50)) * (this._PICKER_PALETTE_HEIGHT - 1));
+        pos.x = Math.floor(pos.x * (this._PICKER_PALETTE_WIDTH - 1));
 
         var selector = this.$el.find('#' + opt.selector);
 
         selector.css("top", parseInt(pos.y - this._SELECTOR_OFFSET_Y) + 'px');
         selector.css("left", parseInt(pos.x - this._SELECTOR_OFFSET_X) + 'px');
-	};
+    };
 
     Plugin.prototype.setSliderPos = function (hPart) {
-		var opt = this.options;
+        var opt = this.options;
 
-		this._sliderPosY =  (hPart * (this._SLIDER_PALETTE_HEIGHT - 1));
+        this._sliderPosY =  (hPart * (this._SLIDER_PALETTE_HEIGHT - 1));
 
         this.$el.find('#' + opt.slider).css("top", this._sliderPosY - this._SLIDER_OFFSET);
-	};
-	
-	Plugin.prototype.parseHslColor = function (hsl) {
-		return 'hsl(' + hsl.h + ', ' + hsl.s + '% , ' + hsl.l + '%)';
-	};
-	
-	Plugin.prototype.offsetPosFromEvent = function (e) {
-		return {
-			x : (e.offsetX || (e.clientX - e.target.offsetLeft)),
-			y : (e.offsetY || (e.clientY - e.target.offsetTop))
-		};
-	};
+    };
+
+    Plugin.prototype.parseHslColor = function (hsl) {
+        return 'hsl(' + hsl.h + ', ' + hsl.s + '% , ' + hsl.l + '%)';
+    };
+
+    Plugin.prototype.offsetPosFromEvent = function (e) {
+        return {
+            x : (e.offsetX || (e.clientX - e.target.offsetLeft)),
+            y : (e.offsetY || (e.clientY - e.target.offsetTop))
+        };
+    };
 
 //    Plugin.prototype.isHexInput = function (el) {
 //        return (el.id === (this.options.readoutInput + "_" +  opt.readouts[3]));
@@ -260,7 +269,7 @@
         this.$el.find('#' + opt.readoutInput + "_" + opt.readouts[3]).val(rgbToHex(rgb.r, rgb.g, rgb.b));
     };
 
-	Plugin.prototype.bindEvents = function () {
+    Plugin.prototype.bindEvents = function () {
         this.$el.find('#' + this.options.paletteSlider).click( function(e) {
             var opt = this.options;
 
@@ -327,15 +336,15 @@
             }
         }.bind(this));
 
-	};
+    };
 
-	$.fn[pluginName] = function (options) {
-		return this.each(function () {
-			if (!$.data(this, 'plugin_' + pluginName)) {
-				$.data(this, 'plugin_' + pluginName,
-					new Plugin(this, options));
-			}
-		});
-	};
-	
+    $.fn[pluginName] = function (options) {
+        return this.each(function () {
+            if (!$.data(this, 'plugin_' + pluginName)) {
+                $.data(this, 'plugin_' + pluginName,
+                    new Plugin(this, options));
+            }
+        });
+    };
+
 })(jQuery, window, document);

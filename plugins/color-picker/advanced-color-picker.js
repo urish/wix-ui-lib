@@ -23,6 +23,10 @@
 	// Contain the present location of the slider bar
 	var _sliderPosY = 0;
 
+    // Private members for holding the two formats of the color
+    var _hexColor = 0;
+    var _hslParts = 0;
+
 	// The actual plugin constructor
 	function Plugin(element, options) {
 		this.$el = $(element);
@@ -33,32 +37,69 @@
 		this.init();
 	};
 
-    Plugin.prototype.convertColor = function (color) {
+    Plugin.prototype.convertRgbStrToHex = function (color) {
 
-        if (color.indexOf("rgb") != -1) {
-            var start = color.indexOf("(");
-            var rgbColor = color.substring(start + 1, color.length - 1);
-            var rgbParts = rgbColor.split(',');
-            return rgbToHex(parseInt(rgbParts[0]), parseInt(rgbParts[1]), parseInt(rgbParts[2]));
-        }
+        var start = color.indexOf("(");
+        var rgbColor = color.substring(start + 1, color.length - 1);
+        var rgbParts = rgbColor.split(',');
+        return rgbToHex(parseInt(rgbParts[0]), parseInt(rgbParts[1]), parseInt(rgbParts[2]));
 
         return color;
     };
+
+    Plugin.prototype.convertHslStrToHslParts = function (color) {
+        var start = color.indexOf("(");
+        var hslStr = color.substring(start + 1, color.length - 1);
+        var hslParts = hslStr.split(',');
+
+        return {h: (parseInt(hslParts.h) / 360).toFixed(3), s: (parseInt(hslParts.s.remove(hslParts.s.length-1)) / 100).toFixed(3), l: (parseInt(hslParts.l.remove(hslParts.l.length-1)) / 100).toFixed(3)};
+    };
+
+    Plugin.prototype.convertHslToHex = function (hslParts) {
+        var rgb = hsvToRgb(hslParts.h, hslParts.s, hslParts.l);
+        return rgbToHex(rgb.r, rgb.g, rgb.b);
+    };
+
+    Plugin.prototype.divHslParts = function (hslParts) {
+        return { h: hslParts / 360, s: hslParts.s / 100, l: hslParts.l / 100};
+    };
+
+    Plugin.prototype.InitColorFormats = function ()
+    {
+        if (this.options.initColor.indexOf('hsl') != -1)
+        {
+            this._hslParts = this.convertHslStrToHslParts(this.options.initColor);
+            this._hexColor = this.paddingHex(this.convertHslToHex(this._hslParts));
+        }
+        else if (this.options.initColor.indexOf('rgb') != -1)
+        {
+            this._hexColor = this.paddingHex(this.convertRgbStrToHex(this.options.initColor));
+            this._hslParts = this.convertHexToHslParts(this._hexColor);
+        }
+        else
+        {
+            this._hexColor = this.paddingHex(this.options.initColor);
+            this._hslParts = this.convertHexToHslParts(this._hexColor);
+        }
+
+        this._hslParts = { h: this._hslParts.h.toFixed(3), s: this._hslParts.s.toFixed(3), l: this._hslParts.l.toFixed(3)};
+    }
 
 	Plugin.prototype.init = function () {
 
         this.setContent();
         this.setConstants();
 
-        var hex = this.paddingHex(this.convertColor(this.options.initColor));
+        this.InitColorFormats();
+
         this.renderSlider();
-		this.setSliderPos((this.convertHexToHslParts(hex)).h);
+		this.setSliderPos(this._hslParts.h);
 
-        this.renderPicker(this.getHslColor(hex, true));
-		this.setSelectorPos(this.convertHexToHslParts(hex));
+        this.renderPicker(this.parseHslColor(this.multHslParts(this._hslParts)));
+		this.setSelectorPos(this._hslParts);
 
-        this.$el.find('#' + this.options.readoutInput + "_" + this.options.readouts[3]).val(hex);
-        this.updateHslReadoutValues(this.getHslColor(hex));
+        this.$el.find('#' + this.options.readoutInput + "_" + this.options.readouts[3]).val(this._hexColor.toUpperCase());
+        this.updateHslReadoutValues(this.multHslParts(this._hslParts));
 		this.bindEvents();
 	};
 
@@ -169,7 +210,7 @@
         var hVal = (this._sliderPosY/ (this._SLIDER_PALETTE_HEIGHT - 1)) * 360;
 		var sVal = 100 - pos.x * 100;
 		var lVal = (pos.y * -50) + (50 * pos.x) + 50 - (pos.y * pos.x * 50);
-		
+
 		return { h : hVal, s : sVal, l : lVal };
 	};
 	
@@ -194,9 +235,10 @@
 		var opt = this.options;
         var pos = { x : 0, y : 0 };
 
-		pos.x = ((100 - hslParts.s * 100) / 100);
-		pos.y = Math.floor(((hslParts.l * 100 + (-50 * pos.x) - 50) / ((-50 * pos.x) - 50)) * (this._PICKER_PALETTE_HEIGHT - 1));
-      	pos.x = Math.floor(pos.x * (this._PICKER_PALETTE_WIDTH - 1));
+		pos.x = ((100 - (hslParts.s * 100)) / 100);
+		pos.y = (((hslParts.l * 100) + (-50 * pos.x) - 50) / ((-50 * pos.x) - 50));
+        pos.y = pos.y * (this._PICKER_PALETTE_HEIGHT - 1);
+      	pos.x = (pos.x * (this._PICKER_PALETTE_WIDTH - 1));
 
         var selector = this.$el.find('#' + opt.selector);
 
@@ -239,19 +281,20 @@
         var hslFormat = this.parseHslColor(hsl);
         this.renderPicker(hslFormat);
 
-        hsl.h /= 360;
-        hsl.s /= 100;
-        hsl.l /= 100;
+        this._hslParts.h = (hsl.h / 360).toFixed(3);
+        this._hslParts.s = (hsl.s / 100).toFixed(3);
+        this._hslParts.l = (hsl.l / 100).toFixed(3);
 
-        this.setSliderPos(hsl.h);
-        this.setSelectorPos(hsl);
+        this.setSliderPos(this._hslParts.h);
+        this.setSelectorPos(this._hslParts);
     };
 
     Plugin.prototype.SetHexValue = function (hslParts) {
         var opt = this.options;
 
         var rgb = hslToRgb(hslParts.h, hslParts.s, hslParts.l);
-        this.$el.find('#' + opt.readoutInput + "_" + opt.readouts[3]).val(rgbToHex(rgb.r, rgb.g, rgb.b));
+        this._hexColor = rgbToHex(rgb.r, rgb.g, rgb.b);
+        this.$el.find('#' + opt.readoutInput + "_" + opt.readouts[3]).val( this._hexColor.toUpperCase());
     };
 
 	Plugin.prototype.bindEvents = function () {
@@ -274,8 +317,12 @@
 
             this.renderPicker(this.parseHslColor(color));
 
+            this._hslParts = {h: (color.h / 360).toFixed(3), s: (color.s / 100).toFixed(3), l: (color.l/ 100).toFixed(3)};
+            this._hexColor = this.convertHslToHex(this._hslParts);
             this.updateHslReadoutValues(color);
-            this.SetHexValue(color);
+
+            this.SetHexValue(this._hexColor);
+
             this.$el.trigger('colorChanged', this.parseHslColor(color));
         }.bind(this));
 
@@ -297,8 +344,12 @@
 
             var color = this.colorFromPosPicker(pos);
 
+            this._hslParts = {h: (color.h / 360).toFixed(3), s: (color.s / 100).toFixed(3), l: (color.l/ 100).toFixed(3)};
+            this._hexColor = this.convertHslToHex(this._hslParts);
             this.updateHslReadoutValues(color);
-            this.SetHexValue(color);
+
+            this.SetHexValue(this._hexColor);
+
             this.$el.trigger('colorChanged', this.parseHslColor(color));
 
         }.bind(this));
@@ -307,14 +358,15 @@
             if (e.target.id === (this.options.readoutInput + "_" + this.options.readouts[3])) {
                 var hex = this.$el.find('#' + this.options.readoutInput + "_" + this.options.readouts[3]).val();
 
-                hex = this.paddingHex(hex);
-                var hslParts = this.convertHexToHslParts(hex);
-                this.updateHslReadoutValues(this.multHslParts(hslParts));
+                this._hexColor = this.paddingHex(hex);
+                this._hslParts  = this.convertHexToHslParts(hex);
 
-                this.setSliderPos(hslParts.h);
+                this.updateHslReadoutValues(this.multHslParts(this._hslParts));
 
-                this.renderPicker(this.parseHslColor(this.multHslParts(hslParts)));
-                this.setSelectorPos(hslParts);
+                this.setSliderPos(this._hslParts.h);
+
+                this.renderPicker(this.parseHslColor(this.multHslParts(this._hslParts)));
+                this.setSelectorPos( this._hslParts);
             }
             else {
                 this.RenderByHslInputs();

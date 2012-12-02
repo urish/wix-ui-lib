@@ -41,10 +41,16 @@
             function() {
                 this.$el.addClass('over');
             }.bind(this),
+
             function() {
                 this.$el.removeClass('over');
             }.bind(this)
         );
+
+        this.$el.click( function() {
+            this.$el.removeClass('over');
+        }.bind(this));
+
     }
 
     Plugin.prototype = $.extend({}, $.fn.popover.Constructor.prototype, {
@@ -84,6 +90,7 @@
 
         startColorPicker: function(node) {
             this.options.node = node;
+
             this.createContainers();
             this.renderColorPickers();
             this.renderButtons();
@@ -179,13 +186,17 @@
             $(document).bind("colorChanged", this.onColorChange.bind(this));
 
             this.actions.find('#cancelSelection').click(function() {
-                this.$tip.hide()
+                this.$el.removeClass('active');
+                this.$el.removeClass('up');
+                this.$tip.remove();
             }.bind(this));
 
             this.actions.find('#selectColor').click(function() {
                 var selectedColor = this.preview.find('#selectedColor').data('selected');
                 this.$tip.trigger("colorSelected", selectedColor);
-                this.$tip.hide();
+                this.$tip.remove();
+                this.$el.removeClass('active');
+                this.$el.removeClass('up');
             }.bind(this));
         },
 

@@ -22,6 +22,8 @@
 	
 	// Contain the present location of the slider bar
 	var _sliderPosY = 0;
+    var _hexColor = 0;
+    var _hslParts = 0;
 
 	// The actual plugin constructor
 	function Plugin(element, options) {
@@ -33,7 +35,7 @@
 		this.init();
 	};
 
-    Plugin.prototype.convertColor = function (color) {
+    Plugin.prototype.convertRgbStrToHex = function (color) {
 
         if (color.indexOf("rgb") != -1) {
             var start = color.indexOf("(");
@@ -44,6 +46,24 @@
 
         return color;
     };
+
+    Plugin.prototype.convertHslStrToHslParts = function (color) {
+        var start = color.indexOf("(");
+        var hslStr = color.substring(start + 1, color.length - 1);
+        var hslParts = hslStr.split(',');
+
+        return {h: parseInt(hslParts.h), s: parseInt(hslParts.s.remove(hslParts.s.length-1)), l: parseInt(hslParts.l.remove(hslParts.l.length-1))}
+    }
+
+    Plugin.prototype.InitColor = function ()
+    {
+        if (this.options.initColor.contains('hsl'))
+        {
+             this._hslParts = this.convertHslStrToHslParts(this.options.initColor);
+            this._hexColor = this.
+        }
+        else if (this.options.initColor.contains(''))
+    }
 
 	Plugin.prototype.init = function () {
 
@@ -194,8 +214,8 @@
 		var opt = this.options;
         var pos = { x : 0, y : 0 };
 
-		pos.x = ((100 - hslParts.s * 100) / 100);
-		pos.y = Math.floor(((hslParts.l * 100 + (-50 * pos.x) - 50) / ((-50 * pos.x) - 50)) * (this._PICKER_PALETTE_HEIGHT - 1));
+		pos.x = ((100 - Math.floor(hslParts.s * 100)) / 100);
+		pos.y = Math.floor(((Math.floor(hslParts.l * 100) + (-50 * pos.x) - 50) / ((-50 * pos.x) - 50)) * (this._PICKER_PALETTE_HEIGHT - 1));
       	pos.x = Math.floor(pos.x * (this._PICKER_PALETTE_WIDTH - 1));
 
         var selector = this.$el.find('#' + opt.selector);
@@ -251,7 +271,7 @@
         var opt = this.options;
 
         var rgb = hslToRgb(hslParts.h, hslParts.s, hslParts.l);
-        this.$el.find('#' + opt.readoutInput + "_" + opt.readouts[3]).val(rgbToHex(rgb.r, rgb.g, rgb.b));
+        this.$el.find('#' + opt.readoutInput + "_" + opt.readouts[3]).val(rgbToHex(rgb.r, rgb.g, rgb.b).toUpperCase());
     };
 
 	Plugin.prototype.bindEvents = function () {

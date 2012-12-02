@@ -65,16 +65,6 @@
             this.$el.toggleClass('up');
         },
 
-        show: function() {
-            $.extend.show();
-
-            debugger;
-            this.$el.blur(function() {
-                debugger;
-            });
-
-        },
-
         setContent: function() {
             this.$tip = this.tip();
             var title = this.getTitle(),

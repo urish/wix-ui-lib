@@ -95,18 +95,13 @@
 
 
     Plugin.prototype.init = function () {
-
         this.setContent();
         this.setConstants();
-
         this.InitColorFormats();
-
         this.renderSlider();
         this.setSliderPos(this._hslParts.h);
-
         this.renderPicker(this.parseHslColor(this.multHslParts(this._hslParts)));
         this.setSelectorPos(this._hslParts);
-
         this.$el.find('#' + this.options.readoutInput + "_" + this.options.readouts[3]).val(this._hexColor.toUpperCase());
         this.updateHslReadoutValues(this.multHslParts(this._hslParts));
         this.bindEvents();
@@ -131,7 +126,6 @@
     };
 
     Plugin.prototype.paddingHex = function (hex) {
-
         var hexStr = hex.toString().replace('#', '');
 
         while (hexStr.length < 6) {
@@ -144,19 +138,21 @@
     Plugin.prototype.createReadout = function (name, lbl) {
         var opt = this.options;
 
-        var lbl = lbl || name;
-        var readoutLabel = $('<label>').text(lbl);
+        // readout label
+        var readoutLabel = $('<label>').text(lbl || name);
 
-        var readoutInput = $('<input>', {
-            id: opt.readoutInput + "_" + name ,
+        // readout input and value
+        $('<input>', {
+            id: opt.readoutInput + "_" + name,
             class: "acp-readout-input"
-        });
+        }).appendTo(readoutLabel);
 
+        // return wrapped elements
         return $('<div>', {
             id: opt.readout + "_" + name,
             class: "acp-readout"
-        }).append(readoutLabel, readoutInput);
-    }
+        }).append(readoutLabel);
+    };
 
     Plugin.prototype.updateHslReadoutValues = function (hslParts) {
         var opt = this.options;

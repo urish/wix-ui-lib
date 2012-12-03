@@ -311,7 +311,7 @@
     };
 
     Plugin.prototype.colorChanged = function (color) {
-        this.$el.trigger('colorChanged', this.parseHslColor(color));
+        this.$el.trigger('colorChanged', color);
     }
 
     Plugin.prototype.bindEvents = function () {

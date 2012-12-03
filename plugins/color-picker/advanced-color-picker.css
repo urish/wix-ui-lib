@@ -40,11 +40,12 @@
 
 .acp-readout label {
     font-size: 11px;
+    display: inline-block;
 }
 
 .acp-readout input {
     margin-left: 10px;
-    width: 24px;
+    width: 50px;
     display: inline-block;
     font-size: 11px;
     text-align: center;

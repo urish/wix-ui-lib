@@ -3,7 +3,7 @@
 .popover {
     width: 370px;
     height: 350px;
-    padding-bottom: 54px;
+    padding-bottom: 40px;
 }
 
 .popover-title {
@@ -29,9 +29,9 @@
 #preview {
     width: 326px;
     height: 30px;
-    position: absolute;
-    bottom: 60px;
-    left: 12px;
+    margin-top: 12px;
+    /*top: 310px;*/
+    /*left: 12px;*/
 }
 
 #originalColor,
@@ -41,6 +41,47 @@
     height: 30px;
 }
 
+#originalColor {
+    -webkit-border-top-left-radius: 6px;
+    -webkit-border-bottom-left-radius: 6px;
+    -moz-border-radius-topleft: 6px;
+    -moz-border-radius-bottomleft: 6px;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+}
+
+#selectedColor {
+    -webkit-border-top-right-radius: 6px;
+    -webkit-border-bottom-right-radius: 6px;
+    -moz-border-radius-topright: 6px;
+    -moz-border-radius-bottomright: 6px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+/* action buttons */
+
+#actions {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    overflow: hidden;
+    width: 346px;
+}
+
+#actions button {
+    min-width: 100px;
+    font-size: 14px;
+    line-height: 27px;
+}
+
+button#cancelSelection {
+    float: left;
+}
+
+button#selectColor {
+    float: right;
+}
 
 /* tabs */
 
@@ -53,17 +94,6 @@
 #tabs > button {
     margin: 5px 5px 0;
 }
-
-#actions {
-    position: absolute;
-    bottom: 12px;
-    left: 12px;
-}
-
-
-
-
-
 
 /* simple color picker */
 
@@ -204,13 +234,13 @@
     -webkit-border-radius: 3px;
    	-moz-border-radius: 3px;
    	border-radius: 3px;
-
     margin-left: 10px;
     width: 70px;
     line-height: 27px;
     display: inline-block;
-    font-size: 11px;
+    font-size: 12px;
     text-align: center;
+    color: #848484;
 }
 
 .advanced-color-palette {
@@ -220,4 +250,22 @@
 .readouts {
     float: left;
     margin-left: 10px;
+}
+
+.readouts > div:after {
+    font-size: 11px;
+    margin-left: 10px;
+    color: #848484;
+}
+
+#acpReadoutWrapper_H:after {
+    content: "\00B0";
+}
+
+#acpReadoutWrapper_S:after {
+    content: "%";
+}
+
+#acpReadoutWrapper_L:after {
+    content: "%"
 }

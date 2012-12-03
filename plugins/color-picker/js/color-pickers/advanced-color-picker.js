@@ -35,15 +35,13 @@
     var _hexColor = 0;
     var _hslParts = 0;
 
-    // The actual plugin constructor
     function Plugin(element, options) {
         this.$el = $(element);
         this.options = $.extend({}, defaults, options);
-
         this._defaults = defaults;
         this._name = pluginName;
         this.init();
-    };
+    }
 
     Plugin.prototype.convertRgbStrToHex = function (color) {
 
@@ -74,18 +72,15 @@
 
     Plugin.prototype.InitColorFormats = function ()
     {
-        if (this.options.initColor.indexOf('hsl') != -1)
-        {
+        if (this.options.initColor.indexOf('hsl') != -1) {
             this._hslParts = this.convertHslStrToHslParts(this.options.initColor);
             this._hexColor = this.paddingHex(this.convertHslToHex(this._hslParts));
         }
-        else if (this.options.initColor.indexOf('rgb') != -1)
-        {
+        else if (this.options.initColor.indexOf('rgb') != -1) {
             this._hexColor = this.paddingHex(this.convertRgbStrToHex(this.options.initColor));
             this._hslParts = this.convertHexToHslParts(this._hexColor);
         }
-        else
-        {
+        else {
             this._hexColor = this.paddingHex(this.options.initColor);
             this._hslParts = this.convertHexToHslParts(this._hexColor);
         }

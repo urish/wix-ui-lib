@@ -10,12 +10,12 @@
             },
 
             colorPickerTabs: {
-                "Simple": "Simple",
-                "Advanced": "Advanced"
+                "Simple": "Site colors",
+                "Advanced": "All colors"
             },
 
             preview: "<span id=\"originalColor\"></span><span id=\"selectedColor\"></span>",
-            actions: "<button id=\"selectColor\" class=\"btn btn-mini\">OK</button><button id=\"cancelSelection\" class=\"btn btn-mini\">Cancel</button>"
+            actions: "<button id=\"cancelSelection\" class=\"btn btn-mini\">Cancel</button><button id=\"selectColor\" class=\"btn btn-mini btn-primary\">OK</button>"
         };
 
 

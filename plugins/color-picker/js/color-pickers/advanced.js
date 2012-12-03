@@ -34,11 +34,33 @@
     var _hexColor = 0;
     var _hslParts = 0;
 
+    window.ieG = (function (dir, stops) {
+        var grd = {
+            open : '<?xml version="1.0" ?><svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" version="1.0" width="100%" height="100%" xmlns:xlink="http://www.w3.org/1999/xlink"><defs>',
+            close : '</linearGradient></defs><rect width="100%" height="100%" style="fill:url(#g);" /></svg>',
+            dirs : {
+                left : 'x1="0%" y1="0%" x2="100%" y2="0%"',
+                right : 'x1="100%" y1="0%" x2="0%" y2="0%"',
+                top : 'x1="0%" y1="0%" x2="0%" y2="100%"',
+                bottom : 'x1="0%" y1="100%" x2="0%" y2="0%"'
+            }
+        };
+        return function (dir, stops) {
+            var r = '<linearGradient id="g" ' + grd.dirs[dir] + ' spreadMethod="pad">';
+            stops.forEach(function (stop) {
+                r += '<stop offset="' + stop.offset + '" stop-color="' + stop.color + '" stop-opacity="' + stop.opacity + '"/>';
+            });
+            r = 'data:image/svg+xml;base64,' + btoa(grd.open + r + grd.close);
+            return r;
+        };
+    })();
+
     function Plugin(element, options) {
         this.$el = $(element);
         this.options = $.extend({}, defaults, options);
         this._defaults = defaults;
         this._name = pluginName;
+
         this.init();
     }
 
@@ -46,7 +68,318 @@
 
         Constants: {
             hslGrad: 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PiA8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSIgdmVyc2lvbj0iMS4wIiB3aWR0aD0iMTAwJSIgICAgIGhlaWdodD0iMTAwJSIgICAgICAgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPiAjRkYwMDAwLCAjRkZGRjAwLCAjMDBGRjAwLCAjMDBGRkZGLCAjMDAwMEZGLCAjRkYwMEZGLCAjRkYwMDAwICAgPGRlZnM+ICAgICA8bGluZWFyR3JhZGllbnQgaWQ9Im15TGluZWFyR3JhZGllbnQxIiAgICAgICAgICAgICAgICAgICAgIHgxPSIwJSIgeTE9IjAlIiAgICAgICAgICAgICAgICAgICAgIHgyPSIwJSIgeTI9IjEwMCUiICAgICAgICAgICAgICAgICAgICAgc3ByZWFkTWV0aG9kPSJwYWQiPiAgICAgICA8c3RvcCBvZmZzZXQ9IjAlIiAgIHN0b3AtY29sb3I9IiNGRjAwMDAiIHN0b3Atb3BhY2l0eT0iMSIvPiAgICAgICA8c3RvcCBvZmZzZXQ9IjIwJSIgICBzdG9wLWNvbG9yPSIjRkZGRjAwIiBzdG9wLW9wYWNpdHk9IjEiLz4gICAgICAgPHN0b3Agb2Zmc2V0PSI0MCUiICAgc3RvcC1jb2xvcj0iIzAwRkYwMCIgc3RvcC1vcGFjaXR5PSIxIi8+ICAgICAgIDxzdG9wIG9mZnNldD0iNjAlIiAgIHN0b3AtY29sb3I9IiMwMDAwRkYiIHN0b3Atb3BhY2l0eT0iMSIvPiAgICAgICA8c3RvcCBvZmZzZXQ9IjgwJSIgc3RvcC1jb2xvcj0iI0ZGMDBGRiIgc3RvcC1vcGFjaXR5PSIxIi8+ICAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI0ZGMDAwMCIgc3RvcC1vcGFjaXR5PSIxIi8+ICAgICA8L2xpbmVhckdyYWRpZW50PiAgIDwvZGVmcz4gICAgPHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgICAgICBzdHlsZT0iZmlsbDp1cmwoI215TGluZWFyR3JhZGllbnQxKTsiIC8+IDwvc3ZnPg==',
+            photoshopG1: window.ieG('bottom', [{
+                offset : '0%',
+                color : 'black',
+                opacity : '1'
+            }, {
+                offset : '100%',
+                color : 'black',
+                opacity : '0'
+            }])
+        },
 
+        init: function() {
+            this.setContent();
+            this.setConstants();
+            this.InitColorFormats();
+            this.renderSlider();
+            this.setSliderPos(this._hslParts.h);
+            this.renderPicker(this.parseHslColor(this.multHslParts(this._hslParts)));
+            this.setSelectorPos(this._hslParts);
+            this.$el.find('#' + this.options.readoutInput + "_" + this.options.readouts[3]).val(this._hexColor.toUpperCase());
+            this.updateHslReadoutValues(this.multHslParts(this._hslParts));
+            this.bindEvents();
+        },
+
+        _initIeg: function() {
+        },
+
+        setContent: function() {
+            $(this.options.template).appendTo(this.$el);
+
+            var readoutsWrapper = $('<div>', {
+                class: 'readouts'
+            });
+
+            this.createReadout(this.options.readouts[3], '#').appendTo(readoutsWrapper);
+
+            for (var i = 0; i < (this.options.readouts.length - 1); i++) {
+                this.createReadout(this.options.readouts[i]).appendTo(readoutsWrapper);
+            }
+
+            this.$el.append(readoutsWrapper);
+
+            this.$el.parent().css('overflow','hidden');
+        },
+
+        paddingHex: function(hex) {
+            var hexStr = hex.toString().replace('#', '');
+
+            while (hexStr.length < 6) {
+                hexStr = '0' + hexStr;
+            }
+
+            return hexStr;
+        },
+
+        createReadout: function(name, lbl) {
+            var opt = this.options;
+
+            // readout label
+            var readoutLabel = $('<label>').text(lbl || name);
+
+            // readout input and value
+            $('<input>', {
+                id: opt.readoutInput + "_" + name,
+                class: "acp-readout-input"
+            }).appendTo(readoutLabel);
+
+            // return wrapped elements
+            return $('<div>', {
+                id: opt.readout + "_" + name,
+                class: "acp-readout"
+            }).append(readoutLabel);
+        },
+
+        updateHslReadoutValues: function(hslParts) {
+            var opt = this.options;
+
+            this.$el.find('#' + opt.readoutInput + "_" + opt.readouts[0]).val(Math.floor(hslParts.h));
+            this.$el.find('#' + opt.readoutInput + "_" + opt.readouts[1]).val(Math.floor(hslParts.s));
+            this.$el.find('#' + opt.readoutInput + "_" + opt.readouts[2]).val(Math.floor(hslParts.l));
+        },
+
+        getHslColor : function(colorHex, parse) {
+            var hslParts = this.convertHexToHslParts(colorHex);
+            hslParts = this.multHslParts(hslParts);
+
+            return parse? this.parseHslColor(hslParts) : hslParts;
+        },
+
+        multHslParts : function(hslParts) {
+            return {
+                h: hslParts.h *360,
+                s: hslParts.s * 100,
+                l: hslParts.l * 100
+            };
+        },
+
+        setConstants: function() {
+            var opt = this.options;
+
+            this._SLIDER_PALETTE_HEIGHT = opt.paletteSliderHeight;
+            this._PICKER_PALETTE_HEIGHT = opt.palettePickerSize;
+            this._PICKER_PALETTE_WIDTH = opt.palettePickerSize;
+            this._SLIDER_OFFSET = opt.sliderHeight / 2;
+            this._SELECTOR_OFFSET_X = opt.selectorSize / 2;
+            this._SELECTOR_OFFSET_Y = opt.selectorSize / 2;
+        },
+
+        renderPicker: function(color) {
+            var opt = this.options;
+            var palettePicker = this.$el.find('#' + opt.palettePicker);
+            if (this.Utils.ieG) {
+                var photoshopG2 = this.Utils.ieG('left', [
+                    {
+                        offset : '0%',
+                        color : color,
+                        opacity : '1'
+                    },
+                    {
+                        offset : '100%',
+                        color : 'white',
+                        opacity : '1'
+                    }
+                ]);
+                palettePicker.css("background-image", 'url("' + this.Utils.photoshopG1 + '"),url("' + photoshopG2 + '")');
+            } else {
+                palettePicker.css("background-image", '-webkit-linear-gradient(bottom, black, rgba(0,0,0,0)),-webkit-linear-gradient(left, ' + color + ', white)');
+                palettePicker.css("background-image", '-moz-linear-gradient(bottom, black, rgba(0,0,0,0)),-moz-linear-gradient(left, ' + color + ', white)');
+            }
+        },
+
+        renderSlider: function() {
+            var opt = this.options;
+            var sliderPlt = this.$el.find('#' + opt.paletteSlider);
+
+            if (window.ieG) {
+                sliderPlt.css("background-image", 'url("' + this.Constants.hslGrad + '")');
+            } else {
+                sliderPlt.css("background-image", '-webkit-linear-gradient(top, #FF0000, #FFFF00, #00FF00, #00FFFF, #0000FF, #FF00FF, #FF0000)');
+                sliderPlt.css("background-image", '-moz-linear-gradient(top, #FF0000, #FFFF00, #00FF00, #00FFFF, #0000FF, #FF00FF, #FF0000)');
+            }
+        },
+
+        colorFromPosPicker: function(pos) {
+            var hVal = (this._sliderPosY/ (this._SLIDER_PALETTE_HEIGHT - 1)) * 360;
+            var sVal = 100 - pos.x * 100;
+            var lVal = (pos.y * -50) + (50 * pos.x) + 50 - (pos.y * pos.x * 50);
+
+            return { h : hVal, s : sVal, l : lVal };
+        },
+
+        colorFromPosSlider: function(pos) {
+            return {h : pos.y * 360, s : 100, l : 50 };
+        },
+
+        convertHexToHslParts: function(colorHex) {
+            colorHex = this.paddingHex(colorHex);
+
+            var colorRgb = this.Utils.hexToRgb(colorHex);
+            var colorHsl = this.Utils.rgbToHsv(colorRgb.r, colorRgb.g, colorRgb.b);
+
+            return {
+                h : colorHsl[0],
+                s : colorHsl[1],
+                l : colorHsl[2]
+            };
+        },
+
+        setSelectorPos: function(hslParts) {
+            var opt = this.options;
+            var pos = { x : 0, y : 0 };
+
+            pos.x = ((100 - (hslParts.s * 100)) / 100);
+            pos.y = (((hslParts.l * 100) + (-50 * pos.x) - 50) / ((-50 * pos.x) - 50));
+            pos.y = pos.y * (this._PICKER_PALETTE_HEIGHT - 1);
+            pos.x = pos.x * (this._PICKER_PALETTE_WIDTH - 1);
+
+            var selector = this.$el.find('#' + opt.selector);
+
+            selector.css("top", parseInt(pos.y - this._SELECTOR_OFFSET_Y) + 'px');
+            selector.css("left", parseInt(pos.x - this._SELECTOR_OFFSET_X) + 'px');
+        },
+
+        setSliderPos: function(hPart) {
+            var opt = this.options;
+
+            this._sliderPosY =  (hPart * (this._SLIDER_PALETTE_HEIGHT - 1));
+
+            this.$el.find('#' + opt.slider).css("top", this._sliderPosY - this._SLIDER_OFFSET);
+        },
+
+        parseHslColor: function(hsl) {
+            return 'hsl(' + hsl.h + ', ' + hsl.s + '% , ' + hsl.l + '%)';
+        },
+
+        offsetPosFromEvent: function(e) {
+            return {
+                x : (e.offsetX || (e.clientX - e.target.offsetLeft)),
+                y : (e.offsetY || (e.clientY - e.target.offsetTop))
+            };
+        },
+
+        RenderByHslInputs: function() {
+            var opt = this.options;
+            var hsl = { h: 0, s: 0, l:0 };
+            hsl.h = this.$el.find('#' + opt.readoutInput + "_" + opt.readouts[0]).val();
+            hsl.s = this.$el.find('#' + opt.readoutInput + "_" + opt.readouts[1]).val();
+            hsl.l = this.$el.find('#' + opt.readoutInput + "_" + opt.readouts[2]).val();
+
+            this.setHexValue(hsl);
+
+            var hslFormat = this.parseHslColor(hsl);
+            this.renderPicker(hslFormat);
+
+            this._hslParts.h = (hsl.h / 360).toFixed(3);
+            this._hslParts.s = (hsl.s / 100).toFixed(3);
+            this._hslParts.l = (hsl.l / 100).toFixed(3);
+
+            this.setSliderPos(this._hslParts.h);
+            this.setSelectorPos(this._hslParts);
+        },
+
+        setHexValue : function (hslParts) {
+            var opt = this.options;
+
+            var rgb = this.Utils.hsvToRgb(hslParts.h, hslParts.s, hslParts.l);
+            this._hexColor = this.Utils.rgbToHex(rgb.r, rgb.g, rgb.b);
+            this.$el.find('#' + opt.readoutInput + "_" + opt.readouts[3]).val( this._hexColor.toUpperCase());
+        },
+
+        colorChanged : function (color) {
+            this.$el.trigger('colorChanged', color);
+        },
+
+        bindEvents : function () {
+            this.$el.find('#' + this.options.paletteSlider).click( function(e) {
+                var opt = this.options;
+
+                if (e.target.className === opt.slider) {
+                    return;
+                }
+
+                var pos = this.offsetPosFromEvent(e);
+
+                this.$el.find('#' + opt.slider).css("top", (pos.y - this._SLIDER_OFFSET) + 'px');
+                this._sliderPosY = pos.y;
+
+                pos.x = pos.x / (e.target.clientWidth - 1);
+                pos.y = pos.y / (e.target.clientHeight - 1);
+
+                var color = this.colorFromPosSlider(pos);
+
+                this.renderPicker(this.parseHslColor(color));
+
+                this._hslParts = {h: (color.h / 360).toFixed(3), s: (color.s / 100).toFixed(3), l: (color.l/ 100).toFixed(3)};
+                this._hexColor = this.convertHslToHex(this._hslParts);
+                this.updateHslReadoutValues(color);
+
+                this.setHexValue(this._hexColor);
+
+                this.colorChanged(this.parseHslColor(color));
+
+            }.bind(this));
+
+            this.$el.find('#' + this.options.palettePicker).click( function(e) {
+                var opt = this.options;
+
+                if (e.target.className === opt.selector) {
+                    return;
+                }
+
+                var pos = this.offsetPosFromEvent(e);
+                var selector = this.$el.find('#' + opt.selector);
+
+                selector.css("top", (pos.y - this._SELECTOR_OFFSET_Y) + 'px');
+                selector.css("left", (pos.x - this._SELECTOR_OFFSET_X) + 'px');
+
+                pos.x = pos.x / (e.target.clientWidth - 1);
+                pos.y = pos.y / (e.target.clientHeight - 1);
+
+                var color = this.colorFromPosPicker(pos);
+
+                this._hslParts = {h: (color.h / 360).toFixed(3), s: (color.s / 100).toFixed(3), l: (color.l/ 100).toFixed(3)};
+                this._hexColor = this.convertHslToHex(this._hslParts);
+                this.updateHslReadoutValues(color);
+
+                this.setHexValue(this._hexColor);
+
+                this.colorChanged(this.parseHslColor(color));
+
+            }.bind(this));
+
+            this.$el.find('.' +  "acp-readout-input").keyup( function (e) {
+                if (e.target.id === (this.options.readoutInput + "_" + this.options.readouts[3])) {
+                    var hex = this.$el.find('#' + this.options.readoutInput + "_" + this.options.readouts[3]).val();
+
+                    this._hexColor = this.paddingHex(hex);
+                    this._hslParts  = this.convertHexToHslParts(hex);
+
+                    this.updateHslReadoutValues(this.multHslParts(this._hslParts));
+
+                    this.setSliderPos(this._hslParts.h);
+
+                    this.renderPicker(this.parseHslColor(this.multHslParts(this._hslParts)));
+                    this.setSelectorPos( this._hslParts);
+                }
+                else {
+                    this.RenderByHslInputs();
+                }
+
+                this.colorChanged(this.parseHslColor(this.multHslParts(this._hslParts)));
+            }.bind(this));
         },
 
         Utils: {
@@ -147,12 +480,9 @@
 
                 return [r * 255, g * 255, b * 255];
             }
-
-
         },
 
         convertRgbStrToHex:function (color) {
-
             var start = color.indexOf("(");
             var rgbColor = color.substring(start + 1, color.length - 1);
             var rgbParts = rgbColor.split(',');
@@ -195,308 +525,6 @@
             }
 
             this._hslParts = { h: this._hslParts.h.toFixed(3), s: this._hslParts.s.toFixed(3), l: this._hslParts.l.toFixed(3)};
-        },
-
-
-        init: function() {
-            this.setContent();
-            this.setConstants();
-            this.InitColorFormats();
-            this.renderSlider();
-            this.setSliderPos(this._hslParts.h);
-            this.renderPicker(this.parseHslColor(this.multHslParts(this._hslParts)));
-            this.setSelectorPos(this._hslParts);
-            this.$el.find('#' + this.options.readoutInput + "_" + this.options.readouts[3]).val(this._hexColor.toUpperCase());
-            this.updateHslReadoutValues(this.multHslParts(this._hslParts));
-            this.bindEvents();
-        },
-
-        setContent: function() {
-            $(this.options.template).appendTo(this.$el);
-
-            var readoutsWrapper = $('<div>', {
-                class: 'readouts'
-            });
-
-            this.createReadout(this.options.readouts[3], '#').appendTo(readoutsWrapper);
-
-            for (var i = 0; i < (this.options.readouts.length - 1); i++) {
-                this.createReadout(this.options.readouts[i]).appendTo(readoutsWrapper);
-            }
-
-            this.$el.append(readoutsWrapper);
-
-            this.$el.parent().css('overflow','hidden');
-        },
-
-        paddingHex: function(hex) {
-            var hexStr = hex.toString().replace('#', '');
-
-            while (hexStr.length < 6) {
-                hexStr = '0' + hexStr;
-            }
-
-            return hexStr;
-        },
-
-        createReadout: function(name, lbl) {
-            var opt = this.options;
-
-            // readout label
-            var readoutLabel = $('<label>').text(lbl || name);
-
-            // readout input and value
-            $('<input>', {
-                id: opt.readoutInput + "_" + name,
-                class: "acp-readout-input"
-            }).appendTo(readoutLabel);
-
-            // return wrapped elements
-            return $('<div>', {
-                id: opt.readout + "_" + name,
-                class: "acp-readout"
-            }).append(readoutLabel);
-        },
-
-        updateHslReadoutValues: function(hslParts) {
-            var opt = this.options;
-
-            this.$el.find('#' + opt.readoutInput + "_" + opt.readouts[0]).val(Math.floor(hslParts.h));
-            this.$el.find('#' + opt.readoutInput + "_" + opt.readouts[1]).val(Math.floor(hslParts.s));
-            this.$el.find('#' + opt.readoutInput + "_" + opt.readouts[2]).val(Math.floor(hslParts.l));
-        },
-
-        getHslColor : function(colorHex, parse) {
-            var hslParts = this.convertHexToHslParts(colorHex);
-            hslParts = this.multHslParts(hslParts);
-
-            return parse? this.parseHslColor(hslParts) : hslParts;
-        },
-
-        multHslParts : function(hslParts) {
-            return {
-                h: hslParts.h *360,
-                s: hslParts.s * 100,
-                l: hslParts.l * 100
-            };
-        },
-
-        setConstants: function() {
-            var opt = this.options;
-
-            this._SLIDER_PALETTE_HEIGHT = opt.paletteSliderHeight;
-            this._PICKER_PALETTE_HEIGHT = opt.palettePickerSize;
-            this._PICKER_PALETTE_WIDTH = opt.palettePickerSize;
-            this._SLIDER_OFFSET = opt.sliderHeight / 2;
-            this._SELECTOR_OFFSET_X = opt.selectorSize / 2;
-            this._SELECTOR_OFFSET_Y = opt.selectorSize / 2;
-        },
-
-        renderPicker: function(color) {
-            var opt = this.options;
-            var palettePicker = this.$el.find('#' + opt.palettePicker);
-            if (this.Utils.ieG) {
-                var photoshopG2 = this.Utils.ieG('left', [
-                    {
-                        offset : '0%',
-                        color : color,
-                        opacity : '1'
-                    },
-                    {
-                        offset : '100%',
-                        color : 'white',
-                        opacity : '1'
-                    }
-                ]);
-                palettePicker.css("background-image", 'url("' + photoshopG1 + '"),url("' + photoshopG2 + '")');
-            } else {
-                palettePicker.css("background-image", '-webkit-linear-gradient(bottom, black, rgba(0,0,0,0)),-webkit-linear-gradient(left, ' + color + ', white)');
-                palettePicker.css("background-image", '-moz-linear-gradient(bottom, black, rgba(0,0,0,0)),-moz-linear-gradient(left, ' + color + ', white)');
-            }
-        },
-
-        renderSlider: function() {
-            var opt = this.options;
-            var sliderPlt = this.$el.find('#' + opt.paletteSlider);
-
-            if (window.ieG) {
-                sliderPlt.css("background-image", 'url("' + this.Constants.hslGrad + '")');
-            } else {
-                sliderPlt.css("background-image", '-webkit-linear-gradient(top, #FF0000, #FFFF00, #00FF00, #00FFFF, #0000FF, #FF00FF, #FF0000)');
-                sliderPlt.css("background-image", '-moz-linear-gradient(top, #FF0000, #FFFF00, #00FF00, #00FFFF, #0000FF, #FF00FF, #FF0000)');
-            }
-        },
-
-        colorFromPosPicker: function(pos) {
-            var hVal = (this._sliderPosY/ (this._SLIDER_PALETTE_HEIGHT - 1)) * 360;
-            var sVal = 100 - pos.x * 100;
-            var lVal = (pos.y * -50) + (50 * pos.x) + 50 - (pos.y * pos.x * 50);
-
-            return { h : hVal, s : sVal, l : lVal };
-        },
-
-        colorFromPosSlider: function(pos) {
-            return {h : pos.y * 360, s : 100, l : 50 };
-        },
-
-        convertHexToHslParts: function(colorHex) {
-            colorHex = this.paddingHex(colorHex);
-
-            var colorRgb = this.Utils.hexToRgb(colorHex);
-            var colorHsl = this.Utils.rgbToHsv(colorRgb.r, colorRgb.g, colorRgb.b);
-
-            return {
-                h : colorHsl[0],
-                s : colorHsl[1],
-                l : colorHsl[2]
-            };
-        },
-
-        setSelectorPos: function(hslParts) {
-            var opt = this.options;
-            var pos = { x : 0, y : 0 };
-
-            pos.x = ((100 - (hslParts.s * 100)) / 100);
-            pos.y = (((hslParts.l * 100) + (-50 * pos.x) - 50) / ((-50 * pos.x) - 50));
-            pos.y = pos.y * (this._PICKER_PALETTE_HEIGHT - 1);
-            pos.x = pos.x * (this._PICKER_PALETTE_WIDTH - 1);
-
-            var selector = this.$el.find('#' + opt.selector);
-
-            selector.css("top", parseInt(pos.y - this._SELECTOR_OFFSET_Y) + 'px');
-            selector.css("left", parseInt(pos.x - this._SELECTOR_OFFSET_X) + 'px');
-        },
-
-        setSliderPos: function(hPart) {
-            var opt = this.options;
-
-            this._sliderPosY =  (hPart * (this._SLIDER_PALETTE_HEIGHT - 1));
-
-            this.$el.find('#' + opt.slider).css("top", this._sliderPosY - this._SLIDER_OFFSET);
-        },
-
-        parseHslColor: function(hsl) {
-            return 'hsl(' + hsl.h + ', ' + hsl.s + '% , ' + hsl.l + '%)';
-        },
-
-        offsetPosFromEvent: function(e) {
-            return {
-                x : (e.offsetX || (e.clientX - e.target.offsetLeft)),
-                y : (e.offsetY || (e.clientY - e.target.offsetTop))
-            };
-        },
-
-        RenderByHslInputs: function() {
-            var opt = this.options;
-            var hsl = { h: 0, s: 0, l:0 };
-            hsl.h = this.$el.find('#' + opt.readoutInput + "_" + opt.readouts[0]).val();
-            hsl.s = this.$el.find('#' + opt.readoutInput + "_" + opt.readouts[1]).val();
-            hsl.l = this.$el.find('#' + opt.readoutInput + "_" + opt.readouts[2]).val();
-
-            this.SetHexValue(hsl);
-
-            var hslFormat = this.parseHslColor(hsl);
-            this.renderPicker(hslFormat);
-
-            this._hslParts.h = (hsl.h / 360).toFixed(3);
-            this._hslParts.s = (hsl.s / 100).toFixed(3);
-            this._hslParts.l = (hsl.l / 100).toFixed(3);
-
-            this.setSliderPos(this._hslParts.h);
-            this.setSelectorPos(this._hslParts);
-        },
-
-        SetHexValue : function (hslParts) {
-            var opt = this.options;
-
-            var rgb = this.Utils.hslToRgb(hslParts.h, hslParts.s, hslParts.l);
-            this._hexColor = this.Utils.rgbToHex(rgb.r, rgb.g, rgb.b);
-            this.$el.find('#' + opt.readoutInput + "_" + opt.readouts[3]).val( this._hexColor.toUpperCase());
-        },
-
-        colorChanged : function (color) {
-            this.$el.trigger('colorChanged', color);
-        },
-
-        bindEvents : function () {
-            this.$el.find('#' + this.options.paletteSlider).click( function(e) {
-                var opt = this.options;
-
-                if (e.target.className === opt.slider) {
-                    return;
-                }
-
-                var pos = this.offsetPosFromEvent(e);
-
-                this.$el.find('#' + opt.slider).css("top", (pos.y - this._SLIDER_OFFSET) + 'px');
-                this._sliderPosY = pos.y;
-
-                pos.x = pos.x / (e.target.clientWidth - 1);
-                pos.y = pos.y / (e.target.clientHeight - 1);
-
-                var color = this.colorFromPosSlider(pos);
-
-                this.renderPicker(this.parseHslColor(color));
-
-                this._hslParts = {h: (color.h / 360).toFixed(3), s: (color.s / 100).toFixed(3), l: (color.l/ 100).toFixed(3)};
-                this._hexColor = this.convertHslToHex(this._hslParts);
-                this.updateHslReadoutValues(color);
-
-                this.SetHexValue(this._hexColor);
-
-                this.colorChanged(this.parseHslColor(color));
-
-            }.bind(this));
-
-            this.$el.find('#' + this.options.palettePicker).click( function(e) {
-                var opt = this.options;
-
-                if (e.target.className === opt.selector) {
-                    return;
-                }
-
-                var pos = this.offsetPosFromEvent(e);
-                var selector = this.$el.find('#' + opt.selector);
-
-                selector.css("top", (pos.y - this._SELECTOR_OFFSET_Y) + 'px');
-                selector.css("left", (pos.x - this._SELECTOR_OFFSET_X) + 'px');
-
-                pos.x = pos.x / (e.target.clientWidth - 1);
-                pos.y = pos.y / (e.target.clientHeight - 1);
-
-                var color = this.colorFromPosPicker(pos);
-
-                this._hslParts = {h: (color.h / 360).toFixed(3), s: (color.s / 100).toFixed(3), l: (color.l/ 100).toFixed(3)};
-                this._hexColor = this.convertHslToHex(this._hslParts);
-                this.updateHslReadoutValues(color);
-
-                this.SetHexValue(this._hexColor);
-
-                this.colorChanged(this.parseHslColor(color));
-
-            }.bind(this));
-
-            this.$el.find('.' +  "acp-readout-input").keyup( function (e) {
-                if (e.target.id === (this.options.readoutInput + "_" + this.options.readouts[3])) {
-                    var hex = this.$el.find('#' + this.options.readoutInput + "_" + this.options.readouts[3]).val();
-
-                    this._hexColor = this.paddingHex(hex);
-                    this._hslParts  = this.convertHexToHslParts(hex);
-
-                    this.updateHslReadoutValues(this.multHslParts(this._hslParts));
-
-                    this.setSliderPos(this._hslParts.h);
-
-                    this.renderPicker(this.parseHslColor(this.multHslParts(this._hslParts)));
-                    this.setSelectorPos( this._hslParts);
-                }
-                else {
-                    this.RenderByHslInputs();
-                }
-
-                this.colorChanged(this.parseHslColor(this.multHslParts(this._hslParts)));
-            }.bind(this));
-
         }
     });
 

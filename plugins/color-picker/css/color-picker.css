@@ -1,23 +1,72 @@
-.popover{
-    background: url("img/bg-gradient.png") 0 100% repeat-x #F9FAFC;
-    width: 260px;
+/* popover */
+
+.popover {
+    width: 370px;
+    height: 350px;
+    padding-bottom: 54px;
 }
 
 .popover-title {
-    background: #F9FAFC;
-}
-ul, li {
-    margin: 0;
-    padding: 0;
+    border-bottom: 1px solid #d4d4d4;
 }
 
+.popover-content {
+    padding: 0;
+    margin: 12px;
+}
+
+/* container */
+
+#colorPicker {
+    border: 1px solid #d4d4d4;
+    padding: 12px;
+
+    -webkit-border-radius: 3px;
+   	-moz-border-radius: 3px;
+   	border-radius: 3px;
+}
+
+#preview {
+    width: 326px;
+    height: 30px;
+    position: absolute;
+    bottom: 60px;
+    left: 12px;
+}
+
+#originalColor,
+#selectedColor {
+    display: inline-block;
+    width: 50%;
+    height: 30px;
+}
+
+
+/* tabs */
+
 #tabs {
-    margin: 0 0 10px;
+    position: absolute;
+    top: 0;
+    right: 10px;
 }
 
 #tabs > button {
     margin: 5px 5px 0;
 }
+
+#actions {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+}
+
+
+
+
+
+
+/* simple color picker */
+
 
 .palette-row {
 	line-height: 10px;
@@ -27,6 +76,7 @@ ul, li {
     -webkit-border-radius: 3px;
    	-moz-border-radius: 3px;
    	border-radius: 3px;
+
     margin: 1px 2px;
     overflow: hidden;
     border: 1px solid #c4c4c4;
@@ -62,20 +112,6 @@ ul, li {
 .color-unit.active {
 	/*border-color: #fff;*/
     /*box-shadow: #444 0 0 1em;*/
-}
-
-
-#preview {
-    width: 100%;
-    height: 50px;
-    border: 1px solid #ddd;
-}
-
-#originalColor,
-#selectedColor {
-    display: inline-block;
-    width: 50%;
-    height: 50px;
 }
 
 .default {
@@ -128,25 +164,35 @@ ul, li {
 
 }
 
-.acp-slider{
+#acpPalettePicker {
+    width: 162px;
+    height: 162px;
+}
+
+#acpPaletteSlider {
+    margin-left: 12px;
+    height: 162px;
+}
+
+.acp-slider {
 	position: absolute;
 	width: 18px;
 	height:	12px;
-	border: 1px single black;
-    background-image: url("http://dl.dropbox.com/u/120228035/hueBar.png");
-	background-repeat: no-repeat;
+    background: url("http://dl.dropbox.com/u/120228035/hueBar.png") no-repeat;
 	top: -6px;
 }
 
-.acp-selector{
+.acp-selector {
 	position: absolute;
 	width: 10px;
 	height: 10px;
 	border: 2px double #fff;
-	border-image: initial;
-	border-radius: 6px;
     top: -7px;
     left:-7px;
+
+    -webkit-border-radius: 6px;
+   	-moz-border-radius: 6px;
+   	border-radius: 6px;
 }
 
 .acp-readout label {
@@ -155,8 +201,13 @@ ul, li {
 }
 
 .acp-readout input {
+    -webkit-border-radius: 3px;
+   	-moz-border-radius: 3px;
+   	border-radius: 3px;
+
     margin-left: 10px;
-    width: 50px;
+    width: 70px;
+    line-height: 27px;
     display: inline-block;
     font-size: 11px;
     text-align: center;

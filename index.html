@@ -5,8 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="lib/css/bootstrap.min.css" type="text/css" media="screen, projection" />
     <link rel="stylesheet" href="lib/css/main.css" type="text/css" media="screen, projection" />
-    <link rel="stylesheet" href="plugins/color-picker/color-picker.css" type="text/css" media="screen, projection" />
-    <link rel="stylesheet" href="plugins/color-picker/advanced-color-picker.css" type="text/css" media="screen, projection" />
+    <link rel="stylesheet" href="plugins/color-picker/css/color-picker.css" type="text/css" media="screen, projection" />
 </head>
 <body>
 <header>
@@ -79,15 +78,13 @@
 <script type="text/javascript" src="lib/js/jquery-1.8.2.min.js"></script>
 <script type="text/javascript" src="lib/js/bootstrap/bootstrap.js"></script>
 <!-- plugins -->
-<script type="text/javascript" src="plugins/color-picker/color-picker-container.js"></script>
-<script type="text/javascript" src="plugins/color-picker/simple-color-picker.js"></script>
-<script type="text/javascript" src="plugins/color-picker/advanced-color-picker.js"></script>
-<script type="text/javascript" src="plugins/color-picker/ColorPickerUtils.js"></script>
+<script type="text/javascript" src="plugins/color-picker/js/color-picker-container.js"></script>
+<script type="text/javascript" src="plugins/color-picker/js/color-pickers/simple-color-picker.js"></script>
+<script type="text/javascript" src="plugins/color-picker/js/color-pickers/advanced-color-picker.js"></script>
+<script type="text/javascript" src="plugins/color-picker/js/ColorPickerUtils.js"></script>
 <!-- ready -->
 <script type="text/javascript">
     $(document).ready(function() {
-        window._w = {};
-
         $('#startColorPicker').makeColorPicker({
             ColorPickers: {
                 Simple: {
@@ -113,10 +110,5 @@
                 }
             }
         });
-    });
-
-    $(document).bind('colorSelected', function (e, color) {
-        $(document).find('.inner').css("background-color", color);
-        console.log(color);
     });
 </script>

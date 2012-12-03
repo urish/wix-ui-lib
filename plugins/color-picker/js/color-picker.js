@@ -35,23 +35,12 @@
         this._name = pluginName;
 
         this.init("popover", this.$el, this.options);
-
         this.createColoredElm();
 
-        this.$el.hover(
-            function() {
-                this.$el.addClass('over');
-            }.bind(this),
 
-            function() {
-                this.$el.removeClass('over');
-            }.bind(this)
-        );
-
-        this.$el.click( function() {
-            this.$el.removeClass('over');
+        $(document).bind('click.' + this.type, function (e) {
+            this.clearPopovers();
         }.bind(this));
-
     }
 
     Plugin.prototype = $.extend({}, $.fn.popover.Constructor.prototype, {
@@ -65,10 +54,33 @@
         },
 
         toggle: function(ev) {
+
             var $tip = this.tip();
-            !($tip.hasClass('in')) ? this.show() :  this.hide();
+            if (!($tip.hasClass('in'))) {
+                this.clearPopovers();
+                this.show();
+                }
+            else {
+                this.hide();
+            }
             this.$el.toggleClass('active');
             this.$el.toggleClass('up');
+            this.$el.removeClass('over');
+
+            return false;
+        },
+
+        clearPopovers : function () {
+            $('.popover').each(function () {
+                $(this).removeClass('in');
+                $(this).remove();
+            })
+
+            $('.color-selector').each(function () {
+                $(this).removeClass('active');
+                $(this).removeClass('up');
+                $(this).removeClass('over');
+            })
         },
 
         setContent: function() {
@@ -169,6 +181,8 @@
             $('#tabs').find('.active').removeClass('active');
             $(ev.target).addClass('active');
             $('#' + ev.data.pickerId).fadeIn();
+
+            return false;
         },
 
         renderButtons: function() {
@@ -182,19 +196,25 @@
             $(document).bind("colorChanged", this.onColorChange.bind(this));
 
             this.actions.find('#cancelSelection').click(function() {
-                this.$el.removeClass('active');
-                this.$el.removeClass('up');
-                this.hide();
+                this.closePopover();
+
+                return false;
             }.bind(this));
 
             this.actions.find('#selectColor').click(function() {
                 var $tip = this.tip();
                 var selectedColor = this.preview.find('#selectedColor').data('selected');
                 this.$el.find(".inner").css("background-color", selectedColor);
-                this.hide();
-                this.$el.removeClass('active');
-                this.$el.removeClass('up');
+                this.closePopover();
+
+                return false;
             }.bind(this));
+        },
+
+        closePopover : function () {
+            this.hide();
+            this.$el.removeClass('active');
+            this.$el.removeClass('up');
         },
 
         onColorChange: function(ev, data) {

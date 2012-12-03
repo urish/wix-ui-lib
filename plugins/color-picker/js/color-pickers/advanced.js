@@ -330,6 +330,8 @@
 
                 this.colorChanged(this.parseHslColor(color));
 
+                return false;
+
             }.bind(this));
 
             this.$el.find('#' + this.options.palettePicker).click( function(e) {
@@ -357,6 +359,8 @@
                 this.setHexValue(this._hexColor);
 
                 this.colorChanged(this.parseHslColor(color));
+
+                return false;
 
             }.bind(this));
 

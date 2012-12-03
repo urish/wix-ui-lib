@@ -36,6 +36,8 @@
 
         this.init("popover", this.$el, this.options);
 
+        this.createColoredElm();
+
         this.$el.hover(
             function() {
                 this.$el.addClass('over');
@@ -58,23 +60,28 @@
 
         _data: {},
 
+        createColoredElm : function () {
+            this.$el.append($ ('<div class="inner"></div>'));
+        },
+
         toggle: function(ev) {
-            !$('.popover').hasClass('in') ? this.show() :  this.hide();
+            var $tip = this.tip();
+            !($tip.hasClass('in')) ? this.show() :  this.hide();
             this.$el.toggleClass('active');
             this.$el.toggleClass('up');
         },
 
         setContent: function() {
-            this.$tip = this.tip();
+            var $tip = this.tip();
             var title = this.getTitle(),
                 content = this.getContent();
 
-            this.$tip.find('.popover-title')[this.options.html ? 'html' : 'text'](title)
-            this.$tip.find('.popover-content')[this.options.html ? 'html' : 'text'](content)
+            $tip.find('.popover-title')[this.options.html ? 'html' : 'text'](title)
+            $tip.find('.popover-content')[this.options.html ? 'html' : 'text'](content)
 
-            this.startColorPicker(this.$tip.find('#colorPicker'));
+            this.startColorPicker($tip.find('#colorPicker'));
 
-            this.$tip.removeClass('fade top bottom left right in')
+            $tip.removeClass('fade top bottom left right in')
         },
 
         startColorPicker: function(node) {
@@ -177,13 +184,14 @@
             this.actions.find('#cancelSelection').click(function() {
                 this.$el.removeClass('active');
                 this.$el.removeClass('up');
-                this.$tip.remove();
+                this.hide();
             }.bind(this));
 
             this.actions.find('#selectColor').click(function() {
+                var $tip = this.tip();
                 var selectedColor = this.preview.find('#selectedColor').data('selected');
-                this.$tip.trigger("colorSelected", selectedColor);
-                this.$tip.remove();
+                this.$el.find(".inner").css("background-color", selectedColor);
+                this.hide();
                 this.$el.removeClass('active');
                 this.$el.removeClass('up');
             }.bind(this));

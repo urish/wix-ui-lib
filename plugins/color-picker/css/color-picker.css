@@ -262,10 +262,7 @@ button#selectColor {
     content: "\00B0";
 }
 
-#acpReadoutWrapper_S:after {
-    content: "%";
-}
-
+#acpReadoutWrapper_S:after,
 #acpReadoutWrapper_L:after {
-    content: "%"
+    content: "%";
 }

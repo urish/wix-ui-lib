@@ -23,80 +23,83 @@
         this.init();
     }
 
-    Plugin.prototype.init = function () {
-        this.bindEvents();
+    Plugin.prototype = $.extend({}, Plugin.prototype, {
 
-        if (this.options.layout === "horizontal") {
-            this.arrangeHorizontal(this.options);
-        } else {
-            this.arrangeVertical(this.options);
-        }
-    };
+        init: function () {
+            this.bindEvents();
 
-    Plugin.prototype.arrangeVertical = function(data) {
-        var linesInCol = this.options.colors.length / data.width;
+            if (this.options.layout === "horizontal") {
+                this.arrangeHorizontal(this.options);
+            } else {
+                this.arrangeVertical(this.options);
+            }
+        },
 
-        this.options.colors.reverse();
+        arrangeVertical: function(data) {
+            var linesInCol = this.options.colors.length / data.width;
 
-        for (var i = 0; i < linesInCol; ++i) {
+            this.options.colors.reverse();
+
+            for (var i = 0; i < linesInCol; ++i) {
+                var currentRow = this.newRow();
+                for (var j = 0; j < data.width; ++j) {
+                    currentRow.append(this.createColor(this.options.colors[(j*data.width)+i]));
+                }
+            }
+        },
+
+        arrangeHorizontal: function(data) {
+            var opt = this.options;
             var currentRow = this.newRow();
-            for (var j = 0; j < data.width; ++j) {
-                currentRow.append(this.createColor(this.options.colors[(j*data.width)+i]));
+
+            for (var i = 0; i < opt.colors.length; ++i) {
+                currentRow.append(this.createColor(opt.colors[i]));
+                if (((i+1) % data.width) === 0) {
+                    currentRow = this.newRow();
+                }
             }
-        }
-    };
+        },
 
-    Plugin.prototype.arrangeHorizontal = function(data) {
-        var opt = this.options;
-        var currentRow = this.newRow();
+        newRow: function() {
+            return $('<div>', {
+                class: "palette-row"
+            }).appendTo(this.$el);
+        },
 
-        for (var i = 0; i < opt.colors.length; ++i) {
-            currentRow.append(this.createColor(opt.colors[i]));
-            if (((i+1) % data.width) === 0) {
-                currentRow = this.newRow();
+        createColor: function (colorHex) {
+            var opt = this.options;
+
+            var colorWrapper = $('<div>', {
+                class: opt.colorUnit,
+                hvalue: colorHex
+            });
+
+            var colorInner = $('<div>', {
+                class: opt.colorUnitInner
+            }).css('background-color', colorHex).appendTo(colorWrapper);
+
+            var colorIcon = $('<div>', {
+                class: 'color-icon'
+            }).appendTo(colorWrapper);
+
+            if (colorInner.css('background-color') === opt.initColor) {
+                colorWrapper.addClass(opt.active);
             }
+
+            return colorWrapper;
+        },
+
+        bindEvents: function () {
+            var opt = this.options;
+
+            this.$el.on('click', '.' + opt.colorUnit, function (e) {
+                var $this = $(this);
+                $('#'+opt.wrapperId).find('.active').removeClass(opt.active);
+                $this.addClass(opt.active);
+                $(document).trigger('colorChanged', $this.attr('hvalue'));
+            });
         }
-    };
-
-    Plugin.prototype.newRow = function() {
-        return $('<div>', {
-            class: "palette-row"
-        }).appendTo(this.$el);
-    };
-
-    Plugin.prototype.createColor = function (colorHex) {
-        var opt = this.options;
-
-        var colorWrapper = $('<div>', {
-            class: opt.colorUnit,
-            hvalue: colorHex
-        });
-
-        var colorInner = $('<div>', {
-            class: opt.colorUnitInner
-        }).css('background-color', colorHex).appendTo(colorWrapper);
-
-        var colorIcon = $('<div>', {
-            class: 'color-icon'
-        }).appendTo(colorWrapper);
-
-        if (colorInner.css('background-color') === opt.initColor) {
-            colorWrapper.addClass(opt.active);
-        }
-
-        return colorWrapper;
-    };
-
-    Plugin.prototype.bindEvents = function () {
-        var opt = this.options;
-
-        this.$el.on('click', '.' + opt.colorUnit, function (e) {
-            var $this = $(this);
-            $('#'+opt.wrapperId).find('.active').removeClass(opt.active);
-            $this.addClass(opt.active);
-            $(document).trigger('colorChanged', $this.attr('hvalue'));
-        });
-    };
+    });
 
     $.fn[pluginName] = function (options) {
         return this.each(function () {
@@ -105,6 +108,6 @@
                     new Plugin(this, options));
             }
         });
-    };
+    }
 
 })(jQuery, window, document);

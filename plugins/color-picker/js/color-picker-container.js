@@ -18,7 +18,6 @@
             actions: "<button id=\"cancelSelection\" class=\"btn btn-mini\">Cancel</button><button id=\"selectColor\" class=\"btn btn-mini btn-primary\">OK</button>"
         };
 
-
     // The actual plugin constructor
     function Plugin(element, options) {
         this.$el = $(element);

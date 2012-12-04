@@ -231,6 +231,10 @@ button#selectColor {
    	border-radius: 6px;
 }
 
+.acp-readout {
+    margin-bottom: 4px;
+}
+
 .acp-readout input {
     -webkit-border-radius: 3px;
    	-moz-border-radius: 3px;
@@ -243,6 +247,12 @@ button#selectColor {
     text-align: center;
     color: #848484;
     text-transform: uppercase;
+    outline: 0;
+}
+
+.acp-readout input:focus {
+    box-shadow: #848484 0 0 10px;
+    color: #444;
 }
 
 .advanced-color-palette {

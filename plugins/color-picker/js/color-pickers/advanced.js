@@ -99,8 +99,6 @@
                 class: 'readouts'
             });
 
-
-
             for (var i = 0; i < (this.options.readouts.length - 1); i++) {
                 this.createReadout(this.options.readouts[i]).appendTo(readoutsWrapper);
             }
@@ -366,6 +364,10 @@
             this.$el.find('.' +  "acp-readout-input").keyup( function (e) {
                 if (e.target.id === (this.options.readoutInput + "_" + this.options.readouts[3])) {
                     var hex = this.$el.find('#' + this.options.readoutInput + "_" + this.options.readouts[3]).val();
+
+                    if (hex.length > 6) {
+                        return false;
+                    }
 
                     this._hexColor = this.paddingHex(hex);
                     this._hslParts  = this.convertHexToHslParts(hex);

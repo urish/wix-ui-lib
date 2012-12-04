@@ -102,9 +102,9 @@
             this.createContainers();
             this.renderColorPickers();
             this.renderButtons();
-            this.bindEvents();
             this.showFirstPicker();
             this.renderPreview();
+            this.bindEvents();
         },
 
         createContainers: function() {
@@ -194,6 +194,9 @@
 
         bindEvents: function() {
             $(document).bind("colorChanged", this.onColorChange.bind(this));
+
+            this.tip().bind('click', function () {
+                return false;});
 
             this.actions.find('#cancelSelection').click(function() {
                 this.closePopover();

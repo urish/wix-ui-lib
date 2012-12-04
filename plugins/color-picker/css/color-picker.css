@@ -2,7 +2,6 @@
 
 .popover {
     width: 370px;
-    height: 350px;
     padding-bottom: 40px;
 }
 
@@ -30,8 +29,6 @@
     width: 326px;
     height: 30px;
     margin-top: 12px;
-    /*top: 310px;*/
-    /*left: 12px;*/
 }
 
 #originalColor,
@@ -86,9 +83,14 @@ button#selectColor {
 /* tabs */
 
 #tabs {
-    position: absolute;
-    top: 0;
-    right: 10px;
+    text-align: right;
+    margin: 12px 0 0;
+}
+
+#tabs a {
+    cursor: pointer;
+    margin: 0 0 0 10px;
+    font-size:  14px;
 }
 
 #tabs > button {
@@ -225,22 +227,18 @@ button#selectColor {
    	border-radius: 6px;
 }
 
-.acp-readout label {
-    font-size: 11px;
-    display: inline-block;
-}
-
 .acp-readout input {
     -webkit-border-radius: 3px;
    	-moz-border-radius: 3px;
    	border-radius: 3px;
     margin-left: 10px;
-    width: 70px;
+    width: 60px;
     line-height: 27px;
     display: inline-block;
     font-size: 12px;
     text-align: center;
     color: #848484;
+    text-transform: uppercase;
 }
 
 .advanced-color-palette {
@@ -249,13 +247,34 @@ button#selectColor {
 
 .readouts {
     float: left;
-    margin-left: 10px;
 }
 
+.readouts > div:before {
+    display: inline-block;
+    width: 20px;
+}
+
+.readouts > div:before,
 .readouts > div:after {
     font-size: 11px;
     margin-left: 10px;
     color: #848484;
+}
+
+#acpReadoutWrapper_HEX:before {
+    content: "Hex";
+}
+
+#acpReadoutWrapper_H:before {
+    content: "H";
+}
+
+#acpReadoutWrapper_S:before {
+    content: "S";
+}
+
+#acpReadoutWrapper_L:before {
+    content: "L";
 }
 
 #acpReadoutWrapper_H:after {

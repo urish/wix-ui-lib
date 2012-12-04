@@ -8,10 +8,14 @@
         colorUnit : "color-unit",
         colorUnitInner : "color-unit-inner",
         active : 'active',
-        colors : ['#50FAFE', '#FFFFFF', '#0088CB', '#ED1C24', '#FFCB05', '#727272',
-            '#727272', '#B0B0B0', '#CECECE', '#9C9C9C', '#6C6C6C', '#484848', '#242424', '#C4EEF6', '#A5E1ED',
+        colors : [
+            '#CECECE', '#9C9C9C', '#6C6C6C', '#484848', '#242424', '#C4EEF6', '#A5E1ED',
             '#59CEE5', '#3B8999', '#1D444C', '#FFFDFD', '#999999', '#666666', '#444444', '#000000', '#E4A3B8',
-            '#CA748F', '#AF1A49', '#751131', '#3A0818', '#D5E7A6', '#B8CF78', '#8EB71D', '#5E7A13', '#2F3D09']
+            '#CA748F', '#AF1A49', '#751131', '#3A0818', '#D5E7A6', '#B8CF78', '#8EB71D', '#5E7A13', '#2F3D09'
+        ],
+        fixedColors: [
+            '#ED1C24', '#FFCB05', '#727272', '#727272', '#B0B0B0'
+        ]
     };
 
     // The actual plugin constructor

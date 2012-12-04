@@ -92,9 +92,6 @@
             this.bindEvents();
         },
 
-        _initIeg: function() {
-        },
-
         setContent: function() {
             $(this.options.template).appendTo(this.$el);
 
@@ -102,11 +99,13 @@
                 class: 'readouts'
             });
 
-            this.createReadout(this.options.readouts[3], '#').appendTo(readoutsWrapper);
+
 
             for (var i = 0; i < (this.options.readouts.length - 1); i++) {
                 this.createReadout(this.options.readouts[i]).appendTo(readoutsWrapper);
             }
+
+            this.createReadout(this.options.readouts[3]).appendTo(readoutsWrapper);
 
             this.$el.append(readoutsWrapper);
 
@@ -123,23 +122,18 @@
             return hexStr;
         },
 
-        createReadout: function(name, lbl) {
+        createReadout: function(name) {
             var opt = this.options;
 
-            // readout label
-            var readoutLabel = $('<label>').text(lbl || name);
-
-            // readout input and value
-            $('<input>', {
+            var input = $('<input>', {
                 id: opt.readoutInput + "_" + name,
                 class: "acp-readout-input"
-            }).appendTo(readoutLabel);
+            });
 
-            // return wrapped elements
             return $('<div>', {
                 id: opt.readout + "_" + name,
                 class: "acp-readout"
-            }).append(readoutLabel);
+            }).append(input);
         },
 
         updateHslReadoutValues: function(hslParts) {
@@ -226,6 +220,14 @@
         convertHexToHslParts: function(colorHex) {
             colorHex = this.paddingHex(colorHex);
 
+            if (colorHex === "000000") {
+                return {
+                    h : 0,
+                    s : 0,
+                    l : 0
+                }
+            }
+
             var colorRgb = this.Utils.hexToRgb(colorHex);
             var colorHsl = this.Utils.rgbToHsv(colorRgb.r, colorRgb.g, colorRgb.b);
 
@@ -294,7 +296,7 @@
             var opt = this.options;
 
             this._hexColor = this.convertHslToHex(hslParts);
-            this.$el.find('#' + opt.readoutInput + "_" + opt.readouts[3]).val( this._hexColor.toUpperCase());
+            this.$el.find('#' + opt.readoutInput + "_" + opt.readouts[3]).val(this._hexColor);
         },
 
         colorChanged : function (color) {

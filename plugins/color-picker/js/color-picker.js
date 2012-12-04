@@ -37,7 +37,6 @@
         this.init("popover", this.$el, this.options);
         this.createColoredElm();
 
-
         $(document).bind('click.' + this.type, function (e) {
             this.clearPopovers();
         }.bind(this));
@@ -53,8 +52,7 @@
             this.$el.append($ ('<div class="inner"></div>'));
         },
 
-        toggle: function(ev) {
-
+        toggle: function() {
             var $tip = this.tip();
             if (!($tip.hasClass('in'))) {
                 this.clearPopovers();
@@ -110,14 +108,15 @@
         createContainers: function() {
             var opt = this.options;
 
-            this.createTabs();
-
             this.paletteContainer = $('<div>', { id: "palettes" })
                 .appendTo(opt.node);
+
 
             this.preview = $('<div>', { id: "preview" })
                 .appendTo(opt.node)
                 .html(opt.preview);
+
+            this.createTabs();
 
             this.actions = $('<div>', { id: "actions" })
                 .appendTo(opt.node);
@@ -145,14 +144,6 @@
                 pickerOptions.wrapperId = "colorpicker_" + new Date().getTime();
                 pickerOptions.initColor =  this.$el.find('.inner').css('background-color');
 
-                if (this._hasTabs) {
-                    $('<button>', {})
-                        .html(this.options.colorPickerTabs[picker])
-                        .addClass('btn btn-mini')
-                        .appendTo(this.options.node.find('#tabs'))
-                        .bind('click', { pickerId: pickerOptions.wrapperId, self: this }, this.onTabSelect);
-                }
-
                 var pickerWrapper = $('<div>', { id: pickerOptions.wrapperId })
                     .appendTo(this.options.node.find('#palettes'));
 
@@ -164,6 +155,13 @@
                     view: this.$el
                 };
 
+                if (this._hasTabs) {
+                    $('<a>', {})
+                        .html(this.options.colorPickerTabs[picker])
+                        .appendTo(this.options.node.find('#tabs'))
+                        .attr('picker_id', pickerOptions.wrapperId)
+                        .bind('click', { pickerId: pickerOptions.wrapperId, self: this }, this.onTabSelect);
+                }
             }.bind(this));
         },
 
@@ -174,13 +172,27 @@
 
             var pickers = $('#palettes').children();
 
+            this.$target = $(ev.target);
+
             $.each(pickers, function(picker) {
-                $(pickers[picker]).hide()
+                $(pickers[picker]).hide();
+
+                if (this.$target.attr('picker_id') != $(pickers[picker]).attr('id')) {
+                    this.$target.show()
+                }
             }.bind(this));
 
             $('#tabs').find('.active').removeClass('active');
             $(ev.target).addClass('active');
             $('#' + ev.data.pickerId).fadeIn();
+            $('[picker_id='+ev.data.pickerId+']').hide();
+
+            $.each($('#tabs').children(), function(trigger) {
+                var $trigger = $($('#tabs').children()[trigger]);
+                if (this.$target.attr('picker_id') != $trigger.attr('picker_id')) {
+                    $trigger.show();
+                }
+            }.bind(this))
 
             return false;
         },
@@ -196,20 +208,18 @@
             $(document).bind("colorChanged", this.onColorChange.bind(this));
 
             this.tip().bind('click', function () {
-                return false;});
+                return false;
+            });
 
             this.actions.find('#cancelSelection').click(function() {
                 this.closePopover();
-
                 return false;
             }.bind(this));
 
             this.actions.find('#selectColor').click(function() {
-                var $tip = this.tip();
                 var selectedColor = this.preview.find('#selectedColor').data('selected');
                 this.$el.find(".inner").css("background-color", selectedColor);
                 this.closePopover();
-
                 return false;
             }.bind(this));
         },
@@ -228,7 +238,7 @@
 
         showFirstPicker: function() {
             $(this.paletteContainer.children()[0]).show();
-            $(this.options.node.find('#tabs').children()[0]).addClass('active');
+            $(this.options.node.find('#tabs').children()[0]).hide();
         }
     });
 

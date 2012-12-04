@@ -102,6 +102,10 @@ button#selectColor {
 	line-height: 10px;
 }
 
+.palette-row-fixed {
+    padding-top: 10px;
+}
+
 .color-unit {
     -webkit-border-radius: 3px;
    	-moz-border-radius: 3px;

@@ -14,7 +14,7 @@
             '#CA748F', '#AF1A49', '#751131', '#3A0818', '#D5E7A6', '#B8CF78', '#8EB71D', '#5E7A13', '#2F3D09'
         ],
         fixedColors: [
-            '#ED1C24', '#FFCB05', '#727272', '#727272', '#B0B0B0'
+            '#50FAFE', '#FFFFFF', '#0088CB', '#ED1C24', '#FFCB05'
         ]
     };
 
@@ -61,6 +61,12 @@
                 if (((i+1) % data.width) === 0) {
                     currentRow = this.newRow();
                 }
+            }
+
+            // render fixed colors
+            currentRow = this.newRow().addClass('palette-row-fixed');
+            for (var i = 0; i < data.width; i++) {
+                currentRow.append(this.createColor(opt.fixedColors[i]));
             }
         },
 

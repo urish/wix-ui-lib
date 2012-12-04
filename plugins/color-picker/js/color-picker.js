@@ -52,18 +52,21 @@
             this.$el.append($ ('<div class="inner"></div>'));
         },
 
-        toggle: function() {
+        toggle: function(ev) {
             var $tip = this.tip();
+
             if (!($tip.hasClass('in'))) {
                 this.clearPopovers();
                 this.show();
-                }
+            }
             else {
                 this.hide();
             }
             this.$el.toggleClass('active');
             this.$el.toggleClass('up');
             this.$el.removeClass('over');
+
+            $('.popover').css('width', parseInt($(this.$tip.find('#palettes').children()[0]).find('.palette-row').css('width')) + 50 + "px")
 
             return false;
         },
@@ -137,7 +140,7 @@
         },
 
         renderColorPickers: function() {
-            $.each(this.options.ColorPickers, function(picker) {
+            $.each(this.options.ColorPickers, function(picker, key) {
                 var pickerName = this.options.colorPickerTypes[picker];
                 var pickerOptions = this.options.ColorPickers[picker];
 
@@ -152,7 +155,9 @@
 
                 this._data[picker] = {
                     options: pickerOptions,
-                    view: this.$el
+                    view: this.$el,
+                    type: picker,
+                    self: this
                 };
 
                 if (this._hasTabs) {
@@ -160,7 +165,7 @@
                         .html(this.options.colorPickerTabs[picker])
                         .appendTo(this.options.node.find('#tabs'))
                         .attr('picker_id', pickerOptions.wrapperId)
-                        .bind('click', { pickerId: pickerOptions.wrapperId, self: this }, this.onTabSelect);
+                        .bind('click', { pickerId: pickerOptions.wrapperId, type: picker, self: this }, this.onTabSelect);
                 }
             }.bind(this));
         },
@@ -185,6 +190,15 @@
             $('#tabs').find('.active').removeClass('active');
             $(ev.target).addClass('active');
             $('#' + ev.data.pickerId).fadeIn();
+
+            if (ev.data.type === "Advanced") {
+                $('.popover').css('width', '370px');
+            } else {
+                $('.popover').css('width', parseInt($(ev.data.self.$tip.find($('#palettes')).find('#'+ev.data.pickerId).find('.palette-row')[0]).css('width')) + 50 + "px");
+            }
+
+            debugger;
+
             $('[picker_id='+ev.data.pickerId+']').hide();
 
             $.each($('#tabs').children(), function(trigger) {
@@ -192,7 +206,7 @@
                 if (this.$target.attr('picker_id') != $trigger.attr('picker_id')) {
                     $trigger.show();
                 }
-            }.bind(this))
+            }.bind(this));
 
             return false;
         },

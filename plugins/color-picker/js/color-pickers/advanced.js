@@ -277,14 +277,14 @@
             hsl.s = this.$el.find('#' + opt.readoutInput + "_" + opt.readouts[1]).val();
             hsl.l = this.$el.find('#' + opt.readoutInput + "_" + opt.readouts[2]).val();
 
-            this.setHexValue(hsl);
-
             var hslFormat = this.parseHslColor(hsl);
             this.renderPicker(hslFormat);
 
             this._hslParts.h = (hsl.h / 360).toFixed(3);
             this._hslParts.s = (hsl.s / 100).toFixed(3);
             this._hslParts.l = (hsl.l / 100).toFixed(3);
+
+            this.setHexValue(this._hslParts);
 
             this.setSliderPos(this._hslParts.h);
             this.setSelectorPos(this._hslParts);
@@ -293,8 +293,7 @@
         setHexValue : function (hslParts) {
             var opt = this.options;
 
-            var rgb = this.Utils.hsvToRgb(hslParts.h, hslParts.s, hslParts.l);
-            this._hexColor = this.Utils.rgbToHex(rgb.r, rgb.g, rgb.b);
+            this._hexColor = this.convertHslToHex(hslParts);
             this.$el.find('#' + opt.readoutInput + "_" + opt.readouts[3]).val( this._hexColor.toUpperCase());
         },
 
@@ -323,10 +322,9 @@
                 this.renderPicker(this.parseHslColor(color));
 
                 this._hslParts = {h: (color.h / 360).toFixed(3), s: (color.s / 100).toFixed(3), l: (color.l/ 100).toFixed(3)};
-                this._hexColor = this.convertHslToHex(this._hslParts);
                 this.updateHslReadoutValues(color);
 
-                this.setHexValue(this._hexColor);
+                this.setHexValue(this._hslParts);
 
                 this.colorChanged(this.parseHslColor(color));
 
@@ -353,10 +351,9 @@
                 var color = this.colorFromPosPicker(pos);
 
                 this._hslParts = {h: (color.h / 360).toFixed(3), s: (color.s / 100).toFixed(3), l: (color.l/ 100).toFixed(3)};
-                this._hexColor = this.convertHslToHex(this._hslParts);
                 this.updateHslReadoutValues(color);
 
-                this.setHexValue(this._hexColor);
+                this.setHexValue(this._hslParts);
 
                 this.colorChanged(this.parseHslColor(color));
 
@@ -507,7 +504,7 @@
 
         convertHslToHex: function (hslParts) {
             var rgb = this.Utils.hsvToRgb(hslParts.h, hslParts.s, hslParts.l);
-            return this.Utils.rgbToHex(rgb.r, rgb.g, rgb.b);
+            return this.Utils.rgbToHex(rgb[0], rgb[1], rgb[2]);
         },
 
         divHslParts: function (hslParts) {

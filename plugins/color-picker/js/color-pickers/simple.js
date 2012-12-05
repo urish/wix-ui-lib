@@ -22,6 +22,7 @@
     function Plugin(element, options) {
         this.$el = $(element);
         this.options = $.extend({}, defaults, options);
+        this.options.colors = this.options.colors.slice(0).reverse();
         this._defaults = defaults;
         this._name = pluginName;
         this.init();
@@ -42,13 +43,17 @@
         arrangeVertical: function(data) {
             var linesInCol = this.options.colors.length / data.width;
 
-            this.options.colors.reverse();
-
             for (var i = 0; i < linesInCol; ++i) {
                 var currentRow = this.newRow();
                 for (var j = 0; j < data.width; ++j) {
                     currentRow.append(this.createColor(this.options.colors[(j*data.width)+i]));
                 }
+            }
+
+            // render fixed colors
+            var currentRow = this.newRow().addClass('palette-row-fixed');
+            for (var i = 0; i < data.width; i++) {
+                currentRow.append(this.createColor(this.options.fixedColors[i]));
             }
         },
 
@@ -61,12 +66,6 @@
                 if (((i+1) % data.width) === 0) {
                     currentRow = this.newRow();
                 }
-            }
-
-            // render fixed colors
-            currentRow = this.newRow().addClass('palette-row-fixed');
-            for (var i = 0; i < data.width; i++) {
-                currentRow.append(this.createColor(opt.fixedColors[i]));
             }
         },
 

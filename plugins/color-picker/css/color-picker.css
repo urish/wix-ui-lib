@@ -68,6 +68,7 @@
 #actions button {
     font-size: 14px;
     line-height: 27px;
+    min-width: 59px;
 }
 
 button#cancelSelection {

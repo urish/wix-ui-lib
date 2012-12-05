@@ -67,7 +67,7 @@
             this.$el.toggleClass('up');
             this.$el.removeClass('over');
 
-            $('.popover').css('width', parseInt($(this.$tip.find('#palettes').children()[0]).find('.palette-row').css('width')) + 50 + "px")
+            $('.popover').css('width', parseInt($(this.$tip.find('#palettes').children()[0]).find('.palette-row').css('width')) + 50 + "px");
 
             return false;
         },
@@ -124,6 +124,10 @@
 
             this.actions = $('<div>', { id: "actions" })
                 .appendTo(opt.node);
+
+            this.actions.find('#selectColor').click(function(ev) {
+                $(document).trigger('colorChanged', $(ev.target).css('background-color'));
+            })
         },
 
         createTabs: function() {

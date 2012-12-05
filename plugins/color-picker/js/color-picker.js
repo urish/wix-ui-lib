@@ -197,8 +197,6 @@
                 $('.popover').css('width', parseInt($(ev.data.self.$tip.find($('#palettes')).find('#'+ev.data.pickerId).find('.palette-row')[0]).css('width')) + 50 + "px");
             }
 
-            debugger;
-
             $('[picker_id='+ev.data.pickerId+']').hide();
 
             $.each($('#tabs').children(), function(trigger) {

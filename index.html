@@ -48,6 +48,8 @@
                 <h3>Demo</h3>
                 <a rel="popover" id="startColorPicker" class="color-selector default"></a>
                 <a rel="popover" id="startColorPickerX" class="color-selector default"></a>
+                <a rel="popover" id="startColorPickerY" class="color-selector default"></a>
+                <a rel="popover" id="startColorPickerZ" class="color-selector default"></a>
                 <h3>Example</h3>
                 <pre class="prettyprint linenums">
                     $('#startColorPicker').makeColorPicker({
@@ -83,12 +85,30 @@
             ColorPickers: {
                 Simple: {
                     width: 5,
-                    layout: "horizontal"
+                    layout: "vertical"
                 },
                 Advanced: {}
             }
         });
         $('#startColorPickerX').makeColorPicker({
+            ColorPickers: {
+                Simple: {
+                    width: 5,
+                    layout: "vertical"
+                },
+                Advanced: {}
+            }
+        });
+        $('#startColorPickerY').makeColorPicker({
+            ColorPickers: {
+                Simple: {
+                    width: 5,
+                    layout: "vertical"
+                },
+                Advanced: {}
+            }
+        });
+        $('#startColorPickerZ').makeColorPicker({
             ColorPickers: {
                 Simple: {
                     width: 5,

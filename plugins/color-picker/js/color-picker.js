@@ -49,7 +49,8 @@
         _data: {},
 
         createColoredElm : function () {
-            this.$el.append($ ('<div class="inner"></div>'));
+            var inner = $('<span>').addClass('inner');
+            this.$el.append(inner);
         },
 
         toggle: function(ev) {

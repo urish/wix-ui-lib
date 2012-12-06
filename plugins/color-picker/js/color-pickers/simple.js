@@ -106,6 +106,11 @@
                 $('#'+opt.wrapperId).find('.active').removeClass(opt.active);
                 $this.addClass(opt.active);
 
+                $(document).trigger('colorChangedPreview', {
+                    hex: $this.attr('hvalue'),
+                    hsl: null
+                });
+
                 return false;
             });
         }

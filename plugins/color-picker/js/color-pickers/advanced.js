@@ -298,7 +298,10 @@
         },
 
         colorChanged : function (color) {
-            this.$el.trigger('colorChanged', color);
+            this.$el.trigger('colorChangedPreview', {
+                hex: '#' + this._hexColor,
+                hsl: color
+            });
         },
 
         bindEvents : function () {

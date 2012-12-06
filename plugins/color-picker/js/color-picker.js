@@ -14,6 +14,8 @@
                 "Advanced": "All colors"
             },
 
+            startWithColor: "#000000",
+
             preview: "<span id=\"originalColor\"></span><span id=\"selectedColor\"></span>",
             actions: "<button id=\"cancelSelection\" class=\"btn btn-mini\">Cancel</button><button id=\"selectColor\" class=\"btn btn-mini btn-primary\">OK</button>"
         };
@@ -50,6 +52,8 @@
 
         createColoredElm : function () {
             var inner = $('<span>').addClass('inner');
+            debugger;
+            inner.css('background-color', this.options.startWithColor);
             this.$el.append(inner);
         },
 
@@ -76,7 +80,7 @@
             $('.popover').each(function () {
                 $(this).removeClass('in');
                 $(this).remove();
-            })
+            });
 
             $('.color-selector').each(function () {
                 $(this).removeClass('active');
@@ -214,14 +218,11 @@
             $('<button>', { id: "selectColor" })
                 .html(this.options.actions)
                 .find('button').addClass('btn btn-large')
-                .appendTo(this.actions)
-                .click(function(ev) {
-                    $(document).trigger('colorChanged', $(ev.target).css('background-color'));
-                });
+                .appendTo(this.actions);
         },
 
         bindEvents: function() {
-            $(document).bind("colorChanged", this.onColorChange.bind(this));
+            $(document).bind("colorChangedPreview", this.onColorChange.bind(this));
 
             this.tip().bind('click', function () {
                 return false;
@@ -234,8 +235,17 @@
 
             this.actions.find('#selectColor').click(function() {
                 var selectedColor = this.preview.find('#selectedColor').data('selected');
-                this.$el.find(".inner").css("background-color", selectedColor);
+                this.$el.find(".inner").css("background-color", selectedColor.hex);
+
                 this.closePopover();
+
+                var data = {
+                    type: this.$el.attr('id'),
+                    selected_color: selectedColor.hex
+                }
+
+                $(document).trigger('colorChanged', data);
+
                 return false;
             }.bind(this));
         },
@@ -248,7 +258,7 @@
 
         onColorChange: function(ev, data) {
             var selected = this.preview.find('#selectedColor');
-            selected.css('background-color', data);
+            selected.css('background-color', data.hex);
             selected.data('selected', data);
         },
 

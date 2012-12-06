@@ -105,7 +105,6 @@
                 var $this = $(this);
                 $('#'+opt.wrapperId).find('.active').removeClass(opt.active);
                 $this.addClass(opt.active);
-                $(document).trigger('colorChanged', $this.attr('hvalue'));
 
                 return false;
             });

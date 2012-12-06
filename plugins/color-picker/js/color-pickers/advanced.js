@@ -326,8 +326,6 @@
 
                 this.setHexValue(this._hslParts);
 
-                this.colorChanged(this.parseHslColor(color));
-
                 return false;
 
             }.bind(this));

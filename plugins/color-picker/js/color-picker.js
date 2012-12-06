@@ -124,10 +124,6 @@
 
             this.actions = $('<div>', { id: "actions" })
                 .appendTo(opt.node);
-
-            this.actions.find('#selectColor').click(function(ev) {
-                $(document).trigger('colorChanged', $(ev.target).css('background-color'));
-            })
         },
 
         createTabs: function() {
@@ -218,7 +214,10 @@
             $('<button>', { id: "selectColor" })
                 .html(this.options.actions)
                 .find('button').addClass('btn btn-large')
-                .appendTo(this.actions);
+                .appendTo(this.actions)
+                .click(function(ev) {
+                    $(document).trigger('colorChanged', $(ev.target).css('background-color'));
+                });
         },
 
         bindEvents: function() {

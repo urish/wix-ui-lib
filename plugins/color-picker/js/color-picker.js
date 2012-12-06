@@ -14,7 +14,7 @@
                 "Advanced": "All colors"
             },
 
-            startWithColor: "#000000",
+            startWithColor: "#FF0000",
 
             preview: "<span id=\"originalColor\"></span><span id=\"selectedColor\"></span>",
             actions: "<button id=\"cancelSelection\" class=\"btn btn-mini\">Cancel</button><button id=\"selectColor\" class=\"btn btn-mini btn-primary\">OK</button>"
@@ -23,7 +23,6 @@
     // The actual plugin constructor
     function Plugin(element, options) {
         this.$el = $(element);
-
         this.options = $.extend({}, defaults, options);
 
         this.options = $.extend({}, this.options, {
@@ -52,7 +51,6 @@
 
         createColoredElm : function () {
             var inner = $('<span>').addClass('inner');
-            debugger;
             inner.css('background-color', this.options.startWithColor);
             this.$el.append(inner);
         },

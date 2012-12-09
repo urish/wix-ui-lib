@@ -139,7 +139,7 @@ button#selectColor {
 
 .color-unit:hover {
     box-shadow: 0 2px 3px 0 rgba(0,0,0,.35), 0 1px 2px 0 rgba(255,255,255,.7) inset;
-    border-color: #848484;
+    border-color: #d4d4d4;
 }
 
 .color-unit-inner {
@@ -178,26 +178,30 @@ button#selectColor {
 
 .color-selector {
     display: block;
-    width: 80px;
-    height: 40px;
-    background-image: url("../../../lib/img/color-picket-states.png");
+    width: 50px;
+    height: 25px;
+    background-image: url("../img/color-selector-sprite.png");
+    background-repeat: no-repeat;
     background-position: 0 0;
 }
 
-.over {
-    background-position: 0px -40px;
+.color-selector:hover {
+    background-position: 0 -28px;
 }
 
+.color-selector.active:hover,
 .up {
-    background-position: 0px -80px;
+    background-position: 0 -55px;
 }
 
 .inner {
-    width: 48px;
-    height: 25px;
+    width: 30px;
+    height: 18px;
+    top: 5px;
+    left: 0;
     margin: 5px 0px 0px 6px;
-    background-color: black;
-    position: absolute;
+    position: relative;
+    display: block;
     z-index: -1;
 }
 

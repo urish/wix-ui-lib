@@ -46,8 +46,8 @@
 			if ($this.find('.' + opt.contentClass).is(':hidden')) {
 				$('.' + opt.triggerClass).removeClass(opt.activeClass).find('.' + opt.contentClass).slideUp(opt.animationTime, opt.ease);
 				$this.toggleClass(opt.activeClass).find('.'+opt.contentClass).fadeIn('fast').slideDown(opt.animationTime, opt.ease);
+                return false;
             }
-			return false;
 		});
 	};
 

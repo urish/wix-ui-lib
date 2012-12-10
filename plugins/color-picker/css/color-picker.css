@@ -107,8 +107,8 @@ button#selectColor {
     display: inline-block;
 }
 
-.palette-row li {
-    line-height: 3px;
+.palette-row {
+    height: 28px;
 }
 
 .palette-row-fixed {
@@ -175,8 +175,8 @@ button#selectColor {
 }
 
 .color-unit.active {
-	/*border-color: #fff;*/
-    /*box-shadow: #444 0 0 1em;*/
+	border-color: #fff;
+    box-shadow: #444 0 0 1em;
 }
 
 .default {

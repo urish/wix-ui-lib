@@ -120,7 +120,8 @@
 
             this.preview = $('<div>', { id: "preview" })
                 .appendTo(opt.node)
-                .html(opt.preview);
+                .html(opt.preview)
+                .css('display', 'none');
 
             this.createTabs();
 
@@ -196,8 +197,10 @@
 
             if (ev.data.type === "Advanced") {
                 $('.popover').css('width', '370px');
+                $('#preview').show();
             } else {
                 $('.popover').css('width', parseInt($(ev.data.self.$tip.find($('#palettes')).find('#'+ev.data.pickerId).find('.palette-row')[0]).css('width')) + 50 + "px");
+                $('#preview').hide()
             }
 
             $('[picker_id='+ev.data.pickerId+']').hide();

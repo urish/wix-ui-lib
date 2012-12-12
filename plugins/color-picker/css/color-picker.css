@@ -10,13 +10,23 @@
 
 .popover-content {
     padding: 0;
-    margin: 12px;
 }
 
 /* container */
 
+#picker-main {
+    border: 1px solid #CCC;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 1px 1px 0 inset;
+
+    border-radius: 3px;
+    overflow: hidden;
+    padding: 12px;
+    padding-bottom: 0;
+}
+
 #colorPicker {
     padding: 12px;
+    background: #FDFDFD;
 
     -webkit-border-radius: 3px;
    	-moz-border-radius: 3px;
@@ -55,11 +65,8 @@
 /* action buttons */
 
 #actions {
-    /*position: absolute;*/
-    /*bottom: 12px;*/
-    /*left: 12px;*/
     overflow: hidden;
-    /*width: 346px;*/
+    margin-top: 12px;
 }
 
 #actions button {
@@ -80,7 +87,10 @@ button#selectColor {
 
 #tabs {
     text-align: right;
-    margin: 12px 0;
+    margin: 0;
+    padding: 0;
+    height: 34px;
+    line-height: 34px;
 }
 
 #tabs a {
@@ -105,7 +115,7 @@ button#selectColor {
 }
 
 .palette-row {
-    height: 34px;
+    height: 28px;
 }
 
 .palette-row-fixed {
@@ -121,15 +131,16 @@ button#selectColor {
     cursor: auto;
 }
 
+.color-unit:hover {
+    box-shadow: 0 2px 3px 0 rgba(0,0,0,.35), 0 1px 2px 0 rgba(255,255,255,.7) inset;
+    border-color: #d4d4d4;
+}
+
 .color-unit {
-    -webkit-border-radius: 3px;
-   	-moz-border-radius: 3px;
-   	border-radius: 3px;
+    -webkit-border-radius: 4px;
+   	-moz-border-radius: 4px;
+   	border-radius: 4px;
 
-    background-image: url("../img/bg-gradient.png");
-    background-position: 0 50%;
-
-    padding: 2px;
     margin: 0 3px 3px 0;
 
     overflow: hidden;
@@ -137,13 +148,8 @@ button#selectColor {
     position: relative;
 	display: inline-block;
     cursor: pointer;
-    width: 30px;
-    height: 30px;
-}
-
-.color-unit:hover {
-    box-shadow: 0 2px 3px 0 rgba(0,0,0,.35), 0 1px 2px 0 rgba(255,255,255,.7) inset;
-    border-color: #d4d4d4;
+    width: 28px;
+    height: 28px;
 }
 
 .color-unit-inner {
@@ -152,23 +158,24 @@ button#selectColor {
    	border-radius: 3px;
 
     position: absolute;
-    top: 4px;
-    left: 4px;
-    width: 26px;
-    height: 26px;
+    top: 3px;
+    left: 3px;
+    width: 22px;
+    height: 22px;
 }
 
 .color-icon {
-    background: url("../img/drop_down_picker_frame.png") 0px 0px no-repeat;
-    margin: -12px 0 0 -12px;
+    background: url("../img/drop_down_picker_frame.png") 0 0 no-repeat;
+    margin: 2px 0 0 2px;
     width: 25px;
-    top: 50%;
-    left: 50%;
+    height: 25px;
+    top: 0;
+    left: 0;
     position: absolute;
 }
 
 .color-unit.active {
-	border-color: #fff;
+	border-color: #3366FF;
     box-shadow: #444 0 0 1em;
 }
 
@@ -253,8 +260,8 @@ button#selectColor {
 
 .readouts {
     float: left;
-    margin-left: 17px;
-    width: 8em;
+    margin-left: 15px;
+    width: 120px;
     height: 150px;
     vertical-align: top;
 }
@@ -278,8 +285,8 @@ button#selectColor {
     margin: 0 0.3em;
     width: 3em;
     height: 1.6em;
-    line-height: 1.1px;
-    font-size: 1em;
+    line-height: 1.1em;
+    font-size: 0.8em;
     text-align: center;
     color: #848484;
     text-transform: uppercase;
@@ -299,20 +306,6 @@ button#selectColor {
 .advanced-color-palette {
     float: left;
 }
-
-
-
-/*.readouts > div:before {*/
-    /*display: inline-block;*/
-    /*width: 20px;*/
-/*}*/
-
-/*.readouts > div:before,*/
-/*.readouts > div:after {*/
-    /*font-size: 11px;*/
-    /*margin-left: 10px;*/
-    /*color: #848484;*/
-/*}*/
 
 #acpReadoutWrapper_HEX:before {
     content: "Hex";

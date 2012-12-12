@@ -92,8 +92,8 @@
             var title = this.getTitle(),
                 content = this.getContent();
 
-            $tip.find('.popover-title')[this.options.html ? 'html' : 'text'](title)
-            $tip.find('.popover-content')[this.options.html ? 'html' : 'text'](content)
+            $tip.find('.popover-title')[this.options.html ? 'html' : 'text'](title);
+            $tip.find('.popover-content')[this.options.html ? 'html' : 'text'](content);
 
             this.startColorPicker($tip.find('#colorPicker'));
 
@@ -101,7 +101,7 @@
         },
 
         startColorPicker: function(node) {
-            this.options.node = node;
+            this.options.node = $('<div>', { id: "picker-main" }).appendTo(node);
 
             this.createContainers();
             this.renderColorPickers();
@@ -126,7 +126,7 @@
             this.createTabs();
 
             this.actions = $('<div>', { id: "actions" })
-                .appendTo(opt.node);
+                .appendTo(opt.node.parent());
         },
 
         createTabs: function() {

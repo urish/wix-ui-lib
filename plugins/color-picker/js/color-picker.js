@@ -69,7 +69,7 @@
             this.$el.toggleClass('up');
             this.$el.removeClass('over');
 
-            $('.popover').css('width', parseInt($(this.$tip.find('#palettes').children()[0]).find('.palette-row').css('width')) + 50 + "px");
+            $('.popover').css('width', 215 + 'px');
 
             return false;
         },
@@ -89,7 +89,7 @@
 
         setContent: function() {
             var $tip = this.tip();
-            var title = this.getTitle(),
+            var title = defaults.colorPickerTabs["Simple"],
                 content = this.getContent();
 
             $tip.find('.popover-title')[this.options.html ? 'html' : 'text'](title);
@@ -196,10 +196,10 @@
             $('#' + ev.data.pickerId).fadeIn();
 
             if (ev.data.type === "Advanced") {
-                $('.popover').css('width', '370px');
+                $('.popover').css('width', '382px');
                 $('#preview').show();
             } else {
-                $('.popover').css('width', parseInt($(ev.data.self.$tip.find($('#palettes')).find('#'+ev.data.pickerId).find('.palette-row')[0]).css('width')) + 50 + "px");
+                $('.popover').css('width', '215px');
                 $('#preview').hide()
             }
 
@@ -211,6 +211,10 @@
                     $trigger.show();
                 }
             }.bind(this));
+
+            // set popover title
+            var title = defaults.colorPickerTabs[ev.data.type];
+            ev.data.self.$tip.find('.popover-title')['html'](title);
 
             return false;
         },

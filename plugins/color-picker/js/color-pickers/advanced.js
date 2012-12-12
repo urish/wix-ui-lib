@@ -22,6 +22,7 @@
                     "<label>H<input type=\"text\" id=\"acpReadoutInput_H\" class=\"acp-readout-input\"/>&deg;</label>" +
                     "<label>S<input type=\"text\" id=\"acpReadoutInput_S\" class=\"acp-readout-input\"/>%</label>" +
                     "<label>L<input type=\"text\" id=\"acpReadoutInput_L\" class=\"acp-readout-input\"/>%</label>" +
+                    "<hr>" +
                     "<label id=\"acpReadout_HEX\">Hex #<input type=\"text\" id=\"acpReadoutInput_HEX\" class=\"acp-readout-input\"/></label>" +
                 "</div>",
             draggable : false,

@@ -1,0 +1,28 @@
+
+.tpa-checkbox {
+    background: url("../img/checbox-sprite (2).png") no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.tpa-checkbox.checked {
+    background-position: 0 0;
+}
+
+.tpa-checkbox.unchecked {
+    background-position: 0 -17px;
+}
+
+.tpa-radio-button {
+    background: url("../img/radio-button-sprite (2).png") no-repeat;
+    width: 12px;
+    height: 13px;
+}
+
+.tpa-radio-button.checked {
+    background-position: 0 -13px;
+}
+
+.tpa-radio-button.unchecked {
+    background-position: 0 0;
+}

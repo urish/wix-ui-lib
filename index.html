@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="lib/css/bootstrap.min.css" type="text/css" media="screen, projection" />
     <link rel="stylesheet" href="lib/css/main.css" type="text/css" media="screen, projection" />
     <link rel="stylesheet" href="plugins/color-picker/css/color-picker.css" type="text/css" media="screen, projection" />
+    <link rel="stylesheet" href="components/css/common-controls.css" type="text/css" media="screen, projection" />
 </head>
 <body>
 <header>
@@ -63,6 +64,16 @@
                     });
                 </pre>
             </section>
+
+            <section id="commonControls">
+                <div class="page-header">
+                    <h1>Common Controls</h1>
+                </div>
+                <h3>Demo</h3>
+                <div id="tpaCheckbox" class="checkbox"></div>
+                <div id="tpaCheckbox2" class="checkbox"></div>
+                <div id="tpaRadioButton"></div>
+            </section>
         </div>
     </div>
 </div>
@@ -79,6 +90,7 @@
 <script type="text/javascript" src="plugins/color-picker/js/color-picker.js"></script>
 <script type="text/javascript" src="plugins/color-picker/js/color-pickers/simple.js"></script>
 <script type="text/javascript" src="plugins/color-picker/js/color-pickers/advanced.js"></script>
+<script type="text/javascript" src="Components/common-controls.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         $('#startColorPicker').makeColorPicker({
@@ -117,5 +129,9 @@
                 Advanced: {}
             }
         });
+
+        var checkbox1 = new Checkbox($('#tpaCheckbox'), 'unchecked');
+        var checkbox2 = new Checkbox($('#tpaCheckbox2'), 'checked');
+        var radioButton = new RadioButton($('#tpaRadioButton'), 'checked');
     });
 </script>

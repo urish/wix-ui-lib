@@ -9,13 +9,20 @@
             paletteSlider : "acpPaletteSlider",
             slider : "acpSlider",
             selector : "acpSelector",
-            template: "<div class=\"advanced-color-palette\">" +
-                "<div id=\"acpPalettePicker\" class=\"acp-picker-palette\">" +
-                "<div id=\"acpSelector\" class=\"acp-selector\"></div>" +
+            template:
+                "<div class=\"advanced-color-palette\">" +
+                    "<div id=\"acpPalettePicker\" class=\"acp-picker-palette\">" +
+                    "<div id=\"acpSelector\" class=\"acp-selector\"></div>" +
+                    "</div>" +
+                    "<div id=\"acpPaletteSlider\" class=\"acp-slider-palette\">" +
+                    "<div id=\"acpSlider\" class=\"acp-slider\"></div>" +
+                    "</div>"  +
                 "</div>" +
-                "<div id=\"acpPaletteSlider\" class=\"acp-slider-palette\">" +
-                "<div id=\"acpSlider\" class=\"acp-slider\"></div>" +
-                "</div>"  +
+                "<div class=\"readouts\">" +
+                    "<label>H<input type=\"text\" id=\"acpReadoutInput_H\" class=\"acp-readout-input\"/>&deg;</label>" +
+                    "<label>S<input type=\"text\" id=\"acpReadoutInput_S\" class=\"acp-readout-input\"/>%</label>" +
+                    "<label>L<input type=\"text\" id=\"acpReadoutInput_L\" class=\"acp-readout-input\"/>%</label>" +
+                    "<label id=\"acpReadout_HEX\">Hex #<input type=\"text\" id=\"acpReadoutInput_HEX\" class=\"acp-readout-input\"/></label>" +
                 "</div>",
             draggable : false,
             readout : "acpReadoutWrapper",
@@ -94,19 +101,6 @@
 
         setContent: function() {
             $(this.options.template).appendTo(this.$el);
-
-            var readoutsWrapper = $('<div>', {
-                class: 'readouts'
-            });
-
-            for (var i = 0; i < (this.options.readouts.length - 1); i++) {
-                this.createReadout(this.options.readouts[i]).appendTo(readoutsWrapper);
-            }
-
-            this.createReadout(this.options.readouts[3]).appendTo(readoutsWrapper);
-
-            this.$el.append(readoutsWrapper);
-
             this.$el.parent().css('overflow','hidden');
         },
 

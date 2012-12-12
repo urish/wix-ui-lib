@@ -16,7 +16,6 @@
 /* container */
 
 #colorPicker {
-    border: 1px solid #d4d4d4;
     padding: 12px;
 
     -webkit-border-radius: 3px;
@@ -25,9 +24,16 @@
 }
 
 #preview {
-    /*width: 326px;*/
     height: 30px;
-    margin-top: 12px;
+    margin-top: 10px;
+    overflow: hidden;
+    white-space: nowrap;
+
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+
+    background-image: url("http://static.wix.com/services/html-client-core/2.63.0/images/mobile/core/themes/editor_mobile/transparency.gif");
 }
 
 #originalColor,
@@ -35,24 +41,15 @@
     display: inline-block;
     width: 50%;
     height: 30px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 1px 0px inset;
 }
 
 #originalColor {
-    -webkit-border-top-left-radius: 6px;
-    -webkit-border-bottom-left-radius: 6px;
-    -moz-border-radius-topleft: 6px;
-    -moz-border-radius-bottomleft: 6px;
-    border-top-left-radius: 6px;
-    border-bottom-left-radius: 6px;
+    border-radius: 5px 0 0 5px;
 }
 
 #selectedColor {
-    -webkit-border-top-right-radius: 6px;
-    -webkit-border-bottom-right-radius: 6px;
-    -moz-border-radius-topright: 6px;
-    -moz-border-radius-bottomright: 6px;
-    border-top-right-radius: 6px;
-    border-bottom-right-radius: 6px;
+    border-radius: 0 5px 5px 0;
 }
 
 /* action buttons */
@@ -108,7 +105,7 @@ button#selectColor {
 }
 
 .palette-row {
-    height: 28px;
+    height: 34px;
 }
 
 .palette-row-fixed {
@@ -154,15 +151,11 @@ button#selectColor {
    	-moz-border-radius: 3px;
    	border-radius: 3px;
 
-    background-image: url("../img/bg-gradient.png");
-    background-position: 0 50%;
-
     position: absolute;
     top: 4px;
     left: 4px;
     width: 26px;
     height: 26px;
-    /*margin: -8px 0 0 -8px;*/
 }
 
 .color-icon {
@@ -206,48 +199,38 @@ button#selectColor {
     height: 18px;
     top: 5px;
     left: 5px;
-    /*margin: 5px 0px 0px 6px;*/
     position: relative;
     display: block;
     z-index: -1;
 }
 
-/* Advanced */
+/*****************************************************************************************
+ *   Advance Color Picker
+ *
+ ******************************************************************************************/
 
 .acp-picker-palette{
-  position: relative;
-  width: 150px;
-  height: 150px;
-  /*top:20;
-  left: 20;*/
-  display: inline-block;
-
+    position: relative;
+    width: 150px;
+    height: 150px;
+    display: inline-block;
+    box-shadow: rgba(0, 0, 0, 0.498039) 1px 1px 3px 0px inset;
 }
 
 .acp-slider-palette{
-  position: relative;
-  width: 18px;
-  height: 150px;
-  /*top:20;*/
-  display: inline-block;
-
-}
-
-#acpPalettePicker {
-    width: 162px;
-    height: 162px;
-}
-
-#acpPaletteSlider {
-    margin-left: 12px;
-    height: 162px;
+    position: relative;
+    width: 18px;
+    height: 150px;
+    margin-left: 7px;
+    display: inline-block;
+    box-shadow: 1px 1px 3px 0 rgba(0,0,0,.5) inset;
 }
 
 .acp-slider {
 	position: absolute;
 	width: 18px;
 	height:	12px;
-    background: url("http://dl.dropbox.com/u/120228035/hueBar.png") no-repeat;
+    background: url("http://static.wix.com/services/html-client-core/2.63.0/images/mobile/core/themes/editor_mobile/hueBar.png") no-repeat;
 	top: -6px;
 }
 
@@ -268,19 +251,44 @@ button#selectColor {
     margin-bottom: 4px;
 }
 
-.acp-readout input {
+.readouts {
+    float: left;
+    margin-left: 17px;
+    width: 8em;
+    height: 150px;
+    vertical-align: top;
+}
+
+.readouts > label {
+    display: block;
+    height: 30px;
+}
+
+.readouts > label#acpReadout_HEX {
+    margin-top: 20px;
+}
+
+.acp-readout-input {
     -webkit-border-radius: 3px;
    	-moz-border-radius: 3px;
    	border-radius: 3px;
-    margin-left: 10px;
-    width: 60px;
-    line-height: 27px;
-    display: inline-block;
-    font-size: 12px;
+    border: 1px solid #B4B4B4;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 1px 1px 0 inset;
+
+    margin: 0 0.3em;
+    width: 3em;
+    height: 1.6em;
+    line-height: 1.1px;
+    font-size: 1em;
     text-align: center;
     color: #848484;
     text-transform: uppercase;
     outline: 0;
+    vertical-align: baseline;
+}
+
+.acp-readout-input#acpReadoutInput_HEX {
+    width: 3.7em;
 }
 
 .acp-readout input:focus {
@@ -292,21 +300,19 @@ button#selectColor {
     float: left;
 }
 
-.readouts {
-    float: left;
-}
 
-.readouts > div:before {
-    display: inline-block;
-    width: 20px;
-}
 
-.readouts > div:before,
-.readouts > div:after {
-    font-size: 11px;
-    margin-left: 10px;
-    color: #848484;
-}
+/*.readouts > div:before {*/
+    /*display: inline-block;*/
+    /*width: 20px;*/
+/*}*/
+
+/*.readouts > div:before,*/
+/*.readouts > div:after {*/
+    /*font-size: 11px;*/
+    /*margin-left: 10px;*/
+    /*color: #848484;*/
+/*}*/
 
 #acpReadoutWrapper_HEX:before {
     content: "Hex";

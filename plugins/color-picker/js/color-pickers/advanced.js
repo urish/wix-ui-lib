@@ -309,12 +309,23 @@
             $(document).unbind('mouseup.caret.drag');
         },
 
-        setSliderPosition: function($slider, $bar, yMov) {
-            if ( ((yMov < 0) && ($slider.position().top + yMov) < 0) ||
-                (yMov >= 0) && ($slider.position().top + $slider.height() + yMov) > $bar.height()) {
-                return;
-            }
-            $slider.css('top', + ($slider.position().top + yMov) + 'px');
+        setSliderPosition: function($slider, $bar, newPos) {
+
+            this._sliderPosY = newPos.y;
+
+            newPos.x = newPos.x / ($bar.width() - 1);
+            newPos.y = newPos.y / ($bar.height() - 1);
+
+            var color = this.colorFromPosSlider(newPos);
+
+            this.renderPicker(this.parseHslColor(color));
+
+            this._hslParts = {h: (color.h / 360).toFixed(3), s: (color.s / 100).toFixed(3), l: (color.l/ 100).toFixed(3)};
+            this.updateHslReadoutValues(color);
+
+            this.setHexValue(this._hslParts);
+
+            this.colorChanged(this.parseHslColor(color));
         },
 
         bindEvents : function () {
@@ -325,38 +336,52 @@
                 var lastY = event.pageY;
                 $(document).bind('mouseup.caret.drag', function() {
                     this.unbindSliderDrag();
+
                 }.bind(this));
 
                 $(document).bind('mousemove.caret.drag', function(event) {
-                    this.setSliderPosition($slider, $paletteSlider, (event.pageY - lastY));
+
+                    var yMov = (event.pageY - lastY);
+                    var newPos = {x: 0, y: 0};
+                    newPos.y = $slider.position().top + yMov;
+                    newPos.x = $slider.position().left;
+
+                    if ( ((yMov < 0) && (newPos.y  <= (0 - this._SLIDER_OFFSET))) ||
+                        (yMov >= 0) && (newPos.y > ($paletteSlider.height() - 1 - this._SLIDER_OFFSET))) {
+                        return;
+                    }
+
+                    $slider.css('top', + newPos.y + 'px');
+                    newPos.y = newPos.y + this._SLIDER_OFFSET;
+                    this.setSliderPosition($slider, $paletteSlider, newPos);
 
                     lastY = event.pageY;
                 }.bind(this));
+
+                // cancel out any text selections
+                document.body.focus();
+
+                // prevent text selection in IE
+                document.onselectstart = function () { return false; };
+                // prevent IE from trying to drag an image
+                event.target.ondragstart = function() { return false; };
+
+                // prevent text selection (except IE)
+                return false;
             }.bind(this));
 
-            this.$el.find('#' + this.options.paletteSlider).click( function(e) {
+            $paletteSlider.click( function(e) {
                 var opt = this.options;
 
                 if (e.target.className === 'acp-slider') {
                     return;
                 }
 
-                var pos = this.offsetPosFromEvent(e);
+                var newPos = this.offsetPosFromEvent(e);
 
-                this.$el.find('#' + opt.slider).css("top", (pos.y - this._SLIDER_OFFSET) + 'px');
-                this._sliderPosY = pos.y;
+                $slider.css('top', + (newPos.y - this._SLIDER_OFFSET) + 'px');
 
-                pos.x = pos.x / (e.target.clientWidth - 1);
-                pos.y = pos.y / (e.target.clientHeight - 1);
-
-                var color = this.colorFromPosSlider(pos);
-
-                this.renderPicker(this.parseHslColor(color));
-
-                this._hslParts = {h: (color.h / 360).toFixed(3), s: (color.s / 100).toFixed(3), l: (color.l/ 100).toFixed(3)};
-                this.updateHslReadoutValues(color);
-
-                this.setHexValue(this._hslParts);
+                this.setSliderPosition($slider, $paletteSlider, newPos);
 
                 return false;
 

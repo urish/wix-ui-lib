@@ -14,7 +14,7 @@
                 "Advanced": "All colors"
             },
 
-            startWithColor: "#FF0000",
+            startWithColor: "#897185",
 
             preview: "<span id=\"originalColor\"></span><span id=\"selectedColor\"></span>",
             actions: "<button id=\"cancelSelection\" class=\"btn btn-mini\">Cancel</button><button id=\"selectColor\" class=\"btn btn-mini btn-primary\">OK</button>"

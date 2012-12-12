@@ -299,8 +299,8 @@
         },
 
         unbindSliderDrag: function() {
-            $(document).unbind('mousemove.caret.drag');
-            $(document).unbind('mouseup.caret.drag');
+            $(document).unbind('mousemove.slider.drag');
+            $(document).unbind('mouseup.slider.drag');
         },
 
         setSliderPosition: function($slider, $bar, newPos) {
@@ -322,18 +322,40 @@
             this.colorChanged(this.parseHslColor(color));
         },
 
+        unbindSelectorDrag: function() {
+            $(document).unbind('mousemove.selector.drag');
+            $(document).unbind('mouseup.selector.drag');
+        },
+
+        setSelectorPosition: function($selector, $palette, newPos) {
+
+            newPos.x = newPos.x / ($palette.width() - 1);
+            newPos.y = newPos.y / ($palette.height() - 1);
+
+            var color = this.colorFromPosPicker(newPos);
+
+            this._hslParts = {h: (color.h / 360).toFixed(3), s: (color.s / 100).toFixed(3), l: (color.l/ 100).toFixed(3)};
+            this.updateHslReadoutValues(color);
+
+            this.setHexValue(this._hslParts);
+
+            this.colorChanged(this.parseHslColor(color));
+        },
+
         bindEvents : function () {
             var $slider = this.$el.find('#' + this.options.slider);
             var $paletteSlider = this.$el.find('#' + this.options.paletteSlider);
+            var $selector = this.$el.find('#' + this.options.selector);
+            var $palettePicker = this.$el.find('#' + this.options.palettePicker);
 
             $slider.bind('mousedown', function(event) {
                 var lastY = event.pageY;
-                $(document).bind('mouseup.caret.drag', function() {
+                $(document).bind('mouseup.slider.drag', function() {
                     this.unbindSliderDrag();
 
                 }.bind(this));
 
-                $(document).bind('mousemove.caret.drag', function(event) {
+                $(document).bind('mousemove.slider.drag', function(event) {
 
                     var yMov = (event.pageY - lastY);
                     var newPos = {x: 0, y: 0};
@@ -381,7 +403,55 @@
 
             }.bind(this));
 
-            this.$el.find('#' + this.options.palettePicker).click( function(e) {
+            $selector.bind('mousedown', function(event) {
+                var lastY = event.pageY;
+                var lastX = event.pageX;
+
+                $(document).bind('mouseup.selector.drag', function() {
+                    this.unbindSelectorDrag();
+
+                }.bind(this));
+
+                $(document).bind('mousemove.selector.drag', function(event) {
+
+                    var yMov = (event.pageY - lastY);
+                    var xMov = (event.pageX - lastX);
+                    var newPos = {x: 0, y: 0};
+                    newPos.y = $selector.position().top + yMov;
+                    newPos.x = $selector.position().left + xMov;
+
+                    if ( ((yMov < 0) && (newPos.y  <= (0 - this._SELECTOR_OFFSET_Y))) ||
+                         ((yMov >= 0) && (newPos.y > ($palettePicker.height() - 1 - this._SELECTOR_OFFSET_Y))) ||
+                         ((xMov < 0) && (newPos.x  <= (0 - this._SELECTOR_OFFSET_X))) ||
+                         ((xMov >= 0) && (newPos.x > ($palettePicker.width() - 1 - this._SELECTOR_OFFSET_X))) ) {
+                        return;
+                    }
+
+                    $selector.css('top', + newPos.y + 'px');
+                    $selector.css('left', + newPos.x + 'px');
+
+                    newPos.y = newPos.y + this._SELECTOR_OFFSET_Y;
+                    newPos.x = newPos.x + this._SELECTOR_OFFSET_X;
+
+                    this.setSelectorPosition($selector, $palettePicker, newPos);
+
+                    lastY = event.pageY;
+                    lastX = event.pageX;
+                }.bind(this));
+
+                // cancel out any text selections
+                document.body.focus();
+
+                // prevent text selection in IE
+                document.onselectstart = function () { return false; };
+                // prevent IE from trying to drag an image
+                event.target.ondragstart = function() { return false; };
+
+                // prevent text selection (except IE)
+                return false;
+            }.bind(this));
+
+            $palettePicker.click( function(e) {
                 var opt = this.options;
 
                 if (e.target.className === 'acp-selector') {
@@ -389,22 +459,12 @@
                 }
 
                 var pos = this.offsetPosFromEvent(e);
-                var selector = this.$el.find('#' + opt.selector);
+                var selector = $selector;
 
                 selector.css("top", (pos.y - this._SELECTOR_OFFSET_Y) + 'px');
                 selector.css("left", (pos.x - this._SELECTOR_OFFSET_X) + 'px');
 
-                pos.x = pos.x / (e.target.clientWidth - 1);
-                pos.y = pos.y / (e.target.clientHeight - 1);
-
-                var color = this.colorFromPosPicker(pos);
-
-                this._hslParts = {h: (color.h / 360).toFixed(3), s: (color.s / 100).toFixed(3), l: (color.l/ 100).toFixed(3)};
-                this.updateHslReadoutValues(color);
-
-                this.setHexValue(this._hslParts);
-
-                this.colorChanged(this.parseHslColor(color));
+                this.setSelectorPosition($selector, $palettePicker, pos);
 
                 return false;
 

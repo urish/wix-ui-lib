@@ -49,11 +49,11 @@ hr {
     left: 25%;
     background-image: url("http://static.wix.com/services/html-web-skins/1.211.19/images/wysiwyg/core/themes/editor_web/icons/top-bar-icons.png");
     background-repeat:no-repeat;
-    background-position:50% -3px;
+    background-position:50% -2px;
 }
 
 .popover-close-x:hover {
-    background-position:50% -143px;
+    background-position:50% -142px;
 }
 
 .popover-content {

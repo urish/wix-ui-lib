@@ -29,7 +29,8 @@
             title: "Color Picker",
             html: true,
             content: '<div id="colorPicker"></div>',
-            template: '<div class="popover"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"></div></div></div>'
+            template: '<div class="popover"><div class="arrow"></div><div class="popover-inner"><div class="popover-header"> \<' +
+                'h3 class="popover-title"></h3><div class="popover-close"><div class="popover-close-x"></div></div></div><div class="popover-content"></div></div></div>'
         });
 
         this._defaults = defaults;
@@ -227,13 +228,19 @@
         },
 
         bindEvents: function() {
+            var $tip = this.tip();
             $(document).bind("colorChangedPreview", this.onColorChange.bind(this));
 
-            this.tip().bind('click', function () {
+            $tip.bind('click', function () {
                 return false;
             });
 
             this.actions.find('#cancelSelection').click(function() {
+                this.closePopover();
+                return false;
+            }.bind(this));
+
+            $tip.find('.popover-close').click(function() {
                 this.closePopover();
                 return false;
             }.bind(this));

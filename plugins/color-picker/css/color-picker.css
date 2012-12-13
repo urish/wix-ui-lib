@@ -70,6 +70,7 @@ hr {
     overflow: hidden;
     padding: 12px;
     padding-bottom: 0;
+    padding-top: 6px;
 }
 
 #colorPicker {
@@ -263,6 +264,10 @@ button#selectColor {
  *   Advance Color Picker
  *
  ******************************************************************************************/
+.advanced-viewer{
+    height: 162px;
+    padding-top: 6px;
+}
 
 .acp-picker-palette{
     position: relative;
@@ -358,6 +363,7 @@ button#selectColor {
 .advanced-color-palette {
     float: left;
 }
+
 
 #acpReadoutWrapper_HEX:before {
     content: "Hex";

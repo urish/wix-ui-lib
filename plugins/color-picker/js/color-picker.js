@@ -90,6 +90,8 @@
 
         setContent: function() {
             var $tip = this.tip();
+
+            $tip.css('height', 356 + 'px');
             var title = defaults.colorPickerTabs["Simple"],
                 content = this.getContent();
 

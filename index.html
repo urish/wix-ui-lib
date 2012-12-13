@@ -70,9 +70,11 @@
                     <h1>Common Controls</h1>
                 </div>
                 <h3>Demo</h3>
-                <div id="tpaCheckbox" class="checkbox"></div>
-                <div id="tpaCheckbox2" class="checkbox"></div>
-                <div id="tpaRadioButton"></div>
+                <!--<div id="tpaCheckbox" class="checkbox"></div>-->
+                <!--<div id="tpaCheckbox2" class="checkbox"></div>-->
+                <!--<div id="tpaRadioButton"></div>-->
+                <div class="tpa-slider"></div>
+                <div id="opacitySlider"></div>
             </section>
         </div>
     </div>
@@ -133,5 +135,6 @@
         var checkbox1 = new Checkbox($('#tpaCheckbox'), 'unchecked');
         var checkbox2 = new Checkbox($('#tpaCheckbox2'), 'checked');
         var radioButton = new RadioButton($('#tpaRadioButton'), 'checked');
+        var slider = new Slider($('#opacitySlider'));
     });
 </script>

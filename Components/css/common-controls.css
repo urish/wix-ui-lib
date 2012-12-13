@@ -26,3 +26,44 @@
 .tpa-radio-button.unchecked {
     background-position: 0 0;
 }
+
+.tpa-slider-bar {
+    height: 5px;
+    width: 65px;
+    position: relative;
+}
+
+.tpa-slider-bar-body {
+    background: url("../img/slider-bg-pixel.png") repeat-x;
+    height: 5px;
+    width: 88%;
+    display: inline-block;
+}
+
+.tpa-slider-bar-right {
+    background: url("../img/slider-bg-right.png") no-repeat;
+    height: 5px;
+    width: 6%;
+    display: inline-block;
+}
+
+.tpa-slider-bar-left {
+    background: url("../img/slider-bg-left.png") no-repeat;
+    height: 5px;
+    display: inline-block;
+    width: 6%;
+}
+
+.tpa-slider {
+    background: url("../img/slider (5).png") no-repeat;
+    background-position: -6px, 0px;
+    height: 24px;
+    width: 18px;
+    position: absolute;
+    left: -9px;
+    display: inline-block;
+}
+
+
+
+

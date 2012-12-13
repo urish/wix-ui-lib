@@ -101,6 +101,7 @@
         },
 
         setContent: function() {
+            this.$el.addClass('advanced-viewer');
             $(this.options.template).appendTo(this.$el);
             this.$el.parent().css('overflow','hidden');
         },

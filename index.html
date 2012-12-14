@@ -32,6 +32,17 @@
             </ul>
         </div>
         <div class="span9">
+            <section id="commonControls">
+                <div class="page-header">
+                    <h1>Common Controls</h1>
+                </div>
+                <h3>Demo</h3>
+                <div id="tpaCheckbox" class="checkbox"></div>
+                <div id="tpaCheckbox2" class="checkbox"></div>
+                <div id="tpaRadioButton"></div>
+                <br>
+                <div class="tpa-main-btn"><label>Connect Account</label></div>
+            </section>
             <section id="accordion">
                 <div class="page-header">
                     <h1>Accordion</h1>
@@ -47,7 +58,6 @@
                     <h1>Color Picker</h1>
                 </div>
                 <h3>Demo</h3>
-                <a rel="popover" id="startColorPicker" class="color-selector default"><label>Background</label></a>
                 <a rel="popover" id="startColorPickerX" class="color-selector default"></a>
                 <a rel="popover" id="startColorPickerY" class="color-selector default"></a>
                 <a rel="popover" id="startColorPickerZ" class="color-selector default"></a>
@@ -63,16 +73,6 @@
                         }
                     });
                 </pre>
-            </section>
-
-            <section id="commonControls">
-                <div class="page-header">
-                    <h1>Common Controls</h1>
-                </div>
-                <h3>Demo</h3>
-                <div id="tpaCheckbox" class="checkbox"></div>
-                <div id="tpaCheckbox2" class="checkbox"></div>
-                <div id="tpaRadioButton"></div>
             </section>
         </div>
     </div>
@@ -93,20 +93,11 @@
 <script type="text/javascript" src="Components/common-controls.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#startColorPicker').makeColorPicker({
-            ColorPickers: {
-                Simple: {
-                    width: 5,
-                    layout: "vertical"
-                },
-                Advanced: {}
-            }
-        });
         $('#startColorPickerX').makeColorPicker({
             ColorPickers: {
                 Simple: {
                     width: 5,
-                    layout: "horizontal"
+                    layout: "vertical"
                 },
                 Advanced: {}
             }

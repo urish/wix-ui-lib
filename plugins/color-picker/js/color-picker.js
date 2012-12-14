@@ -70,7 +70,9 @@
             this.$el.toggleClass('up');
             this.$el.removeClass('over');
 
-            $('.popover').css('width', 215 + 'px');
+            // simple init view 
+            $('#picker-main').css('padding-top', '12px');
+            $('.popover').css('width', 217 + 'px');
 
             return false;
         },
@@ -200,10 +202,12 @@
 
             if (ev.data.type === "Advanced") {
                 $('.popover').css('width', '382px');
+                $('#picker-main').css('padding-top', '6px');
                 $('#preview').show();
             } else {
-                $('.popover').css('width', '215px');
-                $('#preview').hide()
+                $('.popover').css('width', '217px');
+                $('#picker-main').css('padding-top', '12px');
+                $('#preview').hide();
             }
 
             $('[picker_id='+ev.data.pickerId+']').hide();

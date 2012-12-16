@@ -16,6 +16,11 @@
 
             startWithColor: "#897185",
 
+            ColorPickers: {
+                Simple: {},
+                Advanced: {}
+            },
+
             preview: "<span id=\"originalColor\"></span><span id=\"selectedColor\"></span>",
             actions: "<button id=\"cancelSelection\" class=\"btn btn-mini\">Cancel</button><button id=\"selectColor\" class=\"btn btn-mini btn-primary\">OK</button>"
         };

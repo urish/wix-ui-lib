@@ -96,33 +96,9 @@
 <script type="text/javascript" src="Components/common-controls.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#startColorPickerX').makeColorPicker({
-            ColorPickers: {
-                Simple: {
-                    width: 5,
-                    layout: "vertical"
-                },
-                Advanced: {}
-            }
-        });
-        $('#startColorPickerY').makeColorPicker({
-            ColorPickers: {
-                Simple: {
-                    width: 5,
-                    layout: "vertical"
-                },
-                Advanced: {}
-            }
-        });
-        $('#startColorPickerZ').makeColorPicker({
-            ColorPickers: {
-                Simple: {
-                    width: 5,
-                    layout: "vertical"
-                },
-                Advanced: {}
-            }
-        });
+        $('#startColorPickerX').makeColorPicker();
+        $('#startColorPickerY').makeColorPicker();
+        $('#startColorPickerZ').makeColorPicker();
 
         var checkbox1 = new Checkbox($('#tpaCheckbox'), 'unchecked');
         var checkbox2 = new Checkbox($('#tpaCheckbox2'), 'checked');

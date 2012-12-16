@@ -15,7 +15,9 @@
         ],
         fixedColors: [
             '#50FAFE', '#FFFFFF', '#0088CB', '#ED1C24', '#FFCB05'
-        ]
+        ],
+        width: 5,
+        layout: "vertical"git 
     };
 
     // The actual plugin constructor

@@ -29,7 +29,8 @@
             title: "Color Picker",
             html: true,
             content: '<div id="colorPicker"></div>',
-            template: '<div class="popover"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"></div></div></div>'
+            template: '<div class="popover"><div class="arrow"></div><div class="popover-inner"><div class="popover-header"> \<' +
+                'h3 class="popover-title"></h3><div class="popover-close"><div class="popover-close-x"></div></div></div><div class="popover-content"></div></div></div>'
         });
 
         this._defaults = defaults;
@@ -69,7 +70,9 @@
             this.$el.toggleClass('up');
             this.$el.removeClass('over');
 
-            $('.popover').css('width', 215 + 'px');
+            // simple init view 
+            $('#picker-main').css('padding-top', '12px');
+            $('.popover').css('width', 217 + 'px');
 
             return false;
         },
@@ -89,6 +92,8 @@
 
         setContent: function() {
             var $tip = this.tip();
+
+            $tip.css('height', 356 + 'px');
             var title = defaults.colorPickerTabs["Simple"],
                 content = this.getContent();
 
@@ -197,10 +202,12 @@
 
             if (ev.data.type === "Advanced") {
                 $('.popover').css('width', '382px');
+                $('#picker-main').css('padding-top', '6px');
                 $('#preview').show();
             } else {
-                $('.popover').css('width', '215px');
-                $('#preview').hide()
+                $('.popover').css('width', '217px');
+                $('#picker-main').css('padding-top', '12px');
+                $('#preview').hide();
             }
 
             $('[picker_id='+ev.data.pickerId+']').hide();
@@ -227,13 +234,19 @@
         },
 
         bindEvents: function() {
+            var $tip = this.tip();
             $(document).bind("colorChangedPreview", this.onColorChange.bind(this));
 
-            this.tip().bind('click', function () {
+            $tip.bind('click', function () {
                 return false;
             });
 
             this.actions.find('#cancelSelection').click(function() {
+                this.closePopover();
+                return false;
+            }.bind(this));
+
+            $tip.find('.popover-close').click(function() {
                 this.closePopover();
                 return false;
             }.bind(this));

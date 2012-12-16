@@ -1,5 +1,4 @@
 /* popover */
-
 hr {
     padding: 0;
     margin: 0;
@@ -8,10 +7,53 @@ hr {
 
 .popover {
     width: 382px;
+    padding: 0;
 }
 
-.popover-title {
+.popover-header {
+    width: 100%;
+    height: 34px;
     border-bottom: 1px solid #d4d4d4;
+}
+.popover-title {
+    overflow: hidden;
+    float: left;
+    background: none;
+    border-radius: 0;
+    border-bottom: none;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+}
+
+.popover-close {
+    width: 34px;
+    height: 34px;
+    float: right;
+    position: relative;
+    border-left: 1px solid #d4d4d4;
+
+    -webkit-border-top-right-radius: 3px;
+    -moz-border-radius-topright: 3px;
+    border-top-right-radius: 3px;
+}
+
+.popover-close:hover {
+    background:#ddd;
+}
+
+.popover-close-x {
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    background-image: url("http://static.wix.com/services/html-web-skins/1.211.19/images/wysiwyg/core/themes/editor_web/icons/top-bar-icons.png");
+    background-repeat:no-repeat;
+    background-position:50% -2px;
+}
+
+.popover-close-x:hover {
+    background-position:50% -142px;
 }
 
 .popover-content {

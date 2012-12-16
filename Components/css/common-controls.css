@@ -14,8 +14,41 @@
 }
 
 .tpa-appicon {
-    width:86px;
+    display: inline-block;
+    position: relative;
+
+    width: 86px;
     height: 86px;
+
+    border-radius: 15px;
+    -webkit-box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+}
+.tpa-appicon > .gloss {
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255, 255, 255, 0.7)), to(rgba(255, 255, 255, 0.2)));
+    height: 50%;
+    width: 100%;
+    z-index: 1;
+    position: absolute;
+    box-shadow: inset 0px 2px 1px rgba(255, 255, 255, 0.6);
+
+    border-top-right-radius: 38px 38px;
+    border-top-left-radius: 38px 38px;
+    border-bottom-right-radius: 120px 30px;
+    border-bottom-left-radius: 100px 30px;
+}
+
+.tpa-appicon > .img {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    border-radius: 15px;
+    background-image: url('http://img829.imageshack.us/img829/3622/iconballblue114.png');
+    background-position: center;
+
+    -webkit-background-size: cover; /*for webKit*/
+    -moz-background-size: cover; /*Mozilla*/
+    -o-background-size: cover; /*opera*/
+    background-size: cover; /*generic*/
 }
 
 .tpa-box.tpa-text{

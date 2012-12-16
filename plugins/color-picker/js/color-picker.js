@@ -70,11 +70,66 @@
             this.$el.toggleClass('up');
             this.$el.removeClass('over');
 
-            // simple init view 
+            // simple init view
             $('#picker-main').css('padding-top', '12px');
-            $('.popover').css('width', 217 + 'px');
+            $('.popover').css('width', 214 + 'px');
 
             return false;
+        },
+
+        show: function () {
+            var $tip, inside, pos, actualWidth, actualHeight, placement, tp;
+
+            if (this.hasContent() && this.enabled) {
+                $tip = this.tip();
+                this.setContent();
+
+                if (this.options.animation) {
+                    $tip.addClass('fade');
+                }
+
+                placement = typeof this.options.placement == 'function' ?
+                    this.options.placement.call(this, $tip[0], this.$element[0]) :
+                    this.options.placement;
+
+                inside = /in/.test(placement);
+
+                $tip.detach().css({ top: 0, left: 0, display: 'block' }).insertAfter(this.$element);
+
+                pos = this.getPosition(inside);
+
+                actualWidth = $tip[0].offsetWidth;
+                actualHeight = $tip[0].offsetHeight;
+
+                switch (inside ? placement.split(' ')[1] : placement) {
+                    case 'bottom':
+                        tp = {top: pos.top + pos.height, left: pos.left + pos.width / 2 - actualWidth / 2};
+                        break;
+                    case 'top':
+                        tp = {top: pos.top - actualHeight, left: pos.left + pos.width / 2 - actualWidth / 2};
+                        break;
+                    case 'left':
+                        tp = {top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left - actualWidth};
+                        break;
+                    case 'right':
+                        var windowHeight = $(window).height();
+                        var triggerPos = (pos.top + pos.height / 2);
+                        var popoverOffset = actualHeight / 2;
+                        var popoverOverflow = popoverOffset - (windowHeight - (triggerPos-$(window).scrollTop()));
+                        var arrowPos = 50;
+
+                        if (popoverOverflow > 0) {
+                            triggerPos -= popoverOverflow;
+                            arrowPos += ((popoverOverflow / actualHeight) * 100);
+                        }
+                        $('.arrow').css('top', arrowPos + '%');
+                        tp = {top: triggerPos - popoverOffset, left: pos.left + pos.width};
+                        break;
+                }
+
+                $tip.offset(tp).addClass(placement).addClass('in');
+
+            }
         },
 
         clearPopovers : function () {
@@ -205,7 +260,7 @@
                 $('#picker-main').css('padding-top', '6px');
                 $('#preview').show();
             } else {
-                $('.popover').css('width', '217px');
+                $('.popover').css('width', '214px');
                 $('#picker-main').css('padding-top', '12px');
                 $('#preview').hide();
             }

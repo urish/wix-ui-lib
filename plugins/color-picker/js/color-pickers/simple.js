@@ -46,14 +46,24 @@
             for (var i = 0; i < linesInCol; ++i) {
                 var currentRow = this.newRow();
                 for (var j = 0; j < data.width; ++j) {
-                    currentRow.append(this.createColor(this.options.colors[(j*data.width)+i]));
+                    var color = this.createColor(this.options.colors[(j*data.width)+i]);
+                    if (j == data.width-1) {
+                        color.css('margin-right', '0');
+                    }
+
+                    currentRow.append(color);
                 }
             }
 
             // render fixed colors
             var currentRow = this.newRow().addClass('palette-row-fixed');
             for (var i = 0; i < data.width; i++) {
-                currentRow.append(this.createColor(this.options.fixedColors[i]));
+                var color = this.createColor(this.options.fixedColors[i]);
+                if (i == data.width-1) {
+                    color.css('margin-right', '0');
+                }
+
+                currentRow.append(color);
             }
         },
 

@@ -168,8 +168,13 @@ button#selectColor {
 }
 
 .palette-row-fixed {
-    padding-top: 10px;
+    padding-top: 7px;
 }
+
+.palette-row-fixed .color-unit {
+    margin-bottom: 0;
+}
+
 
 .color-selector {
     cursor: pointer;

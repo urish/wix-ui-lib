@@ -15,7 +15,7 @@ function Checkbox (el, defaultVal) {
         $(e.target).toggleClass('checked');
         $(e.target).toggleClass('unchecked');
     });
-}
+};
 
 function RadioButton (el, group, defaultVal) {
     this.radioButton = el;
@@ -30,9 +30,11 @@ function RadioButton (el, group, defaultVal) {
         this.checkRadio($(e.target));
     }.bind(this));
 
-   this.checkRadio = function (el) {
-        el? el: this.radioButton;
+    this.initRadio = function () {
+        this.checkRadio(this.radioButton);
+    };
 
+    this.checkRadio = function (el) {
         if (el.hasClass('checked')) {
             return;
         }
@@ -41,8 +43,8 @@ function RadioButton (el, group, defaultVal) {
 
         el.removeClass('unchecked');
         el.addClass('checked');
-    }
-}
+    };
+};
 
 function Slider(el) {
     var _SLIDER_OFFSET = 10;
@@ -97,12 +99,12 @@ function Slider(el) {
 
         $slider.css('left', + ($slider.position().left + xMov) + 'px');
 
-    }
+    };
 
     function unbindSliderDrag() {
         $(document).unbind('mousemove.slider.drag');
         $(document).unbind('mouseup.slider.drag');
-    }
+    };
 
 }
 

@@ -116,6 +116,7 @@
     background: url("../img/checbox-sprite (2).png") no-repeat;
     width: 16px;
     height: 16px;
+    display: inline-block;
 }
 
 .tpa-checkbox.checked {

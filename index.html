@@ -40,7 +40,9 @@
                 <h3>Demo</h3>
                 <div id="tpaCheckbox" class="checkbox"></div>
                 <div id="tpaCheckbox2" class="checkbox"></div>
-                <div id="tpaRadioButton"></div>
+                <div id="tpaRadioButton1"></div>
+                <div id="tpaRadioButton2"></div>
+                <div id="tpaRadioButton3"></div>
                 <br>
                 <div class="tpa-main-btn" id="connect-btn"><label>Connect Account</label></div>
             </section>
@@ -124,7 +126,9 @@
 
         var checkbox1 = new Checkbox($('#tpaCheckbox'), 'unchecked');
         var checkbox2 = new Checkbox($('#tpaCheckbox2'), 'checked');
-        var radioButton = new RadioButton($('#tpaRadioButton'), 'checked');
+        var radioButton1 = new RadioButton($('#tpaRadioButton1'), 'checked');
+        var radioButton2 = new RadioButton($('#tpaRadioButton2'), 'unchecked');
+        var radioButton3 = new RadioButton($('#tpaRadioButton3'), 'unchecked');
         var slider = new Slider($('#opacitySlider'));
 
         $('#connect-btn').bind('mousedown mouseup', function() {

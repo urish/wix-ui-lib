@@ -23,8 +23,14 @@ function RadioButton (el, deafult) {
     radioButton.addClass(deafult);
 
     radioButton.on('click', function (e) {
-        el.toggleClass('checked');
-        el.toggleClass('unchecked');
+        if (el.hasClass('checked')) {
+            return;
+        }
+        $('.tpa-radio-button').removeClass('checked');
+        $('.tpa-radio-button').addClass('unchecked');
+
+        el.removeClass('unchecked');
+        el.addClass('checked');
     });
 }
 

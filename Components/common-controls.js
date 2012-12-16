@@ -6,23 +6,33 @@
  * To change this template use File | Settings | File Templates.
  */
 
-function Checkbox (el, deafult) {
+function Checkbox (el, defaultVal) {
     var checkbox = el;
     checkbox.addClass('tpa-checkbox');
-    checkbox.addClass(deafult);
+    checkbox.addClass(defaultVal);
 
     checkbox.on('click', function (e) {
-        el.toggleClass('checked');
-        el.toggleClass('unchecked');
+        $(e.target).toggleClass('checked');
+        $(e.target).toggleClass('unchecked');
     });
 }
 
-function RadioButton (el, deafult) {
-    var radioButton = el;
-    radioButton.addClass('tpa-radio-button');
-    radioButton.addClass(deafult);
+function RadioButton (el, group, defaultVal) {
+    this.radioButton = el;
+    this.radioButton.addClass('tpa-radio-button');
 
-    radioButton.on('click', function (e) {
+    this.val = defaultVal? defaultVal: "unchecked";
+
+    this.radioButton.addClass(this.val);
+    this.radioButton.attr('group', group);
+
+    this.radioButton.on('click', function (e) {
+        this.checkRadio($(e.target));
+    }.bind(this));
+
+   this.checkRadio = function (el) {
+        el? el: this.radioButton;
+
         if (el.hasClass('checked')) {
             return;
         }
@@ -31,7 +41,7 @@ function RadioButton (el, deafult) {
 
         el.removeClass('unchecked');
         el.addClass('checked');
-    });
+    }
 }
 
 function Slider(el) {

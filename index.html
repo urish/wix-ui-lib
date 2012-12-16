@@ -102,9 +102,11 @@
 
         var checkbox1 = new Checkbox($('#tpaCheckbox'), 'unchecked');
         var checkbox2 = new Checkbox($('#tpaCheckbox2'), 'checked');
-        var radioButton1 = new RadioButton($('#tpaRadioButton1'), 'checked');
-        var radioButton2 = new RadioButton($('#tpaRadioButton2'), 'unchecked');
-        var radioButton3 = new RadioButton($('#tpaRadioButton3'), 'unchecked');
+        var radioButton1 = new RadioButton($('#tpaRadioButton1'),'test');
+        var radioButton2 = new RadioButton($('#tpaRadioButton2'),'test');
+        var radioButton3 = new RadioButton($('#tpaRadioButton3'),'test');
+
+        radioButton3.checkRadio($('#tpaRadioButton3'));
         var slider = new Slider($('#opacitySlider'));
 
         $('#connect-btn').bind('mousedown mouseup', function() {

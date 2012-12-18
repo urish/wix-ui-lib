@@ -151,6 +151,10 @@
     position: relative;
 }
 
+.tap-bar {
+    positin: relative;
+}
+
 .tpa-slider-bar-body {
     background: url("../img/slider-bg-pixel.png") repeat-x;
     height: 5px;

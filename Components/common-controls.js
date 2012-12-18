@@ -68,7 +68,7 @@ function Slider(el) {
 
     this.$opacitySlider.addClass('tpa-slider-bar');
 
-    this.$bar = $("<div id=\"tpaBar\"></div>").appendTo(this.$opacitySlider);
+    this.$bar = $("<div id=\"tpaBar\" class=\"tap-bar\"></div>").appendTo(this.$opacitySlider);
 
     var $left = $("<span class=\"tpa-slider-bar-left\"></div>").appendTo(this.$bar);
     var $middle = $("<span class=\"tpa-slider-bar-body\"></div>").appendTo(this.$bar);
@@ -123,7 +123,7 @@ function Slider(el) {
     };
 
     this.setSliderNormalPosition = function(xMov) {
-        xMov = xMov * this.$bar.width();
+        xMov = xMov * this.$opacitySlider.width();
         this.setSliderPosition(xMov);
     };
 

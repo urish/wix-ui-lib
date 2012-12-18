@@ -12,8 +12,21 @@ function Checkbox (el, defaultVal) {
     checkbox.addClass(defaultVal);
 
     checkbox.on('click', function (e) {
-        $(e.target).toggleClass('checked');
-        $(e.target).toggleClass('unchecked');
+        var $el = $(e.target);
+        $el.toggleClass('checked');
+        $el.toggleClass('unchecked');
+
+        var data = {
+            type: $el.attr('id'),
+            status: 'unchecked'
+        }
+
+        if ($(e.target).hasClass('checked'))
+        {
+            data.status = 'checked';
+        }
+
+        $(document).trigger('checkboxClicked', data);
     });
 };
 
@@ -28,6 +41,9 @@ function RadioButton (el, group, defaultVal) {
 
     this.radioButton.on('click', function (e) {
         this.checkRadio($(e.target));
+
+        $(document).trigger('radioButtonClicked', e.target.id);
+
     }.bind(this));
 
     this.initRadio = function () {

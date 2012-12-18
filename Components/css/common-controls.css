@@ -120,11 +120,11 @@
 }
 
 .tpa-checkbox.checked {
-    background-position: 0 0;
+    background-position: 0 -3px;
 }
 
 .tpa-checkbox.unchecked {
-    background-position: 0 -17px;
+    background-position: 0 -20px;
 }
 
 /*
@@ -134,6 +134,7 @@
     background: url("../img/radio-button-sprite (2).png") no-repeat;
     width: 12px;
     height: 13px;
+    display: inline-block;
 }
 
 .tpa-radio-button.checked {

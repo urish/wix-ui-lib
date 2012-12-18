@@ -38,13 +38,46 @@
                     <h1>Common Controls</h1>
                 </div>
                 <h3>Demo</h3>
-                <ul class="list">
-                    <li><div id="tpaCheckbox" class="checkbox"></div></li>
-                    <li><div id="tpaCheckbox2" class="checkbox"></div></li>
-                    <li><div id="tpaRadioButton1"></div></li>
-                    <li><div id="tpaRadioButton2"></div></li>
-                    <li><div id="tpaRadioButton3"></div></li>
-                </ul>
+                <div class="checkbox">
+                    <div class="check">
+                        <span class="box" id="tpaCheckbox"></span>
+                    </div>
+                    <span class="tpa-label">check 1</span>
+                </div>
+                <div class="checkbox">
+                    <div class="check">
+                        <span class="box" id="tpaCheckbox2"></span>
+                    </div>
+                    <span class="tpa-label">check 2</span>
+                </div>
+
+                <!--<li class="slider">-->
+                    <!--<span class="slider-label">0</span>-->
+                    <!--<div class="bar">-->
+                        <!--<div class="box" id="opacitySlider"></div>-->
+                    <!--</div>-->
+                    <!--<span class="slider-label">100</span>-->
+                <!--</li>-->
+
+                <div class="checkbox">
+                    <div class="check">
+                        <span class="box" id="tpaRadioButton1"></span>
+                    </div>
+                    <span class="tpa-label">radio 1</span>
+                </div>
+                <div class="checkbox">
+                    <div class="check">
+                        <span class="box" id="tpaRadioButton2"></span>
+                    </div>
+                    <span class="tpa-label">radio 2</span>
+                </div>
+                <div class="checkbox">
+                    <div class="check">
+                        <span class="box" id="tpaRadioButton3"></span>
+                    </div>
+                    <span class="tpa-label">radio 3</span>
+                </div>
+
                 <br>
                 <div class="tpa-main-btn" id="connect-btn"><label>Connect Account</label></div>
             </section>
@@ -109,7 +142,7 @@
         var radioButton3 = new RadioButton($('#tpaRadioButton3'),'test');
 
         radioButton3.initRadio();
-        var slider = new Slider($('#opacitySlider'));
+//        var slider = new Slider($('#opacitySlider'));
 
         $('#connect-btn').bind('mousedown mouseup', function() {
             $(this).toggleClass('selected');

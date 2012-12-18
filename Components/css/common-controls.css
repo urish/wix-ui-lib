@@ -151,6 +151,10 @@
     position: relative;
 }
 
+.tap-bar {
+    positin: relative;
+}
+
 .tpa-slider-bar-body {
     background: url("../img/slider-bg-pixel.png") repeat-x;
     height: 5px;
@@ -181,6 +185,59 @@
     left: -9px;
     display: inline-block;
 }
+
+.checkbox {
+    padding-left: 0; /* override twitter bootstrap */
+}
+
+.checkbox > * {
+    display: inline-block;
+    height: 40px;
+    vertical-align: middle;
+    line-height: 40px;
+}
+
+.check {
+    height: 40px;
+    margin: 0;
+}
+
+.check .box {
+    width: 15px;
+    height: 15px;
+    margin-top: 14.5px;
+}
+.slider {
+    padding-left: 5px;
+}
+
+.slider > * {
+    /*display: inline-block;*/
+    height: 40px;
+    vertical-align: middle;
+    line-height: 40px;
+    width: 80px;
+}
+
+.bar {
+    height: 40px;
+    margin: 0;
+    display: inline-block;
+}
+
+.bar .box {
+    width: 65px;
+    height: 15px;
+    margin-top: 18.5px;
+}
+
+.slider .slider-label {
+    display: inline-block;
+    width: 20px;
+    text-align: center;
+    margin: 0 5px;
+}
+
 
 
 

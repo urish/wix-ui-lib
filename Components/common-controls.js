@@ -63,61 +63,71 @@ function RadioButton (el, group, defaultVal) {
 };
 
 function Slider(el) {
-    var _SLIDER_OFFSET = 10;
-    var $opacitySlider = el;
-    var outputValue;
+    this.$opacitySlider = el;
+    this.outputValue = 0;
 
-    $opacitySlider.addClass('tpa-slider-bar');
+    this.$opacitySlider.addClass('tpa-slider-bar');
 
-    var $bar = $("<div id=\"tpaBar\"></div>").appendTo($opacitySlider);
+    this.$bar = $("<div id=\"tpaBar\"></div>").appendTo(this.$opacitySlider);
 
-    var $left = $("<span class=\"tpa-slider-bar-left\"></div>").appendTo($bar);
-    var $middle = $("<span class=\"tpa-slider-bar-body\"></div>").appendTo($bar);
-    var $right = $("<span class=\"tpa-slider-bar-right\"></div>").appendTo($bar);
+    var $left = $("<span class=\"tpa-slider-bar-left\"></div>").appendTo(this.$bar);
+    var $middle = $("<span class=\"tpa-slider-bar-body\"></div>").appendTo(this.$bar);
+    var $right = $("<span class=\"tpa-slider-bar-right\"></div>").appendTo(this.$bar);
 
-    var $slider = $("<div class=\"tpa-slider\"></div>").appendTo($bar);
+    this.$slider = $("<div class=\"tpa-slider\"></div>").appendTo(this.$opacitySlider);
 
-    $(document).ready(function() {
 
-        $slider.bind('mousedown', function(event) {
-            var lastX = event.pageX;
-            $(document).bind('mouseup.slider.drag', function() {
-                unbindSliderDrag();
 
-                var sliderPos = parseInt($slider.css('left'));
-                var outputValue = (sliderPos + ($slider.width() / 2)) / ($bar.width() + 1);
-                console.log(outputValue);
-            });
+    this.$slider.bind('mousedown', function(event) {
+        var lastX = event.pageX;
+        $(document).bind('mouseup.slider.drag', function() {
+            this.unbindSliderDrag();
 
-            $(document).bind('mousemove.slider.drag', function(event) {
-                setSliderPosition(event.pageX - lastX);
-                lastX = event.pageX;
-            });
+            var sliderPos = parseInt(this.$slider.css('left'));
+            this.outputValue = (sliderPos + (this.$slider.width() / 2)) / (this.$bar.width() + 1);
 
-            // cancel out any text selections
-            document.body.focus();
+            var data = {
+                type: this.$opacitySlider.attr("id"),
+                value: this.outputValue
+            };
 
-            // prevent text selection in IE
-            document.onselectstart = function () { return false; };
-            // prevent IE from trying to drag an image
-            event.target.ondragstart = function() { return false; };
+            $(document).trigger("sliderValueChanged", data);
+        }.bind(this));
 
-            // prevent text selection (except IE)
-            return false;
-        });
-    });
+        $(document).bind('mousemove.slider.drag', function(event) {
+            this.setSliderPosition(event.pageX - lastX);
+            lastX = event.pageX;
+        }.bind(this));
 
-    function setSliderPosition(xMov) {
-        if ( ((xMov < 0) && (($slider.position().left + xMov) < (0 - ($slider.width() / 2)))) ||
-            ((xMov >= 0) && (($slider.position().left +  xMov) > ($bar.width() - ($slider.width() / 2)))) ) {
+        // cancel out any text selections
+        document.body.focus();
+
+        // prevent text selection in IE
+        document.onselectstart = function () { return false; };
+        // prevent IE from trying to drag an image
+        event.target.ondragstart = function() { return false; };
+
+        // prevent text selection (except IE)
+        return false;
+    }.bind(this));
+
+
+    this.setSliderPosition = function (xMov) {
+        if ( ((xMov < 0) && ((this.$slider.position().left + xMov) < (0 - (this.$slider.width() / 2)))) ||
+            ((xMov >= 0) && ((this.$slider.position().left +  xMov) > (this.$bar.width() - (this.$slider.width() / 2)))) ) {
             return;
         }
 
-        $slider.css('left', + ($slider.position().left + xMov) + 'px');
+        this.$slider.css('left', + (this.$slider.position().left + xMov) + 'px');
 
     };
 
-    function unbindSliderDrag() {
+    this.setSliderNormalPosition = function(xMov) {
+        xMov = xMov * this.$bar.width();
+        this.setSliderPosition(xMov);
+    };
+
+    this.unbindSliderDrag = function () {
         $(document).unbind('mousemove.slider.drag');
         $(document).unbind('mouseup.slider.drag');
     };

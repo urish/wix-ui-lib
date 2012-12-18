@@ -51,13 +51,13 @@
                     <span class="tpa-label">check 2</span>
                 </div>
 
-                <!--<li class="slider">-->
-                    <!--<span class="slider-label">0</span>-->
-                    <!--<div class="bar">-->
-                        <!--<div class="box" id="opacitySlider"></div>-->
-                    <!--</div>-->
-                    <!--<span class="slider-label">100</span>-->
-                <!--</li>-->
+                <div class="slider">
+                    <span class="slider-label">0</span>
+                    <div class="bar">
+                        <div class="box" id="opacitySlider"></div>
+                    </div>
+                    <span class="slider-label">100</span>
+                </div>
 
                 <div class="checkbox">
                     <div class="check">
@@ -142,10 +142,15 @@
         var radioButton3 = new RadioButton($('#tpaRadioButton3'),'test');
 
         radioButton3.initRadio();
-//        var slider = new Slider($('#opacitySlider'));
+        var slider = new Slider($('#opacitySlider'));
+        slider.setSliderNormalPosition(0.6);
 
         $('#connect-btn').bind('mousedown mouseup', function() {
             $(this).toggleClass('selected');
+        });
+
+        $(document).on("sliderValueChanged", function(e, data){
+           console.log("value " + data.value);
         });
     });
 </script>

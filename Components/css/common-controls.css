@@ -184,6 +184,7 @@
     position: absolute;
     left: -9px;
     display: inline-block;
+    top: 13px;
 }
 
 .checkbox {
@@ -228,7 +229,7 @@
 .bar .box {
     width: 65px;
     height: 15px;
-    margin-top: 18.5px;
+    /*margin-top: 18.5px;*/
 }
 
 .slider .slider-label {

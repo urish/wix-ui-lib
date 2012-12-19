@@ -313,7 +313,13 @@
 
             this.actions.find('#selectColor').click(function() {
                 var selectedColor = this.preview.find('#selectedColor').data('selected');
-                this.$el.find(".inner").css("background-color", selectedColor.hex);
+
+                if (!selectedColor || !selectedColor.hex) {
+                    this.closePopover();
+                    return false;
+                } else {
+                    this.$el.parent().find(".inner").css("background-color", selectedColor.hex);
+                }
 
                 this.closePopover();
 

@@ -80,6 +80,7 @@
 
                 <br>
                 <div class="tpa-main-btn" id="connect-btn"><label>Connect Account</label></div>
+                <div class="tpa-secondary-btn" id="apply-btn"><label>Apply</label></div>
             </section>
             <section id="accordion">
                 <div class="page-header">
@@ -146,6 +147,10 @@
         slider.setSliderNormalPosition(0.6);
 
         $('#connect-btn').bind('mousedown mouseup', function() {
+            $(this).toggleClass('selected');
+        });
+
+        $('#apply-btn').bind('mousedown mouseup', function() {
             $(this).toggleClass('selected');
         });
 

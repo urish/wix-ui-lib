@@ -167,8 +167,8 @@
         renderPicker: function(color) {
             var opt = this.options;
             var palettePicker = this.$el.find('#' + opt.palettePicker);
-            if (this.Utils.ieG) {
-                var photoshopG2 = this.Utils.ieG('left', [
+            if (window.ieG) {
+                var photoshopG2 = window.ieG('left', [
                     {
                         offset : '0%',
                         color : color,
@@ -180,7 +180,7 @@
                         opacity : '1'
                     }
                 ]);
-                palettePicker.css("background-image", 'url("' + this.Utils.photoshopG1 + '"),url("' + photoshopG2 + '")');
+                palettePicker.css("background-image", 'url("' + this.Constants.photoshopG1 + '"),url("' + photoshopG2 + '")');
             } else {
                 palettePicker.css("background-image", '-webkit-linear-gradient(bottom, black, rgba(0,0,0,0)),-webkit-linear-gradient(left, ' + color + ', white)');
                 palettePicker.css("background-image", '-moz-linear-gradient(bottom, black, rgba(0,0,0,0)),-moz-linear-gradient(left, ' + color + ', white)');

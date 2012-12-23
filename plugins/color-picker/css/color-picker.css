@@ -15,6 +15,7 @@ hr {
     height: 34px;
     border-bottom: 1px solid #d4d4d4;
 }
+
 .popover-title {
     overflow: hidden;
     float: left;
@@ -160,11 +161,7 @@ button#selectColor {
 /* simple color picker */
 
 .palette-row {
-    display: inline-block;
-}
-
-.palette-row {
-    height: 28px;
+    height: 33px;
 }
 
 .palette-row-fixed {
@@ -174,7 +171,6 @@ button#selectColor {
 .palette-row-fixed .color-unit {
     margin-bottom: 0;
 }
-
 
 .color-selector {
     cursor: pointer;

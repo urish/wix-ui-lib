@@ -1,0 +1,387 @@
+@import url(../helpers/helpers.less);
+
+// App Intro
+// Presented on the top of the Widget Settings Panel
+
+.intro {
+  &.box {
+    padding-top: 10px;
+    cursor: default;
+    &:hover {
+      background: #fff;
+      border-color: #ccc;
+    }
+  }
+
+  .icon, .description, .divider {
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  .icon {
+    position: relative;
+
+    width: 86px;
+    height: 86px;
+
+    .radius(@iconRadius);
+  }
+
+  .logo {
+    position: absolute;
+    border-radius: 15px;
+
+    height: 100%;
+    width: 100%;
+
+    background: url("http://dummyimage.com/86x86/000/fff.png") center;
+//    .backgroundCover;
+  }
+
+  .gloss {
+    position: absolute;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255, 255, 255, 0.7)), to(rgba(255, 255, 255, 0.2))); /* Chrome,Safari4+ */
+    z-index: 1;
+
+    border-top-right-radius: 38px 38px;
+    border-top-left-radius: 38px 38px;
+    border-bottom-right-radius: 120px 30px;
+    border-bottom-left-radius: 100px 30px;
+
+    height: 50%;
+    width: 100%;
+  }
+
+  .description {
+    max-width: 70%;
+    margin: 0;
+  }
+
+  .divider {
+    height: 86px;
+    width: 1px;
+    background: #ccc;
+    margin: 0 20px;
+  }
+}
+
+.login {
+  text-align: right;
+  padding-bottom: 10px;
+
+  .create-account {
+    display: inline-block;
+    margin: 0;
+    line-height: 30px;
+    text-align: right;
+  }
+
+  .disconnect-account {
+    cursor: pointer;
+  }
+}
+
+// Settings Box
+// Contains settings interface for a speicific widget feature
+
+.box {
+  background: #fff;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  padding: 0 10px 0;
+  cursor: pointer;
+
+  .radius(@boxRadius);
+
+// Box Title
+  > h3 {
+    color: #0099ff;
+    font-size: 12px;
+    display: block;
+    font-weight: normal;
+    padding: 4px 0;
+    margin: 0;
+    line-height: 24px;
+
+    &:before {
+      content: " ";
+      background-image: url('@{images}/expand-collapse-sprite.png');
+      background-position: 0 -1px;
+      width: 23px;
+      height: 23px;
+      float: left;
+      margin-right: 5px;
+    }
+
+    &:hover {
+      color: #0077dd;
+      text-decoration: underline;
+
+      &:before {
+        background-position: 0 -26px;
+      }
+    }
+
+    &:active {
+      &:before {
+        background-position: 0 -49px;
+      }
+    }
+  }
+
+  &.active {
+    cursor: auto !important;
+
+    h3 {
+      color: #444;
+
+      &:before {
+        background-position: 0 -121px;
+      }
+
+      &:hover {
+        text-decoration: none;
+      //        &:before {
+      //          background-position: 0 -98px;
+      //        }
+      }
+    }
+  }
+
+  .feature {
+    border-top: 1px solid #ddd;
+    padding: 0 0 10px 0;
+    input {
+      margin-right: 10px;
+    }
+    > p {
+      font-size: 12px;
+      font-weight: normal;
+      font-style: italic;
+      color: #8a8a8a;
+    }
+  }
+
+  .list {
+    margin: 0;
+    padding: 0;
+
+    li {
+      list-style: none;
+      border-bottom: 1px solid #d4d4d4;
+      font-size: 12px;
+      min-height: 40px;
+      line-height: 40px;
+      padding: 0 8px;
+
+      > * {
+        display: inline-block;
+        margin-right: 10px;
+        color: #848484;
+      }
+
+      &:nth-last-child(1) {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+
+      .option {
+        min-width: 70px;
+        font-weight: bold;
+        color: #444;
+      }
+
+      .slider {
+          .knob {
+              top: 27.5%;
+          }
+      }
+    }
+  }
+}
+
+.checkbox {
+  padding-left: 0; // override Twitter Bootstrap
+  min-height: 0; // override Twitter Bootstrap
+  cursor: pointer;
+  line-height: 18px;
+
+  .check {
+    background-image: url('@{images}/checbox-sprite.png');
+    background-repeat: no-repeat;
+    background-position: 0 -18px;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    position: relative;
+    top: 2px;
+    margin-right: 5px;
+  }
+
+  &.checked {
+    .check {
+      background-position: 0 -1px;
+    }
+  }
+
+  p {
+    margin: 0;
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+.radiobutton {
+  cursor: pointer;
+  margin-right: 10px;
+
+  .check {
+    background-image: url('@{images}/radio-button-sprite.png');
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    width: 16px;
+    height: 14px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  &.checked {
+    .check {
+      background-position: 0 -13px;
+    }
+  }
+
+  p {
+    margin: 0;
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+.slider {
+  position: relative;
+
+  min-width: 180px;
+    vertical-align: middle;
+
+  .slider-middle,
+  .slider-right,
+  .slider-left {
+    display: inline-block;
+    height: 4px;
+  }
+
+  .slider-right,
+  .slider-left {
+    width: 4px;
+  }
+
+  .slider-right,
+  .slider-left,
+  .knob {
+    background-repeat: no-repeat;
+  }
+
+  .slider-middle {
+    background-image: url('@{images}/slider-bg-pixel.png');
+    background-repeat: repeat-x;
+    max-width: 88%;
+    min-width: 80px;
+  }
+
+  .slider-right {
+    background-image: url('@{images}/slider-bg-right.png');
+  }
+
+  .slider-left {
+    background-image: url('@{images}/slider-bg-left.png');
+  }
+
+  .knob {
+    background-image: url('@{images}/slider-knob.png');
+    background-position: -6px 0;
+
+    position: absolute;
+    top: 0;
+    left: -2px;
+
+    height: 24px;
+    width: 18px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .val,
+  .min,
+  .max {
+    display: inline-block;
+    text-align: center;
+  }
+
+  .min,
+  .max {
+    font-size: 12px;
+    margin: 0 5px;
+  }
+
+  .val {
+      position: absolute;
+      top: 0;
+      left: 100px;
+    font-size: 10px;
+    color: #888;
+  }
+
+  .slider-label,
+  .bar {
+    display: inline-block;
+  }
+}
+
+.layouts {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+
+  li {
+    border: 1px solid rgba(0, 153, 255, 0.1);
+    width: 30%;
+    height: 100px;
+    display: inline-block;
+    background: rgba(0, 153, 255, 0.02);
+    list-style: none;
+
+    p {
+      line-height: 100px;
+      font-size: 12px;
+      margin: 0;
+      font-style: italic;
+      color: rgba(0, 153, 255, 0.6);
+      box-shadow: rgba(0, 153, 255, 0.2) 0 0 5px;
+    }
+
+    &.selected {
+      background: rgba(0, 153, 255, 0.08);
+      cursor: auto;
+      zoom: 1.05;
+      &:hover {
+        background: rgba(0, 153, 255, 0.08);
+      }
+    }
+
+    &:hover {
+      border: 1px solid rgba(0, 153, 255, 0.1);
+      background: rgba(0, 153, 255, 0.1);
+      cursor: pointer;
+    }
+  }
+}
+
+// TODO: Remove; fix this in color-picker.less
+.picker {
+    vertical-align: middle;
+    position: relative;
+    top: 8px;
+}

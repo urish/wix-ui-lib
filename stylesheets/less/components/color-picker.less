@@ -260,56 +260,62 @@ button#selectColor {
         display: inline-block;
         box-shadow: 1px 1px 3px 0 rgba(0,0,0,.5) inset;
     }
+}
 
-    .readouts {
-        float: left;
-        margin-left: 16px;
-        width: 128px;
-        height: 162px;
-        vertical-align: top;
+.readouts {
+    float: left;
+    margin-left: 16px;
+    height: 162px;
+    vertical-align: top;
 
-        .acp-readout input:focus {
-            background: rgba(0, 153, 255, 0.20);
-            color: #444;
-        }
 
-        #acpReadoutWrapper_HEX:before {
-            content: "Hex";
-        }
+    hr {
+        height: 1px;
+        background: #ddd;
+        border: none;
+        margin-top: 20px;
+    }
 
-        #acpReadoutWrapper_H:before {
-            content: "H";
-        }
+    .acp-readout input:focus {
+        background: rgba(0, 153, 255, 0.20);
+        color: #444;
+    }
 
-        #acpReadoutWrapper_S:before {
-            content: "S";
-        }
+    #acpReadoutWrapper_HEX:before {
+        content: "Hex";
+    }
 
-        #acpReadoutWrapper_L:before {
-            content: "L";
-        }
+    #acpReadoutWrapper_H:before {
+        content: "H";
+    }
 
-        #acpReadoutWrapper_H:after {
-            content: "\00B0";
-        }
+    #acpReadoutWrapper_S:before {
+        content: "S";
+    }
 
-        #acpReadoutWrapper_S:after,
-        #acpReadoutWrapper_L:after {
-            content: "%";
-        }
+    #acpReadoutWrapper_L:before {
+        content: "L";
+    }
 
-        > label {
-            display: block;
-            height: 30px;
-        }
+    #acpReadoutWrapper_H:after {
+        content: "\00B0";
+    }
 
-        > label#acpReadout_HEX {
-            position: relative;
-            margin-top: 10px;
-            margin-right: 0;
-            line-height: 29px;
-        }
+    #acpReadoutWrapper_S:after,
+    #acpReadoutWrapper_L:after {
+        content: "%";
+    }
 
+    > label {
+        display: block;
+        height: 30px;
+    }
+
+    > label#acpReadout_HEX {
+        position: relative;
+        margin-top: 10px;
+        margin-right: 0;
+        line-height: 29px;
     }
 
 }

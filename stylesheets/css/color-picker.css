@@ -236,41 +236,46 @@ button#selectColor {
   display: inline-block;
   box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.5) inset;
 }
-.advanced-color-palette .readouts {
+.readouts {
   float: left;
   margin-left: 16px;
-  width: 128px;
   height: 162px;
   vertical-align: top;
 }
-.advanced-color-palette .readouts .acp-readout input:focus {
+.readouts hr {
+  height: 1px;
+  background: #ddd;
+  border: none;
+  margin-top: 20px;
+}
+.readouts .acp-readout input:focus {
   background: rgba(0, 153, 255, 0.2);
   color: #444;
 }
-.advanced-color-palette .readouts #acpReadoutWrapper_HEX:before {
+.readouts #acpReadoutWrapper_HEX:before {
   content: "Hex";
 }
-.advanced-color-palette .readouts #acpReadoutWrapper_H:before {
+.readouts #acpReadoutWrapper_H:before {
   content: "H";
 }
-.advanced-color-palette .readouts #acpReadoutWrapper_S:before {
+.readouts #acpReadoutWrapper_S:before {
   content: "S";
 }
-.advanced-color-palette .readouts #acpReadoutWrapper_L:before {
+.readouts #acpReadoutWrapper_L:before {
   content: "L";
 }
-.advanced-color-palette .readouts #acpReadoutWrapper_H:after {
+.readouts #acpReadoutWrapper_H:after {
   content: "\00B0";
 }
-.advanced-color-palette .readouts #acpReadoutWrapper_S:after,
-.advanced-color-palette .readouts #acpReadoutWrapper_L:after {
+.readouts #acpReadoutWrapper_S:after,
+.readouts #acpReadoutWrapper_L:after {
   content: "%";
 }
-.advanced-color-palette .readouts > label {
+.readouts > label {
   display: block;
   height: 30px;
 }
-.advanced-color-palette .readouts > label#acpReadout_HEX {
+.readouts > label#acpReadout_HEX {
   position: relative;
   margin-top: 10px;
   margin-right: 0;

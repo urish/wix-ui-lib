@@ -3,83 +3,136 @@
 // App Intro
 // Presented on the top of the Widget Settings Panel
 
+body {
+    margin: 10px;
+    font-family: "Arial", sans-serif;
+}
+
 .intro {
   &.box {
-    padding-top: 10px;
     cursor: default;
+    overflow: hidden;
+    padding: 0;
     &:hover {
       background: #fff;
       border-color: #ccc;
     }
   }
 
-  .icon, .description, .divider {
-    display: inline-block;
-    vertical-align: top;
+  .title {
+      max-width: 30%;
+      float: left;
+
+      .divider {
+        height: 86px;
+        width: 1px;
+        background: #ccc;
+        margin: 24px 24px 24px 0;
+        float: left;
+      }
+  }
+
+  .icon, .description {
+      float: left;
   }
 
   .icon {
     position: relative;
 
+    margin: 24px;
+
     width: 86px;
     height: 86px;
 
     .radius(@iconRadius);
-  }
 
-  .logo {
-    position: absolute;
-    border-radius: 15px;
+      .logo {
+        border-radius: 15px;
 
-    height: 100%;
-    width: 100%;
+        height: 100%;
+        width: 100%;
 
-    background: url("http://dummyimage.com/86x86/000/fff.png") center;
-//    .backgroundCover;
-  }
+        background: url('@{images}/wix_icon.png') center;
+    //    .backgroundCover;
+      }
 
-  .gloss {
-    position: absolute;
-    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255, 255, 255, 0.7)), to(rgba(255, 255, 255, 0.2))); /* Chrome,Safari4+ */
-    z-index: 1;
+      .gloss {
+      position: absolute;
+      background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255, 255, 255, 0.7)), to(rgba(255, 255, 255, 0.2))); /* Chrome,Safari4+ */
+      z-index: 1;
 
-    border-top-right-radius: 38px 38px;
-    border-top-left-radius: 38px 38px;
-    border-bottom-right-radius: 120px 30px;
-    border-bottom-left-radius: 100px 30px;
+      border-top-right-radius: 38px 38px;
+      border-top-left-radius: 38px 38px;
+      border-bottom-right-radius: 120px 30px;
+      border-bottom-left-radius: 100px 30px;
 
-    height: 50%;
-    width: 100%;
+      height: 50%;
+      width: 100%;
+    }
   }
 
   .description {
-    max-width: 70%;
-    margin: 0;
-  }
-
-  .divider {
-    height: 86px;
-    width: 1px;
-    background: #ccc;
-    margin: 0 20px;
+      margin: 24px 0;
+      p {
+          margin: 0;
+      }
   }
 }
 
-.login {
-  text-align: right;
-  padding-bottom: 10px;
+.login-panel {
+    overflow: hidden;
+    width: 100%;
+    margin-bottom: 10px;
+}
 
+.login {
+  overflow: hidden;
+    padding-right: 10px;
+
+
+  button.submit {
+    float: right;
+  }
+
+  .premium-features,
   .create-account {
-    display: inline-block;
     margin: 0;
-    line-height: 30px;
-    text-align: right;
+    float: left;
+    font-size: 11px;
+    text-align: left;
+  }
+
+  .user {
+      position: relative;
+      min-height: 110px;
+
+      p {
+          margin: 24px 0 0;
+      }
+  }
+
+  .premium {
+      overflow: hidden;
+      width: 100%;
+      bottom: 0;
+
+      > p {
+        line-height: 30px;
+        margin: 0;
+        line-height: 30px;
+      }
   }
 
   .disconnect-account {
     cursor: pointer;
   }
 }
+
+.premium-features {
+    background: url('@{images}/premium-features.png') no-repeat center left;
+    padding-left: 20px;
+}
+
 
 // Settings Box
 // Contains settings interface for a speicific widget feature
@@ -88,8 +141,8 @@
   background: #fff;
   border: 1px solid #ccc;
   margin-bottom: 10px;
-  padding: 0 10px 0;
   cursor: pointer;
+  padding: 0 10px;
 
   .radius(@boxRadius);
 
@@ -99,18 +152,18 @@
     font-size: 12px;
     display: block;
     font-weight: normal;
-    padding: 4px 0;
     margin: 0;
-    line-height: 24px;
+    line-height: 40px;
 
     &:before {
       content: " ";
       background-image: url('@{images}/expand-collapse-sprite.png');
-      background-position: 0 -1px;
+      background-position: 0 -2px;
       width: 23px;
       height: 23px;
-      float: left;
+      display: inline-block;
       margin-right: 5px;
+      vertical-align: middle;
     }
 
     &:hover {
@@ -141,30 +194,33 @@
 
       &:hover {
         text-decoration: none;
-      //        &:before {
-      //          background-position: 0 -98px;
-      //        }
       }
     }
   }
 
   .feature {
     border-top: 1px solid #ddd;
-    padding: 0 0 10px 0;
+    padding: 10px 0;
+
+    > * {
+      margin: 0 28px;
+    }
+
     input {
       margin-right: 10px;
     }
+
     > p {
       font-size: 12px;
+    margin-bottom: 24px;
       font-weight: normal;
-      font-style: italic;
       color: #8a8a8a;
     }
   }
 
   .list {
-    margin: 0;
     padding: 0;
+    margin-bottom: 0;
 
     li {
       list-style: none;
@@ -172,7 +228,6 @@
       font-size: 12px;
       min-height: 40px;
       line-height: 40px;
-      padding: 0 8px;
 
       > * {
         display: inline-block;
@@ -302,7 +357,7 @@
     background-position: -6px 0;
 
     position: absolute;
-    top: 0;
+    top: 3px;
     left: -2px;
 
     height: 24px;

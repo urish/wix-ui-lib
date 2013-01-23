@@ -238,7 +238,6 @@ button#selectColor {
 }
 .readouts {
   float: left;
-  margin-left: 16px;
   height: 162px;
   vertical-align: top;
 }
@@ -274,6 +273,8 @@ button#selectColor {
 .readouts > label {
   display: block;
   height: 30px;
+  margin-bottom: 5px;
+  text-align: left;
 }
 .readouts > label#acpReadout_HEX {
   position: relative;

@@ -1,14 +1,3 @@
-.backgroundCover {
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-.borderBox {
-  box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-}
 .clearfix {
   *zoom: 1;
 }
@@ -33,7 +22,9 @@
   background-color: #0099FF;
   background-repeat: repeat-x;
   background-position: 0 50%;
+  font-size: 14px;
 }
+.btn.upgrade,
 .btn.default {
   background-image: url('../../images/bg-gradient.png');
   background-color: transparent;
@@ -45,7 +36,6 @@
   background: #0099FF;
   color: #fff;
   border-color: #5B8FA7;
-  font-size: 14px;
 }
 .btn.blue:hover,
 .btn.connect:hover {
@@ -55,6 +45,9 @@
   -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, .15), 0 1px 2px rgba(0, 0, 0, .05);
   -moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, .15), 0 1px 2px rgba(0, 0, 0, .05);
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, .15), 0 1px 2px rgba(0, 0, 0, .05);
+}
+.btn.upgrade {
+  color: #a41aa4;
 }
 .btn.gray {
   color: #444;

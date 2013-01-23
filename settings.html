@@ -8,35 +8,45 @@
 <body>
 
 <header class="intro box">
-    <!-- App Logo with native CSS3 gloss -->
-    <div class="icon">
-        <div class="logo">
-            <span class="gloss"></span>
+    <div class="title">
+        <!-- App Logo with native CSS3 gloss -->
+        <div class="icon">
+            <div class="logo">
+                <span class="gloss"></span>
+            </div>
         </div>
+
+        <!-- This divider is a must according to the Wix design requirements -->
+        <div class="divider"></div>
     </div>
-
-    <!-- This divider is a must according to the Wix design requirements -->
-    <div class="divider"></div>
-
-    <!-- App description -->
-    <p class="description">
-        This is a sample Settings view for widgets and pages created with <a href="http://dev.wix.com" target="_blank">Wix's 3rd Party SDK</a>,
-        compatible with Wix's product requirements.
-        This boilerplate is aimed at saving time for developing the UI of your apps, and let the
-        developer focus on developing logic.
-    </p>
 
     <!-- Connect account area -->
     <div class="login">
         <div class="guest">
-            <p class="create-account">Don't have an account? <a href="#"><strong>Sign up now!</strong></a></p>
-            <button class="submit btn connect">Connect account</button>
+            <div class="description">
+                <p>
+                    This is a sample Settings view for widgets and pages created with <a href="http://dev.wix.com" target="_blank">Wix's 3rd Party SDK</a>,
+                    compatible with Wix's product requirements.
+                    This boilerplate is aimed at saving time for developing the UI of your apps, and let the
+                    developer focus on developing logic.
+                </p>
+            </div>
+
+            <div class="login-panel">
+                <p class="create-account">Don't have an<br/>account? <a href="#"><strong>Create one</strong></a></p>
+                <button class="submit btn connect">Connect account</button>
+            </div>
         </div>
+
         <div class="user hidden">
             <p>
-                Connected as <strong class="user-name">John Doe</strong>
-                (<a class="disconnect-account">Disconnect account</a>)
+                You are now connected to <strong class="user-name">John Doe (john@doe.com)</strong> account<br/>
+                <a class="disconnect-account">Disconnect account</a>
             </p>
+            <div class="premium">
+                <p class="premium-features">Premium features</p>
+                <button class="submit btn upgrade">Upgrade</button>
+            </div>
         </div>
     </div>
 </header>
@@ -52,7 +62,6 @@
             <ul class="list">
                 <li>
                     <span class="option">Option 1</span>
-                    <span class="picker"><a rel="popover" class="example-1-color-picker"></a></span>
                     <span class="checkboxes">
                         <span class="checkbox">Show Badge</span>
                     </span>

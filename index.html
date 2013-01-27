@@ -28,32 +28,261 @@
         </ul>
       </header>
       <section>
-        <h3>Welcome to GitHub Pages.</h3>
+        <p><img src="https://dl.dropbox.com/u/427838/ui-lib/images/wix_icon.png" alt="Wix"></p>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<h1>Wix 3rd Party Starter Kit</h1>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
+<p>This boilerplate is aimed at helping developers in the process of getting new apps to <a>Wix App Market</a> as quickly as possible. The UI in this project focuses on the App's Settings Panel. The boilerplate offers UI standards and common Javascript components to assist the developer in passing Product tests, and in developing a consistent and uniformed UI for the app.</p>
+
+<h2>Structure &amp; Standards</h2>
+
+<hr><h4>App Intro</h4>
+
+<hr><p>First, make an introduction. <em>This is compulsry according to Wix Apps product style guide.</em></p>
+
+<h6>HTML</h6>
+
+<pre><code>&lt;div class="title"&gt;
+    &lt;div class="icon"&gt;
+        &lt;div class="logo"&gt;
+            &lt;span class="gloss"&gt;&lt;/span&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class="divider"&gt;&lt;/div&gt;
+&lt;/div&gt;
 </code></pre>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<p>You can simply paste your app icon in the CSS <code>.logo</code> class:</p>
 
-<h3>Designer Templates</h3>
+<h6>CSS</h6>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<pre><code>.intro .icon .logo {
+  border-radius: 15px;
+  height: 100%;
+  width: 100%;
+  background: url('../../images/wix_icon.png') center;
+}
+</code></pre>
 
-<h3>Rather Drive Stick?</h3>
+<p>Or, if you're using the precompiled Less sources, neatly nested in the <code>.intro</code> block, is the <code>.logo</code> class.</p>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<h6>Less (precompiled)</h6>
 
-<h3>Authors and Contributors</h3>
+<pre><code>.intro {
+    .logo {
+        // …
+        background: url('@{images}/wix_icon.png') center;
+    }
+}
+</code></pre>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<h4>Guest &amp; User</h4>
 
-<h3>Support or Contact</h3>
+<hr><p>Once your app is running, an <strong>authenticated user mode</strong> should come in handy. Under the <code>.intro</code> block you'll find two sections: <code>.guest</code> and <code>.user</code>. Switch the <code>.hidden</code> class between the two to accompany each these state in the app, respectively.</p>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<p>Guests will see the <strong>App Intro</strong>, a <strong>Connect Button</strong>, and a <strong>Text Link</strong> for creating a new account. </p>
+
+<h6>Guest</h6>
+
+<pre><code>&lt;div class="guest"&gt;
+    &lt;div class="description"&gt;
+        &lt;p&gt;&lt;!-- App Description --&gt;&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;div class="login-panel"&gt;
+        &lt;p class="create-account"&gt;Don't have an&lt;br/&gt;account? &lt;a href="#"&gt;&lt;strong&gt;Create one&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+        &lt;button class="submit btn connect"&gt;Connect account&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>Authenticated users will see the details of their <strong>Session Details</strong> (User name, e-mail etc) and a <strong>Text Link</strong> for disconnecting the session.</p>
+
+<h6>User</h6>
+
+<pre><code>&lt;div class="user hidden"&gt;
+    &lt;p&gt;
+        You are now connected to &lt;strong class="user-name"&gt;John Doe (john@doe.com)&lt;/strong&gt; account&lt;br/&gt;
+        &lt;a class="disconnect-account"&gt;Disconnect account&lt;/a&gt;
+    &lt;/p&gt;
+    &lt;div class="premium"&gt;
+        &lt;p class="premium-features"&gt;Premium features&lt;/p&gt;
+        &lt;button class="submit btn upgrade"&gt;Upgrade&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>If this is irrelevant to your project, simply remove this markup.</p>
+
+<h4>Box (Container)</h4>
+
+<hr><p>Box is the basic container for Wix 3rd Party Settings panel. Boxes are for grouped controls or information blocks. Use them as you like!</p>
+
+<pre><code>&lt;div class="box"&gt;
+    &lt;h3&gt;Checkboxes&lt;/h3&gt;
+    &lt;div class="feature"&gt;
+        &lt;p&gt;Feature description&lt;/p&gt;
+        &lt;!-- Box content goes here --&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>Boxes also contain the <code>.feature</code>, which styles a simple paragraph for textual information.</p>
+
+<h4>List</h4>
+
+<hr><p>To group different controls in horizontal view, you can use the <code>.list</code> class and structure:</p>
+
+<pre><code> &lt;ul class="list"&gt;
+     &lt;li&gt;
+         &lt;span class="option"&gt;Option Name&lt;/span&gt;
+         &lt;!-- Option Markup --&gt;
+     &lt;/li&gt;
+ &lt;/ul&gt;
+</code></pre>
+
+<p>This is a simple list with the proper CSS styling to contain all the HTML and JS components offered in the starter kit and present them in a neat horizontal row.</p>
+
+<h4>Layouts Picker</h4>
+
+<hr><pre><code>&lt;div class="layouts"&gt;
+    &lt;figure class="boxes"&gt;&lt;figcaption class="radiobutton"&gt;Layout 1&lt;/figcaption&gt;&lt;/figure&gt;
+    &lt;figure class="full"&gt;&lt;figcaption class="radiobutton"&gt;Layout 2&lt;/figcaption&gt;&lt;/figure&gt;
+    &lt;figure class="grid"&gt;&lt;figcaption class="radiobutton"&gt;Layout 3&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>Available Layouts (<code>images/layouts.png</code>)</p>
+
+<p><img src="https://dl.dropbox.com/u/427838/ui-lib/images/layouts.png" alt="Wix"></p>
+
+<h2>Javascript Components</h2>
+
+<h1></h1>
+
+<p>The starter kit Javascript components are basically a set of <a href="http://jquery.com/">jQuery</a> Plugins.</p>
+
+<h4>Accordion</h4>
+
+<hr><h5>Usage</h5>
+
+<pre><code>&lt;div class="accordion"&gt;
+    &lt;div class="box"&gt;
+        &lt;h3&gt;Title&lt;/h3&gt;
+        &lt;div class="feature"&gt;
+
+            // content goes here
+
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>Set the Accordion parameters in <code>accordion.js</code>. In this case, <code>box</code> defines the Wrapper Class, and <code>feature</code> defines the content wrapper.</p>
+
+<pre><code>{
+    triggerClass : "box",
+    contentClass : "feature"
+}
+</code></pre>
+
+<p>Initialize the Accordion in <code>settings.js</code>:</p>
+
+<pre><code>$('.accordion').Accordion();
+</code></pre>
+
+<h4>Color Picker</h4>
+
+<hr><h5>Usage</h5>
+
+<p>Add the following HTML Markup</p>
+
+<pre><code>&lt;a rel="popover" class="color-picker-1 color-selector default"&gt;&lt;/a&gt;
+</code></pre>
+
+<p>Include <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap</a> components <code>Tooltip</code> and <code>Popover</code> dependencies in your main HTML file</p>
+
+<pre><code>&lt;script type="text/javascript" src="javascripts/bootstrap/bootstrap-tooltip.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="javascripts/bootstrap/bootstrap-popover.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>Next, initialize your color picker on DOM ready like so:</p>
+
+<pre><code>$('.color-selector').ColorPicker();
+</code></pre>
+
+<h4>Radio Button</h4>
+
+<hr><h5>Usage</h5>
+
+<p>Add a radio button group to your HTML file:</p>
+
+<pre><code>&lt;div class="radiobuttons"&gt;
+    &lt;div class="radiobutton"&gt;&lt;p&gt;Option 1&lt;/p&gt;&lt;/div&gt;
+    &lt;div class="radiobutton"&gt;&lt;p&gt;Option 2&lt;/p&gt;&lt;/div&gt;
+    &lt;div class="radiobutton"&gt;&lt;p&gt;Option 3&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>Initialize the button group and decicde which button is <code>checked</code>.</p>
+
+<pre><code>$('.radiobuttons').Radio({ checked: 0 });
+</code></pre>
+
+<h5>Nested Radio Buttons</h5>
+
+<p>This is another use case for radio buttons, implemented in the Layout Picker structure:</p>
+
+<pre><code>&lt;div class="layouts"&gt;
+    &lt;figure class="boxes"&gt;&lt;figcaption class="radiobutton"&gt;Layout 1&lt;/figcaption&gt;&lt;/figure&gt;
+    &lt;figure class="full"&gt;&lt;figcaption class="radiobutton"&gt;Layout 2&lt;/figcaption&gt;&lt;/figure&gt;
+    &lt;figure class="grid"&gt;&lt;figcaption class="radiobutton"&gt;Layout 3&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>Next, you specifiy the nested element (<code>el</code>) of the radio button:</p>
+
+<pre><code>$('.layouts').Radio({el: "figure figcaption", checked: 1});
+</code></pre>
+
+<h4>Checkbox</h4>
+
+<hr><h5>Usage</h5>
+
+<p>Add a checkbox group (Note, one checkbox also needs to be in a wrapping group):</p>
+
+<pre><code>&lt;div class="checkboxes"&gt;
+   &lt;div class="checkbox"&gt;&lt;p&gt;Option 1&lt;/p&gt;&lt;/div&gt;
+   &lt;div class="checkbox"&gt;&lt;p&gt;Option 2&lt;/p&gt;&lt;/div&gt;
+   &lt;div class="checkbox"&gt;&lt;p&gt;Option 3&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>Initialize checkbox, specifying <code>checked</code> checkboxes array with checkboxes 0 and 2 are:</p>
+
+<pre><code>$('.checkboxes').Checkbox({ checked: [0,2] });
+</code></pre>
+
+<h4>Slider</h4>
+
+<hr><h5>Usage</h5>
+
+<p>Add the slider markup, a simple <code>div</code> would do.</p>
+
+<pre><code>&lt;div id="slider1" class="slider"&gt;&lt;/div&gt;
+</code></pre>
+
+<p>Initialize the Slider component with a value string.</p>
+
+<pre><code>$('.slider').Slider({ type: "Value" });
+</code></pre>
+
+<h2>Less.js</h2>
+
+<h1></h1>
+
+<p>The starter kit stylesheets are compiled from LESS sources. If you are not familiar with LESS you can find more information <a href="http://mouapp.com" title="Markdown editor on Mac OS X">here</a>.</p>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/wix">wix</a></p>

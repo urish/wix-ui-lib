@@ -12,7 +12,11 @@
     }
 
     Plugin.prototype.init = function() {
-        this._btnGroup = $(this.$el).children();
+        if (this.options.el) {
+            this._btnGroup = $(this.$el).find(this.options.el);
+        } else {
+            this._btnGroup = $(this.$el).children();
+        }
 
         $(this._btnGroup).each(function(btn) {
             var check = $('<span>').addClass('check');

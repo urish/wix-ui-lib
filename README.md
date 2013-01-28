@@ -6,8 +6,7 @@ This boilerplate is aimed at helping developers in the process of getting new ap
 
 
 
-##### See [demo][demo] and documentation
-[demo]: "http://wix.github.com/wix-ui-lib"
+##### See <a href="http://wix.github.com/wix-ui-lib">demo</a> and documentation
 
 ## Structure & Standards
 ---

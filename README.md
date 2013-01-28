@@ -1,5 +1,7 @@
 # UI Library: Starter Kit for Wix 3rd Party Apps
 
+
+## About
 This project is aimed at helping developers in the process of getting new apps to <a href="http://dev.wix.com" target="_blank">Wix Dev Center</a> as quickly as possible. The UI in this project focuses on the App's Settings Panel. The boilerplate offers UI standards and common Javascript components to assist the developer in passing Product tests, and in developing a consistent and uniformed UI for the app.
 
 ##### Click here for <a href="http://wix.github.com/wix-ui-lib" target="_blank">demo</a> and documentation.
@@ -7,7 +9,7 @@ This project is aimed at helping developers in the process of getting new apps t
 ## Structure & Standards
 
 #### App Intro
-===
+
 
 First, make an introduction. *This is compulsry according to Wix Apps product style guide.*
 
@@ -84,7 +86,9 @@ Box is the basic container for Wix 3rd Party Settings panel. Boxes are for group
         <h3>Checkboxes</h3>
         <div class="feature">
             <p>Feature description</p>
+            
 			<!-- Box content goes here -->
+			
         </div>
     </div>
 
@@ -110,14 +114,9 @@ This is a simple list with the proper CSS styling to contain all the HTML and JS
 	    <figure class="full"><figcaption class="radiobutton">Layout 2</figcaption></figure>
 	    <figure class="grid"><figcaption class="radiobutton">Layout 3</figcaption></figure>
 	</div>
-    
-Available Layouts (`images/layouts.png`)
-
-![Wix](https://dl.dropbox.com/u/427838/ui-lib/images/layouts.png)
-
 
 ## Javascript Components
-===
+
 
 The starter kit Javascript components are basically a set of [jQuery][jquery] Plugins.
 
@@ -203,6 +202,9 @@ Next, you specifiy the nested element (`el`) of the radio button:
 
     $('.layouts').Radio({el: "figure figcaption", checked: 1});
 
+Note &mdash; `.boxes`, `.full` and `.grid` relate to `backgorund-position` of the layout sprite (See `images/layouts.png`):
+
+![Wix](https://dl.dropbox.com/u/427838/ui-lib/images/layouts.png)
 
 #### Checkbox
 

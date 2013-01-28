@@ -5,3 +5,4 @@ desktop.ini
 *.iml
 .idea/
 codekit-config.json
+stylesheets/codekit-config.json

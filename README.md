@@ -4,6 +4,11 @@
 This boilerplate is aimed at helping developers in the process of getting new apps to [Wix App Market][appmarket] as quickly as possible. The UI in this project focuses on the App's Settings Panel. The boilerplate offers UI standards and common Javascript components to assist the developer in passing Product tests, and in developing a consistent and uniformed UI for the app.
 [appmarket]: "http://wix.com/"
 
+
+
+##### See [demo][demo] and documentation
+[demo]: "http://wix.github.com/wix-ui-lib"
+
 ## Structure & Standards
 ---
 

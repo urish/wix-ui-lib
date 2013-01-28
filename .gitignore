@@ -1,8 +1,7 @@
+/stylesheets/*.json
 .DS_Store
 desktop.ini
 *.ipr
 *.iws
 *.iml
 .idea/
-codekit-config.json
-stylesheets/codekit-config.json

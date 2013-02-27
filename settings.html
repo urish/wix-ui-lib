@@ -61,14 +61,17 @@
             <ul class="list">
                 <li>
                     <span class="option">Option 1</span>
-                    <span class="checkboxes">
-                        <span class="checkbox">Show Badge</span>
+                    <span class="checkbox">
+                        <span class ="check"></span>
+                        Show Badge
                     </span>
                 </li>
                 <li>
                     <span class="option">Option 2</span>
                     <span class="picker"><a rel="popover" class="example-1-color-picker color-selector default"></a></span>
-                    <span class="values slider" id="exmaple1-slider"></span>
+                    <span class="slider-container">
+                        0<span class="values slider" id="exmaple1-slider"></span>100
+                    </span>
                 </li>
                 <li>
                     <span class="option">Option 4</span>
@@ -79,8 +82,9 @@
                 </li>
                 <li>
                     <span class="option">Option 5</span>
-                    <span class="checkboxes">
-                        <span class="checkbox">Use advanced settings</span>
+                    <span class="checkbox">
+                        <span class ="check"></span>
+                        Use advanced settings
                     </span>
                 </li>
             </ul>
@@ -118,11 +122,19 @@
         <h3>Checkboxes</h3>
         <div class="feature">
             <p>Checkboxes are use for multiple selection.</p>
-            <div class="checkboxes">
-                <div class="checkbox"><p>Option 1</p></div>
-                <div class="checkbox"><p>Option 2</p></div>
-                <div class="checkbox"><p>Option 3</p></div>
+            <div class="checkbox">
+                <span class ="check"></span>
+                <p>Option 1</p>
             </div>
+            <div class="checkbox">
+                <span class ="check"></span>
+                <p>Option 2</p>
+            </div>
+            <div class="checkbox">
+                <span class ="check"></span>
+                <p>Option 3</p>
+            </div>
+
         </div>
     </div>
 
@@ -159,7 +171,10 @@
         <h3>Sliders</h3>
         <div class="feature">
             <p>Sliders enable the user to easily select a value.</p>
-            <div id="slider1" class="slider"></div>
+            <div class="slider-container">
+                0<div id="slider1" class="slider"></div>100
+            </div>
+
         </div>
     </div>
 

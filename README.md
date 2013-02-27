@@ -1,14 +1,15 @@
-![Wix](https://dl.dropbox.com/u/427838/ui-lib/images/wix_icon.png)
-# Wix 3rd Party Starter Kit
+# UI Library: Starter Kit for Wix 3rd Party Apps
 
-This boilerplate is aimed at helping developers in the process of getting new apps to [Wix App Market][appmarket] as quickly as possible. The UI in this project focuses on the App's Settings Panel. The boilerplate offers UI standards and common Javascript components to assist the developer in passing Product tests, and in developing a consistent and uniformed UI for the app.
-[appmarket]: "http://wix.com/"
+
+## About
+This project is aimed at helping developers in the process of getting new apps to <a href="http://dev.wix.com" target="_blank">Wix Dev Center</a> as quickly as possible. The UI in this project focuses on the App's Settings Panel. The boilerplate offers UI standards and common Javascript components to assist the developer in passing Product tests, and in developing a consistent and uniformed UI for the app.
+
+##### Click here for <a href="http://wix.github.com/wix-ui-lib" target="_blank">demo</a> and documentation.
 
 ## Structure & Standards
----
 
 #### App Intro
----
+
 
 First, make an introduction. *This is compulsry according to Wix Apps product style guide.*
 
@@ -45,7 +46,6 @@ Or, if you're using the precompiled Less sources, neatly nested in the `.intro` 
 
 
 #### Guest & User
----
 
 Once your app is running, an **authenticated user mode** should come in handy. Under the `.intro` block you'll find two sections: `.guest` and `.user`. Switch the `.hidden` class between the two to accompany each these state in the app, respectively.
 
@@ -80,21 +80,22 @@ Authenticated users will see the details of their **Session Details** (User name
 If this is irrelevant to your project, simply remove this markup.
 
 #### Box (Container)
----
 Box is the basic container for Wix 3rd Party Settings panel. Boxes are for grouped controls or information blocks. Use them as you like!
 
     <div class="box">
         <h3>Checkboxes</h3>
         <div class="feature">
             <p>Feature description</p>
+            
 			<!-- Box content goes here -->
+			
         </div>
     </div>
 
 Boxes also contain the `.feature`, which styles a simple paragraph for textual information.
 
 #### List
----
+
 To group different controls in horizontal view, you can use the `.list` class and structure:
 
 	 <ul class="list">
@@ -107,27 +108,21 @@ To group different controls in horizontal view, you can use the `.list` class an
 This is a simple list with the proper CSS styling to contain all the HTML and JS components offered in the starter kit and present them in a neat horizontal row.
 
 #### Layouts Picker
----
+
 	<div class="layouts">
 	    <figure class="boxes"><figcaption class="radiobutton">Layout 1</figcaption></figure>
 	    <figure class="full"><figcaption class="radiobutton">Layout 2</figcaption></figure>
 	    <figure class="grid"><figcaption class="radiobutton">Layout 3</figcaption></figure>
 	</div>
-    
-Available Layouts (`images/layouts.png`)
-
-![Wix](https://dl.dropbox.com/u/427838/ui-lib/images/layouts.png)
-
 
 ## Javascript Components
-===
+
 
 The starter kit Javascript components are basically a set of [jQuery][jquery] Plugins.
 
 [jquery]: http://jquery.com/
 
 #### Accordion
----
 
 ##### Usage	        
 
@@ -154,7 +149,7 @@ Initialize the Accordion in `settings.js`:
     $('.accordion').Accordion();
 
 #### Color Picker
----
+
 
 ##### Usage
 
@@ -177,7 +172,6 @@ Next, initialize your color picker on DOM ready like so:
 
 
 #### Radio Button
----
 
 ##### Usage
 
@@ -208,9 +202,12 @@ Next, you specifiy the nested element (`el`) of the radio button:
 
     $('.layouts').Radio({el: "figure figcaption", checked: 1});
 
+Note &mdash; `.boxes`, `.full` and `.grid` relate to `backgorund-position` of the layout sprite (See `images/layouts.png`):
+
+![Wix](https://dl.dropbox.com/u/427838/ui-lib/images/layouts.png)
 
 #### Checkbox
----
+
 ##### Usage
 
 Add a checkbox group (Note, one checkbox also needs to be in a wrapping group):
@@ -227,7 +224,7 @@ Initialize checkbox, specifying `checked` checkboxes array with checkboxes 0 and
 
 
 #### Slider
----
+
 ##### Usage
 
 Add the slider markup, a simple `div` would do.
@@ -240,7 +237,17 @@ Initialize the Slider component with a value string.
 
 
 ## Less.js
-===
+
 The starter kit stylesheets are compiled from LESS sources. If you are not familiar with LESS you can find more information [here][lessjs].
 
 [lessjs]: http://mouapp.com "Markdown editor on Mac OS X"
+
+## License
+
+Copyright (c) 2012 Wix.com, Inc
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

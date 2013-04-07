@@ -155,7 +155,7 @@ Initialize the Accordion in `settings.js`:
 
 Add the following HTML Markup
 
-    <a rel="popover" class="color-picker-1 color-selector default"></a>
+    <a rel="popover" id="colorpicker1" class="color-selector default"></a>
 
 
 Include [Twitter Bootstrap][bootstrap] components `Tooltip` and `Popover` dependencies in your main HTML file
@@ -167,6 +167,12 @@ Next, initialize your color picker on DOM ready like so:
 
     $('.color-selector').ColorPicker();
 
+To subscribe to color-change event:
+
+     $(document).on("colorChanged", function event , data) {
+            // data.type now has the id of the color-picker (in case you have more than one
+            // data.selected_color has the selected color ('#ffffff' for example)
+        });
 
 [bootstrap]: http://twitter.github.com/bootstrap/
 
@@ -178,16 +184,22 @@ Next, initialize your color picker on DOM ready like so:
 Add a radio button group to your HTML file:
 
 	<div class="radiobuttons">
-		<div class="radiobutton"><p>Option 1</p></div>
-		<div class="radiobutton"><p>Option 2</p></div>
-		<div class="radiobutton"><p>Option 3</p></div>
+		<div id="radioOption1" class="radiobutton"><p>Option 1</p></div>
+		<div id="radioOption2" class="radiobutton"><p>Option 2</p></div>
+		<div id="radioOption3" class="radiobutton"><p>Option 3</p></div>
 	</div>
 
 Initialize the button group and decicde which button is `checked`.
 
     $('.radiobuttons').Radio({ checked: 0 });
 
-
+To subscribe to value-change event: 
+    
+    $(document).on("radioButton.change", function (event, data) {
+        // data.type now has the id of the selected option
+        // data.checked is true
+        });
+    
 ##### Nested Radio Buttons
 
 This is another use case for radio buttons, implemented in the Layout Picker structure:
@@ -212,16 +224,35 @@ Note &mdash; `.boxes`, `.full` and `.grid` relate to `backgorund-position` of th
 
 Add a checkbox group (Note, one checkbox also needs to be in a wrapping group):
 
-	<div class="checkboxes">
-	   <div class="checkbox"><p>Option 1</p></div>
-	   <div class="checkbox"><p>Option 2</p></div>
-	   <div class="checkbox"><p>Option 3</p></div>
-	</div>
+    <div id="checkbox1" class="checkbox">
+        <span class ="check"></span>
+        <p>Checkbox 1</p>
+    </div>
+    <div id="checkbox2" class="checkbox">
+        <span class ="check"></span>
+        <p>Checkbox 2</p>
+    </div>
+    <div  id="checkbox3" class="checkbox">
+        <span class ="check"></span>
+        <p>Checkbox 3</p>
+    </div>
 
 Initialize checkbox, specifying `checked` checkboxes array with checkboxes 0 and 2 are:
 
-    $('.checkboxes').Checkbox({ checked: [0,2] });
+    $('.checkboxes').Checkbox({ checked: true }); 
 
+Or individually:
+
+    $('#checkbox1').Checkbox({ checked: true }); 
+    $('#checkbox2').Checkbox({ checked: false }); 
+    $('#checkbox3').Checkbox({ checked: true }); 
+
+To subscribe to value-change event: 
+
+    $(document).on("checkbox.change", function (event, data) {
+            // data.type now has the id of the changed checkbox
+            // data.checked is whether the checkbox is checked or not
+        });
 
 #### Slider
 

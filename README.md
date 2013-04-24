@@ -165,7 +165,7 @@ Include [Twitter Bootstrap][bootstrap] components `Tooltip` and `Popover` depend
 
 Next, initialize your color picker on DOM ready like so:
 
-    $('.color-selector').ColorPicker();
+    $('.color-selector').ColorPicker({startWithColor : 'red'});
 
 To subscribe to color-change event:
 
@@ -222,30 +222,16 @@ Note &mdash; `.boxes`, `.full` and `.grid` relate to `backgorund-position` of th
 
 ##### Usage
 
-Add a checkbox group (Note, one checkbox also needs to be in a wrapping group):
+Add a checkbox:
 
     <div id="checkbox1" class="checkbox">
         <span class ="check"></span>
         <p>Checkbox 1</p>
     </div>
-    <div id="checkbox2" class="checkbox">
-        <span class ="check"></span>
-        <p>Checkbox 2</p>
-    </div>
-    <div  id="checkbox3" class="checkbox">
-        <span class ="check"></span>
-        <p>Checkbox 3</p>
-    </div>
 
-Initialize checkbox, specifying `checked` checkboxes array with checkboxes 0 and 2 are:
-
-    $('.checkboxes').Checkbox({ checked: true }); 
-
-Or individually:
+Initialize checkbox, specifying `checked`:
 
     $('#checkbox1').Checkbox({ checked: true }); 
-    $('#checkbox2').Checkbox({ checked: false }); 
-    $('#checkbox3').Checkbox({ checked: true }); 
 
 To subscribe to value-change event: 
 
@@ -260,11 +246,16 @@ To subscribe to value-change event:
 
 Add the slider markup, a simple `div` would do.
 
-    <div id="slider1" class="slider"></div>
+    <div class="slider-container">
+         0<div id="slider1" class="slider"></div>100
+    </div>
 
-Initialize the Slider component with a value string.
+Initialize the Slider component with a value.
 
-    $('.slider').Slider({ type: "Value" });
+    $('.slider').Slider({
+							type: "Value",
+							value: 0.5
+						});
 
 
 ## Less.js

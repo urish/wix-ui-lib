@@ -22,8 +22,8 @@
     AdvancedSlider.prototype.init = function () {
         this.markup();
         this.registerEvents();
-		this.setValue(this.options.value);
 		this.options.create.call(this);
+		this.setValue(this.options.value);
     };
 		
     AdvancedSlider.prototype.markup = function () {

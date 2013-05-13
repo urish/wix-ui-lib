@@ -60,6 +60,31 @@
 					maxValue : 2,
 					value : plugin.state[getPlacementOriantion(plugin.state)] || 0,
 					create : function () {
+						var elWidth = this.$el.width();					
+						
+						this.$center = $('<div class="wix-slider-back">');
+						this.$leftLine = $('<div class="wix-slider-back">');
+						this.$rightLine = $('<div class="wix-slider-back">');
+						
+						this.$leftLine.css({
+							left:elWidth/4,
+							background:'rgba(0,0,0,0.13)',
+							width:1
+						}).prependTo(this.$el);
+						
+						this.$center.css({
+							left:elWidth/2 - 1,
+							background:'rgba(0,0,0,0.2)'
+						}).prependTo(this.$el);
+						
+						this.$rightLine.css({
+							left:(elWidth/4)*3,
+							background:'rgba(0,0,0,0.13)',
+							width:1
+						}).prependTo(this.$el);
+						
+						this.$ribbon = $('<div class="wix-slider-back">').prependTo(this.$el);
+												
 						if (getPlacementOriantion(plugin.state) === 'other') {
 							this.$el.addClass('disabled');
 						} else {
@@ -67,6 +92,52 @@
 						}
 					},
 					slide : function (val) {
+						var pinWidth = this.$pin.width()/2;
+						var elWidth = this.$el.width()/4;
+						
+						if(val > 1){
+							var range = (val - 1);
+							var w = elWidth * range;
+							this.$ribbon.css({
+								width:elWidth - w + range * pinWidth,
+								right:0,
+								left:'auto',
+								borderRadius: '0 8px 8px 0'
+							});
+						}
+						
+						if(val >= 0 && val <= 1){
+							var w = elWidth * (val);
+							this.$ribbon.css({
+								width:w,
+								right:'auto',
+								left:elWidth * 2,
+								borderRadius:0
+							});
+						}
+						
+						if(val < -1){
+							var range = ((val*-1) - 1);
+							var w = elWidth * range;
+							this.$ribbon.css({
+								width: (elWidth - w) + range * pinWidth,
+								left:0,
+								right:'auto',
+								borderRadius: '8px 0 0 8px'
+							});							
+						}
+						
+						
+						if(val < 0 && val >= -1){
+							var w = elWidth * ((val*-1));
+							this.$ribbon.css({
+								width: w,
+								right:elWidth *2,
+								left:'auto',
+								borderRadius:0
+							});							
+						}
+						
 						plugin.state[getPlacementOriantion(plugin.state)] = val;
 						setPlacement(plugin.state);
 					}

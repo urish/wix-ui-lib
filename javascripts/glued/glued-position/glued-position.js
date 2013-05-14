@@ -62,14 +62,9 @@
             plugin.$el = $(element);
             plugin.options = $.extend({}, defaults, options);
             plugin.$slider = plugin.$el.find('.glued-slider');
-            plugin.slider = plugin.$slider.AdvancedSlider(plugin.options.slider).data('AdvancedSlider');
             if (plugin.options.change) {
                 plugin.$slider.change = plugin.options.change;
             }
-            plugin.$dropdown = plugin.$el.find(".glued-dropdown")
-                .html(plugin.dropdownHTML())
-                .find('select')
-                .msDropDown(plugin.options.dropdown);
 
             plugin.dropdown = plugin.$dropdown.data('dd');
         });
@@ -85,9 +80,14 @@
 			plugin.$el = $(element);
 			plugin.options = $.extend({}, defaults, options);
 			plugin.$slider = plugin.$el.find('.glued-slider');
+			plugin.slider = plugin.$slider.AdvancedSlider(plugin.options.slider).data('AdvancedSlider');
             if (plugin.options.change) {
                 plugin.$slider.change = plugin.options.change;
             }
+			plugin.$dropdown = plugin.$el.find(".glued-dropdown")
+				.html(plugin.dropdownHTML())
+				.find('select')
+				.msDropDown(plugin.options.dropdown);
 
 			plugin.dropdown = plugin.$dropdown.data('dd');
 		});

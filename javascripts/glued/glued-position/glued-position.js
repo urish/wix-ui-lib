@@ -96,8 +96,8 @@
     function _getDefaults() {
         return {
             placements : [],
-                slider : {
-            minValue : -2,
+            slider : {
+                minValue : -2,
                 maxValue : 2,
                 value : plugin.state[getPlacementOrientation(plugin.state)] || 0,
                 create : function () {
@@ -131,58 +131,58 @@
                 } else {
                     this.$el.addClass(getPlacementOrientation(plugin.state));
                 }
+                },
+                slide : function (val) {
+                    var pinWidth = this.$pin.width()/2;
+                    var elWidth = this.$el.width()/4;
+
+                    if(val > 1){
+                        var range = (val - 1);
+                        var w = elWidth * range;
+                        this.$ribbon.css({
+                            width:elWidth - w + range * pinWidth,
+                            right:0,
+                            left:'auto',
+                            borderRadius: '0 8px 8px 0'
+                        });
+                    }
+
+                    if(val >= 0 && val <= 1){
+                        var w = elWidth * (val);
+                        this.$ribbon.css({
+                            width:w,
+                            right:'auto',
+                            left:elWidth * 2,
+                            borderRadius:0
+                        });
+                    }
+
+                    if(val < -1){
+                        var range = ((val*-1) - 1);
+                        var w = elWidth * range;
+                        this.$ribbon.css({
+                            width: (elWidth - w) + range * pinWidth,
+                            left:0,
+                            right:'auto',
+                            borderRadius: '8px 0 0 8px'
+                        });
+                    }
+
+
+                    if(val < 0 && val >= -1){
+                        var w = elWidth * ((val*-1));
+                        this.$ribbon.css({
+                            width: w,
+                            right:elWidth *2,
+                            left:'auto',
+                            borderRadius:0
+                        });
+                    }
+
+                    plugin.state[getPlacementOrientation(plugin.state)] = val;
+                    setPlacement(plugin.state);
+                }
             },
-            slide : function (val) {
-                var pinWidth = this.$pin.width()/2;
-                var elWidth = this.$el.width()/4;
-
-                if(val > 1){
-                    var range = (val - 1);
-                    var w = elWidth * range;
-                    this.$ribbon.css({
-                        width:elWidth - w + range * pinWidth,
-                        right:0,
-                        left:'auto',
-                        borderRadius: '0 8px 8px 0'
-                    });
-                }
-
-                if(val >= 0 && val <= 1){
-                    var w = elWidth * (val);
-                    this.$ribbon.css({
-                        width:w,
-                        right:'auto',
-                        left:elWidth * 2,
-                        borderRadius:0
-                    });
-                }
-
-                if(val < -1){
-                    var range = ((val*-1) - 1);
-                    var w = elWidth * range;
-                    this.$ribbon.css({
-                        width: (elWidth - w) + range * pinWidth,
-                        left:0,
-                        right:'auto',
-                        borderRadius: '8px 0 0 8px'
-                    });
-                }
-
-
-                if(val < 0 && val >= -1){
-                    var w = elWidth * ((val*-1));
-                    this.$ribbon.css({
-                        width: w,
-                        right:elWidth *2,
-                        left:'auto',
-                        borderRadius:0
-                    });
-                }
-
-                plugin.state[getPlacementOrientation(plugin.state)] = val;
-                setPlacement(plugin.state);
-            }
-        },
             dropdown : {
                 visibleRows : 8,
                     on : {

@@ -36,71 +36,31 @@
 		Wix.Settings.getWindowPlacement(Wix.Utils.getOrigCompId(), cb);
 	}
 
-	var pluginName = 'GluedPosition';
-
-	function Plugin(element, options) {
-		this.state = {
-			horizontalMargin : 0,
-			verticalMargin : 0,
-			placement : 'TOP_LEFT'
-		};
-
-        if (options.initWithBinding) {
-            this.initWithBinding(element, options);
-        } else {
-            this.init(element, options);
-        }
-	}
-
-    Plugin.prototype.init = function (element, options) {
-        var plugin = this;
-        getPlacement(function (data) {
-            plugin.state = data;
-
-            var defaults = _getDefaults();
-
-            plugin.$el = $(element);
-            plugin.options = $.extend({}, defaults, options);
-            plugin.$slider = plugin.$el.find('.glued-slider');
-            if (plugin.options.change) {
-                plugin.$slider.change = plugin.options.change;
-            }
-
-            plugin.dropdown = plugin.$dropdown.data('dd');
-        });
-    }
-
-	Plugin.prototype.initWithBinding = function (element, options) {
-		var plugin = this;
-		getPlacement(function (data) {
-			plugin.state = data;
-
-			var defaults = _getDefaults();
-
-			plugin.$el = $(element);
-			plugin.options = $.extend({}, defaults, options);
-			plugin.$slider = plugin.$el.find('.glued-slider');
-			plugin.slider = plugin.$slider.AdvancedSlider(plugin.options.slider).data('AdvancedSlider');
-            if (plugin.options.change) {
-                plugin.$slider.change = plugin.options.change;
-            }
-			plugin.$dropdown = plugin.$el.find(".glued-dropdown")
-				.html(plugin.dropdownHTML())
-				.find('select')
-				.msDropDown(plugin.options.dropdown);
-
-			plugin.dropdown = plugin.$dropdown.data('dd');
-		});
-	}
-
     function _getDefaults() {
         return {
             placements : [],
             slider : {
                 minValue : -2,
-                maxValue : 2,
-                value : plugin.state[getPlacementOrientation(plugin.state)] || 0,
-                create : function () {
+                maxValue : 2
+            },
+            dropdown : {}
+        };
+    }
+
+    function _getDropdownEvents() {
+        return {
+            create : function() {
+                this.setIndexByValue(this.state.placement);
+            },
+            change : function(evt) {
+                updatePlacement(this.state, this.slider, evt.value);
+            }
+        };
+    }
+
+    function _getSliderEvents(state) {
+        return {
+            create : function () {
                 var elWidth = this.$el.width();
 
                 this.$center = $('<div class="wix-slider-back">');
@@ -126,76 +86,134 @@
 
                 this.$ribbon = $('<div class="wix-slider-back">').prependTo(this.$el);
 
-                if (getPlacementOrientation(plugin.state) === 'other') {
+                if (getPlacementOrientation(state) === 'other') {
                     this.$el.addClass('disabled');
                 } else {
-                    this.$el.addClass(getPlacementOrientation(plugin.state));
-                }
-                },
-                slide : function (val) {
-                    var pinWidth = this.$pin.width()/2;
-                    var elWidth = this.$el.width()/4;
-
-                    if(val > 1){
-                        var range = (val - 1);
-                        var w = elWidth * range;
-                        this.$ribbon.css({
-                            width:elWidth - w + range * pinWidth,
-                            right:0,
-                            left:'auto',
-                            borderRadius: '0 8px 8px 0'
-                        });
-                    }
-
-                    if(val >= 0 && val <= 1){
-                        var w = elWidth * (val);
-                        this.$ribbon.css({
-                            width:w,
-                            right:'auto',
-                            left:elWidth * 2,
-                            borderRadius:0
-                        });
-                    }
-
-                    if(val < -1){
-                        var range = ((val*-1) - 1);
-                        var w = elWidth * range;
-                        this.$ribbon.css({
-                            width: (elWidth - w) + range * pinWidth,
-                            left:0,
-                            right:'auto',
-                            borderRadius: '8px 0 0 8px'
-                        });
-                    }
-
-
-                    if(val < 0 && val >= -1){
-                        var w = elWidth * ((val*-1));
-                        this.$ribbon.css({
-                            width: w,
-                            right:elWidth *2,
-                            left:'auto',
-                            borderRadius:0
-                        });
-                    }
-
-                    plugin.state[getPlacementOrientation(plugin.state)] = val;
-                    setPlacement(plugin.state);
+                    this.$el.addClass(getPlacementOrientation(state));
                 }
             },
-            dropdown : {
-                visibleRows : 8,
-                    on : {
-                    create : function () {
-                        this.setIndexByValue(plugin.state.placement);
-                    },
-                    change : function (evt) {
-                        updatePlacement(plugin.state, plugin.slider, evt.value);
-                    }
+            slide : function(val) {
+                var pinWidth = this.$pin.width() / 2;
+                var elWidth = this.$el.width() / 4;
+
+                if(val > 1){
+                    var range = (val - 1);
+                    var w = elWidth * range;
+                    this.$ribbon.css({
+                        width:elWidth - w + range * pinWidth,
+                        right:0,
+                        left:'auto',
+                        borderRadius: '0 8px 8px 0'
+                    });
                 }
+
+                if(val >= 0 && val <= 1){
+                    var w = elWidth * (val);
+                    this.$ribbon.css({
+                        width:w,
+                        right:'auto',
+                        left:elWidth * 2,
+                        borderRadius:0
+                    });
+                }
+
+                if(val < -1){
+                    var range = ((val * -1) - 1);
+                    var w = elWidth * range;
+                    this.$ribbon.css({
+                        width: (elWidth - w) + range * pinWidth,
+                        left:0,
+                        right:'auto',
+                        borderRadius: '8px 0 0 8px'
+                    });
+                }
+
+
+                if(val < 0 && val >= -1){
+                    var w = elWidth * ((val * -1));
+                    this.$ribbon.css({
+                        width: w,
+                        right:elWidth * 2,
+                        left:'auto',
+                        borderRadius:0
+                    });
+                }
+
+                state[getPlacementOrientation(state)] = val;
+                setPlacement(state);
             }
         };
     }
+
+	var pluginName = 'GluedPosition';
+
+	function Plugin(element, options) {
+		this.state = {
+			horizontalMargin : 0,
+			verticalMargin : 0,
+			placement : 'TOP_LEFT'
+		};
+
+        if (options.initWithBinding) {
+            this.initWithBinding(element, options);
+        } else {
+            this.init(element, options);
+        }
+	}
+
+    Plugin.prototype.init = function (element, options) {
+        var plugin = this;
+
+        var defaults = _getDefaults();
+        if (typeof options.sliderChange === 'function') {
+            defaults.slider.change = options.sliderChange;
+        }
+
+        if (typeof options.dropDownChange === 'function') {
+            defaults.dropdown.change = options.dropDownChange;
+        }
+
+        plugin.$el = $(element);
+        plugin.options = $.extend({}, defaults, options);
+        plugin.$slider = plugin.$el.find('.glued-slider');
+        plugin.$dropdown = plugin.$el.find('.glued-dropdown');
+
+        plugin.options.dropdown.visibleRows = plugin.options.placements.length;
+
+        plugin.dropdown = plugin.$dropdown.data('dd');
+    }
+
+	Plugin.prototype.initWithBinding = function (element, options) {
+		var plugin = this;
+		getPlacement(function (data) {
+            $.extend(plugin.state, data);
+            debugger;
+
+			var defaults = _getDefaults();
+
+
+            $.extend(defaults.dropdown, _getDropdownEvents());
+            $.extend(defaults.slider, _getSliderEvents(plugin.state));
+
+            plugin.$el = $(element);
+			plugin.options = $.extend({}, defaults, options);
+            plugin.options.slider.value = plugin.state[getPlacementOrientation(plugin.state)] || 0;
+			plugin.$slider = plugin.$el.find('.glued-slider');
+			plugin.slider = plugin.$slider.AdvancedSlider(plugin.options.slider).data('AdvancedSlider');
+            plugin.$dropdown = plugin.$el.find('.glued-dropdown');
+
+            plugin.options.dropdown.visibleRows = plugin.options.placements.length;
+
+			plugin.$dropdown = plugin.$el.find(".glued-dropdown")
+				.html(plugin.dropdownHTML())
+				.find('select')
+				.msDropDown(plugin.options.dropdown);
+
+			plugin.dropdown = plugin.$dropdown.data('dd');
+		});
+	}
+
+
 
 	Plugin.prototype.dropdownHTML = function () {
 

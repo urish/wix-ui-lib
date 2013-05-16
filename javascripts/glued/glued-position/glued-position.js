@@ -43,18 +43,23 @@
                 minValue : -2,
                 maxValue : 2
             },
-            dropdown : {}
+            dropdown : {
+				visibleRows:8,
+				on:{}
+			}
         };
     }
 
-    function _getDropdownEvents() {
+    function _getDropdownEvents(state, slider) {
         return {
-            create : function() {
-                this.setIndexByValue(this.state.placement);
-            },
-            change : function(evt) {
-                updatePlacement(this.state, this.slider, evt.value);
-            }
+			on:{
+				create : function() {
+					this.setIndexByValue(state.placement);
+				},
+				change : function(evt) {
+					updatePlacement(state, slider, evt.value);
+				}
+			}
         };
     }
 
@@ -154,66 +159,73 @@
 			placement : 'TOP_LEFT'
 		};
 
+		var defaults = _getDefaults();
+		this.$el = $(element);
         if (options.initWithBinding) {
-            this.initWithBinding(element, options);
+            this.initWithBinding(element, defaults, options);
         } else {
-            this.init(element, options);
+            this.init(element, defaults, options);
         }
 	}
 
-    Plugin.prototype.init = function (element, options) {
+    Plugin.prototype.init = function (defaults, options) {
         var plugin = this;
 
-        var defaults = _getDefaults();
         if (typeof options.sliderChange === 'function') {
-            defaults.slider.change = options.sliderChange;
+            defaults.slider.slide = options.sliderChange;
         }
 
         if (typeof options.dropDownChange === 'function') {
-            defaults.dropdown.change = options.dropDownChange;
+			defaults.dropdown.on.change = options.dropDownChange;
         }
-
-        plugin.$el = $(element);
+		if (typeof options.dropDownCreate === 'function') {
+			defaults.dropdown.on.create = options.dropDownCreate;
+        }
+		if(plugin.options.placements){
+			plugin.options.dropdown.visibleRows = plugin.options.placements.length;
+		}
+		
         plugin.options = $.extend({}, defaults, options);
-        plugin.$slider = plugin.$el.find('.glued-slider');
-        plugin.$dropdown = plugin.$el.find('.glued-dropdown');
-
-        plugin.options.dropdown.visibleRows = plugin.options.placements.length;
-
-        plugin.dropdown = plugin.$dropdown.data('dd');
+	
+		plugin.slider = plugin.createSlider(plugin.options.slider);		
+		plugin.dropdown = plugin.createDropDown(plugin.options.dropdown);
     }
 
-	Plugin.prototype.initWithBinding = function (element, options) {
+	Plugin.prototype.initWithBinding = function (defaults, options) {
 		var plugin = this;
 		getPlacement(function (data) {
+			
             $.extend(plugin.state, data);
-            debugger;
-
-			var defaults = _getDefaults();
-
-
-            $.extend(defaults.dropdown, _getDropdownEvents());
             $.extend(defaults.slider, _getSliderEvents(plugin.state));
+			plugin.options = $.extend({}, defaults, options);			
+			
+			plugin.slider = plugin.createSlider(plugin.options.slider);
 
-            plugin.$el = $(element);
-			plugin.options = $.extend({}, defaults, options);
-            plugin.options.slider.value = plugin.state[getPlacementOrientation(plugin.state)] || 0;
-			plugin.$slider = plugin.$el.find('.glued-slider');
-			plugin.slider = plugin.$slider.AdvancedSlider(plugin.options.slider).data('AdvancedSlider');
-            plugin.$dropdown = plugin.$el.find('.glued-dropdown');
-
-            plugin.options.dropdown.visibleRows = plugin.options.placements.length;
-
-			plugin.$dropdown = plugin.$el.find(".glued-dropdown")
-				.html(plugin.dropdownHTML())
-				.find('select')
-				.msDropDown(plugin.options.dropdown);
-
-			plugin.dropdown = plugin.$dropdown.data('dd');
+			
+			$.extend(plugin.options.dropdown, _getDropdownEvents(plugin.state, plugin.slider));
+			plugin.dropdown = plugin.createDropDown(plugin.options.dropdown);
+			
 		});
-	}
+	};
 
 
+	Plugin.prototype.createSlider = function(options){
+		options.value = plugin.state[getPlacementOrientation(plugin.state)] || 0;
+		this.$slider = plugin.$el.find('.glued-slider');
+		return plugin.$slider.AdvancedSlider(options).data('AdvancedSlider');            
+	};
+	
+	Plugin.prototype.createDropDown = function(options){
+		options.visibleRows = plugin.options.placements.length;
+
+		plugin.$dropdown = plugin.$el.find(".glued-dropdown")
+			.html(plugin.dropdownHTML())
+			.find('select')
+			.msDropDown(options);
+
+		return plugin.$dropdown.data('dd');   
+	};
+	
 
 	Plugin.prototype.dropdownHTML = function () {
 

@@ -150,6 +150,23 @@
         };
     }
 
+    function _setUserEvents(defaults, options) {
+        if (typeof options.sliderCreate === 'function') {
+            defaults.slider.create = options.sliderCreate;
+        }
+
+        if (typeof options.sliderChange === 'function') {
+            defaults.slider.slide = options.sliderChange;
+        }
+
+        if (typeof options.dropDownChange === 'function') {
+            defaults.dropdown.on.change = options.dropDownChange;
+        }
+        if (typeof options.dropDownCreate === 'function') {
+            defaults.dropdown.on.create = options.dropDownCreate;
+        }
+    }
+
 	var pluginName = 'GluedPosition';
 
 	function Plugin(element, options) {
@@ -162,27 +179,19 @@
 		var defaults = _getDefaults();
 		this.$el = $(element);
         if (options.initWithBinding) {
-            this.initWithBinding(element, defaults, options);
+            this.initWithBinding(defaults, options);
         } else {
-            this.init(element, defaults, options);
+            this.init(defaults, options);
         }
 	}
 
     Plugin.prototype.init = function (defaults, options) {
         var plugin = this;
 
-        if (typeof options.sliderChange === 'function') {
-            defaults.slider.slide = options.sliderChange;
-        }
+        _setUserEvents(defaults, options);
 
-        if (typeof options.dropDownChange === 'function') {
-			defaults.dropdown.on.change = options.dropDownChange;
-        }
-		if (typeof options.dropDownCreate === 'function') {
-			defaults.dropdown.on.create = options.dropDownCreate;
-        }
-		if(plugin.options.placements){
-			plugin.options.dropdown.visibleRows = plugin.options.placements.length;
+		if(options.placements){
+			options.dropdown.visibleRows = options.placements.length;
 		}
 		
         plugin.options = $.extend({}, defaults, options);
@@ -198,7 +207,6 @@
             $.extend(plugin.state, data);
             $.extend(defaults.slider, _getSliderEvents(plugin.state));
 			plugin.options = $.extend({}, defaults, options);			
-			
 			plugin.slider = plugin.createSlider(plugin.options.slider);
 
 			
@@ -210,20 +218,20 @@
 
 
 	Plugin.prototype.createSlider = function(options){
-		options.value = plugin.state[getPlacementOrientation(plugin.state)] || 0;
-		this.$slider = plugin.$el.find('.glued-slider');
-		return plugin.$slider.AdvancedSlider(options).data('AdvancedSlider');            
+		options.value = this.state[getPlacementOrientation(this.state)] || 0;
+		this.$slider = this.$el.find('.glued-slider');
+		return this.$slider.AdvancedSlider(options).data('AdvancedSlider');
 	};
 	
 	Plugin.prototype.createDropDown = function(options){
-		options.visibleRows = plugin.options.placements.length;
+		options.visibleRows = this.options.placements.length;
 
-		plugin.$dropdown = plugin.$el.find(".glued-dropdown")
-			.html(plugin.dropdownHTML())
+		this.$dropdown = this.$el.find(".glued-dropdown")
+			.html(this.dropdownHTML())
 			.find('select')
 			.msDropDown(options);
 
-		return plugin.$dropdown.data('dd');   
+		return this.$dropdown.data('dd');
 	};
 	
 

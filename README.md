@@ -243,25 +243,9 @@ Initialize the Slider component with a value string.
 ---
 ##### Usage
 
-Add the glued positioning control markup, by adding a 'div' containing a 'select' menu.
+Add the glued positioning control markup, specifying `type` of the Wix Control, and optional 'placements' array with available placements options (when not specified, all available placements will be shown):
 
-    <div class="glued-positioning">
-    	<div class="glued-dropdown">
-    		<p>Select the position for your widget</p>
-    		<select name="positionSelection" class="positionSelection">
-    			<option value="TOP_LEFT" data-image="images/blank.gif" data-imagecss="positionIcons topLeft" selected="selected">Top Left</option>
-    			<option value="TOP_CENTER" data-image="images/blank.gif" data-imagecss="positionIcons top">Top</option>
-    			<option value="TOP_RIGHT" data-image="images/blank.gif" data-imagecss="positionIcons topRight">Top Right</option>
-    			<option value="CENTER_LEFT" data-image="images/blank.gif" data-imagecss="positionIcons left">Left</option>
-    			<option value="CENTER_RIGHT" data-image="images/blank.gif" data-imagecss="positionIcons right">Right</option>
-    			<option value="BOTTOM_LEFT" data-image="images/blank.gif" data-imagecss="positionIcons bottomLeft">Bottom Left</option>
-    			<option value="BOTTOM_CENTER" data-image="images/blank.gif" data-imagecss="positionIcons bottom">Bottom</option>
-    			<option value="BOTTOM_RIGHT" data-image="images/blank.gif" data-imagecss="positionIcons bottomRight">Bottom Right</option>
-    		</select>
-    	</div>
-    	<div class="divider gluedDivider"></div>
-    	<div class="glued-slider"></div>
-    </div>
+    <div wix-control="{type:'glued-positioning', placements: ['TOP_LEFT'] }"></div>
 
 Initialize the Glued Positioning component with binding:
 

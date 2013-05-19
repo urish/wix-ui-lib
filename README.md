@@ -239,6 +239,44 @@ Initialize the Slider component with a value string.
     $('.slider').Slider({ type: "Value" });
 
 
+#### Glued Positioning Control
+---
+##### Usage
+
+Add the glued positioning control markup, by adding a 'div' containing a 'select' menu.
+
+    <div class="glued-positioning">
+    	<div class="glued-dropdown">
+    		<p>Select the position for your widget</p>
+    		<select name="positionSelection" class="positionSelection">
+    			<option value="TOP_LEFT" data-image="images/blank.gif" data-imagecss="positionIcons topLeft" selected="selected">Top Left</option>
+    			<option value="TOP_CENTER" data-image="images/blank.gif" data-imagecss="positionIcons top">Top</option>
+    			<option value="TOP_RIGHT" data-image="images/blank.gif" data-imagecss="positionIcons topRight">Top Right</option>
+    			<option value="CENTER_LEFT" data-image="images/blank.gif" data-imagecss="positionIcons left">Left</option>
+    			<option value="CENTER_RIGHT" data-image="images/blank.gif" data-imagecss="positionIcons right">Right</option>
+    			<option value="BOTTOM_LEFT" data-image="images/blank.gif" data-imagecss="positionIcons bottomLeft">Bottom Left</option>
+    			<option value="BOTTOM_CENTER" data-image="images/blank.gif" data-imagecss="positionIcons bottom">Bottom</option>
+    			<option value="BOTTOM_RIGHT" data-image="images/blank.gif" data-imagecss="positionIcons bottomRight">Bottom Right</option>
+    		</select>
+    	</div>
+    	<div class="divider gluedDivider"></div>
+    	<div class="glued-slider"></div>
+    </div>
+
+Initialize the Glued Positioning component with binding:
+
+    $('.glued-positioning').GluedPosition({initWithBinding: true});
+
+Or initialize the component with user events:
+
+    $('.glued-positioning').GluedPosition({
+        dropDownChange: function() {} ),
+        dropDownCreate: function() {} ),
+        sliderChange: function() {} ),
+        sliderCreate: function() {} )
+    });
+
+
 ## Less.js
 ===
 The starter kit stylesheets are compiled from LESS sources. If you are not familiar with LESS you can find more information [here][lessjs].

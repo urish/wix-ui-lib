@@ -35,6 +35,14 @@
         this.$pin.addClass('wix-advanced-slider-pin');
     };
 
+    AdvancedSlider.prototype.disable = function () {
+       this.$el.addClass('disabled');
+    };
+
+    AdvancedSlider.prototype.enable = function () {
+        this.$el.removeClass('disabled');
+    };
+
     AdvancedSlider.prototype.registerEvents = function () {
         var $body = $(document.body);
         var slider = this;

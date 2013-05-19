@@ -9,17 +9,17 @@
 			state.horizontalMargin);
 	}
 
-	function updatePlacement(state, sliderPlugin, placement) {
-		sliderPlugin.$el.removeClass('disabled');
+	function updateSliderPlacement(state, sliderPlugin, placement) {
+		sliderPlugin.enable();
 		sliderPlugin.$el.removeClass(getPlacementOrientation(state));
-		state.placement = placement;
+		state.placement = placement
 		sliderPlugin.setValue(0, true);
 		if (getPlacementOrientation(state) === 'other') {
-			sliderPlugin.$el.addClass('disabled');
+			sliderPlugin.disable();
 		} else {
 			sliderPlugin.$el.addClass(getPlacementOrientation(state));
 		}
-		setPlacement(state);
+
 	}
 
 	function getPlacementOrientation(state) {
@@ -52,12 +52,14 @@
 
     function _getDropdownEvents(state, slider) {
         return {
+
 			on:{
 				create : function() {
 					this.setIndexByValue(state.placement);
 				},
 				change : function(evt) {
-					updatePlacement(state, slider, evt.value);
+					updateSliderPlacement(state, slider, evt.value);
+                    setPlacement(state);
 				}
 			}
         };
@@ -177,7 +179,10 @@
 		};
 
 		var defaults = _getDefaults();
+
 		this.$el = $(element);
+        this.createControlHTML();
+
         if (options.initWithBinding) {
             this.initWithBinding(defaults, options);
         } else {
@@ -190,10 +195,6 @@
 
         _setUserEvents(defaults, options);
 
-		if(options.placements){
-			options.dropdown.visibleRows = options.placements.length;
-		}
-		
         plugin.options = $.extend({}, defaults, options);
 	
 		plugin.slider = plugin.createSlider(plugin.options.slider);		
@@ -202,14 +203,13 @@
 
 	Plugin.prototype.initWithBinding = function (defaults, options) {
 		var plugin = this;
-		getPlacement(function (data) {
+		getPlacement(function (state) {
 			
-            $.extend(plugin.state, data);
+            $.extend(plugin.state, state);
             $.extend(defaults.slider, _getSliderEvents(plugin.state));
 			plugin.options = $.extend({}, defaults, options);			
 			plugin.slider = plugin.createSlider(plugin.options.slider);
 
-			
 			$.extend(plugin.options.dropdown, _getDropdownEvents(plugin.state, plugin.slider));
 			plugin.dropdown = plugin.createDropDown(plugin.options.dropdown);
 			
@@ -233,7 +233,13 @@
 
 		return this.$dropdown.data('dd');
 	};
-	
+
+
+	Plugin.prototype.createControlHTML = function () {
+        this.$el.append('<div class="glued-dropdown"></div>' +
+            '<div class="divider gluedDivider"></div>' +
+            '<div class="glued-slider"></div>');
+    }
 
 	Plugin.prototype.dropdownHTML = function () {
 

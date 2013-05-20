@@ -7,7 +7,7 @@ $(document).ready(function() {
     $('.layouts').Radio({el: "figure figcaption", checked: 1});
     $('.example1-color-picker').ColorPicker();
     $('.example1 .radiobuttons').Radio({ checked: 0 });
-	$('.glued-positioning').GluedPosition({initWithBinding: true});
+//	$('.glued-positioning').GluedPosition({initWithBinding: true});
 //	$('.glued-positioning').GluedPosition({initWithBinding: true, placements: ['TOP_LEFT', 'TOP', 'BOTTOM']});
 //	$('.glued-positioning').GluedPosition({
 //        dropDownChange: console.log.bind(console, 'drop'),

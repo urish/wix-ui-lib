@@ -253,9 +253,9 @@ Add the slider markup, a simple `div` would do.
 Initialize the Slider component with a value.
 
     $('.slider').Slider({
-							type: "Value",
-							value: 0.5
-						});
+	type: "Value",
+	value: 0.5
+    });
 
 
 ## Less.js

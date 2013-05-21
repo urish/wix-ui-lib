@@ -258,6 +258,28 @@ Initialize the Slider component with a value.
     });
 
 
+#### Glued Positioning Control
+---
+##### Usage
+
+Add the glued positioning control markup, specifying `type` of the Wix Control, and optional 'placements' array with available placements options (when not specified, all available placements will be shown):
+
+    <div wix-control="{type:'glued-positioning', placements: ['TOP_LEFT'] }"></div>
+
+Initialize the Glued Positioning component with binding:
+
+    $('.glued-positioning').GluedPosition({initWithBinding: true});
+
+Or initialize the component with user events:
+
+    $('.glued-positioning').GluedPosition({
+        dropDownChange: function() {} ),
+        dropDownCreate: function() {} ),
+        sliderChange: function() {} ),
+        sliderCreate: function() {} )
+    });
+
+
 ## Less.js
 
 The starter kit stylesheets are compiled from LESS sources. If you are not familiar with LESS you can find more information [here][lessjs].

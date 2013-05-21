@@ -36,7 +36,9 @@ $(function() {
             options = ctrlName.substr(0, ctrlName.indexOf(':'));
         }
 
-        return JSON.parse(options);
+        return try {
+            JSON.parse(options);
+        } catch (e) {}
     }
 
     function _fixPluginName(ctrlName) {

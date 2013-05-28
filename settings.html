@@ -2,14 +2,19 @@
 <html>
 <head>
     <title>Widget Settings &bull; Wix</title>
-    <link type="text/css" href="stylesheets/css/main.css" rel="stylesheet">
-    <link type="text/css" href="stylesheets/css/settings.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="javascripts/glued/advanced-dropdown/css/dd.css" />
-    <link rel="stylesheet" type="text/css" href="javascripts/glued/glued-position/css/glued-position.css" />
-    <link rel="stylesheet" type="text/css" href="javascripts/glued/advanced-slider/css/advanced-slider.css" />
+	<link type="text/css" href="stylesheets/css/bootstrap.css" rel="stylesheet">
+	<link type="text/css" href="stylesheets/css/common.css" rel="stylesheet">
+	<link type="text/css" href="stylesheets/css/buttons.css" rel="stylesheet">
+	<link type="text/css" href="stylesheets/css/settings.css" rel="stylesheet">
+
+	<link type="text/css" href="javascripts/components/advanced-dropdown/css/dd.css" rel="stylesheet"/>
+    <link type="text/css" href="javascripts/components/glued-position/css/glued-position.css" rel="stylesheet"/>
+    <link type="text/css" href="javascripts/components/slider2/css/slider2.css" rel="stylesheet"/>
+	<link type="text/css" href="javascripts/components/color-picker/css/color-picker.css" rel="stylesheet"/>
 </head>
 <body>
 
+<!-- Header box -->
 <header class="intro box">
     <div class="title">
         <!-- App Logo with native CSS3 gloss -->
@@ -55,12 +60,12 @@
 </header>
 
 <!-- Settings box -->
-<div class="accordion">
+<div class="accordion" wix-controller="Accordion">
 	<!-- Glued Component -->
     <div class="box">
         <h3>Glued Positioning: Controls</h3>
-        <div class="feature">
-			<div data-wix-controller="GluedPosition:{'type':'Glued', 'placements': ['TOP_LEFT'] }"></div>
+		<div class="feature">
+			<div wix-controller="GluedControl"></div>
         </div>
     </div>
 
@@ -73,28 +78,28 @@
             <ul class="list">
                 <li>
                     <span class="option">Option 1</span>
-                    <span class="checkbox">
+                    <span  class="checkbox" wix-controller="Checkbox:{ checked: true }">
                         <span class ="check"></span>
                         Show Badge
                     </span>
                 </li>
                 <li>
                     <span class="option">Option 2</span>
-                    <span class="picker"><a rel="popover" class="example-1-color-picker color-selector default"></a></span>
+                    <span class="picker"><a wix-controller="ColorPicker" rel="popover" class="example-1-color-picker color-selector default"></a></span>
                     <span class="slider-container">
-                        0<span class="values slider" id="exmaple1-slider"></span>100
+                        0<span wix-controller="AdvancedSlider" class="values slider" id="exmaple1-slider"></span>100
                     </span>
                 </li>
                 <li>
                     <span class="option">Option 4</span>
-                    <span class="options radiobuttons">
+                    <span class="options radiobuttons" wix-controller="Radio:{ checked: 0 }">
                         <span class="radiobutton">Transparent</span>
                         <span class="radiobutton">Dark</span>
                     </span>
                 </li>
                 <li>
                     <span class="option">Option 5</span>
-                    <span class="checkbox">
+                    <span class="checkbox" wix-controller="Checkbox:{ checked: true }">
                         <span class ="check"></span>
                         Use advanced settings
                     </span>
@@ -108,7 +113,7 @@
         <h3>List 2: Layouts</h3>
         <div class="feature">
             <p>Layout Pickers are helpful in letting the user choose between different layout presets.</p>
-            <div class="layouts">
+            <div class="layouts" wix-controller="Radio:{el: 'figure figcaption', checked: 1}">
                 <figure class="boxes"><figcaption class="radiobutton">Layout 1</figcaption></figure>
                 <figure class="full"><figcaption class="radiobutton">Layout 2</figcaption></figure>
                 <figure class="grid"><figcaption class="radiobutton">Layout 3</figcaption></figure>
@@ -121,7 +126,7 @@
         <h3>Radio Buttons</h3>
         <div class="feature">
             <p>Radio Buttons groups options and lets the user select one options from the group.</p>
-            <div class="radiobuttons">
+            <div class="radiobuttons" wix-controller="Radio:{ checked: 0 }">
                 <div class="radiobutton"><p>Option 1</p></div>
                 <div class="radiobutton"><p>Option 2</p></div>
                 <div class="radiobutton"><p>Option 3</p></div>
@@ -134,15 +139,15 @@
         <h3>Checkboxes</h3>
         <div class="feature">
             <p>Checkboxes are use for multiple selection.</p>
-            <div class="checkbox">
+            <div class="checkbox" wix-controller="Checkbox:{ checked: true }">
                 <span class ="check"></span>
                 <p>Option 1</p>
             </div>
-            <div class="checkbox">
+            <div class="checkbox" wix-controller="Checkbox:{ checked: true }">
                 <span class ="check"></span>
                 <p>Option 2</p>
             </div>
-            <div class="checkbox">
+            <div class="checkbox" wix-controller="Checkbox:{ checked: true }">
                 <span class ="check"></span>
                 <p>Option 3</p>
             </div>
@@ -155,7 +160,7 @@
         <h3>Color Pickers</h3>
         <div class="feature">
             <p>Color pickers are easy to use and enable the user to customize your widget or page.</p>
-            <a rel="popover" class="color-picker-1 color-selector default"></a>
+            <a rel="popover" wix-controller="ColorPicker" class="color-picker-1 color-selector default"></a>
         </div>
     </div>
 
@@ -184,7 +189,7 @@
         <div class="feature">
             <p>Sliders enable the user to easily select a value.</p>
             <div class="slider-container">
-                0<div id="slider1" class="slider"></div>100
+                0<div id="slider1" class="slider" wix-controller="AdvancedSlider"></div>100
             </div>
 
         </div>
@@ -193,9 +198,10 @@
 </div>
 
 <!-- Wix SDK -->
-<script type="text/javascript" src="//sslstatic.wix.com/services/js-sdk/1.17.0/js/Wix.js"></script>
+<script type="text/javascript" src="//wysiwyg.pita.wixpress.com/js-sdk/1.17.0/js/Wix.js"></script>
+<!--script type="text/javascript" src="//sslstatic.wix.com/services/js-sdk/1.17.0/js/Wix.js"></script-->
 
-<!-- jQuery; needed for Twitter Bootstrap -->
+<!-- jQuery; needed for Wix Plugins -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
 <!-- Twitter Bootstrap components;
@@ -213,13 +219,13 @@
 <script type="text/javascript" src="javascripts/components/color-picker/color-picker.js"></script>
 
 <!-- Settings Glued Logic -->
-<script type="text/javascript" src="javascripts/glued/advanced-dropdown/jquery.dd.js"></script>
-<script type="text/javascript" src="javascripts/glued/advanced-slider/advanced-slider.js"></script>
-<script type="text/javascript" src="javascripts/glued/glued-position/glued-position.js"></script>
+<script type="text/javascript" src="javascripts/components/advanced-dropdown/jquery.dd.js"></script>
+<script type="text/javascript" src="javascripts/components/slider2/slider2.js"></script>
+<script type="text/javascript" src="javascripts/components/glued-position/glued-position.js"></script>
 
 <!-- Settings View Logic -->
+<script type="text/javascript" src="javascripts/views/wixUiAutoStart.js"></script>
 <script type="text/javascript" src="javascripts/views/settings.js"></script>
-<script type="text/javascript" src="javascripts/views/main.js"></script>
 
 </body>
 </html>

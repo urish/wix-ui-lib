@@ -19,13 +19,13 @@
         this.$bar = $("<div>").addClass('slider-bar');
         this.$knob = $("<div>").addClass('knob');
 
-        $([this.$bar, this.$knob]).appendTo(this.$el);
+        this.$el.append(this.$bar, this.$knob);
 
         var left = $("<span>").addClass('slider-left');
         var right = $("<span>").addClass('slider-right');
         var middle = $("<span>").addClass('slider-middle');
 
-        $([left, middle, right]).appendTo(this.$bar);
+        this.$bar.append(left, middle, right);
 
         this.$bar.find('.slider-middle').width(this.options.sliderWidth+'px');
 

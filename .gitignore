@@ -1,3 +1,4 @@
+/stylesheets/*.json
 .DS_Store
 desktop.ini
 *.ipr

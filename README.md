@@ -262,17 +262,21 @@ Initialize the Slider component with a value.
 ---
 ##### Usage
 
-Add the glued positioning control markup, specifying `type` of the Wix Control, and optional 'placements' array with available placements options (when not specified, all available placements will be shown):
+Add the glued positioning control markup, add optional 'placements' array with available placements options (when not specified, all available placements will be shown):
 
-    <div wix-control="{type:'glued-positioning', placements: ['TOP_LEFT'] }"></div>
+    <div class="glued-positioning"></div>
 
 Initialize the Glued Positioning component with binding:
 
-    $('.glued-positioning').GluedPosition({initWithBinding: true});
+    $('.glued-positioning').GluedPosition({
+		placements:['TOP_LEFT'],
+		bindToWidget: true
+	});
 
 Or initialize the component with user events:
 
     $('.glued-positioning').GluedPosition({
+		placements:['TOP_LEFT'],
         dropDownChange: function() {} ),
         dropDownCreate: function() {} ),
         sliderChange: function() {} ),

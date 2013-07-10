@@ -2,8 +2,14 @@
 <html>
 <head>
     <title>Widget Settings &bull; Wix</title>
-    <link type="text/css" href="stylesheets/css/main.css" rel="stylesheet">
-    <link type="text/css" href="stylesheets/css/settings.css" rel="stylesheet">
+	<link type="text/css" href="stylesheets/css/bootstrap.css" rel="stylesheet">
+	<link type="text/css" href="stylesheets/css/common.css" rel="stylesheet">
+	<link type="text/css" href="stylesheets/css/buttons.css" rel="stylesheet">
+	<link type="text/css" href="stylesheets/css/settings.css" rel="stylesheet">
+	<link type="text/css" href="javascripts/components/color-picker/css/color-picker.css" rel="stylesheet"/>
+	<link type="text/css" href="javascripts/components/glued-position-min/glued.min.css" rel="stylesheet"/>
+	
+
 </head>
 <body>
 
@@ -53,6 +59,14 @@
 
 <!-- Settings box -->
 <div class="accordion">
+	<!-- Glued Component -->
+    <div class="box">
+        <h3>Widget Positioning: Controls</h3>
+		<div class="feature">
+			<div class="GluedControl"></div>
+        </div>
+    </div>
+	
     <!-- List 1: Controls -->
     <div class="box">
         <h3>List 1: Controls</h3>
@@ -180,10 +194,11 @@
 
 </div>
 
-<!-- Wix SDK -->
-<script type="text/javascript" src="//sslstatic.wix.com/services/js-sdk/1.16.0/js/Wix.js"></script>
 
-<!-- jQuery; needed for Twitter Bootstrap -->
+<!-- Wix SDK -->
+<script type="text/javascript" src="//sslstatic.wix.com/services/js-sdk/1.17.0/js/Wix.js"></script>
+
+<!-- jQuery; needed for Wix Plugins -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
 <!-- Twitter Bootstrap components;
@@ -200,8 +215,12 @@
 <script type="text/javascript" src="javascripts/components/color-picker/color-pickers/advanced.js"></script>
 <script type="text/javascript" src="javascripts/components/color-picker/color-picker.js"></script>
 
+<!-- Settings Glued Logic -->
+<script type="text/javascript" src="javascripts/components/glued-position-min/glued.min.js"></script>
+
 <!-- Settings View Logic -->
 <script type="text/javascript" src="javascripts/views/settings.js"></script>
 
 </body>
 </html>
+

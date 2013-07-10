@@ -253,8 +253,42 @@ Add the slider markup, a simple `div` would do.
 Initialize the Slider component with a value.
 
     $('.slider').Slider({
-	type: "Value",
-	value: 0.5
+	    type: "Value",
+	    value: 0.5
+    });
+
+
+#### Fixed Positioning Control
+---
+##### Usage
+
+Add the Fixed position widget control markup, add optional 'placements' array with available placements options (when not specified, all available placements will be shown):
+
+    <div class="glued-positioning"></div>
+
+Initialize the Widget Positioning plugin with binding:
+    $('.glued-positioning').GluedPosition({
+		placements:[
+			'TOP_LEFT',
+			'TOP_CENTER',
+			'TOP_RIGHT',
+			'CENTER_LEFT',
+			'CENTER_RIGHT',
+			'BOTTOM_LEFT',
+			'BOTTOM_CENTER',
+			'BOTTOM_RIGHT'
+		],
+		bindToWidget: true
+	});
+
+Or initialize the plugin with user events:
+
+    $('.glued-positioning').GluedPosition({
+		placements:['TOP_LEFT','BOTTOM_LEFT'],
+        dropDownChange: function() {} ),
+        dropDownCreate: function() {} ),
+        sliderChange: function() {} ),
+        sliderCreate: function() {} )
     });
 
 

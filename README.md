@@ -267,6 +267,7 @@ Add the Fixed position widget control markup, add optional 'placements' array wi
     <div class="glued-positioning"></div>
 
 Initialize the Widget Positioning plugin with binding:
+
     $('.glued-positioning').GluedPosition({
 		placements:[
 			'TOP_LEFT',

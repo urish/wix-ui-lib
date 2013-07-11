@@ -216,8 +216,6 @@ Next, you specifiy the nested element (`el`) of the radio button:
 
 Note &mdash; `.boxes`, `.full` and `.grid` relate to `backgorund-position` of the layout sprite (See `images/layouts.png`):
 
-![Wix](https://dl.dropbox.com/u/427838/ui-lib/images/layouts.png)
-
 #### Checkbox
 
 ##### Usage

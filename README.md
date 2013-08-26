@@ -255,6 +255,12 @@ Initialize the Slider component with a value.
 	    value: 0.5
     });
 
+To subscribe to value-change event: 
+
+    $(document).on("slider.change", function (event, data) {
+            // data.type now has the id of the changed slider
+            // data.value has the selected value
+        });
 
 #### Fixed Positioning Control
 ---

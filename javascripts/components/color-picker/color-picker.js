@@ -16,7 +16,7 @@
 
         startWithColor: "#897185",
 
-        siteColors: null,
+        siteColors: undefined,
 
         ColorPickers: {
             Simple: {},

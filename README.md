@@ -119,11 +119,11 @@ This is a simple list with the proper CSS styling to contain all the HTML and JS
 
 Group a series of buttons together on a single line with the button group.
 
-<div class="btn-group">
-  <button type="button" class="btn btn-default">Left</button>
-  <button type="button" class="btn btn-default">Middle</button>
-  <button type="button" class="btn btn-default">Right</button>
-</div>
+	<div class="btn-group">
+	  <button type="button" class="btn btn-default">Left</button>
+	  <button type="button" class="btn btn-default">Middle</button>
+	  <button type="button" class="btn btn-default">Right</button>
+	</div>
 
 ## Javascript Components
 

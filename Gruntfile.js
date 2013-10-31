@@ -73,7 +73,7 @@ module.exports = function (grunt) {
 						src : ['**'],
 						dest : 'build/images'
 					}, // makes all src relative to cwd
-					{expand: true, src: ['settings.html'], dest: 'build/', filter: 'isFile'}, 
+					{expand: true, flatten: true,src: ['html/*.html'], dest: 'build/', filter: 'isFile'}, 
 				]
 			}
 		},

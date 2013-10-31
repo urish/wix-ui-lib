@@ -3,7 +3,7 @@ module.exports = function (grunt) {
 	// Project configuration.
 	var projectName = 'uiLib';
 	var sourceDirectory = 'src/main/';
-	var targetDirectory = 'target/' + projectName + '/src/main/';
+	var buildDirectory = 'build/' + projectName + '/src/main/';
 
 	grunt.initConfig({
 		pkg : grunt.file.readJSON('./package.json'),
@@ -19,7 +19,7 @@ module.exports = function (grunt) {
 					'javascripts/components/**/*.js',
 					'javascripts/ui-lib.js'
 				],
-				dest : 'target/<%= pkg.name %>.all.js'
+				dest : 'build/<%= pkg.name %>.all.js'
 			}
 		},
 
@@ -29,9 +29,9 @@ module.exports = function (grunt) {
 			},
 			build : {
 				src : [
-					'target/<%= pkg.name %>.all.js'
+					'build/<%= pkg.name %>.all.js'
 				],
-				dest : 'target/<%= pkg.name %>.min.js'
+				dest : 'build/<%= pkg.name %>.min.js'
 			}
 		},
 		cssmin : {
@@ -40,7 +40,7 @@ module.exports = function (grunt) {
 					banner : '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
 				},
 				files : {
-					'target/<%= pkg.name %>.min.css' : [
+					'build/<%= pkg.name %>.min.css' : [
 						'stylesheets/bootstrap.css',
 						'stylesheets/buttons.css',
 						'stylesheets/common.css',
@@ -68,9 +68,9 @@ module.exports = function (grunt) {
 						expand : true,
 						cwd : 'images',
 						src : ['**'],
-						dest : 'target/images'
+						dest : 'build/images'
 					}, // makes all src relative to cwd
-					{expand: true, src: ['settings.min.html'], dest: 'target/', filter: 'isFile'}, 
+					{expand: true, src: ['settings.min.html'], dest: 'build/', filter: 'isFile'}, 
 				]
 			}
 		},
@@ -114,7 +114,7 @@ module.exports = function (grunt) {
 				}
 			}
 		},
-		clean : ['target']
+		clean : ['build']
 
 	});
 

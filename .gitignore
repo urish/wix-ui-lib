@@ -4,5 +4,4 @@ desktop.ini
 *.iws
 *.iml
 node_modules/*
-target/*
 .idea/

@@ -1,4 +1,4 @@
-# UI Library: Starter Kit for Wix 3rd Party Apps
+# UI Library 2.0 - Starter Kit for Wix 3rd Party Apps
 
 ## About
 This project is aimed at helping developers in the process of getting new apps to <a href="http://dev.wix.com" target="_blank">Wix Dev Center</a> as quickly as possible. The UI in this project focuses on the App's Settings Panel. The boilerplate offers UI standards and common Javascript components to assist the developer in passing Product tests, and in developing a consistent and uniformed UI for the app.

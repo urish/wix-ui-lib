@@ -22,14 +22,17 @@ module.exports = function (grunt) {
 				dest : 'build/<%= pkg.name %>.all.js'
 			}
 		},
-
+		
 		uglify : {
 			options : {
 				banner : '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
 			},
 			build : {
 				src : [
-					'build/<%= pkg.name %>.all.js'
+					'javascripts/bootstrap/bootstrap-tooltip.js',
+					'javascripts/bootstrap/bootstrap-popover.js',
+					'javascripts/components/**/*.js',
+					'javascripts/ui-lib.js'
 				],
 				dest : 'build/<%= pkg.name %>.min.js'
 			}
@@ -70,7 +73,7 @@ module.exports = function (grunt) {
 						src : ['**'],
 						dest : 'build/images'
 					}, // makes all src relative to cwd
-					{expand: true, src: ['settings.min.html'], dest: 'build/', filter: 'isFile'}, 
+					{expand: true, src: ['settings.html'], dest: 'build/', filter: 'isFile'}, 
 				]
 			}
 		},
@@ -121,6 +124,6 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib');
 
 	// Default task.
-	grunt.registerTask('default', ['clean', 'copy', 'concat', 'uglify', 'cssmin']);
+	grunt.registerTask('default', ['clean', 'copy', 'uglify', 'cssmin']);
 	grunt.registerTask('lint', ['jshint']);
 };

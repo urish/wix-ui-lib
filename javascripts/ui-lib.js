@@ -22,7 +22,7 @@
 
     function initialize(initialValues, onModelChange) {
 		if(window.Wix){
-			if(!Wix.Settings.getSiteColors()){
+			if(!Wix.Settings.getSiteColors() && Wix.Utils.getCompId() !== '[UNKNOWN]'){
 				return setTimeout(function(){
 					initialize(initialValues, onModelChange);
 				},0);

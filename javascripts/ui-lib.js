@@ -21,6 +21,13 @@
 	
 
     function initialize(initialValues, onModelChange) {
+		if(window.Wix){
+			if(!Wix.Settings.getSiteColors()){
+				return setTimeout(function(){
+					initialize(initialValues, onModelChange);
+				},0);
+			}
+		}
     	var $rootEl = $('body'); //$('[wix-uilib],[data-wix-uilib]');
     	if ($rootEl.length > 1) {
     		throw new Error('You have more then one wix-uilib element in the DOM.');

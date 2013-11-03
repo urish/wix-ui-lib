@@ -125,5 +125,6 @@ module.exports = function (grunt) {
 
 	// Default task.
 	grunt.registerTask('default', ['clean', 'copy', 'uglify', 'cssmin']);
+	grunt.registerTask('concatall', ['clean', 'copy', 'concat','uglify', 'cssmin']);
 	grunt.registerTask('lint', ['jshint']);
 };

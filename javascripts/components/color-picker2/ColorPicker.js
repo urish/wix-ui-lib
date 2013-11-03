@@ -858,8 +858,9 @@ var createColorBox = (function (){
 		
 		function initialize(){
 			markup();
-	
-			cb.colorPicker = ColorPicker(cb.colorBoxPicker, options.color, showSimplePicker);
+			var ref = findReferanceName(options.color);
+
+			cb.colorPicker = ColorPicker(cb.colorBoxPicker, ref ? ref.value : options.color, showSimplePicker);
 			
 			cb.colorPicker.on('oncolorpickerchange', function(color){
 				cb.colorPalete.removeSelection();
@@ -870,7 +871,7 @@ var createColorBox = (function (){
 			cb.colorPalete = createColorPalete({
 				width: '182px',
 				parent: cb.wrapper,
-				selected: color ? color : null,
+				selected: ref,
 				onchangepicker: function(){
 					showAdvancePicker();
 				},
@@ -886,8 +887,8 @@ var createColorBox = (function (){
 			
 			showSimplePicker();
 			
-			var color = findReferanceName(options.color);
-			color ? setBoxInnerColor(color.value, color) : setBoxInnerColor(options.color, false);
+			
+			ref ? setBoxInnerColor(ref.value, ref) : setBoxInnerColor(options.color, false);
 			
 			hidePickers();	
 			createOkCancelBtns();
@@ -901,6 +902,7 @@ var createColorBox = (function (){
 			if(!ref){
 				return false
 			}
+			if(ref.reference){return ref;}
 			for(var i =0; i < options.primColors.length;i++){
 				if(options.primColors[i].reference === ref){
 					return options.primColors[i];

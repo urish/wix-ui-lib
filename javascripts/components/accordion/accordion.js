@@ -1,5 +1,3 @@
-
-
 (function ($, window, document, undefined) {
 	'use strict';
 
@@ -76,7 +74,9 @@
 	Plugin.prototype.openElementContent = function ($el) {
 		var opt = this.options;
 		this.$el.find('.' + opt.triggerClass).removeClass(opt.openByDeafult).removeClass(opt.activeClass).find('.' + opt.contentClass).slideUp(opt.animationTime, opt.ease);
-		$el.toggleClass(opt.activeClass).find('.'+opt.contentClass).fadeIn('fast').slideDown(opt.animationTime, opt.ease, function(){
+		var $active = $el.toggleClass(opt.activeClass).find('.'+opt.contentClass);
+		$active.fadeIn('fast').slideDown(opt.animationTime, opt.ease, function(){
+			$active.css('overflow', 'visible');			
 			$(document.body).trigger('uilib-update-scroll-bars');
 		});
 	};

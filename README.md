@@ -297,7 +297,6 @@ Color style parameters can use reserved theme colors in the stylesheet using the
 - Dropdown
 - RadioButton
 - Slider
-- ScrollBar
 - Fixed Positioning Control
 
 
@@ -359,10 +358,6 @@ Add the following HTML Markup
 #### Fixed Positioning Control
 
     <div wix-ctrl="GluedControl"></div>
-
-#### ScrollBar
-
-    <div wix-ctrl="ScrollBar"></div>
 
 ## License
 

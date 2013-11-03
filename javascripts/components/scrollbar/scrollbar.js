@@ -1,7 +1,7 @@
 (function ($, window, document, undefined) {
     'use strict';
 		
-    var pluginName = 'SlimScrollBar',
+    var pluginName = 'ScrollBar',
     defaults = {
             // width in pixels of the visible scroll area
             width : 'auto',

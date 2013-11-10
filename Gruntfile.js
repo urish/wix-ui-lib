@@ -14,8 +14,6 @@ module.exports = function (grunt) {
 			},
 			dist : {
 				src : [
-					'javascripts/bootstrap/bootstrap-tooltip.js',
-					'javascripts/bootstrap/bootstrap-popover.js',
 					'javascripts/components/**/*.js',
 					'javascripts/ui-lib.js'
 				],
@@ -29,8 +27,6 @@ module.exports = function (grunt) {
 			},
 			build : {
 				src : [
-					'javascripts/bootstrap/bootstrap-tooltip.js',
-					'javascripts/bootstrap/bootstrap-popover.js',
 					'javascripts/components/**/*.js',
 					'javascripts/ui-lib.js'
 				],
@@ -54,6 +50,7 @@ module.exports = function (grunt) {
 						'javascripts/components/accordion/accordion.css',
 						'javascripts/components/header/header.css',
 						'javascripts/components/dropdown/dropdown.css',
+						'javascripts/components/popup/popup.css',
 						
 						
 						'javascripts/components/color-picker2/css/color-picker.css',

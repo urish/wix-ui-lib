@@ -25,7 +25,8 @@
 		modalBackground : 'rgba(0,0,0,0.5)',
 		height : 'auto',
 		width : 300,
-		onclose : function () {}
+		onclose : function () {},
+		oncancel: function() {}
 	};
 
 	Popup.prototype.transclude = function () {
@@ -43,12 +44,14 @@
 		if($.trim(footerContent)){
 			this.options.footer = footerContent;
 		}
+		$el.empty();
 	};
 	
 	Popup.prototype.markup = function () {
 		this.popup = this.el;
 
 		this.modal = document.createElement('div');
+				
 
 		this.header = document.createElement('header');
 		this.headerTitle = document.createElement('span');
@@ -60,7 +63,7 @@
 
 		this.modal.className = 'popup-modal';
 
-		this.closeBtn.className = 'popup-close-btn close-popup';
+		this.closeBtn.className = 'popup-close-btn x-close-popup';
 		this.popup.className = 'popup';
 		this.header.className = 'popup-header';
 		this.content.className = 'popup-content';
@@ -88,7 +91,20 @@
 		});
 
 	};
-
+	
+	Popup.prototype.setValue = function (value) {
+		if(value === 'open'){
+			this.open();
+		} else {
+			this.close();
+		}
+		$(this.el).trigger(pluginName+'.change','close');
+	};
+	
+	Popup.prototype.getValue = function () {
+		return this.isOpen();
+	};
+	
 	Popup.prototype.setContent = function (content) {
 		$(this.content).empty().append(content);
 	};
@@ -96,6 +112,7 @@
 	Popup.prototype.setFooter = function (footerContent) {
 		$(this.footer).empty().append(footerContent);
 	};
+
 	Popup.prototype.setTitle = function (title) {
 		$(this.headerTitle).text(title);
 	};
@@ -105,9 +122,10 @@
 	};
 
 	Popup.prototype.open = function () {
-		document.body.appendChild(this.modal);
+		if(this.options.modal){
+			document.body.appendChild(this.modal);
+		}
 		$(this.options.parent).append(this.popup);
-
 		this.popup.style.display = 'block';
 		this.modal.style.display = 'block';
 		this.modal.style.backgroundColor = this.options.modalBackground;
@@ -117,21 +135,38 @@
 	Popup.prototype.close = function () {
 		this.modal.style.display = 'none';
 		this.popup.style.display = 'none';
-
-		$(this.modal).remove();
-		$(this.popup).remove();
 	};
 
 	Popup.prototype.bindEvents = function () {
 		var popup = this;
 		$(this.popup).on('click', '.close-popup', function () {
 			popup.close();
-			popup.options.onclose.call(popup);
+			if(typeof popup.options.onclose === 'string' && typeof window[popup.options.onclose] === 'function'){
+				window[popup.options.onclose].call(popup, {type:'close'});
+			} else if(typeof popup.options.onclose === 'function'){
+				popup.options.onclose.call(popup, {type:'close'});
+			}			
+		});
+		$(this.popup).on('click', '.x-close-popup', function () {
+			popup.close();
+			if(typeof popup.options.oncancel === 'string' && typeof window[popup.options.oncancel] === 'function'){
+				window[popup.options.oncancel].call(popup, {type:'cancel'});
+			} else if(typeof popup.options.oncancel === 'function'){
+				popup.options.oncancel.call(popup, {type:'cancel'});
+			}			
+		});
+		
+		$(window).on('click', function(evt){
+			var popupEl = $(evt.target).parents('.popup')[0];
+			if(popupEl &&  popupEl === popup.popup){
+				return ;
+			}else if(!popup.options.modal){
+				popup.setValue('close');
+			}
 		});
 	};
 
 	
-		
 	$.fn[pluginName] = function (options) {
 		return this.each(function () {
 			if (!$.data(this, 'plugin_' + pluginName)) {
@@ -143,4 +178,5 @@
 
 	$.fn[pluginName].Constructor = Popup;
 	
-}());
+}(jQuery, window, document));
+

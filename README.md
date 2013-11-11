@@ -10,7 +10,7 @@ Wix UI Library is a extension of the Wix SDK. It provides common CSS, HTML and J
 
 ### Dependencies
 
-Wix UI lib dependencies is jQuery from version 1.9.0 and Wix SDK from version 1.22.0
+Wix UI lib dependencies is jQuery from version 1.9.0 and Wix SDK from version 1.23.0
 
 ### Usage
 

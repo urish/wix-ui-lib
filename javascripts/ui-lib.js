@@ -42,7 +42,7 @@
 		model.setInitialValues(initialValues);
     	onModelChange && model.onChange('*', onModelChange);
 		
-		initStyleModelHandling();		
+		initStyleModelHandling();
 		
     	var elements = $rootEl.find('[data-wix-controller], [wix-controller], [wix-ctrl], [data-wix-ctrl]');
     	for (var i = 0; i < elements.length; i++) {
@@ -79,7 +79,7 @@
 		} else {
 			$premium.remove();
 			$notPremium.show();
-		}		
+		}
 	}
 	
 	function getAttribute(element, attr) {
@@ -94,32 +94,32 @@
         var ctrl = getAttribute(element, 'wix-controller') || getAttribute(element, 'wix-ctrl') ;
 		var ctrlName = getCtrlName(ctrl);
 		var options = getOptions(element, ctrl);
-		applyPlugin(element, ctrlName, options);        
+		applyPlugin(element, ctrlName, options);
     }
 	
 	function applyPlugin(element, pluginName, options) {
 		pluginName = fixPluginName(pluginName);
 		if ($.fn[pluginName]) {
-			log('initilizing ' + pluginName, options);
+			log('initializing ' + pluginName, options);
 			$(element)[pluginName](options);
 		} else {
-			console.error('Plugin ' + pluginName + ' is not exist');
+			console.error('Plugin ' + pluginName + ' does not exist');
 		}
 		setUpStyleParams(element, pluginName);
 		setUpModel(element, pluginName);
 	}
 
 	function setUpStyleParams(element, pluginName){
-		var wixStlyeParam = getAttribute(element, 'wix-param');
-		if(wixStlyeParam){
-			styleModel.bindKeyToPlugin(element, pluginName, wixStlyeParam);
+		var wixStyleParam = getAttribute(element, 'wix-param');
+		if(wixStyleParam){
+			styleModel.bindKeyToPlugin(element, pluginName, wixStyleParam);
 		}
 	}
 	
 	function setUpModel(element, pluginName){
 		var wixModel = getAttribute(element, 'wix-model');
 		if(wixModel){
-			model.bindKeyToPlugin(element, pluginName, wixModel);	
+			model.bindKeyToPlugin(element, pluginName, wixModel);
 		}
 	}
 	
@@ -127,7 +127,7 @@
 		 try{
 			return (new Function('return '+ options + ';'))()
 		 }catch(e){
-			throw new Error('Options for plugin is not valid: ' + options);
+			throw new Error('Options for plugin are not valid: ' + options);
 		 }
 	}
 	
@@ -139,7 +139,7 @@
 		var options = getOptionsFormCtrl(ctrl);
 		if (!options) {
 			options = getAttribute(element, 'wix-options');
-		}			
+		}
 		return evalOptions(options) || {};
 	}
 	
@@ -285,7 +285,7 @@
 			if(!styleModel.applyStyleMigration){
 				var styles;
 				try{
-					styles = flatenStyles(style);
+					styles = flattenStyles(style);
 				}catch(err){
 					setTimeout(function(){
 						throw err
@@ -318,9 +318,9 @@
 		}
 	}
 	
-	function flatenStyles(style){
+	function flattenStyles(style){
 		style = style || {};
-		var mergedStlye = {};
+		var mergedStyle = {};
 		//when there will be more types we should merge them
 		for(var prop in style.colors){
 			if(style.colors.hasOwnProperty(prop)){
@@ -329,7 +329,7 @@
 					var opacity = style.colors[prop].value.match(/,([^),]+)\)/);
 					opacity = (opacity ? (+opacity[1]) : 1);
 				
-					mergedStlye[prop] = {
+					mergedStyle[prop] = {
 						color : {
 							reference : style.colors[prop].themeName,
 							value : style.colors[prop].value
@@ -338,21 +338,21 @@
 						opacity : opacity
 					};
 				}else{
-					mergedStlye[prop] = style.colors[prop].themeName || style.colors[prop].value;
+					mergedStyle[prop] = style.colors[prop].themeName || style.colors[prop].value;
 				}
 			}
 		}
 		for(var prop in style.numbers){
 			if(style.numbers.hasOwnProperty(prop)){
-				mergedStlye[prop] = style.numbers[prop];
+				mergedStyle[prop] = style.numbers[prop];
 			}
 		}
 		for(var prop in style.booleans){
 			if(style.booleans.hasOwnProperty(prop)){
-				mergedStlye[prop] = style.booleans[prop];
+				mergedStyle[prop] = style.booleans[prop];
 			}
 		}
-		return mergedStlye;
+		return mergedStyle;
 	}
 	/////////////////////////////////////////////////
 	/////////////////////////////////////////////////

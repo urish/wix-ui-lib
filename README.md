@@ -10,7 +10,7 @@ Wix UI Library is a extension of the Wix SDK. It provides common CSS, HTML and J
 
 ### Dependencies
 
-Wix UI lib dependencies is jQuery from version 1.9.0 and Wix SDK from version 1.22.0
+Wix UI lib dependencies are jQuery from version 1.9.0 and Wix SDK from version 1.23.0
 
 ### Usage
 
@@ -36,7 +36,7 @@ To get started, include the minified JS and CSS files in your App Settings HTML.
 First, make an introduction. *This is compulsory according to Wix Apps product style guide.*
 
 This following markup is for the app intro, description and login panel. 
-it will be automatically styled by the UI library.
+It will be automatically styled by the UI library.
 The login panel is used for connecting your user to his account in your app.
 
 ###### HTML
@@ -125,7 +125,7 @@ The **Wix.UI** Javascript components are basically a set of [jQuery][jquery] Plu
 
 [jquery]: http://jquery.com/
 
-### Specil HTML attributes
+### Special HTML attributes
 Wix UI library includes custom attributes which enable components initilization from within the HTML markup.
 
 **wix-ctrl -** component's controller decleration
@@ -136,7 +136,7 @@ Wix UI library includes custom attributes which enable components initilization 
 
 **wix-model -** sets a key to access the component value from Wix.UI and subscribe to change events.
 
-All attributes can be prefixed with **data-** to be W3C complient (Optional). 
+All attributes can be prefixed with **data-** to be W3C compliant (Optional). 
 
 ###Initialization
 
@@ -209,7 +209,7 @@ Components that has `wix-model` attribute can be initialized with default values
     
 ####Subscribe to model change events
 
-You can subscribe to chages in the wix-model with the following code:
+You can subscribe to changes in the wix-model with the following code:
 
     //subscribe to one key change
     Wix.UI.onChange('myKey', function(value, key){
@@ -262,7 +262,7 @@ You can use the `wix-param` attribute on supported components. Currently Wix sup
 
     <div wix-param="myParam" wix-ctrl="ColorPickerWithOpacity"></div>
 
-wix-pram can also be consumed inside the App's Widget/Page. You can use **Wix SDK** to get all the style parameters that were set in the App's Settings.
+wix-param can also be consumed inside the App's Widget/Page. You can use **Wix SDK** to get all the style parameters that were set in the App's Settings.
     
     var styleParams = Wix.getStyleParams(); // returns a map with all styles values
 

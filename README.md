@@ -98,7 +98,7 @@ Premium panel is used when a user is logged in to your app and you want to offer
 
 If this is irrelevant to your project, simply remove this markup.
 
-## CSS Styleing
+## CSS Styling
 
 #### Box (Container)
 Box is the basic container for Wix 3rd Party Settings panel. Boxes are for grouped controls or information blocks. Use them as you like.
@@ -252,7 +252,7 @@ When you want to save the state of your components you can simply call the toJSO
 
 ###Style Parameters
 
-Wix Style parameters, which replace the wix-model parameters, allow an app developer to save specfifc keys inside the Wix Site. Meaning, they do not need to be saved in the App's database, like  wix-model parameters. **Wix.UI** takes care of saving it inside the site using the Wix SDK.
+Wix Style parameters, which replace the wix-model parameters, allow an app developer to save specfifc keys inside the Wix Site. Meaning, they do not need to be saved in the App's database like  wix-model parameters. **Wix.UI** takes care of saving it inside the site using the Wix SDK.
 
 You can use the `wix-param` attribute on supported components. Currently Wix supports the following Components for wix-param:
 - ColorPicker
@@ -268,7 +268,7 @@ wix-param can also be consumed inside the App's Widget/Page. You can use **Wix S
 
 ###Style paramerters in a CSS stylesheet
 
-You can use the color style parameters inside a inline CSS style within your widget, its a simple template engine that uses {{value}} to interpolate the style parameters. In order to activate it put `wix-style` attribute on an inline style.
+You can use the color style parameters inside a inline CSS style within your widget. It's a simple template engine that uses {{value}} to interpolate the style parameters. In order to activate it put `wix-style` attribute on an inline style.
 
     <style wix-style>
         #myElement {
@@ -281,10 +281,10 @@ Color style parameters can use reserved theme colors in the stylesheet using the
 
 * white/black - primary white, black if the site theme is invereted
 * black/white - primary black, white if the site theme is invereted
-* primery-1 - defaults to red
-* primery-2 - defaults to blue
-* primery-3 - defaults to yellow
-* color-1 to color-25 - pallete colors
+* primary-1 - defaults to red
+* primary-2 - defaults to blue
+* primary-3 - defaults to yellow
+* color-1 to color-25 - palette colors
 
 
 ### Wix.UI Components

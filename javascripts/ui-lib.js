@@ -1,7 +1,10 @@
 (function (exports){
 
+	
+
 	var model = createModel();
 	var styleModel = createModel();
+	var isInitialized = false;
 	
 	exports.UI = {
 		initialize: initialize,
@@ -19,8 +22,10 @@
 		false && console.log.apply(console, args);
 	}
 	
-
     function initialize(initialValues, onModelChange) {
+		if(isInitialized){return;}
+		isInitialized = true;
+		
 		if(window.Wix){
 			if(!Wix.Settings.getSiteColors() && Wix.Utils.getCompId() !== '[UNKNOWN]'){
 				return setTimeout(function(){
@@ -98,7 +103,7 @@
 			log('initilizing ' + pluginName, options);
 			$(element)[pluginName](options);
 		} else {
-			console.error('Plugin ' + pluginName + ' is not exsist');
+			console.error('Plugin ' + pluginName + ' is not exist');
 		}
 		setUpStyleParams(element, pluginName);
 		setUpModel(element, pluginName);

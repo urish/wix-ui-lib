@@ -51,6 +51,7 @@ module.exports = function (grunt) {
 						'javascripts/components/header/header.css',
 						'javascripts/components/dropdown/dropdown.css',
 						'javascripts/components/popup/popup.css',
+						'javascripts/components/input/input.css',
 						
 						
 						'javascripts/components/color-picker2/css/color-picker.css',

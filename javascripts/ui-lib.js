@@ -1,10 +1,9 @@
 (function (exports){
 
+	holdJQueryDOMReady();
 	
-
 	var model = createModel();
 	var styleModel = createModel();
-	var isInitialized = false;
 	
 	exports.UI = {
 		initialize: initialize,
@@ -23,16 +22,10 @@
 	}
 	
     function initialize(initialValues, onModelChange) {
-		if(isInitialized){return;}
-		isInitialized = true;
+		if(initialize.isInitialized){return;}
+		initialize.isInitialized = true;
+		initialize.retry = ++initialize.retry || 1;
 		
-		if(window.Wix){
-			if(!Wix.Settings.getSiteColors() && Wix.Utils.getCompId() !== '[UNKNOWN]'){
-				return setTimeout(function(){
-					initialize(initialValues, onModelChange);
-				},0);
-			}
-		}
     	var $rootEl = $('body'); //$('[wix-uilib],[data-wix-uilib]');
     	if ($rootEl.length > 1) {
     		throw new Error('You have more then one wix-uilib element in the DOM.');
@@ -44,7 +37,7 @@
 		
 		initStyleModelHandling();
 		
-    	var elements = $rootEl.find('[data-wix-controller], [wix-controller], [wix-ctrl], [data-wix-ctrl]');
+    	var elements = $rootEl.andSelf().find('[data-wix-controller], [wix-controller], [wix-ctrl], [data-wix-ctrl]');
     	for (var i = 0; i < elements.length; i++) {
     		try {
     			initializePlugin(elements[i]);
@@ -57,8 +50,37 @@
 			styleModel.applyStyleMigration();
 		}
 
-    	$rootEl.fadeIn(140);
+    	$rootEl.fadeIn(140, function(){
+			$(document.body).trigger('uilib-update-scroll-bars');
+		});
+		
     }
+	
+	function holdJQueryDOMReady(){
+		var timeoutTicket;
+		if(window.Wix){
+			if(Wix.getViewMode() === 'standalone'){
+				setTimeout(function(){
+					throw new Error('Standalone mode: Wix style params are not available outside of the "wix editor"');
+				},0);
+			} else {
+				holdReady(true);
+				timeoutTicket = setTimeout(function(){
+					holdReady(false);
+					throw new Error('Style params are not available outside of the "wix editor", if you are not running inside the "wix editor" try to remove the compId parameter from the url');		
+				}, 3333);
+				Wix.getStyleParams(function(){
+					clearTimeout(timeoutTicket);
+					holdReady(false);
+				});				
+			}
+		}
+
+		function holdReady(hold){
+			window.jQuery && window.jQuery.holdReady && window.jQuery.holdReady( hold );
+		}
+	}
+	
 	
 	function getVendorProductId() {
 		try {

@@ -48,9 +48,7 @@
         this.registerEvents();
         this.updateDisplay();
     };
-	Plugin.prototype.scrollContent = function (y, isWheel, isJump) {
-		
-	}
+
 	Plugin.prototype.scrollContent = function (y, isWheel, isJump) {
 		var delta = y;
 		var maxTop = this.$el.outerHeight() - this.$bar.outerHeight();

@@ -43,12 +43,12 @@ The login panel is used for connecting your user to his account in your app.
         <div class="logo">
 			<img width="86" src="images/wix_icon.png" alt="logo"/>
 		</div>
-		<div class="logedOut">
+		<div class="loggedOut">
 			<p><!-- App Description --></p>
 			<div class="login-panel"><!-- App login panel --></div>
 		</div>
-		<div class="logedIn hidden">
-            <!-- App Loged in information -->
+		<div class="loggedIn hidden">
+            <!-- App Logged in information -->
 			<div class="premium-panel"><!-- Premium features --></div>
 		</div>
 	</header>

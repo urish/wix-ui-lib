@@ -59,7 +59,7 @@
 	function holdJQueryDOMReady(){
 		var timeoutTicket;
 		if(window.Wix){
-			if(Wix.getViewMode() === 'standalone'){
+			if(Wix.Utils.getViewMode() === 'standalone'){
 				setTimeout(function(){
 					throw new Error('Standalone mode: Wix style params are not available outside of the "wix editor"');
 				},0);
@@ -67,7 +67,7 @@
 				holdReady(true);
 				timeoutTicket = setTimeout(function(){
 					holdReady(false);
-					throw new Error('Style params are not available outside of the "wix editor", if you are not running inside the "wix editor" try to remove the compId parameter from the url');		
+					throw new Error('Style params are not available outside of the "wix editor"');		
 				}, 3333);
 				Wix.getStyleParams(function(){
 					clearTimeout(timeoutTicket);

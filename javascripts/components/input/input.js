@@ -27,7 +27,7 @@
 	};
 
 	Plugin.prototype.markup = function () {
-		this.$input = $('<input">').attr('type', this.options.type).addClass('uilib-input');
+		this.$input = $('<input>').attr('type', this.options.type).addClass('uilib-input');
 		this.$el.append(this.$input);
 	};
 

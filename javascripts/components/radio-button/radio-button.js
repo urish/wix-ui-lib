@@ -9,13 +9,15 @@
 		checkedClassName: 'rb-radio-checked',
 		radioValueAttrName:'data-radio-value',
 		inline:false,
-		checked: 0
+		checked: 0,
+		value:undefined
 	};
 
     // The actual plugin constructor
     function Plugin(element, options) {
         this.$el = $(element);
         this.options = $.extend({}, defaults, options);
+		this.options.value = this.options.value !== undefined ? this.options.value : this.options.checked;
 		this.radioGroup = null;
         this.init();
     }

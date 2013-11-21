@@ -5,6 +5,7 @@
 
 	var defaults = {
 		startWithColor : "#897185",
+		value:undefined
 	};
 	
 	var defaultColors = ['#50FAFE', '#FFFFFF', '#0088CB', '#ED1C24', '#FFCB05',
@@ -20,13 +21,16 @@
 	function Plugin(element, options) {
 		this.$el = $(element);
 		this.options = $.extend({}, defaults, options);
+		
+		this.options.value = this.options.value !== undefined ? this.options.value : this.options.startWithColor;
+		
 		this.isParamConected = options.isParamConected || (this.$el.attr('wix-param') || this.$el.attr('data-wix-param'));
 		var siteColors = this.isParamConected ? (Wix.Settings.getSiteColors() || defaultColors) : defaultColors;
 		var that = this;
 
 		this.picker = createColorBox({
 			element: element,
-			color: this.options.startWithColor,
+			color: this.options.value,
 			isParamConected: this.isParamConected,
 			primColors:siteColors.slice(0,5),
 			paleteColors: siteColors.slice(5),

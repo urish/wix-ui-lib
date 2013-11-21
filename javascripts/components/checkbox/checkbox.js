@@ -6,13 +6,15 @@
 	defaults = {
 		checked : false,
 		preLabel: '',
-		postLabel: ''			
+		postLabel: '',
+		value: undefined
 	};
 
     // The actual plugin constructor
     function Plugin(element, options) {
         this.$el = $(element);
         this.options = $.extend({}, defaults, options);
+		this.options.value = this.options.value !== undefined ? this.options.value : this.options.checked;
         this.init();
     }
 			

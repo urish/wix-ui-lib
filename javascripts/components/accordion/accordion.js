@@ -11,7 +11,8 @@
 		activeClass : 'acc-active',
 		ease : 'linear',
 		openByDeafult:'acc-open',
-		openPanel : 0
+		value : 0,
+		toggleOpen: false,
 	};
 
 	// The actual plugin constructor
@@ -37,10 +38,10 @@
 		this.$el.find('.' + opt.contentClass).hide();
 		var $panels = this.$el.find('.' + opt.triggerClass);
 		var $toOpen;
-		if(typeof this.options.openPanel === 'string'){
-			$toOpen = $panels.filter(this.options.openPanel);
+		if(typeof this.options.value === 'string'){
+			$toOpen = $panels.filter(this.options.value);
 		} else {
-			$toOpen = $panels.eq(this.options.openPanel || 0);
+			$toOpen = $panels.eq(this.options.value || 0);
 		}
 		
 		var $openByDefault = this.$el.find('.'+opt.triggerClass+'.' + opt.openByDeafult)
@@ -68,14 +69,26 @@
 		}
 		if ($el.find('.' + opt.contentClass).is(':hidden')) {
 			this.openElementContent($el);
+		} else if (opt.toggleOpen){
+			this.closeElementContent($el);
 		}
+	};
+
+	Plugin.prototype.closeElementContent = function ($el) {
+		var opt = this.options;
+		this.$el.find('.' + opt.triggerClass)
+			.removeClass(opt.openByDeafult)
+			.removeClass(opt.activeClass)
+			.find('.' + opt.contentClass)
+			.slideUp(opt.animationTime, opt.ease);
 	};
 	
 	Plugin.prototype.openElementContent = function ($el) {
 		var opt = this.options;
-		this.$el.find('.' + opt.triggerClass).removeClass(opt.openByDeafult).removeClass(opt.activeClass).find('.' + opt.contentClass).slideUp(opt.animationTime, opt.ease);
+		this.closeElementContent($el);
+		
 		var $active = $el.toggleClass(opt.activeClass).find('.'+opt.contentClass);
-		$active.fadeIn('fast').slideDown(opt.animationTime, opt.ease, function(){
+		$active.slideDown(opt.animationTime, opt.ease, function(){
 			$active.css('overflow', 'visible');			
 			$(document.body).trigger('uilib-update-scroll-bars');
 		});

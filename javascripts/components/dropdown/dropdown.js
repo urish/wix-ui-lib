@@ -6,6 +6,7 @@ var pluginName = 'Dropdown';
 var defaults = {
 	slideTime : 150,
 	selected: 0,
+	value: undefined,
 	autoCloseTime : 5000
 };
 var names = {
@@ -35,6 +36,7 @@ var dropdownCSS = {
 
 function DropDown(element, options) {
 	this.options = $.extend({}, defaults, options);
+	this.options.value = this.options.value !== undefined ? this.options.value : this.options.selected;
 	this.$selected = null;
 	this.$options = null;
 	this.$el = $(element);

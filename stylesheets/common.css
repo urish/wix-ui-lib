@@ -39,7 +39,7 @@ hr{
   display:inline-block;
 }
 
-[wix-label]:before{
+[wix-label]:before, [data-wix-label]:before{
 	content:attr(wix-label);
 	min-width: 160px;
 	font-weight: bold;
@@ -50,11 +50,11 @@ hr{
 	vertical-align: top;
 }
 
-[wix-uilib],[wix-ui]{
+[data-wix-uilib],[wix-uilib],[wix-ui]{
 	display:none;
 }
 
-[wix-premium]{
+[data-wix-premium],[wix-premium]{
 	display:none;
 }
 

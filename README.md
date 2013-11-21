@@ -23,9 +23,8 @@ To get started, include the minified JS and CSS files in your App Settings HTML.
         </head>
         <body wix-ui>
             <!-- your settings -->
-
-            <script src="http://sslstatic.wix.com/services/js-sdk/1.22.0/js/Wix.js"></script>
             <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+            <script src="http://sslstatic.wix.com/services/js-sdk/1.24.0/js/Wix.js"></script>
             <script src="ui-lib.min.js"></script>
         </body>
     </html>
@@ -41,7 +40,7 @@ The login panel is used for connecting your user to his account in your app.
 
 ###### HTML
     <header class="box">
-    	<div class="logo">
+        <div class="logo">
 			<img width="86" src="images/wix_icon.png" alt="logo"/>
 		</div>
 		<div class="logedOut">
@@ -264,17 +263,31 @@ You can use the `wix-param` attribute on supported components. Currently Wix sup
 
 wix-param can also be consumed inside the App's Widget/Page. You can use **Wix SDK** to get all the style parameters that were set in the App's Settings.
     
-    var styleParams = Wix.getStyleParams(); // returns a map with all styles values
+    Wix.getStyleParams(function(styleParams){
+        // styleParams is a map with all style values
+    }); 
 
 ###Style paramerters in a CSS stylesheet
 
-You can use the color style parameters inside a inline CSS style within your widget, its a simple template engine that uses {{value}} to interpolate the style parameters. In order to activate it put `wix-style` attribute on an inline style.
+You can use the color style parameters inside a **inline CSS style** within your widget, its a simple template engine that uses {{value}} to interpolate the style parameters. fallback values are separated with spaces. In order to activate it put `wix-style` attribute on an inline style.
 
     <style wix-style>
+    
         #myElement {
             background-color: {{style.myParam}}; /* style parameter */
             color: {{color-1}}; /* style from the template */
         }
+        
+        #myElement2 {
+            background-color: {{style.myParam color-1}}; /* style parameter with fallback value*/
+        }
+        
+        @media(wix-device-type:mobile){ /* wix media query for device type */
+            #myElement {
+                border: 1px solid {{color-1}};
+            }
+        }        
+        
     </style>
     
 Color style parameters can use reserved theme colors in the stylesheet using the following refrenecs:
@@ -317,7 +330,7 @@ Color style parameters can use reserved theme colors in the stylesheet using the
     
 #### Color picker with stlye parameter
 
-    <div wix-param="myColor" wix-ctrl="ColorPicker"></div>
+    <div wix-param="myColor" wix-ctrl="ColorPicker" wix-options="{startWithColor:'black/white'}"></div>
     
 #### ColorPickerWithOpacity
 
@@ -325,7 +338,7 @@ Color style parameters can use reserved theme colors in the stylesheet using the
     
 #### Color picker with opacity with stlye parameter
 
-    <div wix-param="myColor" wix-ctrl="ColorPickerWithOpacity"></div>
+    <div wix-param="myColor" wix-ctrl="ColorPickerWithOpacity"  wix-options="{startWithColor:'black/white'}"></div>
 
 
 #### Radio Button
@@ -335,10 +348,23 @@ Color style parameters can use reserved theme colors in the stylesheet using the
 		<div data-radio-value="value-2">Option 2</div>
 		<div data-radio-value="value-3">Option 3</div>
 	</div>
+    
+    
+#### Advance Radio Button
+
+    <div wix-ctrl="Radio">
+		<div data-radio-value="value-1">
+            <img src="layout1.png"/>
+        </div>
+		<div data-radio-value="value-2">
+            <img src="layout2.png"/>
+        </div>
+		<div data-radio-value="value-3">
+            <img src="layout3.png"/>
+        </div>
+	</div>
 
 #### Checkbox
-
-Add the following HTML Markup
 
     <div wix-ctrl="Checkbox"></div>
 
@@ -352,6 +378,14 @@ Add the following HTML Markup
 		<option value="value-1">Option A</option>
 		<option value="value-2">Option B</option>
 		<option value="value-3">Option C</option>
+	</div>
+    
+#### Button Group
+
+    <div wix-ctrl="ButtonGroup">
+		<button value="value-1">Button 1</button>
+		<button value="value-2">Button 2</button>
+		<button value="value-3">Button 3</button>
 	</div>
     
 

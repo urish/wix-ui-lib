@@ -5,7 +5,7 @@
 	var pluginName = 'ButtonGroup';
 
 	var defaults = {
-		selected : 0
+		value : 0
 	};
 
 	var names = {
@@ -27,7 +27,7 @@
 
 	ButtonGroup.prototype.init = function () {
 		this.markup();
-		this.setValue(this.options.selected);
+		this.setValue(this.options.value);
 		this.bindEvents();
 	};
 

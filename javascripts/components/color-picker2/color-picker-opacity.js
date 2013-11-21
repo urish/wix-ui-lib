@@ -12,6 +12,7 @@
 
 	function ColorPickerWithOpacity(element, options) {
 		this.options = $.extend({}, defaults, options);
+		this.options.value = this.options.value !== undefined ? this.options.value : this.options.startWithColor;
 		this.$el = $(element);		
 		this.options.isParamConected = (this.$el.attr('wix-param') || this.$el.attr('data-wix-param'));
 		this.init();
@@ -19,7 +20,7 @@
 
 	ColorPickerWithOpacity.prototype.init = function () {
 		this.markup();
-		this.setValue(this.options.startWithColor);
+		this.setValue(this.options.value);
 		this.bindEvents();
 	};
 	

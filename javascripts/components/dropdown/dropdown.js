@@ -40,10 +40,12 @@ function DropDown(element, options) {
 	this.$selected = null;
 	this.$options = null;
 	this.$el = $(element);
+	this.isParamMode = this.$el.attr('wix-param') || this.$el.attr('data-wix-param');
 	this.isOpen = false;
 	this.isActive = false;
 	this.init();
 }
+
 DropDown.prototype.init = function () {
 	this.markup();
 	this.setValue(this.options.selected);
@@ -92,10 +94,19 @@ DropDown.prototype.setValue = function (value) {
 	return false;
 };
 
+
+
+DropDown.prototype.getFullValue = function () {
+	return {
+		value: this.getValue(),
+		index: this.getIndex()
+	};
+};
+
 DropDown.prototype.setValueFromEl = function ($el) {
 	var index = +$el.attr(names.indexAttrName);
 	if(this.setValue(index)){
-		var value = $el.attr(names.valueAttrName);
+		var value = this.isParamMode ? this.getFullValue() : $el.attr(names.valueAttrName);
 		this.$el.trigger(pluginName + '.change', value);		
 	}
 };
@@ -114,7 +125,7 @@ DropDown.prototype.getValue = function () {
 };
 
 DropDown.prototype.getIndex = function () {
-	return this.$selected.find('.' + names.optionClassName).attr(names.indexAttrName);
+	return +this.$selected.find('.' + names.optionClassName).attr(names.indexAttrName);
 };
 
 DropDown.prototype.hideOptions = function (time) {

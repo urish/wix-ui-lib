@@ -58,12 +58,20 @@
 			this.$selected = $option;
 		}
 	};
+	
+	ButtonGroup.prototype.getFullValue = function () {
+		return {
+			index: this.getIndex(),
+			value: this.getValue()
+		};
+	};
+	
 	ButtonGroup.prototype.getValue = function () {
 		return this.$selected.val();
 	};
 
 	ButtonGroup.prototype.getIndex = function () {
-		return this.getOptionsButtons().index(this.$selected);
+		return +this.getOptionsButtons().index(this.$selected);
 	};
 
 	ButtonGroup.prototype.bindEvents = function () {
@@ -74,8 +82,8 @@
 			if (btnGroup.$selected.val() !== value) {
 				btnGroup.setValue(value);
 				btnGroup.$el.trigger(pluginName + '.change', {
-					index: btnGroup.$el.find('.' + names.btnClass).index(btnGroup.$selected),
-					value:value
+					index: btnGroup.getIndex(),//btnGroup.$el.find('.' + names.btnClass).index(btnGroup.$selected),
+					value: value
 				});
 			}
 		});

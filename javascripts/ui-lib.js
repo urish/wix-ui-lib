@@ -42,7 +42,7 @@
     		try {
     			initializePlugin(elements[i]);
     		} catch (err) {
-    			console.log && console.log(err.message);
+    			console.log && console.log('Plugin Initialization Error: ' + err.stack);
     		}
     	}
 							
@@ -67,7 +67,7 @@
 				holdReady(true);
 				timeoutTicket = setTimeout(function(){
 					holdReady(false);
-					throw new Error('Style params are not available outside of the "wix editor"');		
+					throw new Error('Style params are not available outside of the "wix editor", if you are in the editor ');		
 				}, 3333);
 				Wix.getStyleParams(function(){
 					clearTimeout(timeoutTicket);
@@ -319,15 +319,28 @@
 			}
 			
 			styleModel.onChange('*', function(value, name){
-				if(value instanceof Number || typeof value === 'number'){
-					Wix.Settings.setNumberParam(name, {value:value});
+				if(isNumberParam(value)){
+					Wix.Settings.setNumberParam(name, {value:getNumberParamValue(value)});
 				} else if(Object.prototype.toString.call(value).match('Boolean')){
 					Wix.Settings.setBooleanParam(name, {value:value});
 				} else if(value && (value.hasOwnProperty('color') || value.cssColor || value.rgba)) {
 					Wix.Settings.setColorParam(name, {value:value});
 				}
 			});
+			
 		}
+		
+		function isNumberParam(value){
+			if(value instanceof Number || typeof value === 'number' || (!Number.isNaN(+value.index) && value.value)){
+				return true;
+			}
+			return false;
+		}
+		
+		function getNumberParamValue(value){
+			return ( value.index || value.index === 0 ) ? value.index : value;
+		}
+		
 	}
 	
 	function initStyleMigration(initValues){

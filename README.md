@@ -41,7 +41,7 @@ The login panel is used for connecting your user to his account in your app.
 ###### HTML
     <header class="box">
         <div class="logo">
-			<img width="86" src="images/wix_icon.png" alt="logo"/>
+    		<img width="86" src="images/wix_icon.png" alt="logo"/>
 		</div>
 		<div class="loggedOut">
 			<p><!-- App Description --></p>
@@ -125,11 +125,11 @@ The **Wix.UI** Javascript components are basically a set of [jQuery][jquery] Plu
 [jquery]: http://jquery.com/
 
 ### Special HTML attributes
-Wix UI library includes custom attributes which enable components initilization from within the HTML markup.
+Wix UI library includes custom attributes which enable components initialization from within the HTML markup.
 
-**wix-ctrl -** component's controller decleration
+**wix-ctrl -** component's controller declaration
 
-**wix-options -** component initilization
+**wix-options -** component initialization
 
 **wix-param -** sets the key of the style parameter.
 
@@ -151,9 +151,11 @@ There are 2 ways to initialize the components
 Each component can be initialized with a simple markup and two important attributes
 `wix-ctrl` and `wix-options`
 
-**wix-ctrl - ** Sets the component`s controller that will be conected to the element.
+**wix-ctrl - ** Sets the component`s controller that will be connected to the element.
 
 **wix-options - ** Sets the component`s controller options.
+
+**wix-ctrl:{options} - ** Sets the component`s controller and options.
 
 In this way all the Javascript component are managed by the **Wix.UI** library. To initialize the components you need to call **Wix.UI.initialize()** then all the components that has `wix-ctrl` attribute will be initialized with the options that you entered to the `wix-option` attribute and the settings window will be visible.
 
@@ -163,13 +165,13 @@ All the **Wix.UI** components should be initialized after the DOM is ready.
     
     $( document ).ready(function(){
         
-        Wix.UI.initialize();
+        Wix.UI.initialize({});
         
     });
 
 #### Initialize with javascript (advance)
 
-In this way you need to subscribe to chages and set values directly on the jQuery plugin.
+In this way you need to subscribe to changes and set values directly on the jQuery plugin.
 
     $('#myElement').PluginName(options);
     
@@ -180,7 +182,7 @@ In order to set/get component values, you can add a `wix-model` attribute to the
 
 **wix-model** attribute sets a key to access the component value from Wix.UI and subscribe to change events.
 
-Then you will be able to use the **Wix.UI.set(key, value)** or **Wix.UI.get(key)** to update the component state and retrive the component value.
+Then you will be able to use the **Wix.UI.set(key, value)** or **Wix.UI.get(key)** to update the component state and retrieve the component value.
     
     <div wix-model="myKey" wix-ctrl="ComponentName" wix-options="{option: 'value'}"></div>
 
@@ -201,6 +203,8 @@ Components that has `wix-model` attribute can be initialized with default values
           Wix.UI.set('showTweets', false);
           
           Wix.UI.get('showTweets'); //returns false
+          
+          Wix.UI.set('showTweets', false, true); //sets the value and not fire change event
             
         });
     </script>
@@ -251,11 +255,22 @@ When you want to save the state of your components you can simply call the toJSO
 
 ###Style Parameters
 
-Wix Style parameters, which replace the wix-model parameters, allow an app developer to save specfifc keys inside the Wix Site. Meaning, they do not need to be saved in the App's database like  wix-model parameters. **Wix.UI** takes care of saving it inside the site using the Wix SDK.
+Wix Style parameters, which replace the wix-model parameters, allow an app developer to save specific keys inside the Wix Site. Meaning, they do not need to be saved in the App's database like  wix-model parameters. **Wix.UI** takes care of saving it inside the site using the Wix SDK.
 
 You can use the `wix-param` attribute on supported components. Currently Wix supports the following Components for wix-param:
+
+#### Color Parameters Components
 - ColorPicker
 - ColorPickerWithOpacity
+
+#### Number Parameters Components
+- ButtonGroup
+- RadioButton
+- Dropdown
+- Slider
+
+#### Boolean Parameters Components
+- Checkbox
 
 **wix-param** attribute sets the key of the style parameter.
 
@@ -264,11 +279,10 @@ You can use the `wix-param` attribute on supported components. Currently Wix sup
 wix-param can also be consumed inside the App's Widget/Page. You can use **Wix SDK** to get all the style parameters that were set in the App's Settings.
     
     Wix.getStyleParams(function(styleParams){
-        // styleParams is a map with all style values
+        // styleParams is a map with all style values {colors:{}, numbers:{}, booleans:{}}
     }); 
 
 ###Style paramerters in a CSS stylesheet
-
 
 You can use the color style parameters inside a **inline CSS style** within your widget, It's a simple template engine that uses {{value}} to interpolate the style parameters. fallback values are separated with spaces {{value fallback}}. In order to activate it put `wix-style` attribute on an inline style.
 
@@ -291,10 +305,10 @@ You can use the color style parameters inside a **inline CSS style** within your
         
     </style>
     
-Color style parameters can use reserved theme colors in the stylesheet using the following refrenecs:
+Color style parameters can use reserved theme colors in the stylesheet using the following references:
 
-* white/black - primary white, black if the site theme is invereted
-* black/white - primary black, white if the site theme is invereted
+* white/black - primary white, black if the site theme is inverted
+* black/white - primary black, white if the site theme is inverted
 * primary-1 - defaults to red
 * primary-2 - defaults to blue
 * primary-3 - defaults to yellow
@@ -313,10 +327,22 @@ Color style parameters can use reserved theme colors in the stylesheet using the
 - Slider
 - Fixed Positioning Control
 
+---
+### Accordion
 
-#### Accordion
+#### Accordion Options
 
-	<div wix-ctrl="Accordion">
+    {
+        animationTime : 150,
+        ease : 'linear',
+    	openByDeafult:'acc-open',
+    	value : 0,
+    	toggleOpen: false
+    }
+    
+#### Markup
+
+	<div wix-ctrl="Accordion" wix-options="{toggleOpen:false}">
 	    <div class="acc-pane">
             <h3><!-- Title --></h3>
 	        <div class="acc-content">
@@ -324,34 +350,54 @@ Color style parameters can use reserved theme colors in the stylesheet using the
 	        </div>
 	    </div>
 	</div>
-
-#### ColorPicker
-
-    <div wix-ctrl="ColorPicker"></div>
     
-#### Color picker with stlye parameter
+---
+
+### ColorPicker
+
+#### ColorPicker Options
+
+    {
+        startWithColor : "#897185"
+	}
+
+#### Markup
+
+    <div wix-ctrl="ColorPicker" wix-options="{startWithColor:'black/white'}"></div>
+    
+##### Color picker with stlye parameter
 
     <div wix-param="myColor" wix-ctrl="ColorPicker" wix-options="{startWithColor:'black/white'}"></div>
     
-#### ColorPickerWithOpacity
+##### ColorPickerWithOpacity
 
     <div wix-ctrl="ColorPickerWithOpacity"></div>
     
-#### Color picker with opacity with stlye parameter
+##### Color picker with opacity with stlye parameter
 
     <div wix-param="myColor" wix-ctrl="ColorPickerWithOpacity"  wix-options="{startWithColor:'black/white'}"></div>
 
+---
 
-#### Radio Button
+### Radio Button
 
-	<div wix-ctrl="Radio">
+#### Options
+
+    {
+    	radioValueAttrName:'data-radio-value',
+		inline:false,
+		value:0
+	}
+
+#### Markup
+
+	<div wix-ctrl="Radio" wix-options="{value:0}">
 		<div data-radio-value="value-1">Option 1</div>
 		<div data-radio-value="value-2">Option 2</div>
 		<div data-radio-value="value-3">Option 3</div>
 	</div>
     
-    
-#### Advance Radio Button
+##### Advance Radio Button
 
     <div wix-ctrl="Radio">
 		<div data-radio-value="value-1">
@@ -365,34 +411,93 @@ Color style parameters can use reserved theme colors in the stylesheet using the
         </div>
 	</div>
 
-#### Checkbox
+---
 
-    <div wix-ctrl="Checkbox"></div>
+### Checkbox
 
-#### Slider
+#### Options
 
-    <div wix-ctrl="Slider"></div>
+    {
+		preLabel: '',
+		postLabel: '',
+		value: false
+	}
+    
+#### Markup
 
-#### Dropdown
+    <div wix-ctrl="Checkbox" wix-options="{value:false}"></div>
 
-    <div wix-ctrl="Dropdown">
+---
+
+### Slider
+
+#### Options
+    
+    {
+    	minValue : 0,
+		maxValue : 100,
+		value : 0,
+		width : 80,
+		preLabel:'',
+		postLabel:''
+	}
+    
+#### Markup
+
+    <div wix-ctrl="Slider" wix-options="{value:0}"></div>
+
+---
+
+### Dropdown
+
+#### Options
+
+    {
+    	slideTime : 150,
+    	value: 0,
+    	autoCloseTime : 5000
+    }
+
+#### Markup
+
+    <div wix-ctrl="Dropdown" wix-options="{value:0}">
 		<option value="value-1">Option A</option>
 		<option value="value-2">Option B</option>
 		<option value="value-3">Option C</option>
 	</div>
-    
-#### Button Group
+   
+---   
+   
+### Button Group
 
-    <div wix-ctrl="ButtonGroup">
+#### Options
+
+    {
+    	value: 0
+    }
+
+#### Markup
+
+    <div wix-ctrl="ButtonGroup" wix-options="{value:0}">
 		<button value="value-1">Button 1</button>
 		<button value="value-2">Button 2</button>
 		<button value="value-3">Button 3</button>
 	</div>
     
+---
 
-#### Fixed Positioning Control
+### Fixed Positioning Control
 
-    <div wix-ctrl="GluedControl"></div>
+#### Options
+
+    {
+        bindToWidget: false,
+        placements : []
+    }
+
+#### Markup
+
+    <div wix-ctrl="GluedControl" wix-options="{bindToWidget: true}"></div>
 
 ## License
 

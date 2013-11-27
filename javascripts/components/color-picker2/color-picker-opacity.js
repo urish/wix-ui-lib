@@ -4,7 +4,8 @@
 	var pluginName = 'ColorPickerWithOpacity';
 
 	var defaults = {
-		startWithColor : '#000'
+		startWithColor : '#000',
+		value:undefined
 	};
 
 	var names = {

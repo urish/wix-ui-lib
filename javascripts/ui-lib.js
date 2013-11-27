@@ -42,7 +42,7 @@
     		try {
     			initializePlugin(elements[i]);
     		} catch (err) {
-    			console.log && console.log('Plugin Initialization Error: ' + err.stack);
+    			console.log && console.log('Plugin Initialization Error: ' + err.stack, elements[i]);
     		}
     	}
 							
@@ -81,7 +81,6 @@
 		}
 	}
 	
-	
 	function getVendorProductId() {
 		try {
 			var inst = window.location.search.match(/instance=([^&]+)/);
@@ -111,7 +110,7 @@
 		}
 		return val;
 	}
-	
+		
     function initializePlugin(element) {
         var ctrl = getAttribute(element, 'wix-controller') || getAttribute(element, 'wix-ctrl') ;
 		var ctrlName = getCtrlName(ctrl);
@@ -214,8 +213,8 @@
 									//}
 				}
 			},
-			setAndReport : function (modelKey, value) {
-				model.set(modelKey, value, false, true);
+			setAndReport : function (modelKey, value, isSilent) {
+				model.set(modelKey, value, !!isSilent || false, true);
 			},
 			setInitialValues : function (initialValues) {
 				$.extend(model.props, initialValues);

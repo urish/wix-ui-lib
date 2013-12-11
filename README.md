@@ -135,6 +135,8 @@ Wix UI library includes custom attributes which enable components initialization
 
 **wix-model -** sets a key to access the component value from Wix.UI and subscribe to change events.
 
+<div style="color:red">Warning: wix-pram & wix-model can not co-exist on the same controller. Only one of them should be used</div>
+
 All attributes can be prefixed with **data-** to be W3C compliant (Optional). 
 
 ###Initialization

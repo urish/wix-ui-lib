@@ -372,6 +372,15 @@ Color style parameters can use reserved theme colors in the stylesheet using the
 ##### Color picker with stlye parameter
 
     <div wix-param="myColor" wix-ctrl="ColorPicker" wix-options="{startWithColor:'black/white'}"></div>
+
+
+#### ColorPickerWithOpacity Options
+
+    {
+        startWithColor : "#000",
+		startWithOpacity : 1
+	}
+
     
 ##### ColorPickerWithOpacity
 

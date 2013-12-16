@@ -126,8 +126,11 @@
 		} else {
 			console.error('Plugin ' + pluginName + ' does not exist');
 		}
-		setUpStyleParams(element, pluginName);
-		setUpModel(element, pluginName);
+		var param = setUpStyleParams(element, pluginName);
+		var model = setUpModel(element, pluginName);
+		if(param && model){
+			throw new Error('You cannot use wix-param in conjunction with wix-model, only one of them can be used per component.');
+		}
 	}
 
 	function setUpStyleParams(element, pluginName){
@@ -135,6 +138,7 @@
 		if(wixStyleParam){
 			styleModel.bindKeyToPlugin(element, pluginName, wixStyleParam);
 		}
+		return wixStyleParam;
 	}
 	
 	function setUpModel(element, pluginName){
@@ -142,6 +146,7 @@
 		if(wixModel){
 			model.bindKeyToPlugin(element, pluginName, wixModel);
 		}
+		return wixModel;
 	}
 	
 	function evalOptions(options){

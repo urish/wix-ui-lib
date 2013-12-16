@@ -5,6 +5,7 @@
 
 	var defaults = {
 		startWithColor : '#000',
+		startWithOpacity: undefined,
 		value:undefined
 	};
 
@@ -22,7 +23,13 @@
 	ColorPickerWithOpacity.prototype.init = function () {
 		this.markup();
 		this.setValue(this.options.value);
+		this.setOpacity(this.options.startWithOpacity);
 		this.bindEvents();
+	};
+	
+	ColorPickerWithOpacity.prototype.setOpacity = function (opacity) {
+		if(!opacity && opacity!==0){return;}
+		this.getPlugins().slider.setValue(opacity*100);
 	};
 	
 	ColorPickerWithOpacity.prototype.getPlugins = function () {
@@ -99,7 +106,7 @@
 			//}
 		} else if(typeof value === 'string'){
 			color = extractColorFromValue(value);
-			opacity = extractOpacityFromColor(color) * 100;
+			opacity = extractOpacityFromColor(value) * 100;
 		}
 		
 		plugs.slider.setValue(opacity);

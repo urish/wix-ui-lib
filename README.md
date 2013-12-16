@@ -468,15 +468,16 @@ Color style parameters can use reserved theme colors in the stylesheet using the
     {
     	slideTime : 150,
     	value: 0,
-    	autoCloseTime : 5000
+    	autoCloseTime : 5000,
+		optionSelector:'[value]'
     }
 
 #### Markup
 
     <div wix-ctrl="Dropdown" wix-options="{value:0}">
-		<option value="value-1">Option A</option>
-		<option value="value-2">Option B</option>
-		<option value="value-3">Option C</option>
+		<div value="value-1">Option A</div>
+		<div value="value-2">Option B</div>
+		<div value="value-3">Option C</div>
 	</div>
    
 ---   

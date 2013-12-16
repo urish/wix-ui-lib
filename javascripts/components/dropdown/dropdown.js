@@ -7,14 +7,15 @@ var defaults = {
 	slideTime : 150,
 	selected: 0,
 	value: undefined,
-	autoCloseTime : 5000
+	autoCloseTime : 5000,
+	optionSelector : '[value]'
 };
 var names = {
 	valueAttrName : 'data-value',
 	indexAttrName : 'data-index',
 	dropDownClassName : 'dropdown',
 	activeClassName : 'focus-active',
-	optionInitSelector : 'option',
+	
 	optionInitValueAttrName : 'value',
 	optionClassName : 'option',
 	optionsClassName : 'options',
@@ -55,7 +56,7 @@ DropDown.prototype.init = function () {
 
 DropDown.prototype.markup = function () {
 	var $el = this.$el.addClass(names.dropDownClassName);//.css(dropdownCSS);
-	var $options = this.$el.find(names.optionInitSelector).map(function (index) {
+	var $options = this.$el.find(this.options.optionSelector).map(function (index) {
 			var $option = $('<div>')
 				.attr(names.valueAttrName, this.getAttribute(names.optionInitValueAttrName))
 				.attr(names.indexAttrName, index)

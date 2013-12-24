@@ -239,7 +239,7 @@ When you want to save the state of your components you can simply call the toJSO
     var widgetId = Wix.Utils.getInstanceId() + '--' + Wix.Utils.getCompId();
     
     function saveSettings(){
-        $.post('save.php?id=' + widgetId, Wix.Ui.toJSON());
+        $.post('save.php?id=' + widgetId, Wix.UI.toJSON());
     }
     
     function loadSettings(){

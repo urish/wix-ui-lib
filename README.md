@@ -313,9 +313,9 @@ Color style parameters can use reserved theme colors in the stylesheet using the
 
 * white/black - primary white, black if the site theme is inverted
 * black/white - primary black, white if the site theme is inverted
-* primary-1 - defaults to red
-* primary-2 - defaults to blue
-* primary-3 - defaults to yellow
+* primary-1 - defined by the template
+* primary-2 - defined by the template
+* primary-3 - defined by the template
 * color-1 to color-25 - palette colors
 
 

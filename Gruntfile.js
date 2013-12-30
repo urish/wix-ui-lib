@@ -115,6 +115,16 @@ module.exports = function (grunt) {
 				}
 			}
 		},
+        compress: {
+            main: {
+                options: {
+                    archive: 'archive.zip'
+                },
+                files: [
+                    {src: ['build/**'], dest: '/'}
+                ]
+            }
+        },
 		clean : ['build']
 
 	});

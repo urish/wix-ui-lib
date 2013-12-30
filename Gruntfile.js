@@ -130,9 +130,11 @@ module.exports = function (grunt) {
 	});
 
 	grunt.loadNpmTasks('grunt-contrib');
+    grunt.loadTasks('tasks/');
 
 	// Default task.
 	grunt.registerTask('default', ['clean', 'copy', 'uglify', 'cssmin']);
 	grunt.registerTask('concatall', ['clean', 'copy', 'concat','uglify', 'cssmin']);
 	grunt.registerTask('lint', ['jshint']);
+    grunt.registerTask('release', ['default', 'compress', 'release-create-upload']);
 };

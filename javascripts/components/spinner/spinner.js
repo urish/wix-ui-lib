@@ -4,7 +4,7 @@
 	var pluginName = 'Spinner';
 	var defaults = {
 		minValue : 0,
-		maxValue : 100,
+		maxValue : 1000,
 		value : 0,
         step: 1,
         precision: 0
@@ -73,7 +73,7 @@
             autoRollTicket = setTimeout(startAutoRoll, 500);
         });
 
-        this.$el.on('change blur', 'input', function(){
+        this.$el.on('focusout', 'input', function(){
             if(spinner.setValue(_parse(spinner.getValue()))){
                 spinner.$el.trigger(pluginName + '.change', spinner.getValue());
             }

@@ -27,7 +27,7 @@ describe('Spinner', function () {
         expect($spinner).toBeWixed();
     });
 
-    it('should trigger change event and change plugin value on mousedown', function(){
+    it('should trigger change event and change control value on mousedown', function(){
         Wix.UI.initializePlugin(element);
         var $up = $(element).find('.up-arrow');
         $up.mousedown();

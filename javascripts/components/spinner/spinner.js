@@ -1,6 +1,5 @@
 (function ($, window, document, undefined) {
     'use strict';
-
 	var pluginName = 'Spinner';
 	var defaults = {
 		minValue : 0,
@@ -9,12 +8,17 @@
         step: 1,
         precision: 0
 	};
-
-    var strings = {
-        className: 'uilib-spinner',
-        upArrow  : 'up-arrow',
-        downArrow  : 'down-arrow'
-    }
+    var styles = {
+        className : 'uilib-spinner',
+        upArrow   : 'up-arrow',
+        downArrow : 'down-arrow'
+    };
+    var events = {
+        mouseDown  : 'mousedown',
+        mouseUp    : 'mouseup',
+        mouseLeave : 'mouseleave',
+        focusOut   : 'focusout'
+    };
 
 	function Plugin(element, options) {
 		this.$el = $(element);
@@ -32,8 +36,8 @@
         this.$el
             .append("<input autocomplete='off'>")
             .append(_buttonHtml());
-        if(!this.$el.hasClass(strings.className)){
-            this.$el.addClass(strings.className);
+        if(!this.$el.hasClass(styles.className)){
+            this.$el.addClass(styles.className);
         }
 	};
 
@@ -50,12 +54,12 @@
             },100);
         }
 
-        this.$el.on('mouseup mouseleave', function(){
+        this.$el.on(events.mouseUp + ' ' + events.mouseLeave, function(){
            clearTimeout(autoRollTicket);
            dir = 0;
         });
 
-        this.$el.on('mousedown', '.up-arrow', function(){
+        this.$el.on(events.mouseDown, '.' + styles.upArrow, function(){
             spinner.setValue(_parse(spinner.getValue()) + spinner.options.step);
             spinner.$el.trigger(pluginName + '.change', spinner.getValue());
 
@@ -64,7 +68,7 @@
             autoRollTicket = setTimeout(startAutoRoll, 500);
         });
 
-        this.$el.on('mousedown', '.down-arrow', function(){
+        this.$el.on(events.mouseDown, '.' + styles.downArrow, function(){
             spinner.setValue(_parse(spinner.getValue()) - spinner.options.step);
             spinner.$el.trigger(pluginName + '.change', spinner.getValue());
 
@@ -73,7 +77,7 @@
             autoRollTicket = setTimeout(startAutoRoll, 500);
         });
 
-        this.$el.on('focusout', 'input', function(){
+        this.$el.on(events.focusOut, 'input', function(){
             if(spinner.setValue(_parse(spinner.getValue()))){
                 spinner.$el.trigger(pluginName + '.change', spinner.getValue());
             }
@@ -115,8 +119,8 @@
 
     function _buttonHtml() {
         return "" +
-            "<div class='up-arrow'></div>" +
-            "<div class='down-arrow'></span>";
+            "<div class=" + styles.upArrow + "></div>" +
+            "<div class=" + styles.downArrow +"></span>";
     }
 
     function _parse(val) {

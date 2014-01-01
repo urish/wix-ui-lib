@@ -12,16 +12,13 @@ describe('Spinner', function () {
             }
         });
     });
-    var id=0;
     beforeEach(function(){
-        /*
-            @liors - give each test a unique wix-model
-         */
-        element = $('<div wix-model="numOfItems' + (++id) + '" wix-ctrl="Spinner" class="spinner"></div>').appendTo('body')[0];
+        element = $('<div wix-model="numOfItems" wix-ctrl="Spinner" class="spinner"></div>').appendTo('body')[0];
     });
 
     afterEach(function(){
         $(".spinner").remove();
+        Wix.UI.destroyPlugin(element);
     });
 
     it('should apply wix markup to given wix-ctrl', function(){
@@ -36,15 +33,15 @@ describe('Spinner', function () {
         });
         it('should not allow value to be negative', function(){
             $(element).find('.down-arrow').mousedown();
-            expect(Wix.UI.get('numOfItems' + id)).toBe(0);
+            expect(Wix.UI.get('numOfItems')).toBe(0);
         });
 
         it('should increase and decrease the value by 1', function(){
             $(element).find('.up-arrow').mousedown();
-            expect(Wix.UI.get('numOfItems' + id)).toBe(1);
+            expect(Wix.UI.get('numOfItems')).toBe(1);
 
             $(element).find('.down-arrow').mousedown();
-            expect(Wix.UI.get('numOfItems' + id)).toBe(0);
+            expect(Wix.UI.get('numOfItems')).toBe(0);
         });
 
         it('should not allow value to exceed 1000', function(){
@@ -52,34 +49,34 @@ describe('Spinner', function () {
             for(var i=0; i<1010; i++){
                 $up.mousedown();
             }
-            expect(Wix.UI.get('numOfItems' + id)).toEqual(1000);
+            expect(Wix.UI.get('numOfItems')).toEqual(1000);
         });
     });
 
     it('should set value to 0 if input is not numeric', function(){
         Wix.UI.initializePlugin(element);
         $(element).find('input').val('wix was here').focusout();
-        expect(Wix.UI.get('numOfItems' + id)).toBe(0);
+        expect(Wix.UI.get('numOfItems')).toBe(0);
     });
 
     it('should change control value on input focusout', function(){
         Wix.UI.initializePlugin(element);
         $(element).find('input').val('5').focusout();
-        expect(Wix.UI.get('numOfItems' + id)).toBe(5);
+        expect(Wix.UI.get('numOfItems')).toBe(5);
     });
 
     it('should take the current input value when spinning', function(){
         Wix.UI.initializePlugin(element);
-        $(element).find('input').val('5').focusout();
-        expect(Wix.UI.get('numOfItems' + id)).toBe(5);
+        $(element).find('input').val('4').focusout();
+        expect(Wix.UI.get('numOfItems')).toBe(4);
 
         var $up = $(element).find('.up-arrow');
         $up.mousedown();
-        expect(Wix.UI.get('numOfItems' + id)).toBe(6);
+        expect(Wix.UI.get('numOfItems')).toBe(5);
 
         var $down = $(element).find('.down-arrow');
         $down.mousedown();
-        expect(Wix.UI.get('numOfItems' + id)).toBe(5);
+        expect(Wix.UI.get('numOfItems')).toBe(4);
     });
 
     it('should change control value on mousedown per given step', function(){
@@ -87,11 +84,11 @@ describe('Spinner', function () {
         Wix.UI.initializePlugin(element);
         var $up = $(element).find('.up-arrow');
         $up.mousedown().mousedown();
-        expect(Wix.UI.get('numOfItems' + id)).toBe(4);
+        expect(Wix.UI.get('numOfItems')).toBe(4);
 
         var $down = $(element).find('.down-arrow');
         $down.mousedown();
-        expect(Wix.UI.get('numOfItems' + id)).toBe(2);
+        expect(Wix.UI.get('numOfItems')).toBe(2);
     });
 
     it('should change control value on mousedown per given step and precision', function(){
@@ -102,10 +99,10 @@ describe('Spinner', function () {
         Wix.UI.initializePlugin(element);
         var $up = $(element).find('.up-arrow');
         $up.mousedown().mousedown();
-        expect(Wix.UI.get('numOfItems' + id)).toBe(0.2);
+        expect(Wix.UI.get('numOfItems')).toBe(0.2);
 
         var $down = $(element).find('.down-arrow');
         $down.mousedown();
-        expect(Wix.UI.get('numOfItems' + id)).toBe(0.1);
+        expect(Wix.UI.get('numOfItems')).toBe(0.1);
     });
 });

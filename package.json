@@ -1,6 +1,6 @@
 {
     "name": "ui-lib",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "description": "wix ui controls for third party applications",
     "repository": {
         "type": "git",

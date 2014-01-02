@@ -6,14 +6,14 @@
 	var styleModel = createModel();
 	
 	exports.UI = {
-		initialize: initialize,
-		initializePlugin:initializePlugin,
-		initStyleMigration: initStyleMigration,
-		set: model.setAndReport,
-		get: model.get,
-		toJSON: model.toJSON,
-		onChange: model.onChange,
-		onStyleChange: styleModel.onChange
+		initialize         : initialize,
+		initializePlugin   : initializePlugin,
+        destroyPlugin      : destroyPlugin,
+		initStyleMigration : initStyleMigration,
+		set                : model.setAndReport,
+		get                : model.get,
+		toJSON             : model.toJSON,
+		onChange           : model.onChange
 	};
 		
 	function log(){
@@ -117,6 +117,18 @@
 		var ctrlName = getCtrlName(ctrl);
 		var options = getOptions(element, ctrl);
 		applyPlugin(element, ctrlName, options);
+    }
+
+    function destroyPlugin(element) {
+        var ctrl = getAttribute(element, 'wix-controller') || getAttribute(element, 'wix-ctrl') ;
+        var wixModel = getAttribute(element, 'wix-model');
+        var pluginName = getCtrlName(ctrl);
+        if(wixModel){
+            $(element).off(pluginName + '.change');
+            model.props = {};
+            model.handlers = [];
+            model.reporters = {};
+        }
     }
 	
 	function applyPlugin(element, pluginName, options) {

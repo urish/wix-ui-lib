@@ -6,7 +6,8 @@
 	var defaults = {
 		startWithColor : '#000',
 		startWithOpacity: undefined,
-		value:undefined
+		value:undefined,
+		divider: null
 	};
 
 	var names = {
@@ -60,7 +61,11 @@
 			postLabel: '100',
 			value: 100
 		});
-		this.$el.append(this.$ColorPicker, this.$Slider);
+		if(this.options.divider){
+			this.$el.append(this.$ColorPicker, $('<span class="uilib-text" style="margin: 0 0 0 10px">').text(this.options.divider),this.$Slider);
+		} else{
+			this.$el.append(this.$ColorPicker, this.$Slider);
+		}
 	};
 
 	function extractOpacityFromColor(value){

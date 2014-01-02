@@ -17,7 +17,8 @@
         mouseDown  : 'mousedown',
         mouseUp    : 'mouseup',
         mouseLeave : 'mouseleave',
-        focusOut   : 'focusout'
+        focusOut   : 'focusout',
+        keypress   : 'keypress'
     };
 
 	function Plugin(element, options) {
@@ -80,6 +81,14 @@
         this.$el.on(events.focusOut, 'input', function(){
             if(spinner.setValue(_parse(spinner.getValue()))){
                 spinner.$el.trigger(pluginName + '.change', spinner.getValue());
+            }
+        });
+
+        this.$el.on(events.keypress, 'input', function(e){
+            if (e.which == 13){
+                if(spinner.setValue(_parse(spinner.getValue()))){
+                    spinner.$el.trigger(pluginName + '.change', spinner.getValue());
+                }
             }
         });
 	};

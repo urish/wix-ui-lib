@@ -65,6 +65,15 @@ describe('Spinner', function () {
         expect(Wix.UI.get('numOfItems')).toBe(5);
     });
 
+    it('should change control value on enter press', function(){
+        Wix.UI.initializePlugin(element);
+        var $input = $(element).find('input');
+        $input.val('5');
+        var event = givenEnterPressedEvent();
+        $input.trigger(event);
+        expect(Wix.UI.get('numOfItems')).toBe(5);
+    });
+
     it('should take the current input value when spinning', function(){
         Wix.UI.initializePlugin(element);
         $(element).find('input').val('4').focusout();
@@ -105,4 +114,10 @@ describe('Spinner', function () {
         $down.mousedown();
         expect(Wix.UI.get('numOfItems')).toBe(0.1);
     });
+
+    function givenEnterPressedEvent() {
+        var event = jQuery.Event("keypress");
+        event.which = 13;
+        return event;
+    }
 });

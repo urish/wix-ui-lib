@@ -12,7 +12,8 @@
 		set: model.setAndReport,
 		get: model.get,
 		toJSON: model.toJSON,
-		onChange: model.onChange
+		onChange: model.onChange,
+		onStyleChange: styleModel.onChange
 	};
 		
 	function log(){

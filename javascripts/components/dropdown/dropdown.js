@@ -1,4 +1,4 @@
-(function ($, window, document, undefined) {
+﻿(function ($, window, document, undefined) {
 	'use strict';
 
 var pluginName = 'Dropdown';
@@ -7,21 +7,30 @@ var defaults = {
 	slideTime : 150,
 	selected: 0,
 	value: undefined,
-	autoCloseTime : 5000,
-	optionSelector : '[value]'
+	autoCloseTime : 50000,
+	optionSelector : '[value]',
+	spriteMap: '',
+	hideText: false,
+	width:'',
+	height:'',
+	style: 'dropdown-style-1'
 };
+
+var downArrow = '<span class="dropdown-arrow">&#9660;</span>';
+
 var names = {
 	valueAttrName : 'data-value',
 	indexAttrName : 'data-index',
 	dropDownClassName : 'dropdown',
 	activeClassName : 'focus-active',
-	
 	optionInitValueAttrName : 'value',
 	optionClassName : 'option',
 	optionsClassName : 'options',
 	selectedClassName : 'selected',
+	selectedOptionsClassName : 'option-selected',
 	highlightClassName : 'dropdown-highlight',
-	iconClassName: 'dropdown-icon'
+	iconClassName: 'dropdown-icon',
+	hideTextClass: 'dropdown-hideText'
 };
 
 var optionsCSS = {
@@ -55,26 +64,42 @@ DropDown.prototype.init = function () {
 };
 
 DropDown.prototype.markup = function () {
-	var $el = this.$el.addClass(names.dropDownClassName);//.css(dropdownCSS);
+	var dd = this;
+	var $el = this.$el.addClass(names.dropDownClassName + ' ' + this.options.style);//.css(dropdownCSS);
 	var $options = this.$el.find(this.options.optionSelector).map(function (index) {
+	
 			var $option = $('<div>')
 				.attr(names.valueAttrName, this.getAttribute(names.optionInitValueAttrName))
 				.attr(names.indexAttrName, index)
 				.addClass(names.optionClassName)
 				.text(this.textContent);
-				
+	
+			if(dd.options.hideText){
+				$option.addClass(names.hideTextClass);
+			}
 			var iconUrl = this.getAttribute('data-icon');
 			
 			if(iconUrl){
 				$option.prepend('<img src="'+iconUrl+'" class="'+names.iconClassName+'"/>');
 			}		
+			if(dd.options.spriteMap){
+				$option.addClass(dd.options.spriteMap+index);
+			}
 			return $option;
 		}).toArray();
 
 	this.$selected = $('<div>').addClass(names.selectedClassName);
 	this.$options = $('<div>').addClass(names.optionsClassName).append($options).css(optionsCSS);
+	if(this.options.width){
+		this.$options.css('width', this.options.width);
+		$el.css('width', this.options.width);
+	}
+	if(this.options.height){
+		this.$options.css('height', this.options.height);
+	}
 	this.$el.empty();
-	this.$el.append(this.$selected, this.$options);
+	
+	this.$el.append(downArrow, this.$selected, this.$options);
 		
 };
 
@@ -88,8 +113,10 @@ DropDown.prototype.setValue = function (value) {
 		$option = value;
 	}
 	if ($option.length && this.getIndex() !== $option.attr(names.indexAttrName)) {
+		this.$options.find('.'+names.selectedOptionsClassName).removeClass(names.selectedOptionsClassName);
 		this.$selected.empty();
 		this.$selected.append($option.clone(true).addClass('current-item').removeClass(names.highlightClassName));
+		$option.addClass(names.selectedOptionsClassName);
 		return true;
 	}
 	return false;
@@ -135,10 +162,13 @@ DropDown.prototype.hideOptions = function (time) {
 };
 
 DropDown.prototype.showOptions = function (time) {
-	var $el = this.$options.find('[' + names.indexAttrName + '="' + this.getIndex() + '"]').eq(0);
+	var $options = this.$options;
+	var $el = $options.find('[' + names.indexAttrName + '="' + this.getIndex() + '"]').eq(0);
 	this.isOpen = true;
 	this.highlightOption($el);
-	this.$options.slideDown(time !== undefined ? time : this.options.slideTime);
+	$options.slideDown(time !== undefined ? time : this.options.slideTime, function(){
+		$options.css('overflow', 'auto');
+	});
 };
 
 DropDown.prototype.toggleOptions = function (time) {
@@ -201,29 +231,58 @@ DropDown.prototype.bindEvents = function () {
 		dropdown.setActiveMode(false);
 	});
 	
+	var ENTER = 13,
+		SPACE = 32,
+		ESC = 27,
+		TAB = 9,
+		UP = 38,
+		DOWN = 40,
+		PAGE_UP = 33,
+		PAGE_DOWN = 34,
+		PAGE_MOVE_ITEMS = 5,
+		ARROW_MOVE_ITEMS = 1
+	
 	$(window).on('keydown', function (evt) {
-		var $el, dir;
+		var $el, dir, items;
 		if (dropdown.isActive) {
-
-			if (evt.which === 13) {
+			//add Tab & Space
+			if (evt.which === ENTER || evt.which === SPACE) {
 				dropdown.toggleOptions();
 				evt.preventDefault();
 			}
 
-			if (evt.which === 27) {
+			if (evt.which === ESC || evt.which === TAB) {
 				dropdown.hideOptions();
 				dropdown.setActiveMode(false);
 				evt.preventDefault();
 			}
-
-			if (evt.which === 38 || evt.which === 40) {
+			
+			//up/down/pageup/pagedown
+			if (evt.which === UP || evt.which === DOWN || evt.which === PAGE_UP || evt.which === PAGE_DOWN) {
 				$el = dropdown.$options
                     .find('[' + names.indexAttrName + '="' + dropdown.getIndex() + '"]')
 					.eq(0);
-                dir = evt.which === 38 ? 'prev' : 'next';
-                $el = $el[dir]('.' + names.optionClassName);
+                
+				dir = (evt.which === UP || evt.which === PAGE_UP) ? 'prev' : 'next';
+				items = (evt.which === UP || evt.which === DOWN) ? ARROW_MOVE_ITEMS : ((dropdown.$options.height() / $el.height())<<0 || PAGE_MOVE_ITEMS);
+				
+				var _$el;
+				while (items--) {
+					_$el = $el;
+					$el = $el[dir]('.' + names.optionClassName);
+					if($el.length ===0){
+						$el  = _$el;
+					}
+				}
+				
 				dropdown.highlightOption($el);
 				dropdown.setValueFromEl($el);
+				
+				if($el.length){
+					dropdown.$options.clearQueue().animate({
+						scrollTop: dropdown.$options.scrollTop() + $el.position().top
+					}, 200);
+				}
 				evt.preventDefault();
 			}
 

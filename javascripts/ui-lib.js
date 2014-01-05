@@ -336,7 +336,10 @@
 			}
 			
 			styleModel.onChange('*', function(value, name){
-				if(isNumberParam(value)){
+				//order matters font is like number.
+				if(isFontParam(value)){
+					Wix.Settings.setFontParam(name, {value: value});
+				} else if(isNumberParam(value)){
 					Wix.Settings.setNumberParam(name, {value:getNumberParamValue(value)});
 				} else if(Object.prototype.toString.call(value).match('Boolean')){
 					Wix.Settings.setBooleanParam(name, {value:value});
@@ -345,6 +348,10 @@
 				}
 			});
 			
+		}
+		
+		function isFontParam(value){
+			return isNumberParam(value) && value.fontParam === true ? true : false
 		}
 		
 		function isNumberParam(value){
@@ -402,6 +409,12 @@
 		for(var prop in style.booleans){
 			if(style.booleans.hasOwnProperty(prop)){
 				mergedStyle[prop] = style.booleans[prop];
+			}
+		}
+		for(var prop in style.fonts){
+			debugger
+			if(style.fonts.hasOwnProperty(prop)){
+				mergedStyle[prop] = style.fonts[prop];
 			}
 		}
 		return mergedStyle;

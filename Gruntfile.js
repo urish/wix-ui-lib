@@ -14,8 +14,8 @@ module.exports = function (grunt) {
 			},
 			dist : {
 				src : [
-					'javascripts/components/**/*.js',
 					'javascripts/definePlugin.js',
+					'javascripts/components/**/*.js',
 					'javascripts/ui-lib.js'
 				],
 				dest : 'build/<%= pkg.name %>.all.js'

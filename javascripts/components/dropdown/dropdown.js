@@ -109,6 +109,9 @@ DropDown.prototype.markup = function () {
 
 DropDown.prototype.setValue = function (value) {
 	var $option;
+	if(value && typeof value === 'object' && value.hasOwnProperty('index') && value.hasOwnProperty('value')){
+		value = value.value;
+	}
 	if (typeof value === 'number') {
 		$option = this.$options.find('[' + names.indexAttrName + '="' + value + '"]').eq(0);
 	} else if (typeof value === 'string') {

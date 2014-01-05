@@ -3,35 +3,46 @@ $.fn.definePlugin('FontPicker', function () {
 
 	return {
 		init : function () {
+			this.isParamMode = this.$el.attr('wix-param') || this.$el.attr('data-wix-param');
 			this.markup();
+			this.bindEvents();
 		},
 		markup : function () {
 			appendSpriteMap(this.options.spriteUrl, this.$el);
 			this.dropdown = this.$el.Dropdown({
 					hideText : true,
 					width : 280,
-					height : 200
+					height : 200,
+					value: this.options.value
 				}).data('plugin_Dropdown');
 		},
 		bindEvents : function () {
 			var fontPicker = this;
 			this.$el.on('Dropdown.change', function (evt, data) {
 				evt.stopPropagation();
+				if(fontPicker.isParamMode){
+					data.fontParam = true;
+				}
 				fontPicker.triggerChangeEvent(data);
 			});
 		},
 		getDefaults : function () {
 			return {
+				value: undefined,
 				spriteUrl : 'http://static.parastorage.com/services/skins/2.699.2/images/wysiwyg/core/themes/editor_web/richtext/fonts.png'
 			};
 		},
 		getValue : function () {
-			return this.dropdown.getValue.apply(this.dropdown, arguments);
+			return this.dropdown.getFullValue();
 		},
-		setValue : function () {
-			return this.dropdown.setValue.apply(this.dropdown, arguments);
+		setValue : function (value) {
+			if(value.fontParam){
+				value = value.value
+			}
+			return this.dropdown.setValue(value);
 		}
 	};
+
 
 	function appendSpriteMap(spriteUrl, $el) {
 		var fontsMeta = Wix.Settings.getEditorFonts();
@@ -43,7 +54,7 @@ $.fn.definePlugin('FontPicker', function () {
 		for (var f in fontsMeta) {
 			index++;
 			var font = fontsMeta[f];
-			html += '<div class="' + (spriteClass + font.spriteIndex) + '" value=' + font.fontFamily + '>' + font.displayName + '</div>';
+			html += '<div class="' + (spriteClass + font.spriteIndex) + '" value="' + font.fontFamily + '">' + font.displayName + '</div>';
 			maxSpriteIndex = (maxSpriteIndex > +font.spriteIndex) ? maxSpriteIndex : +font.spriteIndex;
 		}
 		var id = spriteClass + '_' + spriteHighlightClass;

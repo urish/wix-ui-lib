@@ -12,6 +12,7 @@ var defaults = {
 	spriteMap: '',
 	hideText: false,
 	width:'',
+	optionsWidth:'',
 	height:'',
 	style: 'dropdown-style-1'
 };
@@ -72,6 +73,7 @@ DropDown.prototype.markup = function () {
 				.attr(names.valueAttrName, this.getAttribute(names.optionInitValueAttrName))
 				.attr(names.indexAttrName, index)
 				.addClass(names.optionClassName)
+				.addClass(this.className)
 				.text(this.textContent);
 	
 			if(dd.options.hideText){
@@ -94,11 +96,13 @@ DropDown.prototype.markup = function () {
 		this.$options.css('width', this.options.width);
 		$el.css('width', this.options.width);
 	}
+	if(this.options.optionsWidth){
+		this.$options.css('width', this.options.width);
+	}
 	if(this.options.height){
 		this.$options.css('height', this.options.height);
 	}
 	this.$el.empty();
-	
 	this.$el.append(downArrow, this.$selected, this.$options);
 		
 };
@@ -169,6 +173,7 @@ DropDown.prototype.showOptions = function (time) {
 	$options.slideDown(time !== undefined ? time : this.options.slideTime, function(){
 		$options.css('overflow', 'auto');
 	});
+	this.$el.trigger('uilib-dropdown-open', this);
 };
 
 DropDown.prototype.toggleOptions = function (time) {
@@ -208,6 +213,13 @@ DropDown.prototype.bindEvents = function () {
 		this.bindAutoClose(this.options.autoCloseTime);
 	}
 
+	$(document).on('uilib-dropdown-open', function(evt, _dropdown){
+		if(_dropdown !== dropdown){
+			dropdown.hideOptions();
+			dropdown.setActiveMode(false);				
+		}
+	});
+	
 	this.$options.on('mouseenter', '.' + names.optionClassName, function () {
 		dropdown.highlightOption($(this));
 	});

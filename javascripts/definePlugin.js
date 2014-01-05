@@ -1,4 +1,4 @@
-function definePlugin(name, plug, defaults) {
+function definePlugin(name, plug) {
 	'use strict';
 	var Plugin = (new Function('return ' + definePlugin.tpl.replace(/\$\$\$/gm, name)))();
 	if (!Plugin.name) {
@@ -6,8 +6,11 @@ function definePlugin(name, plug, defaults) {
 	}
 	Plugin.prototype = plug;
 	Plugin.prototype.constructor = Plugin;
-	Plugin.defaults = defaults;
-	var missingFunction = ['getValue', 'setValue', 'init', 'triggerChangeEvent'].filter(function (key) {
+	Plugin.prototype.triggerChangeEvent = function(data){
+		this.$el.trigger(name + '.change', data);
+	}
+	
+	var missingFunction = ['getValue', 'setValue', 'init', 'getDefaults', 'bindEvents'].filter(function (key) {
 		return typeof plug[key] !== 'function';
 	});
 
@@ -38,22 +41,7 @@ definePlugin.tpl = function $$$(el, options) {
 		throw new Error('Plugin: $$$ must called with the "new" keyword');
 	}
 	this.$el = window.jQuery(el);
-	this.options = window.jQuery.extend({}, $$$.defaults, options);
+	this.options = window.jQuery.extend({}, this.getDefaults(), options);
 	this.init();
 	return this;
-}
-.toString();
-
-var p = definePlugin('Tst', {
-		init : function () {
-			console.log(this)
-
-		},
-		getValue : function () {},
-		setValue : function () {},
-		triggerChangeEvent : function () {}
-	}, {
-		name : 11
-	});
-
-console.log(new p(1, 2, 3))
+}.toString();

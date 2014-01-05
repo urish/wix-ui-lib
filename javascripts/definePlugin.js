@@ -8,7 +8,7 @@
 		if (!Plugin.name) {
 			Plugin.name = name;
 		}
-		Plugin.prototype = pluginPrototypeDefinition();
+		Plugin.prototype = pluginPrototypeDefinition(name);
 		Plugin.prototype.constructor = Plugin;
 		Plugin.prototype.triggerChangeEvent = function(data){
 			this.$el.trigger(name + '.change', data);

@@ -412,7 +412,6 @@
 			}
 		}
 		for(var prop in style.fonts){
-			debugger
 			if(style.fonts.hasOwnProperty(prop)){
 				mergedStyle[prop] = style.fonts[prop];
 			}

@@ -3,15 +3,16 @@
 	var pluginName = 'Slider';
 
 	var defaults = {
-		minValue : 0,
-		maxValue : 100,
-		value : 0,
-		width : 80,
-		preLabel:'',
-		postLabel:'',
-		className: 'default-uilib-slider-ui',
-		slide : function () {},
-		create : function () {}
+		minValue  : 0,
+		maxValue  : 100,
+		value     : 0,
+		width     : 80,
+		preLabel  :'',
+		postLabel :'',
+		className : 'default-uilib-slider-ui',
+        toolTip   : false,
+		slide     : function () {},
+		create    : function () {}
 	};
 
 	function Plugin(element, options) {
@@ -56,6 +57,12 @@
 		
 		this.$pin.addClass('uilib-slider-pin');
 		this.$pin.width(19);
+
+
+        if(this.options.toolTip){
+            this.$toolTip = $(_toolTipHtml());
+            this.$pin.append(this.$toolTip);
+        }
 	};
 
 	Plugin.prototype.disableTextSelection = function (evt) {
@@ -134,6 +141,9 @@
 			this.last_value = this.options.value;
 			val = this.getValue();
 			this.$el.trigger('slide', val);
+            if(this.options.toolTip){
+                this.$toolTip.find('.uilib-text').text(Math.round(val));
+            }
 			this.options.slide.call(this, val);
 		}
 		return this.update();
@@ -158,6 +168,13 @@
             }
         });
     };
+
+    function _toolTipHtml() {
+        return '<div class="uilib-slider-tooltip uilib-slider-tooltip-wrapper">' +
+            '<div class="picker-arrow-top"><div class="picker-arrow-one"></div><div class="picker-arrow-two"></div></div>' +
+            '<div class="uilib-text"></div>' +
+            '</div>';
+    }
 
 
 })(jQuery, window, document);

@@ -13,7 +13,9 @@ module.exports = function(config) {
         'http://sslstatic.wix.com/services/js-sdk/1.24.0/js/Wix.js',
         'javascripts/ui-lib.js',
         'javascripts/components/spinner/spinner.js',
-        'tests/SpinnerSpec.js'
+        'javascripts/components/slider2/slider2.js',
+        'tests/SpinnerSpec.js',
+        'tests/SliderSpec.js'
     ],
 
 

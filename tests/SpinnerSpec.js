@@ -27,7 +27,7 @@ describe('Spinner', function () {
         expect($spinner).toBeWixed();
     });
 
-    describe('Spinner Default Options', function () {
+    describe('Default Options', function () {
         beforeEach(function(){
             Wix.UI.initializePlugin(element);
         });

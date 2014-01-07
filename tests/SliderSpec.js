@@ -9,7 +9,6 @@ describe('Slider', function () {
                 var $preLabel = this.actual.find('.uilib-slider-preLabel');
                 var $postLabel = this.actual.find('.uilib-slider-postLabel');
                 var $pin = this.actual.find('.uilib-slider-pin');
-                var $toolTip = $pin.find('.uilib-slider-tooltip');
                 var pinWidth = $pin.css('width') === '19px';
                 return $element && $preLabel.length && $postLabel.length && $pin.length && pinWidth;
             }

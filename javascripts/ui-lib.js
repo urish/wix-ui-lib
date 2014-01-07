@@ -112,11 +112,11 @@
 		return val;
 	}
 		
-    function initializePlugin(element) {
+    function initializePlugin(element, overrideOptions) {
         var ctrl = getAttribute(element, 'wix-controller') || getAttribute(element, 'wix-ctrl') ;
 		var ctrlName = getCtrlName(ctrl);
 		var options = getOptions(element, ctrl);
-		applyPlugin(element, ctrlName, options);
+		applyPlugin(element, ctrlName, overrideOptions || options);
     }
 	
     function destroyPlugin(element) {
@@ -362,7 +362,7 @@
 		}
 		
 		function isNumberParam(value){
-			if(value instanceof Number || typeof value === 'number' || (!Number.isNaN(+value.index) && value.value)){
+			if(value instanceof Number || typeof value === 'number' || (!isNaN(+value.index) && value.value)){
 				return true;
 			}
 			return false;

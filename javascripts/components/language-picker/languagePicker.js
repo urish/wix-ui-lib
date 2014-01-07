@@ -1,5 +1,5 @@
 jQuery.fn.definePlugin('LanguagePicker', function () {
-	'use strict';
+    'use strict';
 
     var styles = {
         className : 'uilib-languagePicker'
@@ -11,6 +11,9 @@ jQuery.fn.definePlugin('LanguagePicker', function () {
             this.bindEvents();
 		},
 		markup : function () {
+            var $options = _optionsHtml();
+            this.$el.append($options);
+
 			this.dropdown = this.$el.Dropdown({
 					   width: 56,
 				      height: 150,
@@ -43,4 +46,19 @@ jQuery.fn.definePlugin('LanguagePicker', function () {
             return this.dropdown.setValue(value);
 		}
 	};
+
+    function _optionsHtml() {
+        var $options = $('<div value="En">English</div>' +
+            '<div value="De">Deutsch</div>' +
+            '<div value="Es">Español</div>' +
+            '<div value="Fr">Français</div>' +
+            '<div value="It">Italiano</div>' +
+            '<div value="Po">Polski</div>' +
+            '<div value="Pt">Português</div>' +
+            '<div value="Ru">Русский</div>' +
+            '<div value="Ja">日本語</div>' +
+            '<div value="Ko">한국어</div>' +
+            '<div value="Tr">Türkçe</div>');
+        return $options;
+    }
 });

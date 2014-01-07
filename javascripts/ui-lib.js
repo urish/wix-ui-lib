@@ -15,8 +15,8 @@
 		toJSON             : model.toJSON,
 		onChange           : model.onChange,
 		styles             : {
-			set: styleModel.set
-			get: styleModel.get
+			set: styleModel.set,
+			get: styleModel.get,
 			onChange: styleModel.onChange
 		}
 	};
@@ -136,9 +136,7 @@
 			$el.off();
 			$el.find('*').off();
 			$el.remove();
-            delete model.props[wixModel];
-            model.handlers = [];
-            model.reporters = {};
+			model.removeKey(wixModel);            
         }
     }
 	
@@ -241,6 +239,13 @@
 					model.triggerReporters(modelKey, value, plugin);
 									//}
 				}
+			},
+			removeKey: function(key){
+				model.handlers = model.handlers.filter(function(handler){
+					return handler.key !== key;
+				});
+				delete model.reporters[key];
+				delete model.props[key];
 			},
 			setAndReport : function (modelKey, value, isSilent) {
 				model.set(modelKey, value, !!isSilent || false, true);

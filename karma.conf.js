@@ -11,6 +11,7 @@ module.exports = function(config) {
     files: [
         'http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js',
         'http://sslstatic.wix.com/services/js-sdk/1.25.0/js/Wix.js',
+        'http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js',
         'javascripts/definePlugin.js',
 		'javascripts/ui-lib.js',
         'javascripts/components/**/*.js',

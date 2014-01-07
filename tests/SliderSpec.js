@@ -40,15 +40,30 @@ describe('Slider', function () {
         });
     });
 
-
-    it('should show a tooltip with the current value when toolTip is set to true', function(){
-        $(element).attr('wix-options', '{toolTip:true}');
+    it('should set the tooltip value according to the model value when toolTip is set to true', function(){
+        var $element = $(element);
+        $element.attr('wix-options', '{toolTip:true}');
         Wix.UI.initializePlugin(element);
-        var $tooltip = $(".uilib-slider-tooltip");
-
-        expect($tooltip.length).toBe(1);
-
+        var $tooltip = $element.find(".uilib-slider-tooltip");
         Wix.UI.set('numOfItems', 20);
         expect($tooltip.find("div.uilib-text").text()).toEqual('20');
+    });
+
+
+    it('should show a tooltip when the pin moves and hide it when it is static', function(){
+        var $element = $(element);
+        $element.attr('wix-options', '{toolTip:true}');
+        Wix.UI.initializePlugin(element);
+
+        var $pin = $element.find(".uilib-slider-pin");
+        var $tooltip = $element.find(".uilib-slider-tooltip");
+
+        expect($tooltip.css('display')).toBe('none');
+
+        $pin.mousedown();
+        expect($tooltip.css('display')).toBe('block');
+
+        $(document.body).mouseup();
+        expect($tooltip.css('display')).toBe('none');
     });
 });

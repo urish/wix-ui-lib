@@ -10,12 +10,11 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
         'http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js',
-        'http://sslstatic.wix.com/services/js-sdk/1.24.0/js/Wix.js',
-        'javascripts/ui-lib.js',
-        'javascripts/components/spinner/spinner.js',
-        'javascripts/components/slider2/slider2.js',
-        'tests/SpinnerSpec.js',
-        'tests/SliderSpec.js'
+        'http://sslstatic.wix.com/services/js-sdk/1.25.0/js/Wix.js',
+        'javascripts/definePlugin.js',
+		'javascripts/ui-lib.js',
+        'javascripts/components/**/*.js',
+        'tests/**Spec.js'
     ],
 
 

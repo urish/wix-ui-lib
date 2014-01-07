@@ -17,7 +17,6 @@ describe('Spinner', function () {
     });
 
     afterEach(function(){
-        $(".spinner").remove();
         Wix.UI.destroyPlugin(element);
     });
 

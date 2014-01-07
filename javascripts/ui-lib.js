@@ -118,14 +118,20 @@
 		var options = getOptions(element, ctrl);
 		applyPlugin(element, ctrlName, options);
     }
-
+	
     function destroyPlugin(element) {
         var ctrl = getAttribute(element, 'wix-controller') || getAttribute(element, 'wix-ctrl') ;
-        var wixModel = getAttribute(element, 'wix-model');
         var pluginName = getCtrlName(ctrl);
-        if(wixModel){
-            $(element).off(pluginName + '.change');
-            model.props = {};
+        var wixModel = getAttribute(element, 'wix-model');
+		var $el = $(element);
+		var plugin = $el.data('plugin_'+pluginName);
+		
+        if(wixModel){		
+            $el.off();
+			$el.find('*').off();
+			$el.remove();
+			plugin.destroy && plugin.destroy();
+            delete model.props[wixModel];
             model.handlers = [];
             model.reporters = {};
         }
@@ -246,6 +252,7 @@
 				var initValue = model.props[modelKey];
 				if (initValue !== undefined) {
 					plugin.setValue && plugin.setValue(initValue);
+					model.props[modelKey] = plugin.getValue ? plugin.getValue() : initValue;
 				} else {
 					initValue = plugin.getValue ? plugin.getValue() : undefined;
 					model.props[modelKey] = initValue;

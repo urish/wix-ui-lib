@@ -20,7 +20,6 @@ describe('Slider', function () {
     });
 
     afterEach(function(){
-        $(".slider").remove();
         Wix.UI.destroyPlugin(element);
     });
 

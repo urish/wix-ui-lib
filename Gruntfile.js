@@ -28,6 +28,7 @@ module.exports = function (grunt) {
 			},
 			build : {
 				src : [
+					'javascripts/definePlugin.js',
 					'javascripts/components/**/*.js',
 					'javascripts/ui-lib.js'
 				],
@@ -53,6 +54,7 @@ module.exports = function (grunt) {
 						'javascripts/components/dropdown/dropdown.css',
 						'javascripts/components/popup/popup.css',
 						'javascripts/components/input/input.css',
+						'javascripts/components/spinner/spinner.css',
 						
 						
 						'javascripts/components/color-picker2/css/color-picker.css',

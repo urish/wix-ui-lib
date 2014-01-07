@@ -2,26 +2,28 @@
 	if(!$){
 		throw 'jQuery is not defined';
 	}
-	function definePlugin(name, pluginPrototypeDefinition) {
+	function definePlugin(name, pluginPrototypeDefinition, skipValidation) {
 		'use strict';
+				
 		var Plugin = (new Function('return ' + definePlugin.tpl.replace(/\$\$\$/gm, name)))();
 		if (!Plugin.name) {
 			Plugin.name = name;
 		}
-		Plugin.prototype = pluginPrototypeDefinition(name);
+		Plugin.prototype = pluginPrototypeDefinition($);
 		Plugin.prototype.constructor = Plugin;
 		Plugin.prototype.triggerChangeEvent = function(data){
 			this.$el.trigger(name + '.change', data);
-		}
+		};
 		
-		var missingFunction = ['getValue', 'setValue', 'init', 'getDefaults', 'bindEvents'].filter(function (key) {
-			return typeof Plugin.prototype[key] !== 'function';
-		});
+		if(!skipValidation){
+			var missingFunction = ['getValue', 'setValue', 'init', 'getDefaults', 'bindEvents','markup'].filter(function (key) {
+				return typeof Plugin.prototype[key] !== 'function';
+			});
 
-		if (missingFunction.length) {
-			throw new Error('Plugin: ' + name + ' must implement: "' + missingFunction.join(', ') + '"');
+			if (missingFunction.length) {
+				throw new Error('Plugin: ' + name + ' must implement: "' + missingFunction.join(', ') + '"');
+			}
 		}
-
 		definePlugin.registerAsJqueryPlugin(name, Plugin);
 
 		return Plugin;
@@ -39,16 +41,17 @@
 		}
 	}
 
-	definePlugin.tpl = function $$$(el, options) {
-		'use strict';
-		if (!(this instanceof $$$)) {
-			throw new Error('Plugin: $$$ must called with the "new" keyword');
-		}
-		this.$el = window.jQuery(el);
-		this.options = window.jQuery.extend({}, this.getDefaults(), options);
-		this.init();
-		return this;
-	}.toString();
+	definePlugin.tpl = "function $$$(el, options) { "+ 
+		"'use strict';" +
+		"if (!(this instanceof $$$)) {" +
+			"throw new Error('Plugin: $$$ must called with the \"new\" keyword');" + 
+		"}" +
+		"this.$el = window.jQuery(el);" + 
+		"this.options = window.jQuery.extend({}, this.getDefaults(), options);" + 
+		"this.pluginName = '$$$';" + 
+		"this.init();" +
+		"return this;" +
+	"}";
 
 	$.fn.definePlugin = definePlugin;
 	

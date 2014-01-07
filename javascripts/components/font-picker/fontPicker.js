@@ -1,4 +1,4 @@
-$.fn.definePlugin('FontPicker', function () {
+jQuery.fn.definePlugin('FontPicker', function () {
 	'use strict';
 
 	return {

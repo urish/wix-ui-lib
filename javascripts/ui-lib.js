@@ -335,7 +335,7 @@
 		}
 		
 		function isNumberParam(value){
-			if(value instanceof Number || typeof value === 'number' || (!Number.isNaN(+value.index) && value.value)){
+			if(value instanceof Number || typeof value === 'number' || (!isNaN(+value.index) && value.value)){
 				return true;
 			}
 			return false;

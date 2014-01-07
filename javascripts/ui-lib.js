@@ -118,15 +118,15 @@
 		var options = getOptions(element, ctrl);
 		applyPlugin(element, ctrlName, options);
     }
-	
+
     function destroyPlugin(element) {
         var ctrl = getAttribute(element, 'wix-controller') || getAttribute(element, 'wix-ctrl') ;
         var pluginName = getCtrlName(ctrl);
         var wixModel = getAttribute(element, 'wix-model');
 		var $el = $(element);
 		var plugin = $el.data('plugin_'+pluginName);
-		
-        if(wixModel){		
+
+        if(wixModel){
             $el.off();
 			$el.find('*').off();
 			$el.remove();

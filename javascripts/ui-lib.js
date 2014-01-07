@@ -13,7 +13,12 @@
 		set                : model.setAndReport,
 		get                : model.get,
 		toJSON             : model.toJSON,
-		onChange           : model.onChange
+		onChange           : model.onChange,
+		styles             : {
+			set: styleModel.set
+			get: styleModel.get
+			onChange: styleModel.onChange
+		}
 	};
 		
 	function log(){
@@ -127,10 +132,10 @@
 		var plugin = $el.data('plugin_'+pluginName);
 		
         if(wixModel){		
-            $el.off();
+			plugin.destroy && plugin.destroy();
+			$el.off();
 			$el.find('*').off();
 			$el.remove();
-			plugin.destroy && plugin.destroy();
             delete model.props[wixModel];
             model.handlers = [];
             model.reporters = {};

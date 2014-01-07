@@ -54,7 +54,8 @@
                 width:'',
                 optionsWidth:'',
                 height:'',
-                style: 'dropdown-style-1'
+                style: 'dropdown-style-1',
+                modifier: function($el){return $el;}
             };
         },
         markup: function () {
@@ -90,7 +91,7 @@
                 $el.css('width', this.options.width);
             }
             if(this.options.optionsWidth){
-                this.$options.css('width', this.options.width);
+                this.$options.css('width', this.options.optionsWidth);
             }
             if(this.options.height){
                 this.$options.css('height', this.options.height);
@@ -114,7 +115,7 @@
             if ($option.length && this.getIndex() !== $option.attr(names.indexAttrName)) {
                 this.$options.find('.'+names.selectedOptionsClassName).removeClass(names.selectedOptionsClassName);
                 this.$selected.empty();
-                this.$selected.append($option.clone(true).addClass('current-item').removeClass(names.highlightClassName));
+                this.$selected.append(this.options.modifier($option.clone(true).addClass('current-item').removeClass(names.highlightClassName)));
                 $option.addClass(names.selectedOptionsClassName);
                 return true;
             }

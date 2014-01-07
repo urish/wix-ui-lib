@@ -198,12 +198,26 @@
 				this.bindAutoClose(this.options.autoCloseTime);
 			}
 
-			$(document).on('uilib-dropdown-open', function(evt, _dropdown){
+			function uilibDropdownOpen(evt, _dropdown){
 				if(_dropdown !== dropdown){
 					dropdown.hideOptions();
 					dropdown.setActiveMode(false);				
 				}
+			}
+			function winMousedown(evt) {
+				dropdown.hideOptions();
+				dropdown.setActiveMode(false);
+			}
+			
+			$(document).on('uilib-dropdown-open', uilibDropdownOpen);
+			
+			$(window).on('mousedown', winMousedown);
+			
+			this.whenDestroy(function(){
+				$(document).off('uilib-dropdown-open',uilibDropdownOpen);
+				$(window).off('mousedown', winMousedown);
 			});
+			
 			
 			this.$options.on('mouseenter', '.' + names.optionClassName, function () {
 				dropdown.highlightOption($(this));
@@ -222,11 +236,7 @@
 			this.$el.on('mousedown', function (evt) {
 				evt.stopPropagation();
 			});
-			
-			$(window).on('mousedown', function (evt) {
-				dropdown.hideOptions();
-				dropdown.setActiveMode(false);
-			});
+
 			
 			var ENTER = 13,
 				SPACE = 32,

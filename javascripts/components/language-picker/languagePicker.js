@@ -33,7 +33,7 @@ jQuery.fn.definePlugin('LanguagePicker', function () {
 			var languagePicker = this;
 			this.$el.on('Dropdown.change', function (evt, data) {
 				evt.stopPropagation();
-                languagePicker.triggerChangeEvent(data);
+                languagePicker.triggerChangeEvent(languagePicker.getValue());
 			});
 		},
         getDefaults: function(){

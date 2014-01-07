@@ -66,7 +66,8 @@ describe('LanguagePicker', function () {
         var $languagePicker = $(".uilib-languagePicker");
         var $es = $languagePicker.find('.options .option:nth-child(3)');
         $es.click();
-        expect(Wix.UI.get($(element).attr('wix-model'))).toEqual('Es');
+        expect(Wix.UI.get($(element).attr('wix-model')).value).toEqual('Es');
+        expect(Wix.UI.get($(element).attr('wix-model')).index).toEqual(2);
     });
 
     function givenLanguagesWeSupport() {

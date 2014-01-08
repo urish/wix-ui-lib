@@ -38,18 +38,12 @@ module.exports = function (grunt) {
 			dist : {
                 js: {
                     src: jsSrc,
-                    dest : 'build/<%= pkg.name %>.all.js',
-                    separator: ";"
+                    dest : 'build/<%= pkg.name %>.all.js'
                 },
 
                 css: {
                     src: cssSrc,
-                    dest: 'build/<%= pkg.name %>.min.css'
-                },
-
-                html: {
-                    src: 'html/settings.html',
-                    dest: 'build/settings.html'
+                    dest: 'build/<%= pkg.name %>.all.css'
                 }
 			}
 		},
@@ -85,8 +79,17 @@ module.exports = function (grunt) {
                         expand: true, flatten: true,src: ['html/*.html'], dest: 'build/', filter: 'isFile'
                     }
 				]
-			}
+			},
+
+            dev : {
+                files : [
+                    {
+                        expand: true, flatten: true,src: ['html/settings.html'], dest: 'build/', filter: 'isFile'
+                    }
+                ]
+            }
 		},
+
 		jshint : {
 			all : {
 				options : {
@@ -139,15 +142,15 @@ module.exports = function (grunt) {
         watch: {
             js: {
                 files: jsSrc,
-                tasks: ["concat:dist:js"]
+                tasks: ["uglify:build"]
             },
             css: {
                 files: cssSrc,
-                tasks: ["concat:dist:css"]
+                tasks: ["cssmin:add_banner"]
             },
             html: {
                 files: ["<%= concat.dist.html.src %>"],
-                tasks: ["concat:dist:html"]
+                tasks: ["copy:dev"]
             }
         },
 

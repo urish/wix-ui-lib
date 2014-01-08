@@ -4,6 +4,29 @@ module.exports = function (grunt) {
 	var projectName = 'uiLib';
 	var sourceDirectory = 'src/main/';
 	var buildDirectory = 'build/' + projectName + '/src/main/';
+    var jsSrc = ['javascripts/definePlugin.js',
+              'javascripts/components/**/*.js',
+                       'javascripts/ui-lib.js'];
+    var cssSrc = ['stylesheets/bootstrap.css',
+        'stylesheets/buttons.css',
+        'stylesheets/common.css',
+        'stylesheets/settings.css',
+
+        'javascripts/components/radio-button/radio-button.css',
+        'javascripts/components/checkbox/checkbox.css',
+        'javascripts/components/accordion/accordion.css',
+        'javascripts/components/header/header.css',
+        'javascripts/components/dropdown/dropdown.css',
+        'javascripts/components/popup/popup.css',
+        'javascripts/components/input/input.css',
+        'javascripts/components/spinner/spinner.css',
+
+
+        'javascripts/components/color-picker2/css/color-picker.css',
+        'javascripts/components/advanced-dropdown/css/dd.css',
+        'javascripts/components/slider2/slider2.css',
+        'javascripts/components/glued-position/css/glued-position.css'];
+
 
 	grunt.initConfig({
 		pkg : grunt.file.readJSON('./package.json'),
@@ -13,12 +36,21 @@ module.exports = function (grunt) {
 				separator : ';'
 			},
 			dist : {
-				src : [
-					'javascripts/definePlugin.js',
-					'javascripts/components/**/*.js',
-					'javascripts/ui-lib.js'
-				],
-				dest : 'build/<%= pkg.name %>.all.js'
+                js: {
+                    src: jsSrc,
+                    dest : 'build/<%= pkg.name %>.all.js',
+                    separator: ";"
+                },
+
+                css: {
+                    src: cssSrc,
+                    dest: 'build/<%= pkg.name %>.min.css'
+                },
+
+                html: {
+                    src: 'html/settings.html',
+                    dest: 'build/settings.html'
+                }
 			}
 		},
 		
@@ -27,11 +59,7 @@ module.exports = function (grunt) {
 				banner : '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
 			},
 			build : {
-				src : [
-					'javascripts/definePlugin.js',
-					'javascripts/components/**/*.js',
-					'javascripts/ui-lib.js'
-				],
+                src: jsSrc,
 				dest : 'build/<%= pkg.name %>.min.js'
 			}
 		},
@@ -41,28 +69,7 @@ module.exports = function (grunt) {
 					banner : '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
 				},
 				files : {
-					'build/<%= pkg.name %>.min.css' : [
-						'stylesheets/bootstrap.css',
-						'stylesheets/buttons.css',
-						'stylesheets/common.css',
-						'stylesheets/settings.css',
-						
-						'javascripts/components/radio-button/radio-button.css',
-						'javascripts/components/checkbox/checkbox.css',
-						'javascripts/components/accordion/accordion.css',
-						'javascripts/components/header/header.css',
-						'javascripts/components/dropdown/dropdown.css',
-						'javascripts/components/popup/popup.css',
-						'javascripts/components/input/input.css',
-						'javascripts/components/spinner/spinner.css',
-						
-						
-						'javascripts/components/color-picker2/css/color-picker.css',
-						'javascripts/components/advanced-dropdown/css/dd.css',
-						'javascripts/components/slider2/slider2.css',
-						'javascripts/components/glued-position/css/glued-position.css'
-
-					]
+					'build/<%= pkg.name %>.min.css' : cssSrc
 				}
 			}
 		},
@@ -74,7 +81,9 @@ module.exports = function (grunt) {
 						src : ['**'],
 						dest : 'build/images'
 					}, // makes all src relative to cwd
-					{expand: true, flatten: true,src: ['html/*.html'], dest: 'build/', filter: 'isFile'}, 
+					{
+                        expand: true, flatten: true,src: ['html/*.html'], dest: 'build/', filter: 'isFile'
+                    }
 				]
 			}
 		},
@@ -127,6 +136,21 @@ module.exports = function (grunt) {
             }
         },
 
+        watch: {
+            js: {
+                files: jsSrc,
+                tasks: ["concat:dist:js"]
+            },
+            css: {
+                files: cssSrc,
+                tasks: ["concat:dist:css"]
+            },
+            html: {
+                files: ["<%= concat.dist.html.src %>"],
+                tasks: ["concat:dist:html"]
+            }
+        },
+
 		clean : ['build']
 
 	});
@@ -138,4 +162,5 @@ module.exports = function (grunt) {
 	grunt.registerTask('default', ['clean', 'copy', 'uglify', 'cssmin', 'karma']);
 	grunt.registerTask('concatall', ['clean', 'copy', 'concat','uglify', 'cssmin']);
 	grunt.registerTask('lint', ['jshint']);
+    grunt.registerTask('dev', ['clean', 'copy', 'uglify', 'cssmin', 'watch']);
 };

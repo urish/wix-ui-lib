@@ -32,10 +32,21 @@ describe('Slider', function () {
         beforeEach(function(){
             Wix.UI.initializePlugin(element);
         });
+        
 
         it('should not show the tooltip by default', function(){
             var $toolTip = $(element).find('.uilib-slider-tooltip');
             expect($toolTip.length).toBe(0);
+        });
+
+        it('should not show a tool tip when you click on the pin by default', function(){
+            var $element = $(element);
+            var $pin = $element.find(".uilib-slider-pin");
+            var $tooltip = $element.find(".uilib-slider-tooltip");
+
+            expect($tooltip.length).toEqual(0);
+            $pin.mousedown();
+            expect($tooltip.length).toEqual(0);
         });
     });
 

@@ -70,7 +70,7 @@ jQuery.fn.definePlugin('Slider', function ($) {
 				//slider.setValueFromEvent(slider.getXFromEvent(evt));
 			//});
 			this.$pin.on('mousedown', function (evt) {
-                if(!slider.$toolTip.is(":visible")){
+                if(slider.$toolTip && !slider.$toolTip.is(":visible")){
                     slider.$toolTip.show();
                 }
 				slider.currentPos = slider.$pin.position().left;
@@ -80,7 +80,9 @@ jQuery.fn.definePlugin('Slider', function ($) {
                     slider.setPosition(evt);
 				}
 				function mouseup_handler(evt) {
-                    slider.$toolTip.hide();
+                    if(slider.$toolTip){
+                        slider.$toolTip.hide();
+                    }
 					slider.enableTextSelection();
 					$body.off('mousemove', mousemove_handler);
 					$body.off('mouseup', mouseup_handler);

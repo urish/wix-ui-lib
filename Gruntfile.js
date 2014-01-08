@@ -118,14 +118,24 @@ module.exports = function (grunt) {
 				}
 			}
 		},
+
+        karma: {
+            unit: {
+                configFile: 'karma.conf.js',
+                singleRun: true,
+                browsers: ['PhantomJS']
+            }
+        },
+
 		clean : ['build']
 
 	});
 
 	grunt.loadNpmTasks('grunt-contrib');
+    grunt.loadNpmTasks('grunt-karma');
 
 	// Default task.
-	grunt.registerTask('default', ['clean', 'copy', 'uglify', 'cssmin']);
+	grunt.registerTask('default', ['clean', 'copy', 'uglify', 'cssmin', 'karma']);
 	grunt.registerTask('concatall', ['clean', 'copy', 'concat','uglify', 'cssmin']);
 	grunt.registerTask('lint', ['jshint']);
 };

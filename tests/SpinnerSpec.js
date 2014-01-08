@@ -114,6 +114,18 @@ describe('Spinner', function () {
         expect(Wix.UI.get('numOfItems')).toBe(0.1);
     });
 
+    it('should work when setting custom maxValue as a string and setting to a floating value', function(){
+        var options = {  maxValue: '500' };
+        $(element).attr('wix-ctrl', 'Spinner:' + JSON.stringify(options));
+
+        Wix.UI.initializePlugin(element);
+        var $input = $(element).find('input');
+        $input.val('57.37704918032787');
+        var event = givenEnterPressedEvent();
+        $input.trigger(event);
+        expect(Wix.UI.get('numOfItems')).toBe(57);
+    });
+
     function givenEnterPressedEvent() {
         var event = jQuery.Event("keypress");
         event.which = 13;

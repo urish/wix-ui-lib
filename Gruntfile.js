@@ -20,8 +20,7 @@ module.exports = function (grunt) {
 		'javascripts/components/popup/popup.css',
 		'javascripts/components/input/input.css',
 		'javascripts/components/spinner/spinner.css',
-
-
+		'javascripts/components/language-picker/languagePicker.css',
 		'javascripts/components/color-picker2/css/color-picker.css',
 		'javascripts/components/advanced-dropdown/css/dd.css',
 		'javascripts/components/slider2/slider2.css',

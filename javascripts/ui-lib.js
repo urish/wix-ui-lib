@@ -1,6 +1,6 @@
 (function (exports){
 
-	holdJQueryDOMReady();
+	holdJQueryDOMReady(exports.__disableStandaloneError__);
 	
 	var model = createModel();
 	var styleModel = createModel();
@@ -13,12 +13,14 @@
 		set                : model.setAndReport,
 		get                : model.get,
 		toJSON             : model.toJSON,
-		onChange           : model.onChange,
-		styles             : {
+		onChange           : model.onChange
+		/*,
+		Styles             : {
 			set: styleModel.set,
 			get: styleModel.get,
-			onChange: styleModel.onChange
-		}
+			onChange: styleModel.onChange,
+			toJSON: styleModel.toJSON
+		}*/
 	};
 		
 	function log(){
@@ -59,7 +61,7 @@
     	$rootEl.fadeIn(140, function(){
 			$(document.body).trigger('uilib-update-scroll-bars');
 		});
-		
+	
     }
 	
 	function holdJQueryDOMReady(){
@@ -67,13 +69,17 @@
 		if(window.Wix){
 			if(Wix.Utils.getViewMode() === 'standalone'){
 				setTimeout(function(){
-					throw new Error('Standalone mode: Wix style params are not available outside of the "wix editor"');
+					if(!exports.__disableStandaloneError__ ){
+						throw new Error('Standalone mode: Wix style params are not available outside of the "wix editor"');
+					}
 				},0);
 			} else {
 				holdReady(true);
 				timeoutTicket = setTimeout(function(){
 					holdReady(false);
-					throw new Error('Style params are not available outside of the "wix editor", if you are in the editor ');		
+					if(!exports.__disableStandaloneError__ ){
+						throw new Error('Style params are not available outside of the "wix editor", if you are in the editor ');		
+					}
 				}, 3333);
 				Wix.getStyleParams(function(){
 					clearTimeout(timeoutTicket);
@@ -124,7 +130,12 @@
 		applyPlugin(element, ctrlName, overrideOptions || options);
     }
 	
-    function destroyPlugin(element) {
+    function destroyPlugin(element, removeModel) {
+		if(element instanceof jQuery){
+			return element.each(function(){
+				destroyPlugin(this, removeModel);
+			});
+		}
         var ctrl = getAttribute(element, 'wix-controller') || getAttribute(element, 'wix-ctrl') ;
         var pluginName = getCtrlName(ctrl);
         var wixModel = getAttribute(element, 'wix-model');
@@ -132,11 +143,16 @@
 		var plugin = $el.data('plugin_'+pluginName);
 		
         if(wixModel){		
-			plugin.destroy && plugin.destroy();
-			$el.off();
-			$el.find('*').off();
-			$el.remove();
-			model.removeKey(wixModel);            
+			if(plugin.destroy){
+				plugin.destroy();
+			} else {
+				$el.off();
+				$el.find('*').off();
+				$el.remove();
+			}
+			if(removeModel){
+				model.removeKey(wixModel);            
+			}
         }
     }
 	
@@ -202,9 +218,9 @@
     function getCtrlName(ctrl) {
 		var index = ctrl.indexOf(':');
         if (index !== -1) {
-            return ctrl.substr(0, index);
+            return $.trim(ctrl.substr(0, index));
         }
-		return ctrl;
+		return $.trim(ctrl);
     }
 	
 	function createModel() {

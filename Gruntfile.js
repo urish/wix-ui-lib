@@ -5,6 +5,7 @@ module.exports = function (grunt) {
 	var sourceDirectory = 'src/main/';
 	var buildDirectory = 'build/' + projectName + '/src/main/';
 
+
 	grunt.initConfig({
 		pkg : grunt.file.readJSON('./package.json'),
 

@@ -123,8 +123,8 @@
 		setValueFromEl: function ($el) {
 			var index = +$el.attr(names.indexAttrName);
 			if(this.setValue(index)){
-				var value = this.isParamMode ? this.getFullValue() : this.getVal();
-				this.triggerChangeEvent(value);
+				//var value = this.isParamMode ? this.getFullValue() : this.getValue();
+				this.triggerChangeEvent(this.getValue());
 			}
 		},
 		setActiveMode: function (isActive) {
@@ -142,7 +142,7 @@
 			return this.$selected.find('.' + names.optionClassName).attr(names.valueAttrName);
 		},
 		getValue: function () {
-			return this.getVal();
+			return this.getFullValue();
 		},
 		getFullValue: function () {
 			return {

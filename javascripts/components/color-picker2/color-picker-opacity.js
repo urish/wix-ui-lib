@@ -35,9 +35,9 @@ jQuery.fn.definePlugin('ColorPickerWithOpacity', function ($) {
 			var sliderValue = plugs.slider.getValue() / 100;
 			
 			if(rgbString.indexOf('rgba')===0){
-				return rgbString.replace(/,\s*([\d\.]+)\s*\)/, ', '+ sliderValue + ')');
+				return rgbString.replace(/,\s*([\d\.]+)\s*\)/, ','+ sliderValue + ')');
 			} else {
-				return rgbString.replace(/rgb/, 'rgba').replace(')', ', ' + sliderValue + ')');
+				return rgbString.replace(/rgb/, 'rgba').replace(')', ',' + sliderValue + ')');
 			}
 		},
 		setValue: function (value) {
@@ -72,7 +72,7 @@ jQuery.fn.definePlugin('ColorPickerWithOpacity', function ($) {
 			};
 		},
 		colorChangedInInnerPlugins: function (whatChanged, event, value) {
-			//?event.stopPropagation();
+			event.stopPropagation();
 			this.triggerChangeEvent({
 				color: this.getPlugins().colorPicker.getColorObject(),
 				opacity: this.getPlugins().slider.getValue() / 100,

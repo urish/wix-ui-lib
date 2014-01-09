@@ -60,7 +60,7 @@ jQuery.fn.definePlugin('Slider', function ($) {
 
 			if(this.options.toolTip){
 				this.$toolTip = $(_toolTipHtml());
-				this.$pin.append(this.$toolTip);
+				this.$pin.append(this.$toolTip.hide());
 			}
 		},
 		bindEvents: function () {
@@ -70,13 +70,19 @@ jQuery.fn.definePlugin('Slider', function ($) {
 				//slider.setValueFromEvent(slider.getXFromEvent(evt));
 			//});
 			this.$pin.on('mousedown', function (evt) {
+                if(slider.$toolTip && !slider.$toolTip.is(":visible")){
+                    slider.$toolTip.show();
+                }
 				slider.currentPos = slider.$pin.position().left;
 				slider.startDragPos = evt.pageX;
 				slider.disableTextSelection(evt);
 				function mousemove_handler(evt) {
-					slider.setPosition(evt);
+                    slider.setPosition(evt);
 				}
 				function mouseup_handler(evt) {
+                    if(slider.$toolTip){
+                        slider.$toolTip.hide();
+                    }
 					slider.enableTextSelection();
 					$body.off('mousemove', mousemove_handler);
 					$body.off('mouseup', mouseup_handler);

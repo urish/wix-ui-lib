@@ -75,7 +75,7 @@ jQuery.fn.definePlugin('Spinner', function ($) {
 
 			this.$el.on(events.focusOut, 'input', function(){
 				if(spinner.setValue(_parse(spinner.getValue()))){
-					spinner.triggerChangeEvent(spinner.getValue());
+                    spinner.triggerChangeEvent(spinner.getValue());
 				}
 			});
 
@@ -91,19 +91,19 @@ jQuery.fn.definePlugin('Spinner', function ($) {
 			return +this.$el.find('input').val();
 		},
 		setValue: function (valueInRange) {
-			this.options.value = this.valueInRangeToInnerRange(valueInRange);
+            this.options.value = this.valueInRangeToInnerRange(valueInRange);
 			if (this.options.value !== this.last_value) {
-				this.last_value = this.options.value;
+                this.last_value = this.options.value;
 				this.update();
 				return true;
 			}
 		},
 		update: function () {
-			this.$el.find('input').val(this.options.value);
+            this.$el.find('input').val(this.options.value);
 			return this;
 		},
 		valueInRangeToInnerRange: function (value) {
-			value = (+value).toFixed(this.options.precision);
+            value = +(+value).toFixed(this.options.precision);
 			value = value < this.options.minValue ? this.options.minValue : value;
 			value = value > this.options.maxValue ? this.options.maxValue : value;
 			return value;

@@ -26,6 +26,14 @@ hr{
   visibility: hidden;
 }
 
+.pull-right {
+    float: right !important;
+}
+
+.pull-left {
+    float: left !important;
+}
+
 .disable {
     opacity: 0.35;
 }

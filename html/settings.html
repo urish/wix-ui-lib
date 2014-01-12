@@ -4,53 +4,15 @@
     <title>Widget Settings &bull; Wix</title>
     <link rel="stylesheet" href="ui-lib.min.css"/>
     <style type="text/css">
-        .wix{
-            margin: 10px;
-            background-color: #fff;
-        }
-        .wix .container{
-            background-color: #f5f5f5;
-            border-radius: 5px;
-            box-shadow: rgb(0, 0, 0) -3px 0px 50px 0px;
-        }
-        .wix .container .title{
-            font-size: 16px;
-            display: block;
-            padding: 0px 10px;
-            border-bottom: 1px solid #cccccc;
-            line-height: 34px;
-        }
-
-        .wix .container .footer{
-            font-size: 14px;
-            display: block;
-            padding: 10px;
-            border-top: 1px solid #cccccc;
-            line-height: 34px;
-        }
-
-        header.box {
-            margin: 10px;
-        }
-
-        div.accordion {
-            margin: 10px;
-        }
-
-        section.box:last-child {
-            padding-bottom: 10px;
-        }
-
         .left-margin{
             margin-left: 40px;
         }
 
     </style>
 </head>
-<body wix-uilib class="wix">
+<body wix-uilib>
 
 <div class="container">
-    <strong class="title">App Name</strong>
     <header class="box">
         <div class="logo">
             <img width="86" src="images/wix_icon.png" alt="logo"/>
@@ -96,7 +58,7 @@
                         </div>
                     </li>
                     <li wix-label="Number of images:">
-                        <div wix-model="numOfImages" wix-ctrl="Slider" wix-options="{ maxValue:'500', preLabel:'0', postLabel:'500', toolTip:false}"></div>
+                        <div wix-model="numOfImages" wix-ctrl="Slider" wix-options="{ maxValue:'500', preLabel:'0', postLabel:'500', toolTip:true}"></div>
                         <div class="left-margin">&nbsp;</div>
                         <div wix-model="numOfImages" wix-ctrl="Spinner" wix-options="{ maxValue:'500'}"></div>
                     </li>

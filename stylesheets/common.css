@@ -1,6 +1,6 @@
 body {
   margin: 10px 0;
-  background: #FDFDFD;
+  background: #f5f5f5;
   font-family: "Arial", sans-serif;
 }
 p {
@@ -32,6 +32,18 @@ hr{
 
 .pull-left {
     float: left !important;
+}
+
+.container{
+    background-color: #f5f5f5;
+}
+
+.container .footer{
+    font-size: 14px;
+    display: block;
+    padding: 10px;
+    border-top: 1px solid #cccccc;
+    line-height: 34px;
 }
 
 .disable {

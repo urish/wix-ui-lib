@@ -26,7 +26,8 @@ jQuery.fn.definePlugin('Tooltip', function ($) {
 					'<div class="arrow_box">' +
 					'<div class='+ styles.textClassName +'></div>' +
 					'</div>' +
-					'</div>'
+					'</div>',
+				animation : true
 			}
 		},
 		markup: function (){
@@ -88,7 +89,7 @@ jQuery.fn.definePlugin('Tooltip', function ($) {
 				if($elm.outerWidth() > $tooltip.outerWidth()){
 					var diff = $elm.outerWidth() - $tooltip.outerWidth();
 					return diff/2;
-				}else{
+				} else{
 					var diff = $tooltip.outerWidth() - $elm.outerWidth();
 					return -diff/2;
 				}
@@ -98,16 +99,20 @@ jQuery.fn.definePlugin('Tooltip', function ($) {
 				if($elm.outerHeight() > $tooltip.outerHeight()){
 					var diff = $elm.outerHeight() - $tooltip.outerHeight();
 					return diff/2;
-				}else{
+				} else{
 					var diff = $tooltip.outerHeight() - $elm.outerHeight();
 					return -diff/2;
 				}
 			}
 
 			$elm.on(events.mouseLeave, function (evt) {
-				$("." + styles.className).fadeOut(function(){
-					$(this).remove();
-				});
+				if(tooltip.options.animation){
+					$("." + styles.className).fadeOut(function(){
+						tooltip.remove();
+					});
+				} else{
+					tooltip.remove();
+				}
 			});
 		},
 		getValue: function () {

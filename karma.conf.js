@@ -15,7 +15,8 @@ module.exports = function(config) {
         'javascripts/definePlugin.js',
 		'javascripts/ui-lib.js',
         'javascripts/components/**/*.js',
-        'tests/**Spec.js'
+		'javascripts/components/**/*.css',
+		'tests/**Spec.js'
     ],
 
 

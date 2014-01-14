@@ -4,15 +4,15 @@ jQuery.fn.definePlugin('Tooltip', function ($) {
 	var styles = {
 		className : 'uilib-tooltip',
 		textClassName : 'uilib-text',
-		arrowTopClassName : 'arrowTop',
-		arrowLetfClassName : 'arrowLeft',
 		arrowHeight : 12
 	};
 	var events = {
 		mouseEnter : 'mouseenter',
 		mouseLeave : 'mouseleave'
 	};
-		
+
+	var placements = ['top', 'right', 'left', 'bottom'];
+
 	return {
 		init: function(){
 			this.markup();
@@ -20,11 +20,11 @@ jQuery.fn.definePlugin('Tooltip', function ($) {
 		},
 		getDefaults: function(){
 			return {
-				placement : 'top',
+				placement : placements[0],
 				html      : false,
 				template  : '<div class=' + styles.className + '>' +
 					'<div class="arrow_box">' +
-					'<div class="uilib-text"></div>' +
+					'<div class='+ styles.textClassName +'></div>' +
 					'</div>' +
 					'</div>'
 			}
@@ -44,15 +44,20 @@ jQuery.fn.definePlugin('Tooltip', function ($) {
 					$toolTipValue.text($elm.attr("wix-title"));
 				}
 				$elm.after($tooltip);
-				if(tooltip.options.placement === 'top'){
+				if($.inArray(tooltip.options.placement, placements) > - 1){
+					if(tooltip.options.placement === 'top'){
+						setTopPlacement($tooltip);
+					} else if(tooltip.options.placement === 'right'){
+						setRightPlacement($tooltip);
+					} else if(tooltip.options.placement === 'left'){
+						setLeftPlacement($tooltip);
+					} else if(tooltip.options.placement === 'bottom'){
+						setBottomPlacement($tooltip);
+					}
+				} else {
 					setTopPlacement($tooltip);
-				} else if(tooltip.options.placement === 'right'){
-					setRightPlacement($tooltip);
-				} else if(tooltip.options.placement === 'left'){
-					setLeftPlacement($tooltip);
-				} else if(tooltip.options.placement === 'bottom'){
-					setBottomPlacement($tooltip);
 				}
+
 			});
 
 			function setTopPlacement($tooltip){

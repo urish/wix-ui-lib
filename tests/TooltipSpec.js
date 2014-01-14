@@ -54,6 +54,11 @@ describe('Tooltip', function () {
 		expect($tooltip.offset().left).toEqual($(element).offset().left + ($(element).outerWidth() - $tooltip.outerWidth()) / 2);
 	});
 
+	it('should fall back to position top if invalid position is giving',function(){
+		var $tooltip = givenToolTip({placement:'blabla'});
+		expect($tooltip.offset().top).toEqual($(element).offset().top - ($tooltip.outerHeight() + 12));
+	});
+
     function givenMouseEnterEvent() {
         var event = jQuery.Event("mouseenter");
         return event;

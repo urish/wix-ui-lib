@@ -1,18 +1,18 @@
 jQuery.fn.definePlugin('Tooltip', function ($) {
 	'use strict';
-	
+
 	var styles = {
-        className : 'uilib-tooltip',
+		className : 'uilib-tooltip',
 		textClassName : 'uilib-text',
 		arrowTopClassName : 'arrowTop',
 		arrowLetfClassName : 'arrowLeft',
 		arrowHeight : 12
-    };
-    var events = {
-        mouseEnter : 'mouseenter',
-        mouseLeave : 'mouseleave'
-    };
-	
+	};
+	var events = {
+		mouseEnter : 'mouseenter',
+		mouseLeave : 'mouseleave'
+	};
+		
 	return {
 		init: function(){
 			this.markup();
@@ -109,10 +109,10 @@ jQuery.fn.definePlugin('Tooltip', function ($) {
 			return "";
 		},
 		setValue: function (value) {
-            "";
+			"";
 		},
 		update: function () {
-            return this;
+			return this;
 		},
 		remove: function(){
 			$("." + styles.className).remove();

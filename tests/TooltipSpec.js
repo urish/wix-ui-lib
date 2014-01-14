@@ -1,17 +1,17 @@
 describe('Tooltip', function () {
-    'use strict';
+	'use strict';
 
-    var element;
-    beforeEach(function(){
-        element = $('<div style="margin:100px auto; width:200px; border:1px solid red" wix-ctrl="Tooltip" wix-title="Some text to show on <strong>mouse</strong> hover">Help</div>').appendTo('body')[0];
-    });
+	var element;
+	beforeEach(function(){
+		element = $('<div style="margin:100px auto; width:200px; border:1px solid red" wix-ctrl="Tooltip" wix-title="Some text to show on <strong>mouse</strong> hover">Help</div>').appendTo('body')[0];
+	});
 
-    afterEach(function(){
-        Wix.UI.destroyPlugin(element);
-    });
+	afterEach(function(){
+		Wix.UI.destroyPlugin(element);
+	});
 
-    describe('Default Options', function () {
-        it('should place the tool tip on top of the element', function(){
+	describe('Default Options', function () {
+		it('should place the tool tip on top of the element', function(){
 			var $tooltip = givenToolTip();
 			expect($tooltip.offset().top).toEqual($(element).offset().top - ($tooltip.outerHeight() + 12));
 			expect($tooltip.offset().left).toEqual($(element).offset().left + ($(element).outerWidth() - $tooltip.outerWidth()) / 2);
@@ -22,7 +22,7 @@ describe('Tooltip', function () {
 			expect($(element).next().find(".uilib-text").html()).toEqual('Some text to show on &lt;strong&gt;mouse&lt;/strong&gt; hover');
 		});
 
-    });
+	});
 
 	it('should place the tooltip in the middle of the element for very long title', function(){
 		element = $('<div style="margin:100px auto; width:50px; border:1px solid red" wix-ctrl="Tooltip" wix-title="Some text to show on mouse hover some very long text about this feature could also look nice as a tool tip">Help</div>').appendTo('body')[0];
@@ -74,10 +74,10 @@ describe('Tooltip', function () {
 		expect($tooltip.offset().top).toEqual($(element).offset().top - ($tooltip.outerHeight() + 12));
 	});
 
-    function givenMouseEnterEvent() {
-        var event = jQuery.Event("mouseenter");
-        return event;
-    }
+	function givenMouseEnterEvent() {
+		var event = jQuery.Event("mouseenter");
+		return event;
+	}
 
 	function givenMouseLeaveEvent() {
 		var event = jQuery.Event("mouseleave");

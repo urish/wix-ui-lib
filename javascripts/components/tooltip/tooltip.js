@@ -2,9 +2,10 @@ jQuery.fn.definePlugin('Tooltip', function ($) {
 	'use strict';
 
 	var styles = {
-		className : 'uilib-tooltip',
-		textClassName : 'uilib-text',
-		arrowHeight : 12
+		className      : 'uilib-tooltip',
+		textClassName  : 'uilib-text',
+		arrowClassName : 'arrow_box',
+		arrowHeight    : 12
 	};
 	var events = {
 		mouseEnter : 'mouseenter',
@@ -23,7 +24,7 @@ jQuery.fn.definePlugin('Tooltip', function ($) {
 				placement : placements[0],
 				html      : false,
 				template  : '<div class=' + styles.className + '>' +
-					'<div class="arrow_box">' +
+					'<div class=' + styles.arrowClassName + '>' +
 					'<div class='+ styles.textClassName +'></div>' +
 					'</div>' +
 					'</div>',
@@ -62,25 +63,25 @@ jQuery.fn.definePlugin('Tooltip', function ($) {
 			});
 
 			function setTopPlacement($tooltip){
-				$tooltip.find('.arrow_box').addClass('down');
+				$tooltip.find('.' + styles.arrowClassName).addClass('down');
 				$tooltip.css('left', $elm.offset().left + calcOffsetLeft($tooltip));
 				$tooltip.css('top', $elm.offset().top - ($tooltip.outerHeight() + styles.arrowHeight));
 			}
 
 			function setBottomPlacement($tooltip){
-				$tooltip.find('.arrow_box').addClass('up');
+				$tooltip.find('.' + styles.arrowClassName).addClass('up');
 				$tooltip.css('left', $elm.offset().left + calcOffsetLeft($tooltip));
 				$tooltip.css('top', $elm.offset().top + $elm.outerHeight() + styles.arrowHeight);
 			}
 
 			function setRightPlacement($tooltip){
-				$tooltip.find('.arrow_box').addClass('left');
+				$tooltip.find('.' + styles.arrowClassName).addClass('left');
 				$tooltip.css('left', $elm.offset().left + $elm.outerWidth() + styles.arrowHeight);
 				$tooltip.css('top', $elm.offset().top + calcOffsetTop($tooltip));
 			}
 
 			function setLeftPlacement($tooltip){
-				$tooltip.find('.arrow_box').addClass('right');
+				$tooltip.find('.' + styles.arrowClassName).addClass('right');
 				$tooltip.css('left', $elm.offset().left - ($tooltip.outerWidth() + styles.arrowHeight));
 				$tooltip.css('top', $elm.offset().top + calcOffsetTop($tooltip));
 			}

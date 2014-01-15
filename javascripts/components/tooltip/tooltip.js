@@ -47,14 +47,21 @@ jQuery.fn.definePlugin('Tooltip', function ($) {
 				}
 				$elm.after($tooltip);
 				if($.inArray(tooltip.options.placement, placements) > - 1){
-					if(tooltip.options.placement === 'top'){
-						setTopPlacement($tooltip);
-					} else if(tooltip.options.placement === 'right'){
-						setRightPlacement($tooltip);
-					} else if(tooltip.options.placement === 'left'){
-						setLeftPlacement($tooltip);
-					} else if(tooltip.options.placement === 'bottom'){
-						setBottomPlacement($tooltip);
+					switch(tooltip.options.placement){
+						case 'top':
+							setTopPlacement($tooltip);
+							break;
+						case 'right':
+							setRightPlacement($tooltip);
+							break;
+						case 'left':
+							setLeftPlacement($tooltip);
+							break;
+						case 'bottom':
+							setLeftPlacement(setBottomPlacement);
+							break;
+						default :
+							setTopPlacement($tooltip);
 					}
 				} else {
 					setTopPlacement($tooltip);

@@ -39,11 +39,11 @@ jQuery.fn.definePlugin('Tooltip', function ($) {
 			$elm.on(events.mouseEnter, function (evt) {
 				tooltip.remove();
 				var $tooltip = $(tooltip.options.template);
-				var $toolTipValue = $tooltip.find("." + styles.textClassName).html($elm.attr("wix-title"));
+				var $toolTipValue = $tooltip.find("." + styles.textClassName);
 				if(tooltip.options.html){
-					$toolTipValue.html($elm.attr("wix-title"));
+					$toolTipValue.html($elm.attr("wix-tooltip"));
 				} else {
-					$toolTipValue.text($elm.attr("wix-title"));
+					$toolTipValue.text($elm.attr("wix-tooltip"));
 				}
 				$elm.after($tooltip);
 				if($.inArray(tooltip.options.placement, placements) > - 1){

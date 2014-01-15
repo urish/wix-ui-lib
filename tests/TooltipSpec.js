@@ -3,7 +3,7 @@ describe('Tooltip', function () {
 
 	var element;
 	beforeEach(function(){
-		element = $('<div style="margin:100px auto; width:200px; border:1px solid red" wix-ctrl="Tooltip" wix-title="Some text to show on <strong>mouse</strong> hover">Help</div>').appendTo('body')[0];
+		element = $('<div style="margin:100px auto; width:200px; border:1px solid red" wix-tooltip="Some text to show on <strong>mouse</strong> hover">Help</div>').appendTo('body')[0];
 	});
 
 	afterEach(function(){
@@ -25,13 +25,13 @@ describe('Tooltip', function () {
 	});
 
 	it('should place the tooltip in the middle of the element for very long title', function(){
-		element = $('<div style="margin:100px auto; width:50px; border:1px solid red" wix-ctrl="Tooltip" wix-title="Some text to show on mouse hover some very long text about this feature could also look nice as a tool tip">Help</div>').appendTo('body')[0];
+		element = $('<div style="margin:100px auto; width:50px; border:1px solid red" wix-tooltip="Tooltip" wix-title="Some text to show on mouse hover some very long text about this feature could also look nice as a tool tip">Help</div>').appendTo('body')[0];
 		var $tooltip = givenToolTip();
 		expect($tooltip.offset().left + $tooltip.outerWidth() / 2).toEqual($tooltip.offset().left + $tooltip.outerWidth() / 2);
 	});
 
 	it('should place the tooltip in the middle of the element for very shot title', function(){
-		element = $('<div style="margin:100px auto; width:200px; border:1px solid red" wix-ctrl="Tooltip" wix-title="tip">Help</div>').appendTo('body')[0];
+		element = $('<div style="margin:100px auto; width:200px; border:1px solid red" wix-tooltip="Tooltip" wix-title="tip">Help</div>').appendTo('body')[0];
 		var $tooltip = givenToolTip();
 		expect($tooltip.offset().left + $tooltip.outerWidth() / 2).toEqual($tooltip.offset().left + $tooltip.outerWidth() / 2);
 	});
@@ -85,6 +85,7 @@ describe('Tooltip', function () {
 	}
 
 	function givenToolTip(options){
+		_.extend(options, {title:'Some text to show'});
 		$(".uilib-tooltip").remove();
 		$(element).attr('wix-options', JSON.stringify(options));
 		Wix.UI.initializePlugin(element);

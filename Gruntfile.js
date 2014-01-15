@@ -9,6 +9,7 @@ module.exports = function (grunt) {
 					   'javascripts/ui-lib.js'];
 	var cssSrc = ['stylesheets/bootstrap.css',
 		'stylesheets/buttons.css',
+		'stylesheets/icons.css',
 		'stylesheets/common.css',
 		'stylesheets/settings.css',
 

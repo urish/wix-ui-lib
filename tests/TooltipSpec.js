@@ -85,6 +85,7 @@ describe('Tooltip', function () {
 	}
 
 	function givenToolTip(options){
+		options = options || {};
 		_.extend(options, {title:'Some text to show'});
 		$(".uilib-tooltip").remove();
 		$(element).attr('wix-options', JSON.stringify(options));

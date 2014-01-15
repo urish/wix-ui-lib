@@ -2,7 +2,7 @@
     position:absolute;
     min-width: 100px;
 }
-.arrow_box {
+.uilib-tooltip .arrow_box {
     position: relative;
     padding: 6px;
     box-shadow: 0 2px 10px rgba(0,0,0,.3);
@@ -13,7 +13,7 @@
     text-align: center;
 }
 
-.arrow_box:after, .arrow_box:before {
+.uilib-tooltip .arrow_box:after, .arrow_box:before {
     border: solid transparent;
     content: " ";
     height: 0;
@@ -22,68 +22,69 @@
     pointer-events: none;
 }
 
-.arrow_box:after{
+.uilib-tooltip .arrow_box:after{
     border-color: rgba(136, 183, 213, 0);
     border-width: 8px;
 }
 
-.arrow_box:before{
+.uilib-tooltip .arrow_box:before{
     border-color: rgba(194, 225, 245, 0);
     border-width: 9px;
 }
 
-.arrow_box.up:after, .arrow_box.up:before {
+.uilib-tooltip .arrow_box.up:after, .uilib-tooltip .arrow_box.up:before {
     bottom: 100%;
     left: 50%;
 }
 
-.arrow_box.down:after, .arrow_box.down:before {
+.uilib-tooltip .arrow_box.down:after, .uilib-tooltip .arrow_box.down:before {
     top: 100%;
     left: 50%;
 }
 
-.arrow_box.left:after, .arrow_box.left:before {
+.uilib-tooltip .arrow_box.left:after, .uilib-tooltip .arrow_box.left:before {
     right: 100%;
     top: 50%;
 }
 
-.arrow_box.right:after, .arrow_box.right:before {
+.uilib-tooltip .arrow_box.right:after, .uilib-tooltip .arrow_box.right:before {
     left: 100%;
     top: 50%;
 }
 
-.arrow_box.up:after {
+.uilib-tooltip .arrow_box.up:after {
     border-bottom-color: #ffffff;
     margin-left: -8px;
 }
-.arrow_box.up:before {
+
+.uilib-tooltip .arrow_box.up:before {
     border-bottom-color: #d4d4d4;
     margin-left: -9px;
 }
 
-.arrow_box.down:after {
+.uilib-tooltip .arrow_box.down:after {
     border-top-color: #ffffff;
     margin-left: -8px;
 }
-.arrow_box.down:before {
+.uilib-tooltip .arrow_box.down:before {
     border-top-color: #d4d4d4;
     margin-left: -9px;
 }
 
-.arrow_box.left:after {
+.uilib-tooltip .arrow_box.left:after {
     border-right-color: #ffffff;
     margin-top: -8px;
 }
-.arrow_box.left:before {
+.uilib-tooltip .arrow_box.left:before {
     border-right-color: #d4d4d4;
     margin-top: -9px;
 }
 
-.arrow_box.right:after {
+.uilib-tooltip .arrow_box.right:after {
     border-left-color: #ffffff;
     margin-top: -8px;
 }
-.arrow_box.right:before {
+.uilib-tooltip .arrow_box.right:before {
     border-left-color: #d4d4d4;
     margin-top: -9px;
 }

@@ -24,6 +24,7 @@ module.exports = function (grunt) {
 		'javascripts/components/color-picker2/css/color-picker.css',
 		'javascripts/components/advanced-dropdown/css/dd.css',
 		'javascripts/components/slider2/slider2.css',
+		'javascripts/components/tooltip/tooltip.css',
 		'javascripts/components/glued-position/css/glued-position.css'];
 
 

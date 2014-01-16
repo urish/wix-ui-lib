@@ -174,7 +174,8 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-karma');
 
 	// Default task.
-	grunt.registerTask('default', ['clean', 'copy', 'uglify', 'cssmin', 'karma']);
+	grunt.registerTask('default', ['clean', 'copy', 'uglify', 'cssmin']);
+	grunt.registerTask('karma', ['clean', 'copy', 'uglify', 'cssmin', 'karma']);
 	grunt.registerTask('concatall', ['clean', 'copy', 'concat','uglify', 'cssmin']);
 	grunt.registerTask('lint', ['jshint']);
 	grunt.registerTask('dev', ['clean', 'copy', 'uglify', 'cssmin', 'watch']);

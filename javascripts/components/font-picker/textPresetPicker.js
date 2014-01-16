@@ -8,8 +8,15 @@ jQuery.fn.definePlugin('FontStylePicker', function () {
 		fontSizeClass: 'font-style-picker-font-size',
 		textStyleClass: 'font-style-picker-text-style' 
 	};
-	
-	return {
+
+    var boxLikeDrop = '<div class="box-like-drop"><span class="box-like-drop-content">Test</span><span class="box-like-arrow box-like-arrow-down"></span></div>';
+
+
+    var contentMarkup = '<div class="uilib-divider-row"><span class="font-picker-label">Style:</span><span class="style-place-holder"></span></div>';
+        contentMarkup += '<div class="uilib-divider-row"><span class="font-picker-label">Font:</span><span class="font-place-holder"></span></div>';
+        contentMarkup += '<div class="uilib-divider-row"><span class="font-picker-label"> </span><span class="props-place-holder"></span></div>';
+
+    return {
 		init : function () {
 			this.isParamMode = this.getParamKey();
 			this.currentValue = null;
@@ -27,7 +34,7 @@ jQuery.fn.definePlugin('FontStylePicker', function () {
 			};
 		},
 		markup : function () {
-			this.$el.html('<div class="box-like-drop"><span class="box-like-drop-content">Test</span><span class="box-like-arrow box-like-arrow-down"></span></div>');
+			this.$el.html(boxLikeDrop);
 			this.$el.addClass(names.fontStylePickerClass);
 			
 			this.createPopup();
@@ -35,13 +42,8 @@ jQuery.fn.definePlugin('FontStylePicker', function () {
 			this.createFontPicker();
 			this.createTextStylePicker();
 			this.createFontSizePicker();
-			
-			var html = '';
-			html += '<div class="uilib-divider-row"><span class="font-picker-label">Style:</span><span class="style-place-holder"></span></div>';
-			html += '<div class="uilib-divider-row"><span class="font-picker-label">Font:</span><span class="font-place-holder"></span></div>';
-			html += '<div class="uilib-divider-row"><span class="font-picker-label"> </span><span class="props-place-holder"></span></div>';
-			
-			this.popup.content.innerHTML = html;
+
+			this.popup.content.innerHTML = contentMarkup;
 			
 			$(this.popup.content).find('.style-place-holder').append(
 				this.presetSelectPicker.$el.addClass(names.presetSelectClass)
@@ -61,7 +63,7 @@ jQuery.fn.definePlugin('FontStylePicker', function () {
 		createFontSizePicker: function(){
 			this.fontSizePicker = this.UI().createPlugin({
 				ctrl: 'Spinner',
-				appendTo: this.$el,
+				appendTo: this.$el
 			}).getPlugin();
 		},
 		createTextStylePicker: function(){
@@ -73,13 +75,13 @@ jQuery.fn.definePlugin('FontStylePicker', function () {
 			this.textStylePicker = this.UI().createPlugin({
 				ctrl: 'ToggleButtonGroup',
 				html: html,
-				appendTo: this.$el,
+				appendTo: this.$el
 			}).getPlugin();
 		},
 		createFontPicker: function(){
 			this.fontPicker = this.UI().createPlugin({
 				ctrl: 'FontPicker',
-				appendTo: this.$el,
+				appendTo: this.$el
 			}).getPlugin();
 		},
 		createPresetPicker: function(){
@@ -90,20 +92,7 @@ jQuery.fn.definePlugin('FontStylePicker', function () {
 				html += '<div value="'+presetName+'">'+presetName.replace(/-/g,' ')+'</div>';
 			});
 			html += '<div value="Custom">Custom</div>';
-			
-			/*html += '<div value="Title">Title</div>';
-			html += '<div value="Menu">Menu</div>';
-			html += '<div value="Page-title">Page Title</div>';
-			html += '<div value="Heading-XL">Heading XL</div>';
-			html += '<div value="Heading-L">Heading L</div>';
-			html += '<div value="Heading-M">Heading M</div>';
-			html += '<div value="Heading-S">Heading S</div>';
-			html += '<div value="Body-L">Body L</div>';
-			html += '<div value="Body-M">Body M</div>';
-			html += '<div value="Body-S">Body S</div>';
-			html += '<div value="Body-XS">Body XS</div>';
-			html += '<div value="Custom">Custom</div>';*/
-			
+
 			this.presetSelectPicker = this.UI().createPlugin({
 				ctrl: 'Dropdown',
 				appendTo: this.$el,
@@ -151,10 +140,10 @@ jQuery.fn.definePlugin('FontStylePicker', function () {
 		
 		},
 		hideArrow:function(){
-			$(this.popup.arrow).hide();
+			$(this.popup.arrow).hide(50);
 		},
 		showArrow: function(){
-			$(this.popup.arrow).show();
+			$(this.popup.arrow).show(50);
 		},
 		bindEvents : function () {
 			var that = this;
@@ -169,13 +158,13 @@ jQuery.fn.definePlugin('FontStylePicker', function () {
 			
 			this.$el.on('uilib-dropdown-close', function(evt, plugin){
 				if(plugin.isOpen && $(that.popup.arrow).hasClass('popup-arrow-top')){
-					that.showArrow();
+                    setTimeout(function(){
+					    that.showArrow();
+                    },50);
 				}
 			});
 			this.$el.on('uilib-dropdown-open', function(evt, plugin){
-				//if(!plugin.isOpen){	
-					that.hideArrow();
-				//}
+                that.hideArrow();
 			});
 			
 			this.whenDestroy(function(){
@@ -185,21 +174,17 @@ jQuery.fn.definePlugin('FontStylePicker', function () {
 				this.presetSelectPicker.destroy();
 			});
 		},
+        getTextPreset:function(presetName){
+            var presets = Wix.Styles.getSiteTextPresets();
+            var preset = presets[presetName];
+            return preset;
+        },
 		handlePluginPresetSelectChange: function(plugin, evt){
 			var presets = Wix.Styles.getSiteTextPresets();
 			var presetName = this.presetSelectPicker.getValue().value;
 			var preset = presets[presetName];
 			if(!preset){return;}
-			this.setValue({
-				size: parseInt(preset.size, 10),
-				family: preset.fontFamily,
-				preset: presetName,
-				style:  {
-					bold : preset.weight === 'bold',
-					italic : preset.style === 'italic',
-					underline: false
-				}
-			});
+            this.setValueFromPreset(presetName, preset);
 		},
 		checkPresetAgainstState: function(preset, currentState){
 			if(currentState.style.underline){
@@ -272,12 +257,28 @@ jQuery.fn.definePlugin('FontStylePicker', function () {
 			}
 			return val;
 		},
+        setValueFromPreset:function(presetName, preset){
+            this.setValueWithKnownPreset({
+                size: parseInt(preset.size, 10),
+                family: preset.fontFamily,
+                preset: presetName,
+                style:  {
+                    bold : preset.weight === 'bold',
+                    italic : preset.style === 'italic',
+                    underline: false
+                }
+            });
+        },
+        setValueWithKnownPreset:function(value){
+            this.fontSizePicker.setValue(value.size);
+            this.textStylePicker.setValue(value.style);
+            this.fontPicker.setValue(value.family);
+            this.presetSelectPicker.setValue(value.preset);
+            this.updateText();
+        },
 		setValue : function (value) {
-			this.fontSizePicker.setValue(value.size);
-			this.textStylePicker.setValue(value.style);
-			this.fontPicker.setValue(value.family);
-			this.presetSelectPicker.setValue(value.preset);
-			this.updateText();
+            var preset = this.getTextPreset(value.preset);
+            preset ? this.setValueFromPreset(value.preset, preset) : this.setValueWithKnownPreset(value);
 		}
 	};
 

@@ -23,7 +23,6 @@
 			toJSON: styleModel.toJSON
 		}*/
 	};
-		
 	
 	function createPlugin(setup) {
 		var $el = $('<div>');
@@ -159,7 +158,7 @@
         return getAttribute(element, 'wix-controller') || getAttribute(element, 'wix-ctrl');
     }
     
-    function destroyPlugin(element) {
+    function destroyPlugin(element, removeModel) {
         if(element instanceof jQuery){
             return element.each(function(){
                 destroyPlugin(this, removeModel);

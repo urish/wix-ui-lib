@@ -14,8 +14,7 @@
 		set                : model.setAndReport,
 		get                : model.get,
 		toJSON             : model.toJSON,
-		onChange           : model.onChange,
-		getPlugin          : getPlugin
+		onChange           : model.onChange
 		/*,
 		Styles             : {
 			set: styleModel.set,
@@ -160,7 +159,7 @@
         return getAttribute(element, 'wix-controller') || getAttribute(element, 'wix-ctrl');
     }
     
-    function destroyPlugin(element) {
+    function destroyPlugin(element, removeModel) {
         if(element instanceof jQuery){
             return element.each(function(){
                 destroyPlugin(this, removeModel);
@@ -372,10 +371,6 @@
 
 		return model;
 
-	}
-
-	function getPlugin($element, plugin) {
-		return $element.data('plugin_' + plugin);
 	}
 
 	/////////////////////////////////////////////////

@@ -11,9 +11,15 @@ jQuery.fn.definePlugin('Input', function ($) {
 	return {
 		init: function(){
 			this.markup();
-			this.validation = this.options.validation;
 			this.setValue(this.options.value);
 			this.bindEvents();
+		},
+		setValidationFunction:function(validationFunction){
+			if(typeof validationFunction === 'function'){
+				this.options.validation = validationFunction;
+			} else {
+				throw new Error('You must provide a valid validation function.');
+			}
 		},
 		getDefaults: function(){
 			return {
@@ -46,7 +52,7 @@ jQuery.fn.definePlugin('Input', function ($) {
 		setValue: function (value) {
 			var isPassRequiredValidation = this.options.required ? !!value.length : true;
 			var isDifferentValue = (this.$input.val() !== this.value || value !== this.value);
-			if(isPassRequiredValidation && this.validation(value) && isDifferentValue){
+			if(isPassRequiredValidation && this.options.validation(value) && isDifferentValue){
 				this.lastValue = this.getValue();
 				this.$input.val(value);
 				this.value = value;

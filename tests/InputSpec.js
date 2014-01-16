@@ -22,9 +22,9 @@ describe('Input', function () {
 		var $ctrl = givenInput({validate: true});
 		Wix.UI.set('numOfItems', 20);
 		expect($('.uilib-input').val()).toEqual('20');
-		$ctrl.validation = function(){
+		$ctrl.setValidationFunction(function(){
 			return false;
-		}
+		});
 		$('.uilib-input').val('100').keyup();
 		expect($('.uilib-input').hasClass('invalid-input')).toBeTruthy();
 	});
@@ -34,6 +34,6 @@ describe('Input', function () {
 		_.extend(options, {title:'Some text to show'});
 		$(element).attr('wix-options', JSON.stringify(options));
 		Wix.UI.initializePlugin(element);
-		return Wix.UI.getPlugin($(element), "Input");
+		return $(element).getPlugin();
 	}
 });

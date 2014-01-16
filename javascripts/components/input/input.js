@@ -11,6 +11,7 @@ jQuery.fn.definePlugin('Input', function ($) {
 	return {
 		init: function(){
 			this.markup();
+			this.validation = this.options.validation;
 			this.setValue(this.options.value);
 			this.bindEvents();
 		},
@@ -20,10 +21,8 @@ jQuery.fn.definePlugin('Input', function ($) {
 				validate: false,
 				required: false,
 				type: 'text',
-				validation: {
-					test: function(){
-						return true;
-					}
+				validation: function(){
+					return true;
 				}
 			};
 		},
@@ -45,10 +44,9 @@ jQuery.fn.definePlugin('Input', function ($) {
 			return this.value;
 		},
 		setValue: function (value) {
-			var isPassRequiredValidation = this.options.required ? !!value.length : true; 		
+			var isPassRequiredValidation = this.options.required ? !!value.length : true;
 			var isDifferentValue = (this.$input.val() !== this.value || value !== this.value);
-			
-			if(isPassRequiredValidation && this.options.validation.test(value) && isDifferentValue){
+			if(isPassRequiredValidation && this.validation(value) && isDifferentValue){
 				this.lastValue = this.getValue();
 				this.$input.val(value);
 				this.value = value;

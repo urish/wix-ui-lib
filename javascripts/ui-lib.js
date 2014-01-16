@@ -14,6 +14,7 @@
 		get                : model.get,
 		toJSON             : model.toJSON,
 		onChange           : model.onChange,
+		getPlugin          : getPlugin,
 		styles             : {
 			set: styleModel.set,
 			get: styleModel.get,
@@ -336,6 +337,9 @@
 
 	}
 
+	function getPlugin($element, plugin) {
+		return $element.data('plugin_' + plugin);
+	}
 
 	/////////////////////////////////////////////////
 	/////////////////////STYLE///////////////////////

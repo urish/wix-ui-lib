@@ -219,7 +219,7 @@ jQuery.fn.definePlugin('Popup', function ($) {
 		
 		var elmWidth = relativeTo.clientWidth;
 		var elmHeight = relativeTo.clientHeight;
-		
+
 		var top = (elmHeight/2 - pickerHeight/2);
 		var left = elmWidth + distanceFromBox;
 		
@@ -239,7 +239,7 @@ jQuery.fn.definePlugin('Popup', function ($) {
 			right = elmWidth/2 - pickerWidth/2;//right -= (rightOver + pickerWidth/2);
 			side = 'top';
 		}
-		
+
 	/*
 		if((offset.top - pickerHeight/2 ) < 0){
 			top -= offset.top - pickerHeight/2 - topMoveTranslate;

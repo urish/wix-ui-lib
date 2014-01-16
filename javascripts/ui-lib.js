@@ -23,7 +23,6 @@
 			toJSON: styleModel.toJSON
 		}*/
 	};
-		
 	
 	function createPlugin(setup) {
 		var $el = $('<div>');

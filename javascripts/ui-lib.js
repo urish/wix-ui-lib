@@ -8,6 +8,7 @@
 	exports.UI = {
 		initialize         : initialize,
 		initializePlugin   : initializePlugin,
+		createPlugin       : createPlugin,
         destroyPlugin      : destroyPlugin,
 		initStyleMigration : initStyleMigration,
 		set                : model.setAndReport,
@@ -22,6 +23,20 @@
 			toJSON: styleModel.toJSON
 		}*/
 	};
+		
+	
+	function createPlugin(setup) {
+		var $el = $('<div>');
+		$el.attr('wix-ctrl', setup.ctrl);
+		setup.model && $el.attr('wix-model', setup.model);
+		setup.param && $el.attr('wix-param', setup.param);
+		//setup.options && $el.attr('wix-options', JSON.stringify(setup.options));
+		setup.html && $el.html(setup.html);
+		setup.appendTo && $el.appendTo(setup.appendTo);
+		$el[setup.ctrl](setup.options||{});
+		Wix.UI.initializePlugin($el);
+		return $el;
+	}
 		
 	function log(){
 		var args = ['<ui-lib>'];
@@ -124,6 +139,11 @@
 	}
 		
     function initializePlugin(element, overrideOptions) {
+		if(element instanceof jQuery){
+			return element.each(function(){
+				initializePlugin(this, overrideOptions);
+			});
+		}
         var ctrl = getAttribute(element, 'wix-controller') || getAttribute(element, 'wix-ctrl') ;
 		var ctrlName = getCtrlName(ctrl);
 		var options = getOptions(element, ctrl);
@@ -370,7 +390,7 @@
 			
 			styleModel.onChange('*', function(value, name){
 				//order matters font is like number.
-				if(isFontParam(value)){
+				if(isFontParam(value) || isFontStyleParam(value)){
 					Wix.Settings.setFontParam(name, {value: value});
 				} else if(isNumberParam(value)){
 					Wix.Settings.setNumberParam(name, {value:getNumberParamValue(value)});
@@ -381,6 +401,10 @@
 				}
 			});
 			
+		}
+		
+		function isFontStyleParam(value){
+			return value.fontStyleParam === true ? true : false
 		}
 		
 		function isFontParam(value){

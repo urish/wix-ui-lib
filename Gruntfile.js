@@ -23,15 +23,14 @@ module.exports = function (grunt) {
 		'javascripts/components/popup/popup.css',
 		'javascripts/components/input/input.css',
 		'javascripts/components/spinner/spinner.css',
+		'javascripts/components/language-picker/languagePicker.css',
 		'javascripts/components/font-picker/fontPicker.css',
 		'javascripts/components/buttonGroup/buttonGroup.css',
-
-
 		'javascripts/components/color-picker2/css/color-picker.css',
 		'javascripts/components/advanced-dropdown/css/dd.css',
 		'javascripts/components/slider2/slider2.css',
+		'javascripts/components/tooltip/tooltip.css',
 		'javascripts/components/glued-position/css/glued-position.css'];
-
 
 
 	grunt.initConfig({
@@ -147,8 +146,8 @@ module.exports = function (grunt) {
 		karma: {
 			unit: {
 				configFile: 'karma.conf.js',
-				singleRun: true
-			//	browsers: ['Chrome']
+				singleRun: true,
+				browsers: ['PhantomJS']
 			}
 		},
 

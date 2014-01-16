@@ -9,7 +9,7 @@ module.exports = function(config) {
     frameworks: ['jasmine'],
     // list of files / patterns to load in the browser
     files: [
-	
+        'javascripts/components/**/*.css',
 		'stylesheets/bootstrap.css',
 		'stylesheets/buttons.css',
 		'stylesheets/common.css',
@@ -44,7 +44,8 @@ module.exports = function(config) {
 		
 		
 		'tests/mocks/*.js',
-        'tests/**Spec.js'
+        
+		'tests/**Spec.js'
     ],
 
 

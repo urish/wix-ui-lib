@@ -1063,14 +1063,14 @@ var createColorBox = (function (){
 			return cb.wrapper.style.display !== 'none';
 		}
 		
-		function setBestPosition(pickerNode, relativeTo){
+		function setBestPosition(targetNode, relativeTo){
 			var side = 'left';
 			var right = 'auto';
 			var distanceFromBox = 14;
 			var topMoveTranslate = -5;
 		
-			var pickerWidth = pickerNode.clientWidth;
-			var pickerHeight = pickerNode.clientHeight;
+			var pickerWidth = targetNode.clientWidth;
+			var pickerHeight = targetNode.clientHeight;
 			
 			var elmWidth = relativeTo.clientWidth;
 			var elmHeight = relativeTo.clientHeight;
@@ -1102,9 +1102,9 @@ var createColorBox = (function (){
 				top -= (elmHeight + offset.top + pickerHeight/2) - window.innerHeight;
 			}
 			
-			pickerNode.style.top = top + 'px';
-			pickerNode.style.left = (side === 'right' || side === 'top') ? 'auto' : left + 'px';
-			pickerNode.style.right = (side === 'right' || side === 'top') ? right + 'px' : 'auto';
+			targetNode.style.top = top + 'px';
+			targetNode.style.left = (side === 'right' || side === 'top') ? 'auto' : left + 'px';
+			targetNode.style.right = (side === 'right' || side === 'top') ? right + 'px' : 'auto';
 			
 			return side;
 		}

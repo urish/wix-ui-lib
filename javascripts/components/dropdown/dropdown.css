@@ -23,18 +23,27 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 
 .dropdown-arrow{
 	position: absolute;
-	right: 2px;
+	right: 5px;
 	top: 50%;
 	color: #09F;
 	font-size: 12px;
-	margin-top: -7px;
+	margin-top: -3px;
+}
+
+.dropdown-arrow-down{
+	width: 0px;
+	height: 0px;
+	border-style: solid;
+	border-width: 6px 4px 0 4px;
+	border-color: #09F transparent transparent transparent;
+
 }
 .dropdown:hover{
 	box-shadow: 0 0 1px rgba(0,0,0,0.4);
 }
 
 .dropdown.focus-active{
-  border: 1px solid #09F;
+  border: 1px solid rgba(0,0,0,0.4);
 }
 
 .dropdown .option{
@@ -55,7 +64,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
   border-bottom: none;
 }
 .dropdown .option.option-selected{
-  box-shadow: rgba(0, 153, 255,0.3) 0 0 0 30px inset;
+  box-shadow: rgba(0, 0, 0,0.1) 0 0 0 30px inset;
 }
 .dropdown .options{
   outline: 1px solid #ccc;  
@@ -64,7 +73,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 }
 
 .dropdown .dropdown-highlight{
-  background-color:#eee;  
+  background-color: rgba(0, 153, 255, 0.4);
 }
 
 .dropdown-icon{

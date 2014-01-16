@@ -4,10 +4,13 @@ module.exports = function (grunt) {
 	var projectName = 'uiLib';
 	var sourceDirectory = 'src/main/';
 	var buildDirectory = 'build/' + projectName + '/src/main/';
-	var jsSrc = ['javascripts/definePlugin.js',
-			  'javascripts/components/**/*.js',
-					   'javascripts/ui-lib.js'];
-	var cssSrc = ['stylesheets/bootstrap.css',
+	var jsSrc = [
+		'javascripts/definePlugin.js',
+		'javascripts/components/**/*.js',
+		'javascripts/ui-lib.js'
+	];
+	var cssSrc = [
+		'stylesheets/bootstrap.css',
 		'stylesheets/buttons.css',
 		'stylesheets/common.css',
 		'stylesheets/settings.css',
@@ -21,6 +24,8 @@ module.exports = function (grunt) {
 		'javascripts/components/input/input.css',
 		'javascripts/components/spinner/spinner.css',
 		'javascripts/components/language-picker/languagePicker.css',
+		'javascripts/components/font-picker/fontPicker.css',
+		'javascripts/components/buttonGroup/buttonGroup.css',
 		'javascripts/components/color-picker2/css/color-picker.css',
 		'javascripts/components/advanced-dropdown/css/dd.css',
 		'javascripts/components/slider2/slider2.css',
@@ -36,7 +41,9 @@ module.exports = function (grunt) {
 				separator : ';'
 			},
 			dist : {
-				js: {
+				src: jsSrc,
+				dest : 'build/<%= pkg.name %>.all.js'
+				/*js: {
 					src: jsSrc,
 					dest : 'build/<%= pkg.name %>.all.js'
 				},
@@ -49,7 +56,7 @@ module.exports = function (grunt) {
 				html: {
 					src: 'html/settings.html',
 					dest: 'build/settings.html'
-				}
+				}*/
 			}
 		},
 

@@ -3,7 +3,7 @@ jQuery.fn.definePlugin('FontPicker', function () {
 
 	return {
 		init : function () {
-			this.isParamMode = this.$el.attr('wix-param') || this.$el.attr('data-wix-param');
+			this.isParamMode = this.getParamKey();//this.$el.attr('wix-param') || this.$el.attr('data-wix-param');
 			this.markup();
 			this.bindEvents();
 		},
@@ -29,7 +29,7 @@ jQuery.fn.definePlugin('FontPicker', function () {
 		getDefaults : function () {
 			return {
 				value: undefined,
-				spriteUrl : 'http://static.parastorage.com/services/skins/2.699.2/images/wysiwyg/core/themes/editor_web/richtext/fonts.png'
+				spriteUrl : Wix.Styles.getFontsSpriteUrl()
 			};
 		},
 		getValue : function () {
@@ -89,7 +89,7 @@ jQuery.fn.definePlugin('FontPicker', function () {
 			pos = (index * -24 + offsetY);
 			out = tpl.replace('$top', pos);
 			style[index] = (selector + index) + '{' + out + '}';
-			style[index + length + 1] = (selector + index + hoverSelector) + '{' + out + ' background-color:rgba(0,0,0,0.1);}';
+			style[index + length + 1] = (selector + index + hoverSelector) + '{' + out + ' }';
 		}
 		return style.join('\n');
 	}

@@ -1,26 +1,44 @@
 (function (exports){
 
-	holdJQueryDOMReady();
-
+	holdJQueryDOMReady(exports.__disableStandaloneError__);
+	
 	var model = createModel();
 	var styleModel = createModel();
-
+	
 	exports.UI = {
 		initialize         : initialize,
 		initializePlugin   : initializePlugin,
-		destroyPlugin      : destroyPlugin,
+		createPlugin       : createPlugin,
+        destroyPlugin      : destroyPlugin,
 		initStyleMigration : initStyleMigration,
 		set                : model.setAndReport,
 		get                : model.get,
 		toJSON             : model.toJSON,
 		onChange           : model.onChange,
-		getPlugin          : getPlugin,
-		styles             : {
+		getPlugin          : getPlugin
+		/*,
+		Styles             : {
 			set: styleModel.set,
 			get: styleModel.get,
-			onChange: styleModel.onChange
-		}
+			onChange: styleModel.onChange,
+			toJSON: styleModel.toJSON
+		}*/
 	};
+		
+	
+	function createPlugin(setup) {
+		var $el = $('<div>');
+		$el.attr('wix-ctrl', setup.ctrl);
+		setup.model && $el.attr('wix-model', setup.model);
+		setup.param && $el.attr('wix-param', setup.param);
+		//setup.options && $el.attr('wix-options', JSON.stringify(setup.options));
+		setup.html && $el.html(setup.html);
+		setup.appendTo && $el.appendTo(setup.appendTo);
+		$el[setup.ctrl](setup.options||{});
+		Wix.UI.initializePlugin($el);
+		return $el;
+	}
+		
 
 	function log(){
 		var args = ['<ui-lib>'];
@@ -68,13 +86,17 @@
 		if(window.Wix){
 			if(Wix.Utils.getViewMode() === 'standalone'){
 				setTimeout(function(){
-					throw new Error('Standalone mode: Wix style params are not available outside of the "wix editor"');
+					if(!exports.__disableStandaloneError__ ){
+						throw new Error('Standalone mode: Wix style params are not available outside of the "wix editor"');
+					}
 				},0);
 			} else {
 				holdReady(true);
 				timeoutTicket = setTimeout(function(){
 					holdReady(false);
-					throw new Error('Style params are not available outside of the "wix editor", if you are in the editor ');		
+					if(!exports.__disableStandaloneError__ ){
+						throw new Error('Style params are not available outside of the "wix editor", if you are in the editor ');		
+					}
 				}, 3333);
 				Wix.getStyleParams(function(){
 					clearTimeout(timeoutTicket);
@@ -87,7 +109,7 @@
 			window.jQuery && window.jQuery.holdReady && window.jQuery.holdReady( hold );
 		}
 	}
-
+	
 	function getVendorProductId() {
 		try {
 			var inst = window.location.search.match(/instance=([^&]+)/);
@@ -96,7 +118,7 @@
 			return null;
 		}
 	}
-
+	
 	function applyPremiumItems($rootEl){
 		var $premium = $rootEl.find('[wix-premium],[data-wix-premium]');
 		var $notPremium = $rootEl.find('[wix-not-premium], [data-wix-not-premium]');
@@ -109,7 +131,7 @@
 			$notPremium.show();
 		}
 	}
-
+	
 	function getAttribute(element, attr) {
 		var val = element.getAttribute(attr);
 		if (!val) {
@@ -117,38 +139,53 @@
 		}
 		return val;
 	}
-
-	function initializePlugin(element, overrideOptions) {
+		
+    function initializePlugin(element, overrideOptions) {
+		if(element instanceof jQuery){
+			return element.each(function(){
+				initializePlugin(this, overrideOptions);
+			});
+		}
 		var ctrl = getCtrl(element);
 		var ctrlName = getCtrlName(ctrl);
 		var options = getOptions(element, ctrl);
 		applyPlugin(element, ctrlName, overrideOptions || options);
-	}
+    }
 
-	function getCtrl(element){
-		var isToolTip = element.getAttribute('wix-tooltip');
-		if (isToolTip) {
-			return 'Tooltip';
-		}
-		return getAttribute(element, 'wix-controller') || getAttribute(element, 'wix-ctrl');
-	}
-
-	function destroyPlugin(element) {
-		var ctrl = getCtrl(element);
-		var pluginName = getCtrlName(ctrl);
-		var wixModel = getAttribute(element, 'wix-model');
+    function getCtrl(element){
+        var isToolTip = element.getAttribute('wix-tooltip');
+        if (isToolTip) {
+            return 'Tooltip';
+        }
+        return getAttribute(element, 'wix-controller') || getAttribute(element, 'wix-ctrl');
+    }
+    
+    function destroyPlugin(element) {
+        if(element instanceof jQuery){
+            return element.each(function(){
+                destroyPlugin(this, removeModel);
+            });
+        }
+        var ctrl = getCtrl(element);
+        var pluginName = getCtrlName(ctrl);
+        var wixModel = getAttribute(element, 'wix-model');
 		var $el = $(element);
 		var plugin = $el.data('plugin_'+pluginName);
-
-		if(wixModel){
-			plugin.destroy && plugin.destroy();
-			$el.off();
-			$el.find('*').off();
-			$el.remove();
-			model.removeKey(wixModel);            
-		}
-	}
-
+		
+        if(wixModel){		
+			if(plugin.destroy){
+				plugin.destroy();
+			} else {
+				$el.off();
+				$el.find('*').off();
+				$el.remove();
+			}
+			if(removeModel){
+				model.removeKey(wixModel);            
+			}
+        }
+    }
+	
 	function applyPlugin(element, pluginName, options) {
 		pluginName = fixPluginName(pluginName);
 		if ($.fn[pluginName]) {
@@ -210,12 +247,12 @@
 
 	function getCtrlName(ctrl) {
 		var index = ctrl.indexOf(':');
-		if (index !== -1) {
-			return ctrl.substr(0, index);
-		}
-		return ctrl;
-	}
-
+        if (index !== -1) {
+            return $.trim(ctrl.substr(0, index));
+        }
+		return $.trim(ctrl);
+    }
+	
 	function createModel() {
 		var model = {
 			props : {},
@@ -366,7 +403,7 @@
 
 			styleModel.onChange('*', function(value, name){
 				//order matters font is like number.
-				if(isFontParam(value)){
+				if(isFontParam(value) || isFontStyleParam(value)){
 					Wix.Settings.setFontParam(name, {value: value});
 				} else if(isNumberParam(value)){
 					Wix.Settings.setNumberParam(name, {value:getNumberParamValue(value)});
@@ -377,6 +414,11 @@
 				}
 			});
 
+			
+		}
+		
+		function isFontStyleParam(value){
+			return value.fontStyleParam === true ? true : false
 		}
 
 		function isFontParam(value){

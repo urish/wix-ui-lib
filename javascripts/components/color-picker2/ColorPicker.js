@@ -401,7 +401,7 @@ var createColorBox = (function (){
 					this.elm.style.backgroundColor = color;
 				},
 				colorFromPos : function () {
-					return this.elm.style.backgroundColor;
+					return this.elm.style.backgroundColor.replace(/\s/g,'');
 				}
 			},
 			////////////////////////////////////////////
@@ -830,7 +830,7 @@ var createColorBox = (function (){
 		
 		createColorBox.instances = createColorBox.instances || [];
 		
-		var picerInstance = {
+		var pickerInstance = {
 			showSimplePicker:showSimplePicker,
 			showAdvancePicker:showAdvancePicker,
 			hidePickers:hidePickers,
@@ -857,6 +857,7 @@ var createColorBox = (function (){
 		
 		
 		function initialize(){
+
 			markup();
 			var ref = findReferanceName(options.color);
 
@@ -894,8 +895,8 @@ var createColorBox = (function (){
 			createOkCancelBtns();
 			bindEvents();
 
-			createColorBox.instances.push(picerInstance);
-			return picerInstance;
+			createColorBox.instances.push(pickerInstance);
+			return pickerInstance;
 		}
 		
 		function findReferanceName(ref){
@@ -950,15 +951,15 @@ var createColorBox = (function (){
 			cb.cancelBtn.innerHTML = 'Cancel';
 			
 			cb.okBtn.onclick = function(){
-				picerInstance.hidePickers();
+				pickerInstance.hidePickers();
 			}
 			
 			cb.cancelBtn.onclick = function(){
-				if(picerInstance.getColorObject() || picerInstance.getColor() !== cb.openedColor){
-					picerInstance.setColor(cb.openedColor);
+				if(pickerInstance.getColorObject() || pickerInstance.getColor() !== cb.openedColor){
+					pickerInstance.setColor(cb.openedColor);
 					options.onchange && options.onchange(cb.openedColor);	
 				}
-				picerInstance.hidePickers();
+				pickerInstance.hidePickers();
 			}
 			
 			cb.okBtn.className = 'btn blue';
@@ -1029,7 +1030,7 @@ var createColorBox = (function (){
 		}
 		
 		function saveOpendColor(){			
-			cb.openedColor = options.isParamConected ? (picerInstance.getColorObject() || picerInstance.getColor()) : picerInstance.getColor();
+			cb.openedColor = options.isParamConected ? (pickerInstance.getColorObject() || pickerInstance.getColor()) : pickerInstance.getColor();
 		}
 		
 		function showSimplePicker(){
@@ -1062,14 +1063,14 @@ var createColorBox = (function (){
 			return cb.wrapper.style.display !== 'none';
 		}
 		
-		function setBestPosition(pickerNode, relativeTo){
+		function setBestPosition(targetNode, relativeTo){
 			var side = 'left';
 			var right = 'auto';
 			var distanceFromBox = 14;
 			var topMoveTranslate = -5;
 		
-			var pickerWidth = pickerNode.clientWidth;
-			var pickerHeight = pickerNode.clientHeight;
+			var pickerWidth = targetNode.clientWidth;
+			var pickerHeight = targetNode.clientHeight;
 			
 			var elmWidth = relativeTo.clientWidth;
 			var elmHeight = relativeTo.clientHeight;
@@ -1101,9 +1102,9 @@ var createColorBox = (function (){
 				top -= (elmHeight + offset.top + pickerHeight/2) - window.innerHeight;
 			}
 			
-			pickerNode.style.top = top + 'px';
-			pickerNode.style.left = (side === 'right' || side === 'top') ? 'auto' : left + 'px';
-			pickerNode.style.right = (side === 'right' || side === 'top') ? right + 'px' : 'auto';
+			targetNode.style.top = top + 'px';
+			targetNode.style.left = (side === 'right' || side === 'top') ? 'auto' : left + 'px';
+			targetNode.style.right = (side === 'right' || side === 'top') ? right + 'px' : 'auto';
 			
 			return side;
 		}
@@ -1152,6 +1153,6 @@ var createColorBox = (function (){
 		
 	}
 
-		return createColorBox;
+	return createColorBox;
 
 }());

@@ -9,13 +9,42 @@ module.exports = function(config) {
     frameworks: ['jasmine'],
     // list of files / patterns to load in the browser
     files: [
+        'javascripts/components/**/*.css',
+		'stylesheets/bootstrap.css',
+		'stylesheets/buttons.css',
+		'stylesheets/common.css',
+		'stylesheets/settings.css',
+		
+		'javascripts/components/radio-button/radio-button.css',
+		'javascripts/components/checkbox/checkbox.css',
+		'javascripts/components/accordion/accordion.css',
+		'javascripts/components/header/header.css',
+		'javascripts/components/dropdown/dropdown.css',
+		'javascripts/components/popup/popup.css',
+		'javascripts/components/input/input.css',
+		'javascripts/components/spinner/spinner.css',
+		
+		
+		'javascripts/components/color-picker2/css/color-picker.css',
+		'javascripts/components/advanced-dropdown/css/dd.css',
+		'javascripts/components/slider2/slider2.css',
+		'javascripts/components/glued-position/css/glued-position.css',
+
+	
         'http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js',
+		'http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js',
         'http://sslstatic.wix.com/services/js-sdk/1.25.0/js/Wix.js',
-        'http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js',
+
+		'tests/mocks/sdk/**.js',
+		'tests/addons/**.js',
+
         'javascripts/definePlugin.js',
 		'javascripts/ui-lib.js',
         'javascripts/components/**/*.js',
-		'javascripts/components/**/*.css',
+		
+		
+		'tests/mocks/*.js',
+        
 		'tests/**Spec.js'
     ],
 

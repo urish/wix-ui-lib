@@ -42,6 +42,7 @@ describe('ColorPickers', function () {
 			var $el = createPlugin({
 					ctrl : 'ColorPicker',
 					param : 'color',
+					appendTo:'body',
 					options : {
 						value : 'color-1'
 					}

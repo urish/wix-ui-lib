@@ -6,6 +6,7 @@ jQuery.fn.definePlugin('Popup', function ($) {
 	return {
 		init: function(){
 			// TODO: get rid of this.popup	
+			this.state = 'open';
 			this.popup = this.$el[0]; 
 			this.transclude();
 			this.markup();
@@ -18,16 +19,18 @@ jQuery.fn.definePlugin('Popup', function ($) {
 		},
 		getDefaults: function(){
 			return {
-				parent:'body',
+				appendTo: 'body',
 				title : 'Popup',
 				content : '<p>No Content</p>',
-				footer : '<button class="btn close-popup">Close</button>',
+				footer : '<button class="btn gray close-popup">Close</button>',
 				modal : false,
 				modalBackground : 'rgba(0,0,0,0.5)',
 				height : 'auto',
 				width : 300,
 				onclose : function () {},
-				oncancel: function() {}
+				oncancel: function() {},
+				onopen: function(){},
+				onposition: function(){}				
 			};
 		},
 		markup: function () {
@@ -54,7 +57,8 @@ jQuery.fn.definePlugin('Popup', function ($) {
 
 			this.header.appendChild(this.headerTitle);
 			this.header.appendChild(this.closeBtn);
-
+			
+			this.arrow = this.createArrowElement();
 		},
 		transclude: function () {
 			var $el = this.$el;
@@ -75,31 +79,33 @@ jQuery.fn.definePlugin('Popup', function ($) {
 		},
 		bindEvents: function () {
 			var popup = this;
-			$(this.popup).on('click', '.close-popup', function () {
-				popup.close();
-				if(typeof popup.options.onclose === 'string' && typeof window[popup.options.onclose] === 'function'){
-					window[popup.options.onclose].call(popup, {type:'close'});
-				} else if(typeof popup.options.onclose === 'function'){
-					popup.options.onclose.call(popup, {type:'close'});
+			var closeHandler = function (type) {
+				popup.setValue('close');
+				var onType = popup.options['on' + type];
+				if(typeof onType === 'string' && typeof window[onType] === 'function'){
+					window[onType].call(popup, {type: type});
+				} else if(typeof onType === 'function'){
+					onType.call(popup, {type: type});
 				}			
-			});
-			$(this.popup).on('click', '.x-close-popup', function () {
-				popup.close();
-				if(typeof popup.options.oncancel === 'string' && typeof window[popup.options.oncancel] === 'function'){
-					window[popup.options.oncancel].call(popup, {type:'cancel'});
-				} else if(typeof popup.options.oncancel === 'function'){
-					popup.options.oncancel.call(popup, {type:'cancel'});
-				}			
-			});
-			
-			$(window).on('click', function(evt){
+			}
+			var globalCloseHandler = function(evt){
 				var popupEl = $(evt.target).parents('.popup')[0];
-				if(popupEl &&  popupEl === popup.popup){
+				if(popupEl && popupEl === popup.popup || !popup.isOpen()){
 					return ;
 				}else if(!popup.options.modal){
 					popup.setValue('close');
+					closeHandler('cancel');
 				}
+			}
+			
+			$(this.popup).on('click', '.close-popup', closeHandler.bind(null, 'close'));
+			$(this.popup).on('click', '.x-close-popup', closeHandler.bind(null, 'cancel'));
+			$(window).on('click', globalCloseHandler);
+			
+			this.whenDestroy(function(){
+				$(window).off('click', globalCloseHandler);
 			});
+			
 		},
 		getValue: function () {
 			return this.isOpen();
@@ -122,6 +128,25 @@ jQuery.fn.definePlugin('Popup', function ($) {
 				marginLeft : 0 - this.options.width / 2,
 				marginTop : 0 - this.$el.height() / 2
 			});
+
+			if(typeof this.options.onposition === 'function'){
+				return this.options.onposition.call(this);
+			}
+		},
+		setBestPosition: function(relativeTo){
+			if(relativeTo instanceof jQuery){
+				relativeTo = relativeTo[0];
+			}
+			var dir = setBestPosition(this.$el[0], relativeTo);
+			this.setArrowDir(dir);
+			return dir;
+		},
+		createArrowElement: function(){
+			return createArrowElement();
+		},
+		setArrowDir: function(side){
+			side = side||'left';
+			return this.arrow.className = 'popup-arrow popup-arrow-' + side;
 		},
 		setContent: function (content) {
 			$(this.content).empty().append(content);
@@ -133,22 +158,116 @@ jQuery.fn.definePlugin('Popup', function ($) {
 			$(this.headerTitle).text(title);
 		},
 		isOpen: function (title) {
-			return this.popup.style.display !== 'none';
+			return this.state === 'open';
 		},
 		open: function () {
-			if(this.options.modal){
-				document.body.appendChild(this.modal);
-			}
-			$(this.options.parent).append(this.popup);
-			this.popup.style.display = 'block';
-			this.modal.style.display = 'block';
-			this.modal.style.backgroundColor = this.options.modalBackground;
-			this.setPosition();
+			if(this.isOpen()){return;}
+			this.state = 'open';
+			setTimeout(function(){
+				if(this.options.modal){
+					document.body.appendChild(this.modal);
+				}
+				$(this.options.appendTo).append(this.popup);
+				this.popup.style.display = 'block';
+				this.modal.style.display = 'block';
+				this.arrow.style.display = 'block';
+				this.modal.style.backgroundColor = this.options.modalBackground;
+				this.setPosition();
+				if(this.options.onopen){
+					return this.options.onopen.call(this);
+				}
+			}.bind(this),0);
 		},
 		close: function () {
-			this.modal.style.display = 'none';
-			this.popup.style.display = 'none';
+			if(!this.isOpen()){return;}
+			this.state = 'close';
+			setTimeout(function(){
+				this.modal.style.display = 'none';
+				this.popup.style.display = 'none';
+				this.arrow.style.display = 'none';
+			}.bind(this),0);
 		}
 	};
+	
+	function createArrowElement(side){
+		side = side || 'left';
+		var wrapperArrow = document.createElement('div');
+		var a1 = document.createElement('div');
+		var a2 = document.createElement('div');
+		wrapperArrow.className = 'popup-arrow popup-arrow-' + side;
+		a1.className = 'popup-arrow-one';
+		a2.className = 'popup-arrow-two';
+		wrapperArrow.appendChild(a1);
+		wrapperArrow.appendChild(a2);	
+		return wrapperArrow;
+	}
+	
+	function setBestPosition(targetNode, relativeTo){
+		var side = 'left';
+		var right = 'auto';
+		var distanceFromBox = 15;
+		var topMoveTranslate = 0;
+		
+		targetNode.style.top = '0px';
+		targetNode.style.bottom = 'auto';
+ 		targetNode.style.left = '0px';
+		targetNode.style.right = 'auto';
+		targetNode.style.margin = '0';
+	
+		var pickerWidth = targetNode.clientWidth;
+		var pickerHeight = targetNode.clientHeight;
+		
+		var elmWidth = relativeTo.clientWidth;
+		var elmHeight = relativeTo.clientHeight;
+		
+		var top = (elmHeight/2 - pickerHeight/2);
+		var left = elmWidth + distanceFromBox;
+		
+
+		var offset = getOffset(relativeTo);
+		
+		if((elmWidth + pickerWidth + offset.left + distanceFromBox + 1) > window.innerWidth){
+			//left = 0 - pickerWidth - distanceFromBox;
+			right = elmWidth + distanceFromBox + 1;
+			side = 'right';
+		}
+
+			
+		var rightOver = (offset.left - (pickerWidth + distanceFromBox + 1));
+		if(side === 'right' && rightOver < 0){
+			top = 0 - (pickerHeight + distanceFromBox);
+			right = elmWidth/2 - pickerWidth/2;//right -= (rightOver + pickerWidth/2);
+			side = 'top';
+		}
+		
+	/*
+		if((offset.top - pickerHeight/2 ) < 0){
+			top -= offset.top - pickerHeight/2 - topMoveTranslate;
+		}
+		
+		if(side !== 'top' && (elmHeight + offset.top + pickerHeight/2 ) > window.innerHeight){
+			top -= (elmHeight + offset.top + pickerHeight/2) - window.innerHeight;
+		}
+	*/
+
+			
+		targetNode.style.top = top + 'px';
+		targetNode.style.left = (side === 'right' || side === 'top') ? 'auto' : left + 'px';
+		targetNode.style.right = (side === 'right' || side === 'top') ? right + 'px' : 'auto';
+		targetNode.style.margin = '';
+		return side;
+
+	}			
+	function getOffset(el) {
+		var _x = 0;
+		var _y = 0;
+		while( el && !isNaN( el.offsetLeft ) && !isNaN( el.offsetTop ) ) {
+			_x += el.offsetLeft - el.scrollLeft;
+			_y += el.offsetTop - el.scrollTop;
+			el = el.offsetParent;
+		}
+		return { top: _y, left: _x };
+	}
+	
 	
 });

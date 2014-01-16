@@ -18,7 +18,6 @@
 		return Plugin;
 	}
 
-			
 	definePlugin.validate = function(Plugin, name){
 
 		var reservedFunctions = [
@@ -26,7 +25,8 @@
 			'destroy', 
 			'whenDestroy', 
 			'getParamKey',
-			'getModelKey'
+			'getModelKey',
+			'UI'
 		].filter(function (key) {
 			return Plugin.prototype.hasOwnProperty(key);
 		});
@@ -68,14 +68,17 @@
 			};
 		}
 	}
-
 	
 	definePlugin.installMandatoryFunctions = function (Plugin, name){
 		if (!Plugin.name) {
 			Plugin.name = name;
 		}
 		Plugin.prototype.constructor = Plugin;
+		Plugin.unique_id_counter = 0;
 		
+		Plugin.prototype.UI = function(data){
+			return window.Wix.UI || window.UI;
+		};		
 		Plugin.prototype.triggerChangeEvent = function(data){
 			this.$el.trigger(name + '.change', data);
 		};
@@ -87,8 +90,7 @@
 		Plugin.prototype.getModelKey = function(data){
 			return this.$el.attr('wix-model') || this.$el.attr('data-wix-model');
 		};
-		
-		
+				
 		Plugin.prototype.destroy = function(){
 			this.$el.off();
 			this.$el.find('*').off();
@@ -119,12 +121,20 @@
 		"this.$el = window.jQuery(el);" + 
 		"this.options = window.jQuery.extend({}, this.getDefaults(), options);" + 
 		"this.pluginName = '$$$';" + 
+		"el.$uiLibPluginName = '$$$';" + 
 		"this.destroyHandlers = [];" + 
+		"this.GUID = '$$$_' + ($$$.unique_id_counter++);" + 
 		"this.init();" +
 		"return this;" +
 	"}";
 
+	
+	
 	$.fn.definePlugin = definePlugin;
+	$.fn.getPlugin = function(){
+		if(!this[0]){return null;}
+		return this.data('plugin_' + this[0].$uiLibPluginName);
+	};
 	
 }(jQuery))
 

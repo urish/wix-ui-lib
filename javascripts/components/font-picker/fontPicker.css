@@ -72,7 +72,9 @@
 	background: linear-gradient(to bottom,#fff 0,#f1f1f1 44%,#e1e1e1 55%,#f6f6f6 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f6f6f6', GradientType=0);
 }
-
+.box-like-drop:hover{
+	box-shadow: 0 1px 1px rgba(0,0,0,.5);
+}
 .box-like-arrow{
 	position: absolute;
 	right: 5px;

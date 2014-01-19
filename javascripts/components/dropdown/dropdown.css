@@ -49,8 +49,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 .dropdown .option{
   /*margin:3px 5px;
   padding:5px 3px;*/
-  margin: 0px 3px;
-  padding: 5px 0px;
+  margin: 0;
+  padding: 5px;
   border-bottom: 1px solid #ccc;
 }
 	

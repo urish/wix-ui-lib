@@ -42,8 +42,8 @@ module.exports = function (grunt) {
 			},
 			dist : {
 				src: jsSrc,
-				dest : 'build/<%= pkg.name %>.all.js'
-				/*js: {
+				dest : 'build/<%= pkg.name %>.all.js',
+				js: {
 					src: jsSrc,
 					dest : 'build/<%= pkg.name %>.all.js'
 				},
@@ -56,7 +56,7 @@ module.exports = function (grunt) {
 				html: {
 					src: 'html/settings.html',
 					dest: 'build/settings.html'
-				}*/
+				}
 			}
 		},
 

@@ -49,10 +49,15 @@ jQuery.fn.definePlugin('Spinner', function ($) {
 					startAutoRoll();
 				},100);
 			}
-
+            var lastVal = spinner.getValue();
 			this.$el.on(events.mouseUp + ' ' + events.mouseLeave, function(){
 			   clearTimeout(autoRollTicket);
 			   dir = 0;
+               var val = spinner.getValue();
+               if(lastVal !== val){
+                   lastVal = val;
+                   spinner.triggerChangeEvent(spinner.getValue());
+               }
 			});
 
 			this.$el.on(events.mouseDown, '.' + styles.upArrow, function(){

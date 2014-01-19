@@ -22,8 +22,8 @@ describe('Input', function () {
 		var $ctrl = givenInput({validate: true});
 		Wix.UI.set('numOfItems', 20);
 		expect($('.uilib-input').val()).toEqual('20');
-		$ctrl.setValidationFunction(function(){
-			return false;
+		$ctrl.setValidationFunction(function(value){
+			return value < 100;
 		});
 		$('.uilib-input').val('100').keyup();
 		expect($('.uilib-input').hasClass('invalid-input')).toBeTruthy();

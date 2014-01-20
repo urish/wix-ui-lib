@@ -12,11 +12,5 @@
 
 .uilib-languagePicker .dropdown-arrow {
     font-size: 11px;
-    margin-top: -6px;
-}
-
-
-.uilib-languagePicker .option{
-    margin: 0;
-    padding: 5px;
+    margin-top: -3px;
 }

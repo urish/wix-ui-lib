@@ -1,12 +1,76 @@
-.uilib-input{
-   border:1px solid rgba(0,0,0,0.3);
+.uilib-input {
+    font-family: Helvetica Neue, Helvetica, Arial;
 }
 
-.uilib-input.invalid-input{
-   border:1px solid rgba(255,0,0,0.3);
+input[type="text"].uilib-input ,
+input[type="password"].uilib-input {
+    display: inline-block;
+    height: 15px;
+    padding: 4px 10px 4px 6px;
+    font-size: 12px;
+    line-height: 14px;
+    color: #373737;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    vertical-align: middle;
+
+    background-color: #fff;
+    border: 1px solid #ccc;
+
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+    -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+
+    -webkit-transition: border linear .2s, box-shadow linear .2s;
+    -moz-transition: border linear .2s, box-shadow linear .2s;
+    -o-transition: border linear .2s, box-shadow linear .2s;
+    transition: border linear .2s, box-shadow linear .2s;
 }
 
-.uilib-input.valid-input{
-   border:1px solid rgba(0,255,0,0.3);
+input[type="text"]:focus.uilib-input,
+input[type="password"]:focus.uilib-input {
+    border-color: rgba(87, 188, 255, 0.83);
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(87, 188, 255,.6);
+    -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(87, 188, 255,.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(87, 188, 255,.6);
 }
 
+input[type="text"].uilib-input.invalid-input,
+input[type="password"].uilib-input.invalid-input{
+    border:1px solid rgb(253,123,123);
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px #fd7b7b;
+    -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px #fd7b7b;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px #fd7b7b;
+}
+
+input[type="text"].uilib-input.valid-input
+input[type="password"].uilib-input.valid-input {
+    border: 1px solid #cccccc;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+input[type="text"].uilib-input.disabled,
+input[type="password"].uilib-input.disabled {
+    background-color: #f2f3f2;
+}
+
+input[type="text"].uilib-input::-webkit-input-placeholder {
+    color: #9d9d9d;
+}
+
+input[type="text"].uilib-input:-moz-placeholder { /* Firefox 18- */
+    color: #9d9d9d;
+}
+
+input[type="text"].uilib-input::-moz-placeholder {  /* Firefox 19+ */
+    color: #9d9d9d;
+}
+
+input[type="text"].uilib-input:-ms-input-placeholder {
+    color: #9d9d9d;
+}

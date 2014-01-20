@@ -14,21 +14,31 @@ jQuery.fn.definePlugin('Input', function ($) {
 			this.setValue(this.options.value);
 			this.bindEvents();
 		},
+		setValidationFunction:function(validationFunction){
+			if(typeof validationFunction === 'function'){
+				this.options.validation = validationFunction;
+			} else {
+				throw new Error('You must provide a valid validation function.');
+			}
+		},
 		getDefaults: function(){
 			return {
 				value:'',
 				validate: false,
 				required: false,
 				type: 'text',
-				validation: {
-					test: function(){
-						return true;
-					}
+				placeholder: 'Text input',
+				disabled : false,
+				validation: function(){
+					return true;
 				}
 			};
 		},
 		markup: function () {
-			this.$input = $('<input>').attr('type', this.options.type).addClass(names.inputClass);
+			this.$input = $('<input>').attr('type', this.options.type).attr('placeholder', this.options.placeholder).addClass(names.inputClass);
+			if (this.options.disabled){
+				this.disable();
+			}
 			this.$el.append(this.$input);
 		},
 		bindEvents: function () {
@@ -45,10 +55,9 @@ jQuery.fn.definePlugin('Input', function ($) {
 			return this.value;
 		},
 		setValue: function (value) {
-			var isPassRequiredValidation = this.options.required ? !!value.length : true; 		
+			var isPassRequiredValidation = this.options.required ? !!value.length : true;
 			var isDifferentValue = (this.$input.val() !== this.value || value !== this.value);
-			
-			if(isPassRequiredValidation && this.options.validation.test(value) && isDifferentValue){
+			if(isPassRequiredValidation && this.options.validation(value) && isDifferentValue){
 				this.lastValue = this.getValue();
 				this.$input.val(value);
 				this.value = value;
@@ -60,16 +69,22 @@ jQuery.fn.definePlugin('Input', function ($) {
 				if(this.options.validate){
 					this.$input.removeClass(names.validInputClass).addClass(names.invalidInputClass);
 				}
+			} else {
+				if (this.$input.val() === ''){
+					this.$input.removeClass(names.invalidInputClass);
+				}
 			}
 		},
 		disable: function () {
-			this.$el.addClass(names.disabledClass);
+			this.$input.addClass(names.disabledClass);
+			this.$input.attr('disabled', 'disabled');
 		},
 		enable: function () {
-			this.$el.removeClass(names.disabledClass);
+			this.$input.removeClass(names.disabledClass);
+			this.$input.removeAttr('disabled', 'disabled');
 		},
 		isDisabled: function () {
-			return this.$el.hasClass(names.disabledClass);
+			return this.$input.hasClass(names.disabledClass);
 		}	
 	};
 	

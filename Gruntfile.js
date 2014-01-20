@@ -4,10 +4,13 @@ module.exports = function (grunt) {
 	var projectName = 'uiLib';
 	var sourceDirectory = 'src/main/';
 	var buildDirectory = 'build/' + projectName + '/src/main/';
-	var jsSrc = ['javascripts/definePlugin.js',
-			  'javascripts/components/**/*.js',
-					   'javascripts/ui-lib.js'];
-	var cssSrc = ['stylesheets/bootstrap.css',
+	var jsSrc = [
+		'javascripts/definePlugin.js',
+		'javascripts/components/**/*.js',
+		'javascripts/ui-lib.js'
+	];
+	var cssSrc = [
+		'stylesheets/bootstrap.css',
 		'stylesheets/buttons.css',
 		'stylesheets/icons.css',
 		'stylesheets/common.css',
@@ -22,9 +25,12 @@ module.exports = function (grunt) {
 		'javascripts/components/input/input.css',
 		'javascripts/components/spinner/spinner.css',
 		'javascripts/components/language-picker/languagePicker.css',
+		'javascripts/components/font-picker/fontPicker.css',
+		'javascripts/components/buttonGroup/buttonGroup.css',
 		'javascripts/components/color-picker2/css/color-picker.css',
 		'javascripts/components/advanced-dropdown/css/dd.css',
 		'javascripts/components/slider2/slider2.css',
+		'javascripts/components/tooltip/tooltip.css',
 		'javascripts/components/glued-position/css/glued-position.css'];
 
 
@@ -36,6 +42,8 @@ module.exports = function (grunt) {
 				separator : ';'
 			},
 			dist : {
+				src: jsSrc,
+				dest : 'build/<%= pkg.name %>.all.js',
 				js: {
 					src: jsSrc,
 					dest : 'build/<%= pkg.name %>.all.js'
@@ -167,7 +175,8 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-karma');
 
 	// Default task.
-	grunt.registerTask('default', ['clean', 'copy', 'uglify', 'cssmin', 'karma']);
+	grunt.registerTask('default', ['clean', 'copy', 'uglify', 'cssmin']);
+	grunt.registerTask('karma', ['clean', 'copy', 'uglify', 'cssmin', 'karma']);
 	grunt.registerTask('concatall', ['clean', 'copy', 'concat','uglify', 'cssmin']);
 	grunt.registerTask('lint', ['jshint']);
 	grunt.registerTask('dev', ['clean', 'copy', 'uglify', 'cssmin', 'watch']);

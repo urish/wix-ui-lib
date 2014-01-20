@@ -27,7 +27,14 @@
 		position : 'relative'
 	};
 
-	var downArrow = '<span class="dropdown-arrow">&#9660;</span>';
+
+	
+	var arrows = {
+		down  : '<span class="dropdown-arrow dropdown-arrow-down"></span>',
+		up    : '<span class="dropdown-arrow dropdown-arrow-up"></span>',
+		left  : '<span class="dropdown-arrow dropdown-arrow-left"></span>',
+		right : '<span class="dropdown-arrow dropdown-arrow-right"></span>'
+	}
 	
 	return {
 		init: function(){
@@ -54,6 +61,7 @@
 				width:'',
 				optionsWidth:'',
 				height:'',
+				//arrow:'down',
 				style: 'dropdown-style-1',
                 modifier: function($el){return $el;}
 			};
@@ -96,9 +104,10 @@
 			if(this.options.height){
 				this.$options.css('height', this.options.height);
 			}
+
+			this.$options.addClass('uilib-scrollbar');
 			this.$el.empty();
-			this.$el.append(downArrow, this.$selected, this.$options);
-				
+			this.$el.append(arrows[/*this.options.arrow*/'down'], this.$selected, this.$options);
 		},		
 		setValue: function (value) {
 			var $option;
@@ -124,8 +133,8 @@
 		setValueFromEl: function ($el) {
 			var index = +$el.attr(names.indexAttrName);
 			if(this.setValue(index)){
-				var value = this.isParamMode ? this.getFullValue() : this.getVal();
-				this.triggerChangeEvent(value);
+				//var value = this.isParamMode ? this.getFullValue() : this.getValue();
+				this.triggerChangeEvent(this.getValue());
 			}
 		},
 		setActiveMode: function (isActive) {
@@ -143,7 +152,7 @@
 			return this.$selected.find('.' + names.optionClassName).attr(names.valueAttrName);
 		},
 		getValue: function () {
-			return this.getVal();
+			return this.getFullValue();
 		},
 		getFullValue: function () {
 			return {
@@ -152,6 +161,7 @@
 			};
 		},
 		hideOptions: function (time) {
+			this.$el.trigger('uilib-dropdown-close', this);
 			this.isOpen = false;
 			this.$options.slideUp(time !== undefined ? time : this.options.slideTime);
 		},
@@ -200,7 +210,7 @@
 			}
 
 			function uilibDropdownOpen(evt, _dropdown){
-				if(_dropdown !== dropdown){
+				if(_dropdown !== dropdown && _dropdown.isOpen){
 					dropdown.hideOptions();
 					dropdown.setActiveMode(false);				
 				}
@@ -227,7 +237,7 @@
 			this.$options.on('click', '.' + names.optionClassName, function () {
 				dropdown.setValueFromEl($(this));
 			});
-
+			
 			this.$el.on('click', function (evt) {
 				evt.stopPropagation();
 				dropdown.setActiveMode(true);

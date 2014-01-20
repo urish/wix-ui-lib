@@ -1,6 +1,6 @@
 (function (exports){
 
-	holdJQueryDOMReady();
+	holdJQueryDOMReady(exports.__disableStandaloneError__);
 	
 	var model = createModel();
 	var styleModel = createModel();
@@ -8,72 +8,93 @@
 	exports.UI = {
 		initialize         : initialize,
 		initializePlugin   : initializePlugin,
+		createPlugin       : createPlugin,
         destroyPlugin      : destroyPlugin,
 		initStyleMigration : initStyleMigration,
 		set                : model.setAndReport,
 		get                : model.get,
 		toJSON             : model.toJSON,
-		onChange           : model.onChange,
-		styles             : {
+		onChange           : model.onChange
+		/*,
+		Styles             : {
 			set: styleModel.set,
 			get: styleModel.get,
-			onChange: styleModel.onChange
-		}
+			onChange: styleModel.onChange,
+			toJSON: styleModel.toJSON
+		}*/
 	};
+	
+	function createPlugin(setup) {
+		var $el = $('<div>');
+		$el.attr('wix-ctrl', setup.ctrl);
+		setup.model && $el.attr('wix-model', setup.model);
+		setup.param && $el.attr('wix-param', setup.param);
+		//setup.options && $el.attr('wix-options', JSON.stringify(setup.options));
+		setup.html && $el.html(setup.html);
+		setup.appendTo && $el.appendTo(setup.appendTo);
+		$el[setup.ctrl](setup.options||{});
+		Wix.UI.initializePlugin($el);
+		return $el;
+	}
 		
+
 	function log(){
 		var args = ['<ui-lib>'];
 		args.push.apply(args,arguments);
 		false && console.log.apply(console, args);
 	}
-	
-    function initialize(initialValues, onModelChange) {
+
+	function initialize(initialValues, onModelChange) {
 		if(initialize.isInitialized){return;}
 		initialize.isInitialized = true;
 		initialize.retry = ++initialize.retry || 1;
-		
-    	var $rootEl = $('body'); //$('[wix-uilib],[data-wix-uilib]');
-    	if ($rootEl.length > 1) {
-    		throw new Error('You have more then one wix-uilib element in the DOM.');
-    	}
-    	applyPremiumItems($rootEl);
-    	
+
+		var $rootEl = $('body'); //$('[wix-uilib],[data-wix-uilib]');
+		if ($rootEl.length > 1) {
+			throw new Error('You have more then one wix-uilib element in the DOM.');
+		}
+		applyPremiumItems($rootEl);
+
 		model.setInitialValues(initialValues);
-    	onModelChange && model.onChange('*', onModelChange);
-		
+		onModelChange && model.onChange('*', onModelChange);
+
 		initStyleModelHandling();
-		
-    	var elements = $rootEl.andSelf().find('[data-wix-controller], [wix-controller], [wix-ctrl], [data-wix-ctrl]');
-    	for (var i = 0; i < elements.length; i++) {
-    		try {
-    			initializePlugin(elements[i]);
-    		} catch (err) {
-    			console.log && console.log('Plugin Initialization Error: ' + err.stack, elements[i]);
-    		}
-    	}
-							
+
+		var elements = $rootEl.andSelf().find('[data-wix-controller], [wix-controller], [wix-ctrl], [data-wix-ctrl], [wix-tooltip]');
+		for (var i = 0; i < elements.length; i++) {
+			try {
+				initializePlugin(elements[i]);
+			} catch (err) {
+				console.log && console.log('Plugin Initialization Error: ' + err.stack, elements[i]);
+			}
+		}
+
 		if(styleModel.applyStyleMigration){
 			styleModel.applyStyleMigration();
 		}
 
-    	$rootEl.fadeIn(140, function(){
+		$rootEl.fadeIn(140, function(){
 			$(document.body).trigger('uilib-update-scroll-bars');
 		});
-		
-    }
-	
+
+	}
+
 	function holdJQueryDOMReady(){
 		var timeoutTicket;
 		if(window.Wix){
 			if(Wix.Utils.getViewMode() === 'standalone'){
 				setTimeout(function(){
-					throw new Error('Standalone mode: Wix style params are not available outside of the "wix editor"');
+					if(!exports.__disableStandaloneError__ ){
+						throw new Error('Standalone mode: Wix style params are not available outside of the "wix editor"');
+					}
 				},0);
 			} else {
 				holdReady(true);
 				timeoutTicket = setTimeout(function(){
 					holdReady(false);
-					throw new Error('Style params are not available outside of the "wix editor", if you are in the editor ');		
+					if(!exports.__disableStandaloneError__ ){
+						throw new Error('Style params are not available outside of the "wix editor", if you are in the editor ');		
+					}
 				}, 3333);
 				Wix.getStyleParams(function(){
 					clearTimeout(timeoutTicket);
@@ -118,25 +139,48 @@
 	}
 		
     function initializePlugin(element, overrideOptions) {
-        var ctrl = getAttribute(element, 'wix-controller') || getAttribute(element, 'wix-ctrl') ;
+		if(element instanceof jQuery){
+			return element.each(function(){
+				initializePlugin(this, overrideOptions);
+			});
+		}
+		var ctrl = getCtrl(element);
 		var ctrlName = getCtrlName(ctrl);
 		var options = getOptions(element, ctrl);
 		applyPlugin(element, ctrlName, overrideOptions || options);
     }
-	
-    function destroyPlugin(element) {
-        var ctrl = getAttribute(element, 'wix-controller') || getAttribute(element, 'wix-ctrl') ;
+
+    function getCtrl(element){
+        var isToolTip = element.getAttribute('wix-tooltip');
+        if (isToolTip) {
+            return 'Tooltip';
+        }
+        return getAttribute(element, 'wix-controller') || getAttribute(element, 'wix-ctrl');
+    }
+    
+    function destroyPlugin(element, removeModel) {
+        if(element instanceof jQuery){
+            return element.each(function(){
+                destroyPlugin(this, removeModel);
+            });
+        }
+        var ctrl = getCtrl(element);
         var pluginName = getCtrlName(ctrl);
         var wixModel = getAttribute(element, 'wix-model');
 		var $el = $(element);
 		var plugin = $el.data('plugin_'+pluginName);
 		
         if(wixModel){		
-			plugin.destroy && plugin.destroy();
-			$el.off();
-			$el.find('*').off();
-			$el.remove();
-			model.removeKey(wixModel);            
+			if(plugin.destroy){
+				plugin.destroy();
+			} else {
+				$el.off();
+				$el.find('*').off();
+				$el.remove();
+			}
+			if(removeModel){
+				model.removeKey(wixModel);            
+			}
         }
     }
 	
@@ -162,7 +206,7 @@
 		}
 		return wixStyleParam;
 	}
-	
+
 	function setUpModel(element, pluginName){
 		var wixModel = getAttribute(element, 'wix-model');
 		if(wixModel){
@@ -170,7 +214,7 @@
 		}
 		return wixModel;
 	}
-	
+
 	function evalOptions(options){
 		 try{
 			return (new Function('return '+ options + ';'))()
@@ -178,11 +222,11 @@
 			throw new Error('Options for plugin are not valid: ' + options);
 		 }
 	}
-	
+
 	function fixPluginName(pluginName){
 		return pluginName;
 	}
-	
+
 	function getOptions(element, ctrl){
 		var options = getOptionsFormCtrl(ctrl);
 		if (!options) {
@@ -190,21 +234,21 @@
 		}
 		return evalOptions(options) || {};
 	}
-	
-    function getOptionsFormCtrl(ctrl) {
-		var index = ctrl.indexOf(':');
-        if (index !== -1) {
-            return ctrl.substr(index + 1);
-        }
-		return false;
-    }
 
-    function getCtrlName(ctrl) {
+	function getOptionsFormCtrl(ctrl) {
+		var index = ctrl.indexOf(':');
+		if (index !== -1) {
+			return ctrl.substr(index + 1);
+		}
+		return false;
+	}
+
+	function getCtrlName(ctrl) {
 		var index = ctrl.indexOf(':');
         if (index !== -1) {
-            return ctrl.substr(0, index);
+            return $.trim(ctrl.substr(0, index));
         }
-		return ctrl;
+		return $.trim(ctrl);
     }
 	
 	function createModel() {
@@ -323,21 +367,20 @@
 				return $.extend({}, model.props);
 			}
 		};
-		
+
 		return model;
 
 	}
-	
-	
+
 	/////////////////////////////////////////////////
 	/////////////////////STYLE///////////////////////
 	/////////////////////////////////////////////////
 
 	function initStyleModelHandling(){
 		if(window.Wix){
-		
+
 			var style = Wix.Settings.getStyleParams();
-			
+
 			if(!styleModel.applyStyleMigration){
 				var styles;
 				try{
@@ -349,12 +392,12 @@
 					styles = {};
 				}
 				styleModel.setInitialValues(styles);
-				
+
 			}
-			
+
 			styleModel.onChange('*', function(value, name){
 				//order matters font is like number.
-				if(isFontParam(value)){
+				if(isFontParam(value) || isFontStyleParam(value)){
 					Wix.Settings.setFontParam(name, {value: value});
 				} else if(isNumberParam(value)){
 					Wix.Settings.setNumberParam(name, {value:getNumberParamValue(value)});
@@ -364,26 +407,31 @@
 					Wix.Settings.setColorParam(name, {value:value});
 				}
 			});
+
 			
 		}
 		
+		function isFontStyleParam(value){
+			return value.fontStyleParam === true ? true : false
+		}
+
 		function isFontParam(value){
 			return isNumberParam(value) && value.fontParam === true ? true : false
 		}
-		
+
 		function isNumberParam(value){
 			if(value instanceof Number || typeof value === 'number' || (!isNaN(+value.index) && value.value)){
 				return true;
 			}
 			return false;
 		}
-		
+
 		function getNumberParamValue(value){
 			return ( value.index || value.index === 0 ) ? value.index : value;
 		}
-		
+
 	}
-	
+
 	function initStyleMigration(initValues){
 		styleModel.applyStyleMigration = function(){
 			for(var key in initValues){
@@ -393,7 +441,7 @@
 			}		
 		}
 	}
-	
+
 	function flattenStyles(style){
 		style = style || {};
 		var mergedStyle = {};
@@ -401,10 +449,10 @@
 		for(var prop in style.colors){
 			if(style.colors.hasOwnProperty(prop)){
 				if(style.colors[prop].themeName && style.colors[prop].value.indexOf('rgba')===0){
-				
+
 					var opacity = style.colors[prop].value.match(/,([^),]+)\)/);
 					opacity = (opacity ? (+opacity[1]) : 1);
-				
+
 					mergedStyle[prop] = {
 						color : {
 							reference : style.colors[prop].themeName,
@@ -438,7 +486,7 @@
 	/////////////////////////////////////////////////
 	/////////////////////////////////////////////////
 	/////////////////////////////////////////////////
-	
-	
+
+
 })(window.Wix || window);
 

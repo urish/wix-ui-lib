@@ -63,7 +63,7 @@
 	Plugin.prototype.createControlHTML = function () {
         this.$el.append('<div class="glued-dropdown"></div>' +
             '<div class="divider gluedDivider"></div>' +
-            '<div class="glued-slider"></div>');
+            '<div class="slider-wrapper"><div class="glued-slider"></div></div>');
     }
 
 	Plugin.prototype.dropdownHTML = function () {

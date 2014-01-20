@@ -27,13 +27,19 @@ jQuery.fn.definePlugin('Input', function ($) {
 				validate: false,
 				required: false,
 				type: 'text',
+				placeholder: 'Text input',
+				disabled : false,
 				validation: function(){
 					return true;
 				}
 			};
 		},
 		markup: function () {
-			this.$input = $('<input>').attr('type', this.options.type).addClass(names.inputClass);
+			this.$input = $('<input>').attr('type', this.options.type).attr('placeholder', this.options.placeholder).addClass(names.inputClass);
+			if (this.options.disabled){
+				debugger
+				this.disable();
+			}
 			this.$el.append(this.$input);
 		},
 		bindEvents: function () {
@@ -67,13 +73,15 @@ jQuery.fn.definePlugin('Input', function ($) {
 			}
 		},
 		disable: function () {
-			this.$el.addClass(names.disabledClass);
+			this.$input.addClass(names.disabledClass);
+			this.$input.attr('disabled', 'disabled');
 		},
 		enable: function () {
-			this.$el.removeClass(names.disabledClass);
+			this.$input.removeClass(names.disabledClass);
+			this.$input.removeAttr('disabled', 'disabled');
 		},
 		isDisabled: function () {
-			return this.$el.hasClass(names.disabledClass);
+			return this.$input.hasClass(names.disabledClass);
 		}	
 	};
 	

@@ -3,25 +3,35 @@
     width: 138px;    
 }
 
+[wix-ctrl="GluedControl"]{
+	vertical-align: middle;
+}
 
+.slider-wrapper{
+    display: inline-block;
+	vertical-align: middle;
+	height:80px;
+}
 .gluedDivider {
-    height: 90px;
+    height: 80px;
     width: 2px;
     background: #f1f1f1;
     display: inline-block;
+	vertical-align: middle;
 }
 
 .glued-dropdown{
 	width: 200px;
 	display: inline-block;
-	vertical-align: top;
+	vertical-align: middle;
 }
 
 .glued-slider{
 	display: inline-block;
 	vertical-align: top;
-	top: 45px;	
-	left:65px;
+	top: 52px;	
+	left: 45px;
+
 	
 	line-height: 17px;
 	color: #484848;

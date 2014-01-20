@@ -96,7 +96,7 @@
 						throw new Error('Style params are not available outside of the "wix editor", if you are in the editor ');		
 					}
 				}, 3333);
-				Wix.getStyleParams(function(){
+				Wix.Styles.getStyleParams(function(){
 					clearTimeout(timeoutTicket);
 					holdReady(false);
 				});				
@@ -379,7 +379,7 @@
 	function initStyleModelHandling(){
 		if(window.Wix){
 
-			var style = Wix.Settings.getStyleParams();
+			var style = Wix.Styles.getStyleParams();
 
 			if(!styleModel.applyStyleMigration){
 				var styles;
@@ -398,13 +398,13 @@
 			styleModel.onChange('*', function(value, name){
 				//order matters font is like number.
 				if(isFontParam(value) || isFontStyleParam(value)){
-					Wix.Settings.setFontParam(name, {value: value});
+					Wix.Styles.setFontParam(name, {value: value});
 				} else if(isNumberParam(value)){
-					Wix.Settings.setNumberParam(name, {value:getNumberParamValue(value)});
+					Wix.Styles.setNumberParam(name, {value:getNumberParamValue(value)});
 				} else if(Object.prototype.toString.call(value).match('Boolean')){
-					Wix.Settings.setBooleanParam(name, {value:value});
+					Wix.Styles.setBooleanParam(name, {value:value});
 				} else if(value && (value.hasOwnProperty('color') || value.cssColor || value.rgba)) {
-					Wix.Settings.setColorParam(name, {value:value});
+					Wix.Styles.setColorParam(name, {value:value});
 				}
 			});
 

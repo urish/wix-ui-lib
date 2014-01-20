@@ -49,10 +49,13 @@ jQuery.fn.definePlugin('Spinner', function ($) {
 					startAutoRoll();
 				},100);
 			}
-
-			this.$el.on(events.mouseUp + ' ' + events.mouseLeave, function(){
+            
+			this.$el.on(events.mouseUp + ' ' + events.mouseLeave, function(evt){
 			   clearTimeout(autoRollTicket);
-			   dir = 0;
+			   dir = 0;               
+               if(evt.type !== 'mouseleave'){
+                   spinner.triggerChangeEvent(spinner.getValue());
+               }
 			});
 
 			this.$el.on(events.mouseDown, '.' + styles.upArrow, function(){

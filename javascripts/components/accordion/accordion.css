@@ -58,7 +58,7 @@
 }
 .acc-pane .acc-content {
   border-top: 1px solid #ddd;
-  padding: 10px 28px;
+  padding: 10px 0px;
 }
 
 .acc-pane .acc-content input {
@@ -75,10 +75,10 @@
   padding: 0;
   margin: 0;
 }
-.acc-pane .list li {
+.acc-pane .list > li {
   list-style: none;
   border-bottom: 1px solid #d4d4d4;
-  padding: 10px 0;
+  padding: 10px 0 10px 28px;
   /*font-size: 12px;
   min-height: 40px;
   line-height: 40px;*/

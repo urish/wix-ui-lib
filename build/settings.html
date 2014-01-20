@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Widget Settings &bull; Wix</title>
     <link rel="stylesheet" href="ui-lib.min.css"/>
     <style type="text/css">
@@ -51,19 +52,21 @@
             <div class="acc-content">
                 <ul class="list">
                     <li wix-label="Image Visibility:">
-                        <div wix-model="imageVisibility" wix-ctrl="Dropdown" style="width:144px">
+                        <div wix-model="imageVisibility" wix-ctrl="Dropdown" wix-options="{width:150}">
                             <div value="show">Show Images</div>
                             <div value="hide">Hide Images</div>
                             <div value="showhover">Show Images on Hover</div>
                         </div>
                     </li>
+					<li wix-label="Glued:">
+                        <div wix-ctrl="GluedControl" wix-options="{bindToWidget: false}"></div>
+                    </li>
 					<li wix-label="Fonts:">
                         <div wix-model="myFont" wix-ctrl="FontStylePicker"></div>
                     </li>
                     <li wix-label="Number of images:">
-                        <div wix-model="numOfImages" wix-ctrl="Slider" wix-options="{ maxValue:'500', preLabel:'0', postLabel:'500', toolTip:true}"></div>
-                        <div class="left-margin">&nbsp;</div>
-                        <div wix-model="numOfImages" wix-ctrl="Spinner" wix-options="{ maxValue:'500'}"></div>
+                        <div wix-model="numOfImages" wix-ctrl="Slider" wix-options="{ maxValue:500, preLabel:'0', postLabel:'500', toolTip:true}"></div>
+                        <div wix-model="numOfImages" wix-ctrl="Spinner" wix-options="{ maxValue:500}"></div>
                     </li>
                     <li wix-label="Show Icons:">
                         <div wix-model="isIconShown" wix-ctrl="Checkbox"></div>
@@ -85,6 +88,9 @@
                     </li>
                     <li wix-label="Background Color:">
                         <div wix-param="backgroundColor" wix-ctrl="ColorPickerWithOpacity" wix-options="{startWithColor:'color-1'}"></div>
+                    </li>
+					<li wix-label="Slider:">
+                        <div wix-param="speed" wix-ctrl="Slider" wix-options="{value:0.5, toolTip:true}"></div>
                     </li>
                 </ul>
             </div>

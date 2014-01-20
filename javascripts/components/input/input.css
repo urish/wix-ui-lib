@@ -58,3 +58,19 @@ input[type="text"].uilib-input.disabled,
 input[type="password"].uilib-input.disabled {
     background-color: #f2f3f2;
 }
+
+input[type="text"].uilib-input::-webkit-input-placeholder {
+    color: #9d9d9d;
+}
+
+input[type="text"].uilib-input:-moz-placeholder { /* Firefox 18- */
+    color: #9d9d9d;
+}
+
+input[type="text"].uilib-input::-moz-placeholder {  /* Firefox 19+ */
+    color: #9d9d9d;
+}
+
+input[type="text"].uilib-input:-ms-input-placeholder {
+    color: #9d9d9d;
+}

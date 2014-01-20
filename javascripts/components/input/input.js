@@ -69,6 +69,10 @@ jQuery.fn.definePlugin('Input', function ($) {
 				if(this.options.validate){
 					this.$input.removeClass(names.validInputClass).addClass(names.invalidInputClass);
 				}
+			} else {
+				if (this.$input.val() === ''){
+					this.$input.removeClass(names.invalidInputClass);
+				}
 			}
 		},
 		disable: function () {

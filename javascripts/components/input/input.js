@@ -37,7 +37,6 @@ jQuery.fn.definePlugin('Input', function ($) {
 		markup: function () {
 			this.$input = $('<input>').attr('type', this.options.type).attr('placeholder', this.options.placeholder).addClass(names.inputClass);
 			if (this.options.disabled){
-				debugger
 				this.disable();
 			}
 			this.$el.append(this.$input);

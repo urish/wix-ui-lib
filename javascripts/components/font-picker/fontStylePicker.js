@@ -21,8 +21,6 @@ jQuery.fn.definePlugin('FontStylePicker', function () {
     textStyleHtml += '<button value="italic" class="grad-1" style="font-family: serif;font-style: italic;">I</button>';
     textStyleHtml += '<button value="underline" class="grad-1" style="font-family: serif;text-decoration: underline;">U</button>';
 
-    var popupFooterHTML = '<button class="btn gray x-close-popup">Cancel</button><button style="float:right" class="btn blue close-popup">OK</button>';
-
     return {
 		init : function () {
 			this.isParamMode = this.getParamKey();
@@ -119,7 +117,8 @@ jQuery.fn.definePlugin('FontStylePicker', function () {
 					appendTo: this.$el,
 					title : 'Font Settings',
 					content : '',
-					footer : popupFooterHTML,
+					footer:'',
+					buttonSet: 'okCancel',
 					modal : false,
 					modalBackground : 'rgba(0,0,0,0.5)',
 					height : 'auto',
@@ -135,11 +134,11 @@ jQuery.fn.definePlugin('FontStylePicker', function () {
 						that.setValue(that.currentValue);
 						that.triggerChangeEvent(that.getValue());
 					},
-					onposition: function(){
-						this.setBestPosition(that.$el.find('.box-like-drop')[0]);
-					}
+					onposition: function(){}
 				}
 			}).getPlugin();
+			
+			this.popup.setRelativeElement(that.$el.find('.box-like-drop')[0]);
 		
 		},
 		hideArrow:function(){
@@ -152,7 +151,7 @@ jQuery.fn.definePlugin('FontStylePicker', function () {
 			var that = this;
 			this.$el.on('click', '.box-like-drop',function(evt){
 				evt.stopPropagation();
-				that.popup.open();
+				that.popup.toggle();
 			});
 			this.registerToChangeEventAndDelegate(this.fontSizePicker, this);
 			this.registerToChangeEventAndDelegate(this.textStylePicker, this);

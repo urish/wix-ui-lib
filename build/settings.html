@@ -44,7 +44,7 @@
         </div>
     </header>
 
-    <div class="accordion" wix-ctrl="Accordion">
+    <div class="accordion" wix-ctrl="Accordion" wix-options="{toggleOpen:false}">
 
         <div class="acc-pane">
             <h3>General Settings: </h3>
@@ -78,7 +78,7 @@
             </div>
         </div>
 
-        <div class="acc-pane">
+        <div class="acc-pane acc-open">
             <h3>Color Settings: </h3>
 
             <div class="acc-content">
@@ -142,6 +142,9 @@
 <script src="http://sslstatic.wix.com/services/js-sdk/1.24.0/js/Wix.js"></script>
 <!-- Wix UI -->
 <script type="text/javascript" src="ui-lib.min.js"></script>
+
+<script type="text/javascript" src="../javascripts/components/popup/popup.js"></script>
+<script type="text/javascript" src="../javascripts/components/color-picker2/ColorPicker.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function () {

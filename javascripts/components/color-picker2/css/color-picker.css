@@ -1,7 +1,8 @@
 .colorpicker {
   width:252px;
   /*border:1px solid #d4d4d4;  */
-  padding:10px;
+  /*padding:10px;*/
+  margin: 0 0 -10px 0;
   border-radius:0 0 3px 3px;
   line-height: normal;
 }
@@ -141,6 +142,7 @@ label.deg-label{
 
 
 .color-box{
+	cursor:pointer;
 	width :50px; 
 	height: 22px; 
 	border: 1px solid #ccc; 
@@ -164,6 +166,10 @@ label.deg-label{
 
 }
 
+.color-box .popup{
+	cursor:auto;
+}
+
 .color-box:hover{
 	box-shadow: 0 1px 1px rgba(0,0,0,0.5);
 }
@@ -175,6 +181,18 @@ label.deg-label{
 	margin: 3px;
 	box-shadow: 0px -1px 1px #fff inset, 0px 1px 1px rgba(0,0,0,0.4) inset;
 }
+
+/* fix arrow position */
+.color-box .popup-arrow.popup-arrow-left{
+	margin-left: -4px;
+}
+
+.color-box .popup-arrow.popup-arrow-right{
+	margin-right: -3px;
+}
+
+
+
 
 .color-box-inner-arrow{
 	width: 0;
@@ -193,6 +211,7 @@ label.deg-label{
 
 
 .simple-color-node{
+	cursor:pointer;
 	width:21px;
 	height:21px;
 	display:inline-block;
@@ -223,115 +242,6 @@ label.deg-label{
 	overflow: hidden;
 	background:#fff;
 }
-
-.picker-wrapper{
-	font-family: Arial,sans-serif;
-	font-size:14px;
-	box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-	background: #fdfdfd;
-	z-index: 10;
-	border-radius: 4px;
-	border: 1px solid #d4d4d4;
-}
-.picker-wrapper-header{
-	position:relative;
-	height: 21px; 
-	line-height: 21px;
-	padding: 5px 5px 5px 10px;
-	border-bottom: 0;
-	border-bottom: 1px solid #d4d4d4;
-	border-radius: 4px 4px 0 0;	
-	font-size: 15px;
-}
-.picker-close-btn{
-	position: absolute;
-	top: 0;
-	right: 0;
-	width:32px;
-	height:100%;	
-	border-left: 1px solid #d4d4d4;
-	cursor: pointer;
-	background-repeat: no-repeat;
-	background-position: 50% 9px;
-	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAsCAYAAABloJjNAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAadEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjEwMPRyoQAAAhpJREFUSEutkjFvUlEYhkv7B/ACg4GEiRg2uQkkBIYa4M7q4FwXR5Mu/gR/QuMGky4m2KHpZDr0B9yYuDgxOdTG0qFWE0mO33tzP3rOuW+t8UDyJJyH7325fIcteZU2DJUhUFmKomgO7snL88+FE+GR7S2KEsOC6fV6IK1Wq1lpXmZarZbp9/tTP5dDZanZbE6TJDFgOBymtVptX8vELSeTSYflBCoz4ji2S0273b6rDFC5RkpTLQVSdtvuFCozdGd4OilS0kajEcnn2/58DpXOBUgJfuYHLcVOK5XKbaUFsS3/lNguG41GMXy3251p6WAwmMFZaP6mSCmXy1G9Xl/YZUqn08lKx+PxE9tbuGUbgMoQqPTZ8WAzCpWKX+TDMlQCVsDwcwUBWPBv3GSNMRuFyhCoDIHKEKgMgcoQqAyByhCoDIHKEKgMgcoQqAyByhCoXK1WiTDPSbzP9oQT4ZntlYIAKNr7uDTg4vq3kfOL3B+8+/LDPD2+MKdff8Lv+lnnADCE4fuzs4zx4XctzcrUvzy9hJv6eeegYBABu/TN56v1+cHbb+bT+S8U9vysc1Aw6JeSstcsWxBKXpri6ezCfHe0DFAJJOTsTLF2ml2UT0EAvww/EzdOSu/eoQw9xI7ssnxnc3un/3zLMlTGt3ffnzsXIDgXdbS4hn/s552DIoOvhIWwFNYXIO+zUgFlB3ZGKYhQqPx/zNYf67y6Eybkju0AAAAASUVORK5CYII=);
-}
-
-.picker-close-btn:hover{
-	background-position: 50% -21px;
-	background-color: #ddd;
-}
-
-
-.picker-arrow-top .picker-arrow-one,
-.picker-arrow-left .picker-arrow-one,
-.picker-arrow-right .picker-arrow-one{
-	display: block;
-	border-style: solid;
-    border-width: 10px;
-    width: 0px;
-    height: 0px;
-	position:absolute;
-	top: 0;
-	z-index:13;
-}
-
-.picker-arrow-top .picker-arrow-two,
-.picker-arrow-left .picker-arrow-two,
-.picker-arrow-right  .picker-arrow-two{
-	display: block;
-	border-style: solid;
-	border-width: 9px;
-	margin-top:1px;
-    width: 0px;
-    height: 0px;
-	position:absolute;
-	top: 0;
-	z-index:13;
-}
-
-
-.picker-arrow-left .picker-arrow-one{
-    border-color: transparent #d4d4d4 transparent transparent;
-	border-right-width: 12px;
-	right: -15px;
-}
-
-
-
-.picker-arrow-top .picker-arrow-one{
-	border-color: #d4d4d4 transparent transparent transparent;
-	border-top-width: 12px;
-	right: 15px;
-	top: -15px;
-}
-
-.picker-arrow-top .picker-arrow-two{
-    border-color:#ffffff transparent transparent transparent;
-	border-top-width: 11px;
-	right: 16px;
-	top: -16px;
-}
-
-
-
-.picker-arrow-left .picker-arrow-two{
-    border-color: transparent #ffffff transparent transparent;
-	border-right-width: 11px;
-	right: -15px;
-}
-
-.picker-arrow-right .picker-arrow-one{
-    border-color: transparent transparent transparent #d4d4d4;
-	border-left-width: 12px;
-	right: 43px;
-}
-.picker-arrow-right  .picker-arrow-two{
-    border-color: transparent transparent transparent #ffffff;
-	margin-right: 2px;
-	border-left-width: 11px;
-	right: 43px;
-}
-
 
 .change-picker-label{
 	color: #09f;

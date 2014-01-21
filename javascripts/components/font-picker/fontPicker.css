@@ -54,7 +54,7 @@
 }
 
 .box-like-drop{
-	
+	cursor:pointer;
 	height: 24px;
 	border: 1px solid #ccc;
 	border-radius: 4px;

@@ -58,7 +58,7 @@ jQuery.fn.definePlugin('Tooltip', function ($) {
 							setLeftPlacement($tooltip);
 							break;
 						case 'bottom':
-							setLeftPlacement(setBottomPlacement);
+							setBottomPlacement($tooltip);
 							break;
 						default :
 							setTopPlacement($tooltip);

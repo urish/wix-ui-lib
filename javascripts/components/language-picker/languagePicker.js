@@ -15,7 +15,7 @@ jQuery.fn.definePlugin('LanguagePicker', function () {
             this.$el.append($options);
 
 			this.dropdown = this.$el.Dropdown({
-					   width: 56,
+					   width: 62,
 				      height: 150,
                 optionsWidth: 105,
                     modifier: function($el){

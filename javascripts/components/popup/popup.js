@@ -4,7 +4,7 @@ jQuery.fn.definePlugin('Popup', function ($) {
 	var names = {};
 	
 	var buttonSet = {
-		okCancel: '<button class="btn gray x-close-popup">Cancel</button><button style="float:right" class="btn blue close-popup">OK</button>',
+		okCancel: '<button class="uilib-btn btn-secondary btn-small x-close-popup">Cancel</button><button style="float:right" class="uilib-btn btn-small close-popup">OK</button>',
 		none: ''
 	};
 	

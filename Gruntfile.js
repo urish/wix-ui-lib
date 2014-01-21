@@ -12,6 +12,7 @@ module.exports = function (grunt) {
 	var cssSrc = [
 		'stylesheets/bootstrap.css',
 		'stylesheets/buttons.css',
+		'stylesheets/icons.css',
 		'stylesheets/common.css',
 		'stylesheets/settings.css',
 

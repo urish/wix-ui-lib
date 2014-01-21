@@ -43,7 +43,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 }
 
 .dropdown.focus-active{
-  border: 1px solid rgba(0,0,0,0.4);
+    box-shadow: 0 0 1px rgba(0,0,0,0.4);
+    border: 1px solid rgba(0,0,0,0.2);
 }
 
 .dropdown .option{
@@ -64,7 +65,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
   border-bottom: none;
 }
 .dropdown .option.option-selected{
-  box-shadow: rgba(0, 0, 0,0.1) 0 0 0 30px inset;
+   background-color: #e6f5ff;
 }
 .dropdown .options{
   outline: 1px solid #ccc;  
@@ -73,7 +74,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 }
 
 .dropdown .dropdown-highlight{
-  background-color: rgba(0, 153, 255, 0.4);
+  background-color: #e6f5ff;
 }
 
 .dropdown-icon{

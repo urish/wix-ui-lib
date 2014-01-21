@@ -46,9 +46,19 @@ img.fnone{float:none !important}
 	background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAGCAYAAAD+Bd/7AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYxIDY0LjE0MDk0OSwgMjAxMC8xMi8wNy0xMDo1NzowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNS4xIE1hY2ludG9zaCIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo4NzNERDA3M0IwMDAxMUUyOTE2M0MyRDJBNkM3MzJGOCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo4NzNERDA3NEIwMDAxMUUyOTE2M0MyRDJBNkM3MzJGOCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjg3M0REMDcxQjAwMDExRTI5MTYzQzJEMkE2QzczMkY4IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjg3M0REMDcyQjAwMDExRTI5MTYzQzJEMkE2QzczMkY4Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+Y7XHHgAAALlJREFUeNpibD3y+P/Ga68ZmBkYGf4w/Gdg/v+P4T8jKwMz43+GaT6q35mKzKUZZHnZGf4yMgCVMDD8Z2Jm+MfwlyFST5hBR5yjgImdmaGjzkkBrBMEGP/9Z9AU5mJI1BdbzMzINIuJkZGxUk+MY1mSgTjQBGYGZiYGhgor8WvMf/+mg3X8//+f4fuPX2w///8/Gb/27v9FZ558/vj5kzpIHIQZYIy/v/+IPn7z8fb79+/DYWIgDBBgAD1VUz2KNZPWAAAAAElFTkSuQmCC') no-repeat;
 	}
 .dd .ddTitle{color:#373737;
-/*	background:#ededed url(../images/dropdown_bg.png) repeat-x left top;*/
-	background: #ededed url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAYCAIAAAC0rgCNAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYxIDY0LjE0MDk0OSwgMjAxMC8xMi8wNy0xMDo1NzowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNS4xIE1hY2ludG9zaCIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo4NzNERDA2RkIwMDAxMUUyOTE2M0MyRDJBNkM3MzJGOCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo4NzNERDA3MEIwMDAxMUUyOTE2M0MyRDJBNkM3MzJGOCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjg3M0REMDZEQjAwMDExRTI5MTYzQzJEMkE2QzczMkY4IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjg3M0REMDZFQjAwMDExRTI5MTYzQzJEMkE2QzczMkY4Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+f35u8wAAAChJREFUeNpi+P//PxMDAwNR+N+/f0x///5l+vPnDxiD2CAxPHoAAgwA6aMU9p+pHdIAAAAASUVORK5CYII=') repeat-x left top;
-	height: 26px;}
+	background: #fff;
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+	background: -moz-linear-gradient(top,#fff 0,#f4f4f4 48%,#e7e7e7 52%,#f8f8f8 100%);
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#fff),color-stop(48%,#f4f4f4),color-stop(52%,#e7e7e7),color-stop(100%,#f8f8f8));
+	background: -webkit-linear-gradient(top,#fff 0,#f4f4f4 48%,#e7e7e7 52%,#f8f8f8 100%);
+	background: -o-linear-gradient(top,#fff 0,#f4f4f4 48%,#e7e7e7 52%,#f8f8f8 100%);
+	background: -ms-linear-gradient(top,#fff 0,#f4f4f4 48%,#e7e7e7 52%,#f8f8f8 100%);
+	background: linear-gradient(to bottom,#fff 0,#f4f4f4 48%,#e7e7e7 52%,#f8f8f8 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f8f8f8', GradientType=0);
+  
+	height: 26px;
+	
+	}
 .dd .ddTitle .ddTitleText{padding:6px 20px 2px 9px; font-size:12px;}
 .dd .ddTitle .ddTitleText .ddTitleText{padding:0;}
 .dd .ddTitle .description{font-size:8px; color:#666}

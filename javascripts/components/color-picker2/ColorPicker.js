@@ -855,7 +855,6 @@ var createColorBox = (function (){
 			}
 		}
 		
-		
 		function initialize(){
 
 			markup();
@@ -871,7 +870,7 @@ var createColorBox = (function (){
 				
 			cb.colorPalete = createColorPalete({
 				width: '182px',
-				parent: cb.wrapper,
+				parent: cb.popup.content,
 				selected: ref,
 				onchangepicker: function(){
 					showAdvancePicker();
@@ -885,18 +884,61 @@ var createColorBox = (function (){
 				primColors: options.primColors || []
 			});
 			
-			
 			showSimplePicker();
-			
 			
 			ref ? setBoxInnerColor(ref.value, ref) : setBoxInnerColor(options.color, false);
 			
 			hidePickers();	
-			createOkCancelBtns();
 			bindEvents();
 
 			createColorBox.instances.push(pickerInstance);
 			return pickerInstance;
+		}
+
+		function markup(){
+			
+			cb.colorBox = options.element || document.createElement('div');
+			
+			cb.popup = $('<div>').Popup({
+				appendTo: cb.colorBox,
+				title : 'ColorPicker',
+				buttonSet: 'okCancel',
+				height : 'auto',
+				width : 'auto',
+				onclose : function () {
+					pickerInstance.hidePickers();
+				},
+				oncancel: function() {
+					if(pickerInstance.getColorObject() || pickerInstance.getColor() !== cb.openedColor){
+						pickerInstance.setColor(cb.openedColor);
+						options.onchange && options.onchange(cb.openedColor);	
+					}
+					pickerInstance.hidePickers();				
+				},
+				onopen: function(){
+					cb.colorBox.appendChild(this.arrow);
+				},
+				onposition: function(){}	
+			}).getPlugin();
+			
+			cb.popup.setRelativeElement(cb.colorBox)
+			
+			
+			cb.colorBoxPicker = document.createElement('div');
+			cb.colorBoxInner = document.createElement('div');
+			cb.colorBoxInnerArrow = document.createElement('div');
+
+			cb.colorBoxPicker.className = 'colorpicker';
+			cb.colorBox.className = 'color-box';
+			cb.colorBoxInner.className = 'color-box-inner';
+			cb.colorBoxInnerArrow.className = 'color-box-inner-arrow';
+			
+			cb.popup.content.appendChild(cb.colorBoxPicker);
+			
+			cb.colorBox.appendChild(cb.colorBoxInner);
+			cb.colorBox.appendChild(cb.colorBoxInnerArrow);
+			
+			options.parent && options.parent.appendChild(cb.colorBox);
 		}
 		
 		function findReferanceName(ref){
@@ -917,89 +959,6 @@ var createColorBox = (function (){
 			return false;
 		}
 		
-		function markup(){
-			createArrow();
-			createWrapper();
-			
-			cb.colorBox = options.element || document.createElement('div');
-			
-			cb.wrapper.style.position = 'absolute';
-			
-			cb.colorBoxPicker = document.createElement('div');
-			cb.colorBoxInner = document.createElement('div');
-			cb.colorBoxInnerArrow = document.createElement('div');
-
-			cb.colorBoxPicker.className = 'colorpicker';
-			cb.colorBox.className = 'color-box';
-			cb.colorBoxInner.className = 'color-box-inner';
-			cb.colorBoxInnerArrow.className = 'color-box-inner-arrow';
-			
-			cb.wrapper.appendChild(cb.colorBoxPicker);
-			cb.colorBox.appendChild(cb.colorBoxInner);
-			cb.colorBox.appendChild(cb.colorBoxInnerArrow);
-			cb.colorBox.appendChild(cb.wrapper);
-			cb.colorBox.appendChild(cb.wrapperArrow);
-			
-			options.parent && options.parent.appendChild(cb.colorBox);
-		}
-		
-		function createOkCancelBtns(){
-			cb.okBtn = document.createElement('button');
-			cb.cancelBtn = document.createElement('button');
-			
-			cb.okBtn.innerHTML = 'OK';
-			cb.cancelBtn.innerHTML = 'Cancel';
-			
-			cb.okBtn.onclick = function(){
-				pickerInstance.hidePickers();
-			}
-			
-			cb.cancelBtn.onclick = function(){
-				if(pickerInstance.getColorObject() || pickerInstance.getColor() !== cb.openedColor){
-					pickerInstance.setColor(cb.openedColor);
-					options.onchange && options.onchange(cb.openedColor);	
-				}
-				pickerInstance.hidePickers();
-			}
-			
-			cb.okBtn.className = 'btn blue';
-			cb.okBtn.style.cssText = 'float: right; margin: 0 10px 0 0;';
-			
-			cb.cancelBtn.className = 'btn gray';
-			cb.cancelBtn.style.cssText = 'float: left; margin: 0 0 10px 10px;';
-			
-							
-			cb.wrapper.appendChild(cb.cancelBtn);
-			cb.wrapper.appendChild(cb.okBtn);
-		}
-		
-		function createArrow(){
-			cb.wrapperArrow = document.createElement('div');
-			var a1 = document.createElement('div');
-			var a2 = document.createElement('div');
-			cb.wrapperArrow.className = 'picker-arrow-right';
-			a1.className = 'picker-arrow-one';
-			a2.className = 'picker-arrow-two';
-			cb.wrapperArrow.appendChild(a1);
-			cb.wrapperArrow.appendChild(a2);	
-		}
-		
-		function createWrapper(headerText){
-			cb.wrapper = document.createElement('div');
-			cb.wrapperHeader = document.createElement('header');
-			cb.wrapperHeaderText = document.createElement('span');
-			cb.wrapperCloseBtn = document.createElement('div');
-			
-			cb.wrapperCloseBtn.className = 'picker-close-btn';
-			cb.wrapper.className = 'picker-wrapper';
-			cb.wrapperHeader.className = 'picker-wrapper-header';
-			
-			cb.wrapper.appendChild(cb.wrapperHeader);
-			cb.wrapperHeader.appendChild(cb.wrapperHeaderText);
-			cb.wrapperHeader.appendChild(cb.wrapperCloseBtn);
-			
-		}
-		
 		function bindEvents(){
 					
 			window.addEventListener('click', function(){
@@ -1009,14 +968,9 @@ var createColorBox = (function (){
 			cb.colorBox.onclick = function(evt){
 				evt.stopPropagation && evt.stopPropagation();
 				evt.prevetDefault && evt.prevetDefault();		
-				if(evt.target === cb.colorBox || evt.target === cb.colorBoxInner || evt.target === cb.colorBoxInnerArrow || evt.target === cb.wrapperCloseBtn){
-					if(isPickersVisible()){
-						hidePickers();		
-					} else {
-						showPickers();
-						var side = setBestPosition(cb.wrapper , cb.colorBox);
-						cb.wrapperArrow.className = 'picker-arrow-' + side;
-					}
+		
+				if(evt.target === cb.colorBox || evt.target === cb.colorBoxInner || evt.target === cb.colorBoxInnerArrow){
+					cb.popup.isOpen() ? hidePickers() : showPickers();
 				}
 				return false;
 			}
@@ -1034,81 +988,29 @@ var createColorBox = (function (){
 		}
 		
 		function showSimplePicker(){
-			cb.wrapperHeaderText.innerHTML = 'Site Colors';
+			cb.popup.setTitle('Site Colors');
 			cb.colorPicker.hide();
 			cb.colorPalete.show();
 		}
 		
 		function showAdvancePicker(){
-			cb.wrapperHeaderText.innerHTML = 'All Colors';
+			cb.popup.setTitle('All Colors');
 			cb.colorPalete.hide();
 			cb.colorPicker.show();
 		}
 		
 		function hidePickers(){
 			enableTextSelection();
-			cb.wrapper.style.display = 'none';
-			cb.wrapperArrow.style.display = 'none';
+			cb.popup.close();
 		}
 		
 		function showPickers(){
 			saveOpendColor();
 			hideAllOpenPickers();
 			disableTextSelection();
-			cb.wrapper.style.display = 'block';
-			cb.wrapperArrow.style.display = 'block';
+			cb.popup.open();
 		}
-		
-		function isPickersVisible(){
-			return cb.wrapper.style.display !== 'none';
-		}
-		
-		function setBestPosition(targetNode, relativeTo){
-			var side = 'left';
-			var right = 'auto';
-			var distanceFromBox = 14;
-			var topMoveTranslate = -5;
-		
-			var pickerWidth = targetNode.clientWidth;
-			var pickerHeight = targetNode.clientHeight;
-			
-			var elmWidth = relativeTo.clientWidth;
-			var elmHeight = relativeTo.clientHeight;
-			
-			var top = (elmHeight/2 - pickerHeight/2);
-			var left = elmWidth + distanceFromBox;
-			
-			var offset = getOffset(relativeTo);
-			
-			if((elmWidth + pickerWidth + offset.left + distanceFromBox + 1) > window.innerWidth){
-				left = 0 - pickerWidth - distanceFromBox;
-				right = elmWidth + distanceFromBox;
-				side = 'right';
-			}
-				
-			var rightOver = (offset.left - (pickerWidth + distanceFromBox + 1));
-			if(side === 'right' && rightOver < 0){
-				top = 0 - (pickerHeight + distanceFromBox);
-				right -= (rightOver + pickerWidth/2);
-				side = 'top';
-			}
-			
-			
-			if((offset.top - pickerHeight/2 ) < 0){
-				top -= offset.top - pickerHeight/2 - topMoveTranslate;
-			}
-			
-			if(side !== 'top' && (elmHeight + offset.top + pickerHeight/2 ) > window.innerHeight){
-				top -= (elmHeight + offset.top + pickerHeight/2) - window.innerHeight;
-			}
-			
-			targetNode.style.top = top + 'px';
-			targetNode.style.left = (side === 'right' || side === 'top') ? 'auto' : left + 'px';
-			targetNode.style.right = (side === 'right' || side === 'top') ? right + 'px' : 'auto';
-			
-			return side;
-		}
-			
+
 		function setBoxInnerColor(color, colorObject){
 			if(color.indexOf('rgba') !== -1){
 				color = color.replace(/,\s*\d+\.?\d*\s*\)/,')').replace('rgba','rgb');
@@ -1119,23 +1021,12 @@ var createColorBox = (function (){
 			}
 			cb.colorObject = colorObject;
 		}
-				
-		function getOffset(el) {
-			var _x = 0;
-			var _y = 0;
-			while( el && !isNaN( el.offsetLeft ) && !isNaN( el.offsetTop ) ) {
-				_x += el.offsetLeft - el.scrollLeft;
-				_y += el.offsetTop - el.scrollTop;
-				el = el.offsetParent;
-			}
-			return { top: _y, left: _x };
-		}
-		
+
 		function disableTextSelection(){
 			disableTextSelection.onselectstart = document.onselectstart || null;
 			disableTextSelection.onmousedown = document.onmousedown || null;
 			document.onmousedown = document.onselectstart = function(evt) { 
-				if(evt.target.tagName.toLowerCase() === 'input' || evt.ctrlKey){
+				if((evt.target.tagName && (evt.target.tagName.toLowerCase() === 'textarea' || evt.target.tagName.toLowerCase() === 'input')) || evt.ctrlKey){
 					return true;
 				}
 				return false; 

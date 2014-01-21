@@ -14,7 +14,7 @@
     border-radius: 3px;
     text-shadow: none;
 
-    border: 1px solid #257298;
+    border: 1px solid rgba(37, 114, 152, 0.78);
     color: #ffffff;
     background-color: #0099ff;
 
@@ -24,47 +24,44 @@
     background-repeat: repeat-x;
     background-position: 0 50%;
 
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(37%,rgba(255,255,255,0.15)), color-stop(100%,rgba(0,0,0,0.05)));
-    background-image: -webkit-linear-gradient(top, rgba(255,255,255,0.15) 37%,rgba(0,0,0,0.05) 100%);
-    background-image: -moz-linear-gradient(top, rgba(255,255,255,0.15) 37%,rgba(0,0,0,0.05) 100%);
-    background-image: -ms-linear-gradient(top, rgba(255,255,255,0.15) 37%,rgba(0,0,0,0.05) 100%);
-    background-image: -o-linear-gradient(top, rgba(255,255,255,0.15) 37%,rgba(0,0,0,0.05) 100%);
-
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(37%,rgba(0,0,0,.07)), color-stop(56%,rgba(255,255,255,0.07)));
+    background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.07) 37%,rgba(255,255,255,0.07) 56%);
+    background-image: -moz-linear-gradient(top, rgba(0,0,0,0.07) 37%,rgba(255,255,255,0.07) 56%);
+    background-image: -ms-linear-gradient(top, rgba(0,0,0,0.07) 37%,rgba(255,255,255,0.07) 56%);
+    background-image: -o-linear-gradient(top, rgba(0,0,0,0.07) 37%,rgba(255,255,255,0.07) 56%);
 }
 
 .uilib-btn.btn-secondary {
     color: #0099ff;
-    border: 1px solid #c4c4c4;
+    border: 1px solid rgba(196, 196, 196, 0.78);
     background-color: #fff;
 }
 
 .uilib-btn.btn-upgrade {
     color: #a41aa4;
-    border: 1px solid #c4c4c4;
+    border: 1px solid rgba(196, 196, 196, 0.78);
     background-color: #fff;
 }
 
 .uilib-btn.btn-black-text {
     color: #000;
-    border: 1px solid #c4c4c4;
+    border: 1px solid rgba(196, 196, 196, 0.78);
     background-color: #fff;
 }
 
 .uilib-btn.btn-purple {
     color: #fff;
-    border: 1px solid #901790;
+    border: 1px solid rgba(114, 23, 114, 0.78);
     background-color: #a41aa4;
 }
 
 .uilib-btn.btn-green {
     color: #fff;
-    border: 1px solid #50932e;
+    border: 1px solid rgba(80, 147, 46, 0.78);
     background-color: #6bb445;
 }
 
 .uilib-btn:hover {
-    *background-color: #179ce1;
-    *border-color: #5b8fa7;
     -webkit-box-shadow: 0.5px 1px 1px 0 rgba(0,0,0,0.45);
     box-shadow: 0.5px 1px 1px 0 rgba(0,0,0,0.45);
 }
@@ -72,11 +69,11 @@
 .uilib-btn:focus,
 .uilib-btn:active {
     outline: none;
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(37%,rgba(0,0,0,0.005)), color-stop(100%,rgba(255,255,255,0.15)));
-    background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.05) 37%,rgba(255,255,255,0.15) 100%);
-    background-image: -moz-linear-gradient(top, rgba(0,0,0,0.05) 37%,rgba(255,255,255,0.15) 100%);
-    background-image: -ms-linear-gradient(top, rgba(0,0,0,0.05) 37%,rgba(255,255,255,0.15) 100%);
-    background-image: -o-linear-gradient(top, rgba(0,0,0,0.05) 37%,rgba(255,255,255,0.15) 100%);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(37%,rgba(255,255,255,0.07)), color-stop(56%,rgba(0,0,0,0.07)));
+    background-image: -webkit-linear-gradient(top, rgba(255,255,255,0.07) 37%,rgba(0,0,0,0.07) 56%);
+    background-image: -moz-linear-gradient(top, rgba(255,255,255,0.07) 37%,rgba(0,0,0,0.07) 56%);
+    background-image: -ms-linear-gradient(top, rgba(255,255,255,0.07) 37%,rgba(0,0,0,0.07) 56%);
+    background-image: -o-linear-gradient(top, rgba(255,255,255,0.07) 37%,rgba(0,0,0,0.07) 56%);
     box-shadow: inset .5px 1px 1px 0 rgba(0,0,0,0.45);
 }
 
@@ -84,7 +81,7 @@
 .uilib-btn.btn-secondary:active,
 .uilib-btn.btn-black-text:focus,
 .uilib-btn.btn-black-text:active{
-    box-shadow: inset .5px .5px .5px 0 rgba(0,0,0,0.45);
+    box-shadow: inset 0px 1px 1px 0 rgba(0,0,0,0.15);
 }
 
 .uilib-btn.disabled,

@@ -85,7 +85,6 @@ describe('Input', function () {
 
 	function givenInput(options){
 		options = options || {};
-		_.extend(options, {title:'Some text to show'});
 		$element.attr('wix-options', JSON.stringify(options));
 		Wix.UI.initializePlugin(element);
 		return $element.getPlugin();

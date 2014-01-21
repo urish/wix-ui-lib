@@ -56,3 +56,9 @@
     width: 20px;
     height: 16px;
 }
+
+.icon-close {
+    background-position: -167px -15px;
+    width: 10px;
+    height: 9px;
+}

@@ -4,12 +4,6 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Widget Settings &bull; Wix</title>
     <link rel="stylesheet" href="ui-lib.min.css"/>
-    <style type="text/css">
-        .left-margin{
-            margin-left: 40px;
-        }
-
-    </style>
 </head>
 <body wix-uilib>
 
@@ -30,7 +24,7 @@
             <div class="login-panel">
                 <p class="create-account">Don't have an<br/>account? <strong><a href="#" target="_blank">Create
                     one</a></strong></p>
-                <button class="submit btn connect">Connect account</button>
+                <button class="submit uilib-btn connect">Connect account</button>
             </div>
         </div>
         <div class="loggedIn hidden">
@@ -112,6 +106,27 @@
                 <div wix-model="imageMeta" wix-ctrl="Checkbox:{ postLabel:'Image Meta'}"></div>
                 <div wix-model="imageAlt" wix-ctrl="Checkbox:{ postLabel:'Image Alt'}"></div>
                 <div wix-model="imageLink" wix-ctrl="Checkbox:{ postLabel:'Image Link'}"></div>
+            </div>
+        </div>
+
+
+
+        <div class="acc-pane">
+            <h3>Buttons</h3>
+            <div class="acc-content btn-demo">
+                <section>
+                    <button class="submit uilib-btn connect">Connect account</button>
+                    <button class="submit uilib-btn btn-secondary">Connect account</button>
+                    <button class="submit uilib-btn btn-upgrade">Connect account</button>
+                    <button class="submit uilib-btn btn-black-text">Connect account</button>
+                </section>
+                <section>
+                    <button class="submit uilib-btn btn-purple">Connect account</button>
+                    <button class="submit uilib-btn btn-green">Connect account</button>
+                    <button class="submit uilib-btn disabled">Connect account</button>
+                    <button class="submit uilib-btn btn-small">Connect account</button>
+                    <button class="submit uilib-btn btn-large">Connect account</button>
+                </section>
             </div>
         </div>
 

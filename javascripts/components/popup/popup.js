@@ -3,6 +3,11 @@ jQuery.fn.definePlugin('Popup', function ($) {
 	
 	var names = {};
 	
+	var buttonSet = {
+		okCancel: '<button class="btn gray x-close-popup">Cancel</button><button style="float:right" class="btn blue close-popup">OK</button>',
+		none: ''
+	};
+	
 	return {
 		init: function(){
 			// TODO: get rid of this.popup	
@@ -21,12 +26,13 @@ jQuery.fn.definePlugin('Popup', function ($) {
 			return {
 				appendTo: 'body',
 				title : 'Popup',
-				content : '<p>No Content</p>',
-				footer : '<button class="btn gray close-popup">Close</button>',
+				content : '',
+				footer : '',
 				modal : false,
 				modalBackground : 'rgba(0,0,0,0.5)',
 				height : 'auto',
 				width : 300,
+				buttonSet: '',
 				onclose : function () {},
 				oncancel: function() {},
 				onopen: function(){},
@@ -50,11 +56,10 @@ jQuery.fn.definePlugin('Popup', function ($) {
 			this.header.className = 'popup-header';
 			this.content.className = 'popup-content';
 			this.footer.className = 'popup-footer';
-
+			
 			this.popup.appendChild(this.header);
 			this.popup.appendChild(this.content);
 			this.popup.appendChild(this.footer);
-
 			this.header.appendChild(this.headerTitle);
 			this.header.appendChild(this.closeBtn);
 			
@@ -118,6 +123,9 @@ jQuery.fn.definePlugin('Popup', function ($) {
 			}
 			this.triggerChangeEvent('close');
 		},
+		setRelativeElement: function(selectorOrElement){
+			this.relativeElement = $(selectorOrElement)[0];
+		},
 		setPosition: function () {
 			this.$el.css({
 				position : 'absolute',
@@ -128,7 +136,9 @@ jQuery.fn.definePlugin('Popup', function ($) {
 				marginLeft : 0 - this.options.width / 2,
 				marginTop : 0 - this.$el.height() / 2
 			});
-
+			if(this.relativeElement){
+				this.setBestPosition(this.relativeElement);
+			}
 			if(typeof this.options.onposition === 'function'){
 				return this.options.onposition.call(this);
 			}
@@ -152,13 +162,16 @@ jQuery.fn.definePlugin('Popup', function ($) {
 			$(this.content).empty().append(content);
 		},
 		setFooter: function (footerContent) {
-			$(this.footer).empty().append(footerContent);
+			$(this.footer).empty().append(buttonSet[this.options.buttonSet], footerContent);
 		},
 		setTitle: function (title) {
 			$(this.headerTitle).text(title);
 		},
 		isOpen: function (title) {
 			return this.state === 'open';
+		},
+		toggle: function(){
+			this.isOpen() ? this.close() : this.open();
 		},
 		open: function () {
 			if(this.isOpen()){return;}
@@ -214,43 +227,41 @@ jQuery.fn.definePlugin('Popup', function ($) {
 		targetNode.style.right = 'auto';
 		targetNode.style.margin = '0';
 	
-		var pickerWidth = targetNode.clientWidth;
-		var pickerHeight = targetNode.clientHeight;
+		var targetNodeWidth = targetNode.clientWidth;
+		var targetNodeHeight = targetNode.clientHeight;
+		var halfTargetNodeHeight = targetNodeHeight/2;
 		
 		var elmWidth = relativeTo.clientWidth;
 		var elmHeight = relativeTo.clientHeight;
 
-		var top = (elmHeight/2 - pickerHeight/2);
+		var top = (elmHeight/2 - halfTargetNodeHeight);
 		var left = elmWidth + distanceFromBox;
 		
 
 		var offset = getOffset(relativeTo);
 		
-		if((elmWidth + pickerWidth + offset.left + distanceFromBox + 1) > window.innerWidth){
-			//left = 0 - pickerWidth - distanceFromBox;
+		if((elmWidth + targetNodeWidth + offset.left + distanceFromBox + 1) > window.innerWidth){
 			right = elmWidth + distanceFromBox + 1;
 			side = 'right';
 		}
 
 			
-		var rightOver = (offset.left - (pickerWidth + distanceFromBox + 1));
+		var rightOver = (offset.left - (targetNodeWidth + distanceFromBox + 1));
 		if(side === 'right' && rightOver < 0){
-			top = 0 - (pickerHeight + distanceFromBox);
-			right = elmWidth/2 - pickerWidth/2;//right -= (rightOver + pickerWidth/2);
+			top = 0 - (targetNodeHeight + distanceFromBox);
+			right = elmWidth/2 - targetNodeWidth/2;
 			side = 'top';
 		}
 
-	/*
-		if((offset.top - pickerHeight/2 ) < 0){
-			top -= offset.top - pickerHeight/2 - topMoveTranslate;
+	
+		if((offset.top - halfTargetNodeHeight) < 0){
+			top -= offset.top - halfTargetNodeHeight - topMoveTranslate;
 		}
 		
-		if(side !== 'top' && (elmHeight + offset.top + pickerHeight/2 ) > window.innerHeight){
-			top -= (elmHeight + offset.top + pickerHeight/2) - window.innerHeight;
+		if(side !== 'top' && (elmHeight + offset.top + halfTargetNodeHeight) > window.innerHeight){
+			top -= (elmHeight + offset.top + halfTargetNodeHeight) - window.innerHeight;
 		}
-	*/
-
-			
+		
 		targetNode.style.top = top + 'px';
 		targetNode.style.left = (side === 'right' || side === 'top') ? 'auto' : left + 'px';
 		targetNode.style.right = (side === 'right' || side === 'top') ? right + 'px' : 'auto';

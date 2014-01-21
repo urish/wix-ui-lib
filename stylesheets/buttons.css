@@ -17,7 +17,9 @@
     border: 1px solid rgba(37, 114, 152, 0.78);
     color: #ffffff;
     background-color: #0099ff;
-
+    -webkit-box-shadow: inset 1px 2px rgba(255,255,255,.21);
+    -moz-box-shadow: inset 1px 2px rgba(255,255,255,.21);
+    box-shadow: inset 1px 2px rgba(255,255,255,.21);
 
     /* fallback */
     background-image: url('../../images/bg-gradient.png');
@@ -62,19 +64,21 @@
 }
 
 .uilib-btn:hover {
-    -webkit-box-shadow: 0.5px 1px 1px 0 rgba(0,0,0,0.45);
-    box-shadow: 0.5px 1px 1px 0 rgba(0,0,0,0.45);
+    -webkit-box-shadow: 1px 1px 1px rgba(0,0,0,.39), inset 1px 2px rgba(255,255,255,.21);
+    -moz-box-shadow: 1px 1px 1px rgba(0,0,0,.39), inset 1px 2px rgba(255,255,255,.21);
+    box-shadow: 1px 1px 1px rgba(0,0,0,.39), inset 1px 2px rgba(255,255,255,.21);
 }
 
 .uilib-btn:focus,
 .uilib-btn:active {
     outline: none;
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(37%,rgba(255,255,255,0.07)), color-stop(56%,rgba(0,0,0,0.07)));
-    background-image: -webkit-linear-gradient(top, rgba(255,255,255,0.07) 37%,rgba(0,0,0,0.07) 56%);
-    background-image: -moz-linear-gradient(top, rgba(255,255,255,0.07) 37%,rgba(0,0,0,0.07) 56%);
-    background-image: -ms-linear-gradient(top, rgba(255,255,255,0.07) 37%,rgba(0,0,0,0.07) 56%);
-    background-image: -o-linear-gradient(top, rgba(255,255,255,0.07) 37%,rgba(0,0,0,0.07) 56%);
-    box-shadow: inset .5px 1px 1px 0 rgba(0,0,0,0.45);
+    background-image: -webkit-linear-gradient(top, rgba(0,0,0,.07) 37%, rgba(255,255,255,.07) 56%);
+    background-image: -moz-linear-gradient(top, rgba(0,0,0,.07) 37%, rgba(255,255,255,.07) 56%);
+    background-image: -o-linear-gradient(top, rgba(0,0,0,.07) 37%, rgba(255,255,255,.07) 56%);
+    background-image: linear-gradient(to bottom, rgba(0,0,0,.07) 37%, rgba(255,255,255,.07) 56%);   
+    -webkit-box-shadow: inset 1px 2px rgba(0,0,0,.16);
+    -moz-box-shadow: inset 1px 2px rgba(0,0,0,.16);
+    box-shadow: inset 1px 2px rgba(0,0,0,.16);
 }
 
 .uilib-btn.btn-secondary:focus,

@@ -1,11 +1,16 @@
 jQuery.fn.definePlugin('Input', function ($) {
 	'use strict';
 	
-	var names = {
+	var classNames = {
 		inputClass: 'uilib-input',
 		validInputClass: 'valid-input',
 		invalidInputClass: 'invalid-input',
-		disabledClass:'disabled'
+		disabledClass:'disabled',
+		largeClass: 'large',
+		mediumClass: 'medium',
+		xLargeClass: 'x-large',
+		bigClass: 'big'
+
 	};
 	
 	return {
@@ -29,16 +34,32 @@ jQuery.fn.definePlugin('Input', function ($) {
 				type: 'text',
 				placeholder: 'Text input',
 				disabled : false,
+				size: 'default',
 				validation: function(){
 					return true;
 				}
 			};
 		},
 		markup: function () {
-			this.$input = $('<input>').attr('type', this.options.type).attr('placeholder', this.options.placeholder).addClass(names.inputClass);
+			this.$input = $('<input>').attr('type', this.options.type).attr('placeholder', this.options.placeholder).addClass(classNames.inputClass);
 			if (this.options.disabled){
 				this.disable();
 			}
+			switch (this.options.size) {
+				case 'large':
+					this.$input.addClass(classNames.largeClass);
+					break;
+				case 'medium':
+					this.$input.addClass(classNames.mediumClass);
+					break;
+				case 'x-large':
+					this.$input.addClass(classNames.xLargeClass);
+					break;
+				case 'big':
+					this.$input.addClass(classNames.bigClass);
+					break;
+			}
+
 			this.$el.append(this.$input);
 		},
 		bindEvents: function () {
@@ -62,29 +83,29 @@ jQuery.fn.definePlugin('Input', function ($) {
 				this.$input.val(value);
 				this.value = value;
 				if(this.options.validate){
-					this.$input.removeClass(names.invalidInputClass).addClass(names.validInputClass);
+					this.$input.removeClass(classNames.invalidInputClass).addClass(classNames.validInputClass);
 				}
 			} else if(this.$input.val() !== this.value){
 				this.value = '';
 				if(this.options.validate){
-					this.$input.removeClass(names.validInputClass).addClass(names.invalidInputClass);
+					this.$input.removeClass(classNames.validInputClass).addClass(classNames.invalidInputClass);
 				}
 			} else {
 				if (this.$input.val() === ''){
-					this.$input.removeClass(names.invalidInputClass);
+					this.$input.removeClass(classNames.invalidInputClass);
 				}
 			}
 		},
 		disable: function () {
-			this.$input.addClass(names.disabledClass);
+			this.$input.addClass(classNames.disabledClass);
 			this.$input.attr('disabled', 'disabled');
 		},
 		enable: function () {
-			this.$input.removeClass(names.disabledClass);
+			this.$input.removeClass(classNames.disabledClass);
 			this.$input.removeAttr('disabled', 'disabled');
 		},
 		isDisabled: function () {
-			return this.$input.hasClass(names.disabledClass);
+			return this.$input.hasClass(classNames.disabledClass);
 		}	
 	};
 	

@@ -49,6 +49,40 @@ describe('Input', function () {
 		expect($input.attr('disabled')).toBeDefined();
 	});
 
+	describe('Support different text input sizes', function () {
+		it('should support medium text input', function(){
+			givenInput({size: 'medium'});
+			var $input = $element.find('.uilib-input');
+			expect($input.hasClass('medium')).toBeTruthy();
+		});
+
+		it('should support large text input', function(){
+			givenInput({size: 'large'});
+			var $input = $element.find('.uilib-input');
+			expect($input.hasClass('large')).toBeTruthy();
+		});
+
+		it('should support extra large text input', function(){
+			givenInput({size: 'x-large'});
+			var $input = $element.find('.uilib-input');
+			expect($input.hasClass('x-large')).toBeTruthy();
+		});
+
+		it('should support big text input', function(){
+			givenInput({size: 'big'});
+			var $input = $element.find('.uilib-input');
+			expect($input.hasClass('big')).toBeTruthy();
+		});
+
+		it('should only support defined sizes of inputs', function(){
+			givenInput({size: 'wix-foo'});
+			var $input = $element.find('.uilib-input');
+			expect($input.hasClass('wix-foo')).toBeFalsy();
+		});
+	});
+
+
+
 	function givenInput(options){
 		options = options || {};
 		_.extend(options, {title:'Some text to show'});

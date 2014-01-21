@@ -8,6 +8,7 @@ input[type="password"].uilib-input {
     height: 15px;
     padding: 4px 10px 4px 6px;
     font-size: 12px;
+    width: 125px;
     line-height: 14px;
     color: #373737;
     -webkit-border-radius: 2px;
@@ -57,6 +58,27 @@ input[type="password"].uilib-input.valid-input {
 input[type="text"].uilib-input.disabled,
 input[type="password"].uilib-input.disabled {
     background-color: #f2f3f2;
+}
+
+input[type="text"].uilib-input.medium ,
+input[type="password"].uilib-input.medium {
+    width: 224px;
+}
+
+input[type="text"].uilib-input.large ,
+input[type="password"].uilib-input.large {
+    width: 314px;
+}
+
+input[type="text"].uilib-input.x-large ,
+input[type="password"].uilib-input.x-large {
+    width: 525px;
+}
+
+input[type="text"].uilib-input.big ,
+input[type="password"].uilib-input.big {
+    height: 26px;
+    width: 298px;
 }
 
 input[type="text"].uilib-input::-webkit-input-placeholder {

@@ -15,7 +15,7 @@ jQuery.fn.definePlugin('ColorPicker', function ($) {
 			this.options.value = this.options.value !== undefined ? this.options.value : this.options.startWithColor;
 			this.isParamConected = this.options.isParamConected || (this.$el.attr('wix-param') || this.$el.attr('data-wix-param'));
 			//TODO test this.
-			this.siteColors = /*this.isParamConected ? */ true ? (Wix.Styles.getSiteColors() || defaultColors) : defaultColors;
+			this.siteColors = /*this.isParamConected ? */ true ? ((Wix.Styles || Wix.Settings).getSiteColors() || defaultColors) : defaultColors;
 			this.markup();		
 		},
 		getDefaults: function(){
@@ -43,7 +43,7 @@ jQuery.fn.definePlugin('ColorPicker', function ($) {
 			var colorFromTheme;
 			try{
 				if(this.isParamConected && typeof color==='string'){
-					colorFromTheme = Wix.Styles.getColorByRefrence(color);
+					colorFromTheme = (Wix.Styles || Wix.Settings).getColorByRefrence(color);
 				} else if(this.isParamConected && color.color.reference){
 					colorFromTheme = color.color;
 				}

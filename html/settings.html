@@ -66,7 +66,9 @@
                         <div wix-model="isIconShown" wix-ctrl="Checkbox"></div>
                     </li>
                     <li wix-label="Language Picker:">
-                        <div wix-model="languagePicker" wix-ctrl="LanguagePicker"></div>
+                        <div wix-tooltip="Select your language" wix-options=" { placement: 'bottom'} ">
+                            <div wix-model="languagePicker" wix-ctrl="LanguagePicker"></div>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -140,6 +142,26 @@
                 </div>
             </div>
         </div>
+
+        <div class="acc-pane">
+            <h3>Inputs</h3>
+            <div class="acc-content btn-demo">
+                <section>
+                    <div wix-ctrl="Input" wix-options="{ placeholder: 'Demo' }"></div>
+                </section>
+                <section>
+                    <div wix-ctrl="Input" wix-options="{ size: 'medium' }"></div>
+                </section>
+                <section>
+                    <div wix-ctrl="Input" wix-options="{ size: 'large' }"></div>
+                </section>
+                <section>
+                    <div wix-ctrl="Input" wix-options="{ size: 'x-large' }"></div>
+                </section>
+                    <div wix-ctrl="Input" wix-options="{ size: 'big' }"></div>
+                </section>
+            </div>
+        </div>
     </div>
 
     <footer class="clearfix footer">
@@ -157,9 +179,6 @@
 <script src="http://sslstatic.wix.com/services/js-sdk/1.24.0/js/Wix.js"></script>
 <!-- Wix UI -->
 <script type="text/javascript" src="ui-lib.min.js"></script>
-
-<script type="text/javascript" src="../javascripts/components/popup/popup.js"></script>
-<script type="text/javascript" src="../javascripts/components/color-picker2/ColorPicker.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function () {

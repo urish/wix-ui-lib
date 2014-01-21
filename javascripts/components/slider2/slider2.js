@@ -110,7 +110,8 @@ jQuery.fn.definePlugin('Slider', function ($) {
 			return this.update();
 		},
 		transform: function (valueInRange) {
-			return this.options.minValue + valueInRange * (this.options.maxValue - this.options.minValue);
+			var value = this.options.minValue + valueInRange * (this.options.maxValue - this.options.minValue);
+			return Math.round(value);
 		},
 		valueInRangeToInnerRange: function (value) {
 			value = value < this.options.minValue ? this.options.minValue : value;

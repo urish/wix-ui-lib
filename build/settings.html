@@ -4,12 +4,6 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Widget Settings &bull; Wix</title>
     <link rel="stylesheet" href="ui-lib.min.css"/>
-    <style type="text/css">
-        .left-margin{
-            margin-left: 40px;
-        }
-
-    </style>
 </head>
 <body wix-uilib>
 
@@ -30,7 +24,7 @@
             <div class="login-panel">
                 <p class="create-account">Don't have an<br/>account? <strong><a href="#" target="_blank">Create
                     one</a></strong></p>
-                <button class="submit btn connect">Connect account</button>
+                <button class="submit uilib-btn connect">Connect account</button>
             </div>
         </div>
         <div class="loggedIn hidden">
@@ -44,7 +38,7 @@
         </div>
     </header>
 
-    <div class="accordion" wix-ctrl="Accordion">
+    <div class="accordion" wix-ctrl="Accordion" wix-options="{toggleOpen:false}">
 
         <div class="acc-pane">
             <h3>General Settings: </h3>
@@ -66,13 +60,15 @@
                     </li>
                     <li wix-label="Number of images:">
                         <div wix-model="numOfImages" wix-ctrl="Slider" wix-options="{ maxValue:500, preLabel:'0', postLabel:'500', toolTip:true}"></div>
-                        <div wix-model="numOfImages" wix-ctrl="Spinner" wix-options="{ maxValue:500}"></div>
+                        <div wix-model="numOfImages" wix-ctrl="Spinner" wix-options="{ maxValue:500 }"></div>
                     </li>
                     <li wix-label="Show Icons:">
                         <div wix-model="isIconShown" wix-ctrl="Checkbox"></div>
                     </li>
                     <li wix-label="Language Picker:">
-                        <div wix-model="languagePicker" wix-ctrl="LanguagePicker"></div>
+                        <div wix-tooltip="Select your language" wix-options=" { placement: 'top'} ">
+                            <div wix-model="languagePicker" wix-ctrl="LanguagePicker"></div>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -115,6 +111,27 @@
             </div>
         </div>
 
+
+
+        <div class="acc-pane">
+            <h3>Buttons</h3>
+            <div class="acc-content btn-demo">
+                <section>
+                    <button class="submit uilib-btn connect">Connect account</button>
+                    <button class="submit uilib-btn btn-secondary">Connect account</button>
+                    <button class="submit uilib-btn btn-upgrade">Connect account</button>
+                    <button class="submit uilib-btn btn-black-text">Connect account</button>
+                </section>
+                <section>
+                    <button class="submit uilib-btn btn-purple">Connect account</button>
+                    <button class="submit uilib-btn btn-green">Connect account</button>
+                    <button class="submit uilib-btn disabled">Connect account</button>
+                    <button class="submit uilib-btn btn-small">Connect account</button>
+                    <button class="submit uilib-btn btn-large">Connect account</button>
+                </section>
+            </div>
+        </div>
+
         <div class="acc-pane">
             <h3>Button Group</h3>
             <div class="acc-content">
@@ -123,6 +140,26 @@
                     <button value="medium">Medium</button>
                     <button value="large">Large</button>
                 </div>
+            </div>
+        </div>
+
+        <div class="acc-pane">
+            <h3>Inputs</h3>
+            <div class="acc-content btn-demo">
+                <section>
+                    <div wix-ctrl="Input" wix-options="{ placeholder: 'Demo' }"></div>
+                </section>
+                <section>
+                    <div wix-ctrl="Input" wix-options="{ size: 'medium' }"></div>
+                </section>
+                <section>
+                    <div wix-ctrl="Input" wix-options="{ size: 'large' }"></div>
+                </section>
+                <section>
+                    <div wix-ctrl="Input" wix-options="{ size: 'x-large' }"></div>
+                </section>
+                    <div wix-ctrl="Input" wix-options="{ size: 'big' }"></div>
+                </section>
             </div>
         </div>
     </div>

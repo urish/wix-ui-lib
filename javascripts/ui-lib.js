@@ -36,7 +36,6 @@
 		Wix.UI.initializePlugin($el);
 		return $el;
 	}
-		
 
 	function log(){
 		var args = ['<ui-lib>'];

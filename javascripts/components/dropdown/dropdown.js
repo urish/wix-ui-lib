@@ -228,7 +228,10 @@
 				$(document).off('uilib-dropdown-open',uilibDropdownOpen);
 				$(window).off('mousedown', winMousedown);
 			});
-			
+
+			this.$options.mousewheel && this.$options.mousewheel(function(evt){
+				evt.stopPropagation();
+			});
 			
 			this.$options.on('mouseenter', '.' + names.optionClassName, function () {
 				dropdown.highlightOption($(this));

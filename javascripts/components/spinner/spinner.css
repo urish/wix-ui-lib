@@ -20,8 +20,8 @@
     outline: none;
 }
 
-.uilib-spinner.default > input:focus,
-.uilib-spinner.default > input:active {
+.uilib-spinner > input:focus,
+.uilib-spinner > input:active {
     outline: none;
 }
 

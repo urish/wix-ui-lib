@@ -4,19 +4,37 @@ jQuery.fn.definePlugin('LanguagePicker', function () {
     var styles = {
         className : 'uilib-languagePicker'
     };
-
+	
+	var symbToName = {
+		'En': 'English',
+		'De': 'Deutsch',
+		'Es': 'Español',
+		'Fr': 'Français',
+		'It': 'Italiano', 
+		'Po': 'Polski', 
+		'Pt': 'Português', 
+		'Ru': 'Русский', 
+		'Ja': '日本語', 
+		'Ko': '한국어', 
+		'Tr': 'Türkçe'
+	};
+	
 	return {
 		init : function () {
 			this.markup();
             this.bindEvents();
 		},
 		markup : function () {
-            var $options = _optionsHtml();
+            var $options = _optionsHtml(this.options.languages);
             this.$el.append($options);
-
+			var height = this.options.height;
+			if(this.options.height === 'auto'){
+				var m = $options.length % 2;
+				height = $options.length <= 4 ? $options.length * 26 : ($options.length - m)/2 * 26;
+			}
 			this.dropdown = this.$el.Dropdown({
 					   width: 62,
-				      height: 150,
+				      height: height,
                 optionsWidth: 105,
                     modifier: function($el){
                         var $globe = $("<span class='globe'></span>");
@@ -37,7 +55,10 @@ jQuery.fn.definePlugin('LanguagePicker', function () {
 			});
 		},
         getDefaults: function(){
-            return {};
+            return {
+				languages: ['En', 'De', 'Es', 'Fr', 'It', 'Po', 'Pt', 'Ru', 'Ja', 'Ko', 'Tr'],
+				height: 'auto'
+			};
         },
 		getValue : function () {
 			return this.dropdown.getFullValue();
@@ -47,18 +68,10 @@ jQuery.fn.definePlugin('LanguagePicker', function () {
 		}
 	};
 
-    function _optionsHtml() {
-        var $options = $('<div value="En">English</div>' +
-            '<div value="De">Deutsch</div>' +
-            '<div value="Es">Español</div>' +
-            '<div value="Fr">Français</div>' +
-            '<div value="It">Italiano</div>' +
-            '<div value="Po">Polski</div>' +
-            '<div value="Pt">Português</div>' +
-            '<div value="Ru">Русский</div>' +
-            '<div value="Ja">日本語</div>' +
-            '<div value="Ko">한국어</div>' +
-            '<div value="Tr">Türkçe</div>');
-        return $options;
+	
+    function _optionsHtml(langs) {	
+		return $(langs.map(function(symb){
+			return '<div value="'+symb+'">'+symbToName[symb]+'</div>';
+		}).join(''));
     }
 });

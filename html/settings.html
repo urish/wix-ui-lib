@@ -6,8 +6,6 @@
     <link rel="stylesheet" href="ui-lib.min.css"/>
 </head>
 <body wix-uilib>
-
-<div class="container" wix-scroll="{height:600}">
     <header class="box">
         <div class="logo">
             <img width="86" src="images/wix_icon.png" alt="logo"/>
@@ -133,17 +131,21 @@
                     <button value="medium">Medium</button>
                     <button value="large">Large</button>
                 </div>
+
+                <div wix-model="adsSize" wix-ctrl="ToggleButtonGroup">
+                    <button value="mini">Mini</button>
+                    <button value="medium">Medium</button>
+                    <button value="large">Large</button>
+                </div>
             </div>
         </div>
     </div>
 
-    <footer class="clearfix footer">
-    <div class="support pull-right">
-        Have a question? Please contact us at: <a href="mailto:support@company.com">support@company.com</a>
-    </div>
-</footer>
-</div>
-
+    <footer class="uilib-footer">
+        <div class="support pull-right">
+            Have a question? Please contact us at: <a href="mailto:support@company.com">support@company.com</a>
+        </div>
+    </footer>
 
 <!-- jQuery Dependency -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>

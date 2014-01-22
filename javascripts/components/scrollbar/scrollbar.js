@@ -213,7 +213,6 @@
             plugin.scrollContent(0, $bar.position().top, false);
             callLaterToUpdateImages(200);
 
-            evt.preventDefault();
         });
 
         this.$rail.on('click',function(evt){

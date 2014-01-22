@@ -14,7 +14,7 @@
 		
 		definePlugin.installMandatoryFunctions(Plugin, name);		
 		definePlugin.registerAsJqueryPlugin(Plugin, name);
-
+        definePlugin.save(Plugin, name);
 		return Plugin;
 	}
 
@@ -112,7 +112,12 @@
 		};
 	
 	}
-	
+
+    definePlugin.save = function(Plugin, name){
+        definePlugin.store = definePlugin.store || {};
+        definePlugin.store[name] = Plugin;
+    }
+
 	definePlugin.tpl = "function $$$(el, options) { "+ 
 		"'use strict';" +
 		"if (!(this instanceof $$$)) {" +

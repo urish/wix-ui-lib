@@ -22,6 +22,7 @@ jQuery.fn.definePlugin('Tooltip', function ($) {
 		getDefaults: function(){
 			return {
 				placement : placements[0],
+				text 	  : "", 
 				html      : false,
 				template  : '<div class=' + styles.className + '>' +
 					'<div class=' + styles.arrowClassName + '>' +
@@ -39,12 +40,8 @@ jQuery.fn.definePlugin('Tooltip', function ($) {
 			$elm.on(events.mouseEnter, function (evt) {
 				tooltip.remove();
 				var $tooltip = $(tooltip.options.template);
-				var $toolTipValue = $tooltip.find("." + styles.textClassName);
-				if(tooltip.options.html){
-					$toolTipValue.html($elm.attr("wix-tooltip"));
-				} else {
-					$toolTipValue.text($elm.attr("wix-tooltip"));
-				}
+				tooltip.setText($elm, $tooltip);
+
 				$elm.after($tooltip);
 				if($.inArray(tooltip.options.placement, placements) > - 1){
 					switch(tooltip.options.placement){
@@ -66,7 +63,6 @@ jQuery.fn.definePlugin('Tooltip', function ($) {
 				} else {
 					setTopPlacement($tooltip);
 				}
-
 			});
 
 			function setTopPlacement($tooltip){
@@ -134,6 +130,15 @@ jQuery.fn.definePlugin('Tooltip', function ($) {
 		},
 		remove: function(){
 			$("." + styles.className).remove();
+		},
+		setText: function($elm, tooltipTpl) {
+			var $toolTipTextEl = tooltipTpl.find("." + styles.textClassName);
+			var toolTipValue = this.options.text || $elm.attr("wix-tooltip");
+			if(this.options.html){
+				$toolTipTextEl.html(toolTipValue);
+			} else {
+				$toolTipTextEl.text(toolTipValue);
+			}
 		}
 	};
 });

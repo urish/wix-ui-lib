@@ -21,6 +21,7 @@ jQuery.fn.definePlugin('Input', function ($) {
 		},
 		setValidationFunction:function(validationFunction){
 			if(typeof validationFunction === 'function'){
+				this.options.validate = true;
 				this.options.validation = validationFunction;
 			} else {
 				throw new Error('You must provide a valid validation function.');

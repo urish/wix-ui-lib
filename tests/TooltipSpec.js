@@ -2,8 +2,10 @@ describe('Tooltip', function () {
 	'use strict';
 
 	var element;
+	var ctrlElement;
 	beforeEach(function(){
-		element = $('<div style="margin:100px auto; width:200px; border:1px solid red" wix-tooltip="Some text to show on <strong>mouse</strong> hover">Help</div>').appendTo('body')[0];
+		element = $('<div wix-ctrl="Spinner" wix-tooltip="{text: \'Some text to show on hover\'}">Help</div>').appendTo('body')[0];
+		ctrlElement = $('<div wix-ctrl="Tooltip" wix-options="{ placement: \'top\', text:\'bla bla\'}"</div>').appendTo('body')[0];
 	});
 
 	afterEach(function(){
@@ -18,21 +20,14 @@ describe('Tooltip', function () {
 		});
 
 		it('should support text only', function(){
-			var $tooltip = givenToolTip();
-			expect($(element).next().find(".uilib-text").html()).toEqual('Some text to show on &lt;strong&gt;mouse&lt;/strong&gt; hover');
+			var $tooltip = givenToolTip({text:'Some text to show on hover'});
+			expect($(element).next().find(".uilib-text").html()).toEqual('Some text to show on hover');
 		});
 
 	});
 
-	it('should place the tooltip in the middle of the element for very long title', function(){
-		element = $('<div style="margin:100px auto; width:50px; border:1px solid red" wix-tooltip="Tooltip" wix-title="Some text to show on mouse hover some very long text about this feature could also look nice as a tool tip">Help</div>').appendTo('body')[0];
-		var $tooltip = givenToolTip();
-		expect($tooltip.offset().left + $tooltip.outerWidth() / 2).toEqual($tooltip.offset().left + $tooltip.outerWidth() / 2);
-	});
-
-	it('should place the tooltip in the middle of the element for very shot title', function(){
-		element = $('<div style="margin:100px auto; width:200px; border:1px solid red" wix-tooltip="Tooltip" wix-title="tip">Help</div>').appendTo('body')[0];
-		var $tooltip = givenToolTip();
+	it('should place the tooltip in the middle of the element for very long text', function(){
+		var $tooltip = givenToolTip({text:'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla'});
 		expect($tooltip.offset().left + $tooltip.outerWidth() / 2).toEqual($tooltip.offset().left + $tooltip.outerWidth() / 2);
 	});
 
@@ -63,20 +58,22 @@ describe('Tooltip', function () {
 		expect($(".uilib-tooltip").size()).toEqual(0);
 	});
 
-	it('should set the tool tip text as html when option is set to true', function(){
-		givenToolTip({html:true});
-		expect($(element).next().find(".uilib-text").html()).toEqual('Some text to show on <strong>mouse</strong> hover');
-	});
-
-
 	it('should fall back to position top if invalid position is giving',function(){
-		var $tooltip = givenToolTip({placement:'blabla'});
+		var $tooltip = givenToolTip({placement:'top'});
 		expect($tooltip.offset().top).toEqual($(element).offset().top - ($tooltip.outerHeight() + 12));
 	});
 
 	it('should place the tooltip at the bottom when needed', function(){
 		var $tooltip = givenToolTip({placement:'bottom'});
 		expect($tooltip.offset().top).toEqual($(element).offset().top + $(element).outerHeight() + 12);
+	});
+
+	it('should generate tooltip from ctrl direactive', function(){
+		Wix.UI.initializePlugin(ctrlElement);
+		var event = givenMouseEnterEvent();
+		$(ctrlElement).trigger(event);
+		expect($(ctrlElement).next().hasClass("uilib-tooltip")).toBeTruthy();
+		expect($(ctrlElement).next().find(".uilib-text").html()).toEqual('bla bla');
 	});
 
 	function givenMouseEnterEvent() {
@@ -91,9 +88,8 @@ describe('Tooltip', function () {
 
 	function givenToolTip(options){
 		options = options || {};
-		_.extend(options, {title:'Some text to show'});
 		$(".uilib-tooltip").remove();
-		$(element).attr('wix-options', JSON.stringify(options));
+		$(element).attr('wix-tooltip', JSON.stringify(options));
 		Wix.UI.initializePlugin(element);
 		var event = givenMouseEnterEvent();
 		$(element).trigger(event);

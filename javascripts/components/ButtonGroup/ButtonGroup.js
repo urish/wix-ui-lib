@@ -5,9 +5,10 @@ jQuery.fn.definePlugin('ButtonGroup', function($){
 		btnGroupClass : 'btn-group',
 		valueAttrName : 'data-value',
 		indexAttrName : 'data-index',
-		selectedClass : 'uilib-selected',
-		btnClass : 'uilib-button',
-		btnClassToDeprecate : 'btn default',
+		selectedClass : 'btn-selected',
+		btnBaseClass : 'uilib-btn',
+		btnClass : 'uilib-btn btn-secondary btn-small',
+		btnClassToDeprecate : 'btn',
 		btnSelectedClassToDeprecate : 'active',
 		types:{
 			single: 'single',
@@ -98,7 +99,7 @@ jQuery.fn.definePlugin('ButtonGroup', function($){
 		bindEvents: function () {
 			var btnGroup = this;
 			
-			this.$el.on('click', '.' + names.btnClass, function () {
+			this.$el.on('click', '.' + names.btnBaseClass, function () {
 				btnGroup.isSingleMode() ? handleClickSingle($(this)) : handleClickToggle($(this));
 			});
 			

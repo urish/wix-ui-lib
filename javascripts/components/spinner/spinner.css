@@ -17,6 +17,12 @@
     position: absolute;
     top: 5px;
     left: 8px;
+    outline: none;
+}
+
+.uilib-spinner.default > input:focus,
+.uilib-spinner.default > input:active {
+    outline: none;
 }
 
 .uilib-spinner.default .up-arrow {

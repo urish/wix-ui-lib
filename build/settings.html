@@ -7,6 +7,11 @@
 </head>
 <body wix-uilib>
 
+<<<<<<< HEAD
+=======
+<div class="container">
+    <div wix-ctrl="ScrollBar:{height:600}">
+>>>>>>> c69f2551b223435f4aa82e05c0ad146d037111bc
     <header class="box">
         <div class="logo">
             <img width="86" src="images/wix_icon.png" alt="logo"/>
@@ -59,13 +64,15 @@
                     </li>
                     <li wix-label="Number of images:">
                         <div wix-model="numOfImages" wix-ctrl="Slider" wix-options="{ maxValue:500, preLabel:'0', postLabel:'500', toolTip:true}"></div>
-                        <div wix-model="numOfImages" wix-ctrl="Spinner" wix-options="{ maxValue:500}"></div>
+                        <div wix-model="numOfImages" wix-ctrl="Spinner" wix-options="{ maxValue:500 }"></div>
                     </li>
                     <li wix-label="Show Icons:">
                         <div wix-model="isIconShown" wix-ctrl="Checkbox"></div>
                     </li>
                     <li wix-label="Language Picker:">
-                        <div wix-model="languagePicker" wix-ctrl="LanguagePicker"></div>
+                        <div wix-tooltip="Select your language" wix-options=" { placement: 'top'} ">
+                            <div wix-model="languagePicker" wix-ctrl="LanguagePicker"></div>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -77,13 +84,10 @@
             <div class="acc-content">
                 <ul class="list">
                     <li wix-label="Text Color:">
-                        <div wix-param="textColor" wix-ctrl="ColorPickerWithOpacity" wix-options="{startWithColor:'color-5'}"></div>
+                        <div wix-param="textColor" wix-ctrl="ColorPicker" wix-options="{startWithColor:'color-5'}"></div>
                     </li>
                     <li wix-label="Background Color:">
                         <div wix-param="backgroundColor" wix-ctrl="ColorPickerWithOpacity" wix-options="{startWithColor:'color-1'}"></div>
-                    </li>
-					<li wix-label="Slider:">
-                        <div wix-param="speed" wix-ctrl="Slider" wix-options="{value:0.5, toolTip:true}"></div>
                     </li>
                 </ul>
             </div>
@@ -126,22 +130,47 @@
                     <button class="submit uilib-btn btn-small">Connect account</button>
                     <button class="submit uilib-btn btn-large">Connect account</button>
                 </section>
-            </div>
-        </div>
 
-        <div class="acc-pane">
-            <h3>Button Group</h3>
-            <div class="acc-content">
-                <div wix-model="adsSize" wix-ctrl="ButtonGroup">
+                 <div wix-model="adsSize" wix-ctrl="ButtonGroup">
+                    <button value="mini">Mini</button>
+                    <button value="medium">Medium</button>
+                    <button value="large">Large</button>
+                </div>
+
+                <div wix-model="adsSize" wix-ctrl="ToggleButtonGroup">
                     <button value="mini">Mini</button>
                     <button value="medium">Medium</button>
                     <button value="large">Large</button>
                 </div>
             </div>
         </div>
-    </div>
 
+<<<<<<< HEAD
     <footer class="uilib-footer">
+=======
+        <div class="acc-pane">
+            <h3>Inputs</h3>
+            <div class="acc-content btn-demo">
+                <section>
+                    <div wix-ctrl="Input" wix-options="{ placeholder: 'Demo' }"></div>
+                </section>
+                <section>
+                    <div wix-ctrl="Input" wix-options="{ size: 'medium' }"></div>
+                </section>
+                <section>
+                    <div wix-ctrl="Input" wix-options="{ size: 'large' }"></div>
+                </section>
+                <section>
+                    <div wix-ctrl="Input" wix-options="{ size: 'x-large' }"></div>
+                </section>
+                    <div wix-ctrl="Input" wix-options="{ size: 'big' }"></div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+    <footer class="clearfix footer">
+>>>>>>> c69f2551b223435f4aa82e05c0ad146d037111bc
         <div class="support pull-right">
             Have a question? Please contact us at: <a href="mailto:support@company.com">support@company.com</a>
         </div>
@@ -150,12 +179,9 @@
 <!-- jQuery Dependency -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 <!-- Wix SDK -->
-<script src="http://sslstatic.wix.com/services/js-sdk/1.24.0/js/Wix.js"></script>
+<script src="http://sslstatic.wix.com/services/js-sdk/1.25.0/js/Wix.js"></script>
 <!-- Wix UI -->
 <script type="text/javascript" src="ui-lib.min.js"></script>
-
-<script type="text/javascript" src="../javascripts/components/popup/popup.js"></script>
-<script type="text/javascript" src="../javascripts/components/color-picker2/ColorPicker.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function () {

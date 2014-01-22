@@ -81,8 +81,6 @@ describe('Input', function () {
 		});
 	});
 
-
-
 	function givenInput(options){
 		options = options || {};
 		$element.attr('wix-options', JSON.stringify(options));

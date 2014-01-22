@@ -26,11 +26,15 @@
     background-repeat: repeat-x;
     background-position: 0 50%;
 
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(37%,rgba(0,0,0,.07)), color-stop(56%,rgba(255,255,255,0.07)));
-    background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.07) 37%,rgba(255,255,255,0.07) 56%);
-    background-image: -moz-linear-gradient(top, rgba(0,0,0,0.07) 37%,rgba(255,255,255,0.07) 56%);
-    background-image: -ms-linear-gradient(top, rgba(0,0,0,0.07) 37%,rgba(255,255,255,0.07) 56%);
-    background-image: -o-linear-gradient(top, rgba(0,0,0,0.07) 37%,rgba(255,255,255,0.07) 56%);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(37%,rgba(255,255,255,0.07)), color-stop(56%,rgba(0,0,0,.07)));
+    background-image: -webkit-linear-gradient(top, rgba(255,255,255,0.07) 37%,rgba(0,0,0,.07) 56%);
+    background-image: -moz-linear-gradient(top, rgba(255,255,255,0.07) 37%,rgba(0,0,0,.07) 56%);
+    background-image: -ms-linear-gradient(top, rgba(255,255,255,0.07) 37%,rgba(0,0,0,.07) 56%);
+    background-image: -o-linear-gradient(top, rgba(255,255,255,0.07) 37%,rgba(0,0,0,.07) 56%);
+}
+
+.uilib-btn:focus {
+    outline: 0;
 }
 
 .uilib-btn.btn-secondary {
@@ -69,8 +73,8 @@
     box-shadow: 1px 1px 1px rgba(0,0,0,.39), inset 1px 2px rgba(255,255,255,.21);
 }
 
-.uilib-btn:focus,
-.uilib-btn:active {
+.uilib-btn:active,
+.uilib-btn.btn-selected {
     outline: none;
     background-image: -webkit-linear-gradient(top, rgba(0,0,0,.07) 37%, rgba(255,255,255,.07) 56%);
     background-image: -moz-linear-gradient(top, rgba(0,0,0,.07) 37%, rgba(255,255,255,.07) 56%);
@@ -81,10 +85,23 @@
     box-shadow: inset 1px 2px rgba(0,0,0,.16);
 }
 
-.uilib-btn.btn-secondary:focus,
+.uilib-btn.btn-secondary.btn-selected {
+    color: #000;
+}
+
+.uilib-btn.btn-secondary:hover,
+.uilib-btn.btn-black-text:hover,
+.uilib-btn.btn-upgrade:hover {
+    -webkit-box-shadow: 0px 1px 1px rgba(0,0,0,.2), inset 1px 2px rgba(255,255,255,.21);
+    -moz-box-shadow: 0px 1px 1px rgba(0,0,0,.2), inset 1px 2px rgba(255,255,255,.21);
+    box-shadow: 0px 1px 1px rgba(0,0,0,.2), inset 1px 2px rgba(255,255,255,.21);
+}
+
 .uilib-btn.btn-secondary:active,
-.uilib-btn.btn-black-text:focus,
-.uilib-btn.btn-black-text:active{
+.uilib-btn.btn-black-text:active,
+.uilib-btn.btn-secondary.btn-selected,
+.uilib-btn.black-text.btn-selected,
+.uilib-btn.btn-upgrade.btn-selected {
     box-shadow: inset 0px 1px 1px 0 rgba(0,0,0,0.15);
 }
 

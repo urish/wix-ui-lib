@@ -2,16 +2,19 @@ jQuery.fn.definePlugin('Spinner', function ($) {
 	'use strict';
 	
 	var styles = {
-        className : 'uilib-spinner',
-        upArrow   : 'up-arrow',
-        downArrow : 'down-arrow'
+        className: 'uilib-spinner',
+		defaultSize: 'default',
+		mediumSize: 'medium',
+		largeSize: 'large',
+        upArrow: 'up-arrow',
+        downArrow: 'down-arrow'
     };
     var events = {
-        mouseDown  : 'mousedown',
-        mouseUp    : 'mouseup',
-        mouseLeave : 'mouseleave',
-        focusOut   : 'focusout',
-        keypress   : 'keypress'
+        mouseDown: 'mousedown',
+        mouseUp: 'mouseup',
+        mouseLeave: 'mouseleave',
+        focusOut: 'focusout',
+        keypress: 'keypress'
     };
 	
 	return {
@@ -35,6 +38,17 @@ jQuery.fn.definePlugin('Spinner', function ($) {
 				.append(_buttonHtml());
 			if(!this.$el.hasClass(styles.className)){
 				this.$el.addClass(styles.className);
+			}
+			switch(this.options.size){
+				case styles.mediumSize:
+					this.$el.addClass(styles.mediumSize)
+					break;
+				case styles.largeSize:
+					this.$el.addClass(styles.largeSize)
+					break;
+				default:
+					this.$el.addClass(styles.defaultSize)
+					break;
 			}
 		},
 		bindEvents: function () {

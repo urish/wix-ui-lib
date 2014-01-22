@@ -10,25 +10,25 @@
             // width in pixels of the scrollbar and rail
             size : '7px',
             // scrollbar color, accepts any hex/color value
-            color: '#000',
+            color: '#09f',
             // scrollbar position - left/right
             position : 'right',
             // distance in pixels between the side edge and the scrollbar
             distance : '1px',
             // sets scrollbar opacity
             opacity : .4,
-            // sets visibility of the rail
+            // sets visibility of The rail
             railVisible : true,
             // sets rail color
             railColor : '#333',
             // sets rail opacity
-            railOpacity : .2,
-            // defautlt CSS class of the slimscroll rail
-            railClass : 'slimScrollRail',
-            // defautlt CSS class of the slimscroll bar
-            barClass : 'slimScrollBar',
-            // defautlt CSS class of the slimscroll wrapper
-            wrapperClass : 'slimScrollDiv',
+            railOpacity : 0,
+            // defautlt CSS class of the scroll rail
+            railClass : 'uilib.scrollRail',
+            // defautlt CSS class of the scroll bar
+            barClass : 'uilib.scrollBar',
+            // defautlt CSS class of the scroll wrapper
+            wrapperClass : 'uilib.scrollDiv',
             // check if mousewheel should scroll the window if we reach top/bottom
             allowPageScroll : false,
             // scroll amount applied to each mouse wheel step
@@ -213,7 +213,6 @@
             plugin.scrollContent(0, $bar.position().top, false);
             callLaterToUpdateImages(200);
 
-            evt.preventDefault();
         });
 
         this.$rail.on('click',function(evt){

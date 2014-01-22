@@ -2,10 +2,21 @@
     font-family: Helvetica Neue, Helvetica, Arial;
 }
 
+input[type="text"],
+input[type="password"],
+input[type="text"]:before,
+input[type="password"]:before,
+input[type="text"]:after,
+input[type="password"]:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
 input[type="text"].uilib-input ,
 input[type="password"].uilib-input {
     display: inline-block;
-    height: 15px;
+    height: 25px;
     padding: 4px 8px;
     font-size: 12px;
     width: 125px;
@@ -39,7 +50,7 @@ input[type="password"]:focus.uilib-input {
 }
 
 input[type="text"].uilib-input.invalid-input,
-input[type="password"].uilib-input.invalid-input{
+input[type="password"].uilib-input.invalid-input {
     border:1px solid rgb(253,123,123);
     outline: 0;
     -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px #fd7b7b;
@@ -77,6 +88,6 @@ input[type="password"].uilib-input.x-large {
 
 input[type="text"].uilib-input.big ,
 input[type="password"].uilib-input.big {
-    height: 26px;
+    height: 34px;
     width: 298px;
 }

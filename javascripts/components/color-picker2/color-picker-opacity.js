@@ -16,7 +16,8 @@ jQuery.fn.definePlugin('ColorPickerWithOpacity', function ($) {
 			this.$Slider = $('<div>').Slider({
 				preLabel: '0',
 				postLabel: '100',
-				value: 100
+				value: 100,
+				toolTip: true
 			});
 			if(this.options.divider){
 				this.$el.append(this.$ColorPicker, $('<span class="uilib-text" style="margin: 0 0 0 10px">').text(this.options.divider),this.$Slider);
@@ -79,7 +80,12 @@ jQuery.fn.definePlugin('ColorPickerWithOpacity', function ($) {
 				rgba: this.getValue()
 			});
 		},
-		getDefaults: function(){}
+		getDefaults: function(){
+			return {
+				startWithColor: 'rgba(255,0,0,1)'
+				//value:'rgba(255,0,0,1)'
+			}
+		}
 	};
 	
 	

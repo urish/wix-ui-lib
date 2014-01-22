@@ -4,16 +4,9 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Widget Settings &bull; Wix</title>
     <link rel="stylesheet" href="ui-lib.min.css"/>
-    <style type="text/css">
-        .left-margin{
-            margin-left: 40px;
-        }
-
-    </style>
 </head>
 <body wix-uilib>
 
-<div class="container">
     <header class="box">
         <div class="logo">
             <img width="86" src="images/wix_icon.png" alt="logo"/>
@@ -30,7 +23,7 @@
             <div class="login-panel">
                 <p class="create-account">Don't have an<br/>account? <strong><a href="#" target="_blank">Create
                     one</a></strong></p>
-                <button class="submit btn connect">Connect account</button>
+                <button class="submit uilib-btn connect">Connect account</button>
             </div>
         </div>
         <div class="loggedIn hidden">
@@ -44,7 +37,7 @@
         </div>
     </header>
 
-    <div class="accordion" wix-ctrl="Accordion">
+    <div class="accordion" wix-ctrl="Accordion" wix-options="{toggleOpen:false}">
 
         <div class="acc-pane">
             <h3>General Settings: </h3>
@@ -115,6 +108,27 @@
             </div>
         </div>
 
+
+
+        <div class="acc-pane">
+            <h3>Buttons</h3>
+            <div class="acc-content btn-demo">
+                <section>
+                    <button class="submit uilib-btn connect">Connect account</button>
+                    <button class="submit uilib-btn btn-secondary">Connect account</button>
+                    <button class="submit uilib-btn btn-upgrade">Connect account</button>
+                    <button class="submit uilib-btn btn-black-text">Connect account</button>
+                </section>
+                <section>
+                    <button class="submit uilib-btn btn-purple">Connect account</button>
+                    <button class="submit uilib-btn btn-green">Connect account</button>
+                    <button class="submit uilib-btn disabled">Connect account</button>
+                    <button class="submit uilib-btn btn-small">Connect account</button>
+                    <button class="submit uilib-btn btn-large">Connect account</button>
+                </section>
+            </div>
+        </div>
+
         <div class="acc-pane">
             <h3>Button Group</h3>
             <div class="acc-content">
@@ -127,14 +141,11 @@
         </div>
     </div>
 
-    <footer class="clearfix footer">
+    <footer class="uilib-footer">
         <div class="support pull-right">
             Have a question? Please contact us at: <a href="mailto:support@company.com">support@company.com</a>
         </div>
     </footer>
-
-</div>
-
 
 <!-- jQuery Dependency -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
@@ -142,6 +153,9 @@
 <script src="http://sslstatic.wix.com/services/js-sdk/1.24.0/js/Wix.js"></script>
 <!-- Wix UI -->
 <script type="text/javascript" src="ui-lib.min.js"></script>
+
+<script type="text/javascript" src="../javascripts/components/popup/popup.js"></script>
+<script type="text/javascript" src="../javascripts/components/color-picker2/ColorPicker.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function () {

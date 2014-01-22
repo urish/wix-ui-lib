@@ -273,8 +273,13 @@ jQuery.fn.definePlugin('Popup', function ($) {
 		var _x = 0;
 		var _y = 0;
 		while( el && !isNaN( el.offsetLeft ) && !isNaN( el.offsetTop ) ) {
-			_x += el.offsetLeft - el.scrollLeft;
-			_y += el.offsetTop - el.scrollTop;
+			if(el === document.body){
+				_x += el.offsetLeft - document.documentElement.scrollLeft;
+				_y += el.offsetTop - document.documentElement.scrollTop;
+			} else {
+				_x += el.offsetLeft - el.scrollLeft;
+				_y += el.offsetTop - el.scrollTop;
+			}
 			el = el.offsetParent;
 		}
 		return { top: _y, left: _x };

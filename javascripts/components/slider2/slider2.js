@@ -63,12 +63,19 @@ jQuery.fn.definePlugin('Slider', function ($) {
 				this.$pin.append(this.$toolTip.hide());
 			}
 		},
+		getXFromEvent: function(event){
+			return event.offsetX / this.$el.width()
+		},
 		bindEvents: function () {
 			var $body = $(window);
 			var slider = this;
-			//this.$el.on('click', function(evt){
-				//slider.setValueFromEvent(slider.getXFromEvent(evt));
-			//});
+			this.$el.on('click', function(evt){
+				if(evt.target === slider.$el[0]){
+					var x = slider.getXFromEvent(evt);
+					slider.setValue(slider.transform(x));
+					slider.triggerChangeEvent(slider.getValue());
+				}
+			});
 			this.$pin.on('mousedown', function (evt) {
                 if(slider.$toolTip && !slider.$toolTip.is(":visible")){
                     slider.$toolTip.show();

@@ -1,5 +1,6 @@
 .font-style-picker {
 	position: relative;
+	display: inline-block;
 }
 
 .font-style-picker .popup-footer {

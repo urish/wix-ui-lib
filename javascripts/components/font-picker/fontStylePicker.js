@@ -69,6 +69,9 @@ jQuery.fn.definePlugin('FontStylePicker', function () {
 		createFontSizePicker: function(){
 			this.fontSizePicker = this.UI().createPlugin({
 				ctrl: 'Spinner',
+				options: {
+					size : 'medium'
+				},
 				appendTo: this.$el
 			}).getPlugin();
 		},

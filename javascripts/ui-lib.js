@@ -150,34 +150,18 @@
 			applyPlugin(element, ctrlName, overrideOptions || options);
 		}
 
-		var tooltipVal = getTooltip(element);
+		var tooltipVal = getAttribute(element, 'wix-tooltip');
 		if (tooltipVal) {
 			applyPlugin(element, 'Tooltip', evalOptions(tooltipVal) || {});
 		}
 
-		var scrollbarVal = getScrollbar(element);
+		var scrollbarVal = getAttribute(element, 'wix-scroll');
 		if (scrollbarVal) {
 			applyPlugin(element, 'ScrollBar', evalOptions(scrollbarVal) || {});
 		}
     }
 
-    function getTooltip(element) {
-    	var tootipVal = getAttribute(element, 'wix-tooltip');
-        
-        return tootipVal;
-    }
-
-    function getScrollbar(element) {
-    	var scrollbar = getAttribute(element, 'wix-scroll');
-        
-        return scrollbar;
-    }
-
     function getCtrl(element){
-        // var isToolTip = element.getAttribute('wix-tooltip');
-        // if (isToolTip) {
-        //     return 'Tooltip';
-        // }
         return getAttribute(element, 'wix-controller') || getAttribute(element, 'wix-ctrl');
     }
     

@@ -2,7 +2,7 @@
 	'use strict';
 
 	var pluginName = 'GluedControl';
-
+	
 	function Plugin(element, options) {
 		this.state = {
 			horizontalMargin : 0,
@@ -17,16 +17,15 @@
         if (options.bindToWidget) {
             this.initWithBinding(defaults, options);
         } else {
-            this.init(defaults, options);
+            this._init(defaults, options);
         }
 	}
 
-    Plugin.prototype.init = function (defaults, options) {
+    Plugin.prototype._init = function (defaults, options) {
         _setUserEvents(defaults, options);
 
         this.options = $.extend({}, defaults, options);
-	
-		this.slider = this.createSlider(this.options.slider);		
+		this.slider = this.createSlider(this.options.slider);
 		this.dropdown = this.createDropDown(this.options.dropdown);
     }
 
@@ -47,6 +46,10 @@
 		options.value = this.state[getPlacementOrientation(this.state)] || 0;
 		this.$slider = this.$el.find('.glued-slider');
 		return this.$slider.Slider(options).data('plugin_Slider');
+	};
+	
+	Plugin.prototype.getDefaults = function(){
+		return _getDefaults();
 	};
 	
 	Plugin.prototype.createDropDown = function(options){
@@ -130,7 +133,7 @@
 			}
 		});
 	};
-
+	
 	$.fn[pluginName].Constructor = Plugin;
 
 	function setPlacement(state) {
@@ -170,13 +173,14 @@
 
     function _getDefaults() {
         return {
-            placements : [],
+            placements: ['TOP_LEFT', 'TOP_CENTER', 'TOP_RIGHT', 'CENTER_LEFT', 'CENTER_RIGHT', 'BOTTOM_LEFT', 'BOTTOM_CENTER', 'BOTTOM_RIGHT'],
             slider : {
 				width:158,
 				className:'',
-                minValue : -2,
-                maxValue : 2,
-				value : 0
+                minValue: -2,
+                maxValue: 2,
+				value: 0,
+				supportClick: false
             },
             dropdown : {
 				visibleRows:8,
@@ -319,5 +323,21 @@
             defaults.dropdown.on.create = options.dropDownCreate;
         }
     }
-
+	/*
+	jQuery.fn.definePlugin('GluedControl', function ($) {
+		'use strict';
+		
+		var plugin = $.extend({
+			init: function(){
+				Plugin.call(this, this.$el[0], this.options);
+				return this;
+			}
+		}, Plugin.prototype);
+		
+		return plugin;
+		
+	}, true)
+	*/
 })(jQuery, window, document);
+
+

@@ -17,16 +17,17 @@ jQuery.fn.definePlugin('Slider', function ($) {
 		},
 		getDefaults: function(){
 			return {
-				minValue  : 0,
-				maxValue  : 100,
-				value     : 0,
-				width     : 80,
-				preLabel  :'',
-				postLabel :'',
-				className : 'default-uilib-slider-ui',
-				toolTip   : false,
-				slide     : function () {},
-				create    : function () {}
+				minValue: 0,
+				maxValue: 100,
+				value: 0,
+				width: 80,
+				preLabel: '',
+				postLabel: '',
+				className: 'default-uilib-slider-ui',
+				toolTip: false,
+				supportClick: true,
+				slide: function () {},
+				create: function () {}
 			};
 		},
 		markup: function () {
@@ -69,13 +70,15 @@ jQuery.fn.definePlugin('Slider', function ($) {
 		bindEvents: function () {
 			var $body = $(window);
 			var slider = this;
-			this.$el.on('click', function(evt){
-				if(evt.target === slider.$el[0]){
-					var x = slider.getXFromEvent(evt);
-					slider.setValue(slider.transform(x));
-					slider.triggerChangeEvent(slider.getValue());
-				}
-			});
+			if (slider.options.supportClick){
+				this.$el.on('click', function(evt){
+					if(evt.target === slider.$el[0]){
+						var x = slider.getXFromEvent(evt);
+						slider.setValue(slider.transform(x));
+						slider.triggerChangeEvent(slider.getValue());
+					}
+				});
+			}
 			this.$pin.on('mousedown', function (evt) {
                 if(slider.$toolTip && !slider.$toolTip.is(":visible")){
                     slider.$toolTip.show();
@@ -84,7 +87,7 @@ jQuery.fn.definePlugin('Slider', function ($) {
 				slider.startDragPos = evt.pageX;
 				slider.disableTextSelection(evt);
 				function mousemove_handler(evt) {
-                    slider.setPosition(evt);
+					slider.setPosition(evt);
 				}
 				function mouseup_handler(evt) {
                     if(slider.$toolTip){
@@ -117,8 +120,7 @@ jQuery.fn.definePlugin('Slider', function ($) {
 			return this.update();
 		},
 		transform: function (valueInRange) {
-			var value = this.options.minValue + valueInRange * (this.options.maxValue - this.options.minValue);
-			return Math.round(value);
+			return this.options.minValue + valueInRange * (this.options.maxValue - this.options.minValue);
 		},
 		valueInRangeToInnerRange: function (value) {
 			value = value < this.options.minValue ? this.options.minValue : value;

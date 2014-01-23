@@ -323,6 +323,7 @@ var createColorBox = (function (){
 
 		var paletes = {
 			photoshop : {
+				pickerBoxHeight: 148, //TODO get this from the style since the new popup is not in dom when calc
 				setElement : function (elm, palete, initColor) {
 					this.elm = elm;
 					this.elm.className += ' ColorPickerPicker ColorPickerPhotoshop';
@@ -363,8 +364,8 @@ var createColorBox = (function (){
 				setPos:function(pos){
 					this.pos = pos;
 					setTimeout(function() {
-						var h = parseFloat( getComputedStyle(this.elm).height );
-						var w = parseFloat( getComputedStyle(this.elm).width );
+						var h = parseFloat( getComputedStyle(this.elm).height || this.pickerBoxHeight);
+						var w = parseFloat( getComputedStyle(this.elm).width ||  this.pickerBoxHeight);
 						this.posIndecator.style.left = (-6) + pos.x * w  + 'px';
 						this.posIndecator.style.top = (-6) + pos.y * h  + 'px';
 					}.bind(this),0);
@@ -827,7 +828,7 @@ var createColorBox = (function (){
 
 	function createColorBox(options){
 		var cb = {};
-		
+		debugger
 		createColorBox.instances = createColorBox.instances || [];
 		
 		var pickerInstance = {

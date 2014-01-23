@@ -72,6 +72,10 @@ ul, li {
 	border: 1px solid rgba(127,127,127,0.3);
 	border-radius:4px;
 }
+.plugin-demo{
+	margin: 10px 0;
+}
+
 .cmp-plugin-decs-entry{
 	border-top: 5px solid rgba(0,0,0,0.3);
 	margin: 10px 0 30px 0;

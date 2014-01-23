@@ -62,7 +62,7 @@ jQuery.fn.definePlugin('Radio', function ($) {
             this.radioGroup.removeClass(this.options.checkedClassName);
             $el.addClass(this.options.checkedClassName);
             if(!silent){
-                $el.trigger(pluginName + '.change', this.getValue());
+				this.triggerChangeEvent(this.getValue())
             }
         }
     };

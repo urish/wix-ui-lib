@@ -70,13 +70,15 @@ DocsApp.Classes.PluginDocsData = function (utils) {
 			description : ''
 		},
 		Radio : {
-			html : '',
+			html : '\n\t<div data-radio-value="sync10">Sync 10 images</div>\n\t<div data-radio-value="sync25">Sync 25 images</div>\n\t<div data-radio-value="sync50">Sync 50 images</div>\n',
 			optionsForPlugin : {},
 			description : ''
 		},
 		Slider : {
 			html : '',
-			optionsForPlugin : {},
+			optionsForPlugin : {
+				toolTip: true
+			},
 			description : ''
 		},
 		Spinner : {

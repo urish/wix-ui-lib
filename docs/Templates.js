@@ -34,7 +34,7 @@ DocsApp.Classes.Templates = function (pluginDocsData, utils) {
 	
 		return '<div data-scroll-target id="' + name + '-entry" class="cmp-plugin-decs-entry">' +
 		'<h1>' + name + '</h1>' +
-		'<div wix-ctrl="' + name + '" wix-options=\'' + initOptions + '\' class="plugin-demo">' + markup + '</div>' +
+		'<div class="plugin-demo"><div wix-ctrl="' + name + '" wix-options=\'' + initOptions + '\' class="plugin-demo">' + markup + '</div></div>' +
 		'<h3>Markup</h3>' +
 		'<pre class="plugin-markup prettyprint">' + displayMarkup + '</pre>' +
 		'<h3>Options</h3>' +

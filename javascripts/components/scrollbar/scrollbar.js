@@ -8,15 +8,21 @@
             // height in pixels of the visible scroll area
             height : '250px',
             // width in pixels of the scrollbar and rail
-            size : '7px',
+            size : '8px',
+            // corner radius 
+            radius: '4px',
             // scrollbar color, accepts any hex/color value
-            color: '#09f',
+            color: '#a4d9fc',
+             // scrollbar hober color, accepts any hex/color value
+            hoverColor: '#35aeff',
+            // sets scrollbar opacity
+            hoverOpacity : 1,
             // scrollbar position - left/right
             position : 'right',
             // distance in pixels between the side edge and the scrollbar
             distance : '1px',
             // sets scrollbar opacity
-            opacity : .4,
+            opacity : 1,
             // sets visibility of The rail
             railVisible : true,
             // sets rail color
@@ -123,14 +129,14 @@
                 position: 'absolute',
                 top: 0,
                 display: 'block',
-                'border-radius': this.options.size,
+                'border-radius': this.options.radius,
                 background: this.options.railColor,
                 opacity: this.options.railOpacity,
                 zIndex: 999998
             });
 
         // create scrollbar
-        this.$bar = $(divS)
+        var $bar = this.$bar = $(divS)
             .addClass(this.options.barClass)
             .css({
                 background: this.options.color,
@@ -139,12 +145,20 @@
                 top: 0,
                 opacity: this.options.opacity,
                 display: 'block',
-                'border-radius' : this.options.size,
-                BorderRadius: this.options.size,
-                MozBorderRadius: this.options.size,
-                WebkitBorderRadius: this.options.size,
-                zIndex: 999999
+                'border-radius' : this.options.radius,
+                BorderRadius: this.options.radius,
+                MozBorderRadius: this.options.radius,
+                WebkitBorderRadius: this.options.radius,
+                zIndex: 999999,
+                transition: 'backgroundColor'
             });
+
+        var that = this;
+        wrapper.hover(function(event) {
+            $bar.css({background: that.options.hoverColor, opacity: that.options.hoverOpacity}
+        },function(event) {
+            $bar.css({background: that.options.color, opacity: that.options.opacity});
+        });
 
         // set position
         var posCss = (this.options.position == 'right') ? { right: this.options.distance } : { left: this.options.distance };

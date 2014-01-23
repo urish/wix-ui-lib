@@ -2,14 +2,14 @@ jQuery.fn.definePlugin('Tooltip', function ($) {
 	'use strict';
 
 	var styles = {
-		className      : 'uilib-tooltip',
-		textClassName  : 'uilib-text',
-		arrowClassName : 'arrow_box',
-		arrowHeight    : 12
+		className: 'uilib-tooltip',
+		textClassName: 'uilib-text',
+		arrowClassName: 'arrow_box',
+		arrowHeight: 12
 	};
 	var events = {
-		mouseEnter : 'mouseenter',
-		mouseLeave : 'mouseleave'
+		mouseEnter: 'mouseenter',
+		mouseLeave: 'mouseleave'
 	};
 
 	var placements = ['top', 'right', 'left', 'bottom'];
@@ -68,25 +68,25 @@ jQuery.fn.definePlugin('Tooltip', function ($) {
 			function setTopPlacement($tooltip){
 				$tooltip.find('.' + styles.arrowClassName).addClass('down');
 				$tooltip.css('left', $elm.offset().left + calcOffsetLeft($tooltip));
-				$tooltip.css('top', $elm.offset().top - ($tooltip.outerHeight() + styles.arrowHeight));
+				$tooltip.css('top', $elm.position().top - ($tooltip.outerHeight() + styles.arrowHeight));
 			}
 
 			function setBottomPlacement($tooltip){
 				$tooltip.find('.' + styles.arrowClassName).addClass('up');
 				$tooltip.css('left', $elm.offset().left + calcOffsetLeft($tooltip));
-				$tooltip.css('top', $elm.offset().top + $elm.outerHeight() + styles.arrowHeight);
+				$tooltip.css('top', $elm.position().top + $elm.outerHeight() + styles.arrowHeight);
 			}
 
 			function setRightPlacement($tooltip){
 				$tooltip.find('.' + styles.arrowClassName).addClass('left');
 				$tooltip.css('left', $elm.offset().left + $elm.outerWidth() + styles.arrowHeight);
-				$tooltip.css('top', $elm.offset().top + calcOffsetTop($tooltip));
+				$tooltip.css('top', $elm.position().top + calcOffsetTop($tooltip));
 			}
 
 			function setLeftPlacement($tooltip){
 				$tooltip.find('.' + styles.arrowClassName).addClass('right');
 				$tooltip.css('left', $elm.offset().left - ($tooltip.outerWidth() + styles.arrowHeight));
-				$tooltip.css('top', $elm.offset().top + calcOffsetTop($tooltip));
+				$tooltip.css('top', $elm.position().top + calcOffsetTop($tooltip));
 			}
 
 			function calcOffsetLeft($tooltip){

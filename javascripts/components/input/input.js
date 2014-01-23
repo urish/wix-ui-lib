@@ -80,6 +80,9 @@ jQuery.fn.definePlugin('Input', function ($) {
 			var isPassRequiredValidation = this.options.required ? !!value.length : true;
 			var isDifferentValue = (this.$input.val() !== this.value || value !== this.value);
 			if(isPassRequiredValidation && this.options.validation(value) && isDifferentValue){
+				if(!isNaN(parseFloat(value)) && isFinite(value)){
+					value = Math.round(value);
+				}
 				this.lastValue = this.getValue();
 				this.$input.val(value);
 				this.value = value;

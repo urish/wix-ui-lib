@@ -1,42 +1,94 @@
 DocsApp.Classes.PluginDocsData = function (utils) {
-
+	
+	
 	var pluginPresets = {
+		ButtonGroup : {
+			html : '\n\t<button value="mini">Mini</button>\n\t<button value="medium">Medium</button>\n\t<button value="large">Large</button>\n',
+			optionsForPlugin : {},
+			description : ''
+		},
+		ToggleButtonGroup : {
+			html : '\n\t<button value="mini">Mini</button>\n\t<button value="medium">Medium</button>\n\t<button value="large">Large</button>\n',
+			optionsForPlugin : {},
+			description : ''
+		},
+		PluginTemplate : {
+			html : '',
+			optionsForPlugin : {},
+			description : ''
+		},
+		Accordion : {
+			html : '\n\t<div class="acc-pane">\n\t\t<h3>Accordion Pane</h3>\n\t\t<div class="acc-content">Accordion Content</div>\n\t</div>\n\t<div class="acc-pane">\n\t\t<h3>Accordion Pane</h3>\n\t\t<div class="acc-content">Accordion Content</div>\n\t</div>\n\t<div class="acc-pane">\n\t\t<h3>Accordion Pane</h3>\n\t\t<div class="acc-content">Accordion Content</div>\n\t</div>\n',
+			optionsForPlugin : {},
+			description : ''
+		},
+		Checkbox : {
+			html : '',
+			optionsForPlugin : {},
+			description : ''
+		},
+		ColorPickerWithOpacity : {
+			html : '',
+			optionsForPlugin : {},
+			description : ''
+		},
+		ColorPicker : {
+			html : '',
+			optionsForPlugin : {},
+			description : ''
+		},
 		Dropdown : {
 			html : '\n\t<div value="show">Show Images</div>\n\t<div value="hide">Hide Images</div>\n\t<div value="showhover">Show Images on Hover</div>\n',
 			optionsForPlugin : {
 				width : 160
-			}
+			},
+			description : ''
 		},
-		ToggleButtonGroup : {
-			html : '\n\t<button value="mini">Mini</button>\n\t<button value="medium">Medium</button>\n\t<button value="large">Large</button>\n'
+		FontPicker : {
+			html : '',
+			optionsForPlugin : {},
+			description : ''
 		},
-		ButtonGroup : {
-			html : '\n\t<button value="mini">Mini</button>\n\t<button value="medium">Medium</button>\n\t<button value="large">Large</button>\n'
+		FontStylePicker : {
+			html : '',
+			optionsForPlugin : {},
+			description : ''
 		},
-		Accordion : {
-			html : '\n\t<div class="acc-pane">\n\t\t<h3>Accordion Pane</h3>\n\t\t<div class="acc-content">Accordion Content</div>\n\t</div>\n\t<div class="acc-pane">\n\t\t<h3>Accordion Pane</h3>\n\t\t<div class="acc-content">Accordion Content</div>\n\t</div>\n\t<div class="acc-pane">\n\t\t<h3>Accordion Pane</h3>\n\t\t<div class="acc-content">Accordion Content</div>\n\t</div>\n'
+		Input : {
+			html : '',
+			optionsForPlugin : {},
+			description : ''
+		},
+		LanguagePicker : {
+			html : '',
+			optionsForPlugin : {},
+			description : ''
+		},
+		Popup : {
+			html : '\n\t<div data-radio-value="sync10">Sync 10 images</div>\n\t<div data-radio-value="sync25">Sync 25 images</div>\n\t<div data-radio-value="sync50">Sync 50 images</div>\n',
+			optionsForPlugin : {},
+			description : ''
 		},
 		Radio : {
-			html : '\n\t<div data-radio-value="sync10">Sync 10 images</div>\n\t<div data-radio-value="sync25">Sync 25 images</div>\n\t<div data-radio-value="sync50">Sync 50 images</div>\n'
-		},
-		Tooltip : {
-			html : '\n\t<div wix-tooltip="{text: \'this is a simple tooltip\'}">\n\t\t<div style="width:100px">Tool</div>\n\t</div>\n'
+			html : '',
+			optionsForPlugin : {},
+			description : ''
 		},
 		Slider : {
-			optionsForPlugin : {
-				toolTip : true
-			}
-		}
-		/*,ColorPicker:{
-			optionsForPlugin: {
-				startWithColor:'#fff'
-			}
+			html : '',
+			optionsForPlugin : {},
+			description : ''
 		},
-		ColorPickerWithOpacity:{
-			optionsForPlugin: {
-				startWithColor:'rgba()'
-			}
-		}*/
+		Spinner : {
+			html : '',
+			optionsForPlugin : {},
+			description : ''
+		},
+		Tooltip : {
+			html : '\n\t<div wix-tooltip="{text: \'this is a simple tooltip\'}">\n\t\t<div style="width:100px">Tool</div>\n\t</div>\n',
+			optionsForPlugin : {},
+			description : ''
+		}
 	};
 	
 	function formatHTML(html){

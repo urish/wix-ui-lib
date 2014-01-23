@@ -28,6 +28,7 @@ var DocsApp = {
 		var sidebarHTML = '';
 		var docsHTML = '';
 		var blackList = ['PluginTemplate'];
+		var unregisteredList = ['GluedControl'];
 		var store = jQuery.fn.definePlugin.store;
 		for (var pluginName in store) {
 			if (blackList.indexOf(pluginName) !== -1) {
@@ -37,6 +38,18 @@ var DocsApp = {
 			sidebarHTML += this.templates.menuTpl(Plugin);
 			docsHTML += this.templates.contentTpl(Plugin);
 		}
+		unregisteredList.forEach(function(pluginName){
+			var Plugin = jQuery.fn[pluginName].Constructor;
+			var PluginMock = {
+				name: pluginName,
+				prototype:{
+					getDefaults: Plugin.prototype.getDefaults
+				}
+			};
+			sidebarHTML += this.templates.menuTpl(PluginMock);
+			docsHTML += this.templates.contentTpl(PluginMock);
+		}, this);
+
 		this.$sidebar.find('.content').append(sidebarHTML);
 		this.$docs.find('.content').append(docsHTML);
 	}

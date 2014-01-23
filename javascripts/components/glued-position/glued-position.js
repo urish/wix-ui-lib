@@ -25,8 +25,7 @@
         _setUserEvents(defaults, options);
 
         this.options = $.extend({}, defaults, options);
-	
-		this.slider = this.createSlider(this.options.slider);		
+		this.slider = this.createSlider(this.options.slider);
 		this.dropdown = this.createDropDown(this.options.dropdown);
     }
 
@@ -174,9 +173,10 @@
             slider : {
 				width:158,
 				className:'',
-                minValue : -2,
-                maxValue : 2,
-				value : 0
+                minValue: -2,
+                maxValue: 2,
+				value: 0,
+				supportClick: false
             },
             dropdown : {
 				visibleRows:8,

@@ -59,7 +59,7 @@
 
 		initStyleModelHandling();
 
-		var elements = $rootEl.andSelf().find('[data-wix-controller], [wix-controller], [wix-ctrl], [data-wix-ctrl], [wix-tooltip]');
+		var elements = $rootEl.andSelf().find('[data-wix-controller], [wix-controller], [wix-ctrl], [data-wix-ctrl], [wix-tooltip], [wix-scroll]');
 		for (var i = 0; i < elements.length; i++) {
 			try {
 				initializePlugin(elements[i]);
@@ -144,16 +144,24 @@
 			});
 		}
 		var ctrl = getCtrl(element);
-		var ctrlName = getCtrlName(ctrl);
-		var options = getOptions(element, ctrl);
-		applyPlugin(element, ctrlName, overrideOptions || options);
+		if (ctrl) {
+			var ctrlName = getCtrlName(ctrl);
+			var options = getOptions(element, ctrl);
+			applyPlugin(element, ctrlName, overrideOptions || options);
+		}
+
+		var tooltipVal = getAttribute(element, 'wix-tooltip');
+		if (tooltipVal) {
+			applyPlugin(element, 'Tooltip', evalOptions(tooltipVal) || {});
+		}
+
+		var scrollbarVal = getAttribute(element, 'wix-scroll');
+		if (scrollbarVal) {
+			applyPlugin(element, 'ScrollBar', evalOptions(scrollbarVal) || {});
+		}
     }
 
     function getCtrl(element){
-        var isToolTip = element.getAttribute('wix-tooltip');
-        if (isToolTip) {
-            return 'Tooltip';
-        }
         return getAttribute(element, 'wix-controller') || getAttribute(element, 'wix-ctrl');
     }
     

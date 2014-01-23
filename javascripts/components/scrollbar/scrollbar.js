@@ -30,11 +30,11 @@
             // sets rail opacity
             railOpacity : 0,
             // defautlt CSS class of the scroll rail
-            railClass : 'uilib.scrollRail',
+            railClass : 'uilib-scrollRail',
             // defautlt CSS class of the scroll bar
-            barClass : 'uilib.scrollBar',
+            barClass : 'uilib-scrollBar',
             // defautlt CSS class of the scroll wrapper
-            wrapperClass : 'uilib.scrollDiv',
+            wrapperClass : 'uilib-scrollDiv',
             // check if mousewheel should scroll the window if we reach top/bottom
             allowPageScroll : false,
             // scroll amount applied to each mouse wheel step
@@ -150,12 +150,12 @@
                 MozBorderRadius: this.options.radius,
                 WebkitBorderRadius: this.options.radius,
                 zIndex: 999999,
-                transition: 'backgroundColor'
+                transition: 'background-color 200ms '
             });
 
         var that = this;
         wrapper.hover(function(event) {
-            $bar.css({background: that.options.hoverColor, opacity: that.options.hoverOpacity}
+            $bar.css({background: that.options.hoverColor, opacity: that.options.hoverOpacity});
         },function(event) {
             $bar.css({background: that.options.color, opacity: that.options.opacity});
         });

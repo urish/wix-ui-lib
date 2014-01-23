@@ -94,7 +94,7 @@ DocsApp.Classes.PluginDocsData = function (utils) {
 	};
 	
 	function formatHTML(html){
-		//html = html.split(/>\s*</).join('>\n\t<').replace(/\t<\//g, '</');
+		html = html.replace(/\t/g,'    ');
 		return html;
 	}
 	

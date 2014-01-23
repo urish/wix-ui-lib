@@ -26,8 +26,6 @@
 	var dropdownCSS = {
 		position : 'relative'
 	};
-
-
 	
 	var arrows = {
 		down  : '<span class="dropdown-arrow dropdown-arrow-down"></span>',

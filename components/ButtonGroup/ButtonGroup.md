@@ -1,5 +1,6 @@
 # title
-Accordion 
+Button Group 
 
 # description
-Accordion Component displays collapsible content panels for presenting information in a limited amount of space.
+Button Group component, enables selection of multiple options through a group of horizontally ordered buttons
+

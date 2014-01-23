@@ -5,9 +5,10 @@ module.exports = function (grunt) {
 	var sourceDirectory = 'src/main/';
 	var buildDirectory = 'build/' + projectName + '/src/main/';
 	var jsSrc = [
-		'javascripts/definePlugin.js',
-		'javascripts/components/**/*.js',
-		'javascripts/ui-lib.js'
+		'core/definePlugin.js',
+		'core/ColorPickerCore.js',
+		'components/**/*.js',
+		'core/ui-lib.js'
 	];
 	var cssSrc = [
 		'stylesheets/bootstrap.css',
@@ -15,23 +16,23 @@ module.exports = function (grunt) {
 		'stylesheets/icons.css',
 		'stylesheets/common.css',
 		'stylesheets/settings.css',
+		'stylesheets/header.css',
 
-		'javascripts/components/radio-button/radio-button.css',
-		'javascripts/components/checkbox/checkbox.css',
-		'javascripts/components/accordion/accordion.css',
-		'javascripts/components/header/header.css',
-		'javascripts/components/dropdown/dropdown.css',
-		'javascripts/components/popup/popup.css',
-		'javascripts/components/input/input.css',
-		'javascripts/components/spinner/spinner.css',
-		'javascripts/components/language-picker/languagePicker.css',
-		'javascripts/components/font-picker/fontPicker.css',
-		'javascripts/components/buttonGroup/buttonGroup.css',
-		'javascripts/components/color-picker2/css/color-picker.css',
-		'javascripts/components/advanced-dropdown/css/dd.css',
-		'javascripts/components/slider2/slider2.css',
-		'javascripts/components/tooltip/tooltip.css',
-		'javascripts/components/glued-position/css/glued-position.css'];
+		'components/Radio/Radio.css',
+		'components/Checkbox/Checkbox.css',
+		'components/Accordion/Accordion.css',
+		'components/Dropdown/Dropdown.css',
+		'components/Popup/Popup.css',
+		'components/Input/Input.css',
+		'components/Spinner/Spinner.css',
+		'components/LanguagePicker/LanguagePicker.css',
+		'components/FontPicker/FontPicker.css',
+		'components/ButtonGroup/ButtonGroup.css',
+		'components/ColorPicker/ColorPicker.css',
+		'components/AdvancedDropdown/css/dd.css',
+		'components/Slider/Slider.css',
+		'components/Tooltip/Tooltip.css',
+		'components/GluedControl/GluedControl.css'];
 
 
 	grunt.initConfig({
@@ -135,10 +136,9 @@ module.exports = function (grunt) {
 				},
 				files : {
 					src : [
-						'javascripts/**/*.js',
-						'!**/~*.js', '!**/jquery.dd.js',
-						'!**/bootstrap-popover.js',
-						'!**/bootstrap-tooltip.js'
+						'components/**/*.js',
+						'core/**/*.js',
+						'!**/~*.js', '!**/jquery.dd.js'
 					]
 				}
 			}

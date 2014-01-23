@@ -323,21 +323,6 @@
             defaults.dropdown.on.create = options.dropDownCreate;
         }
     }
-	/*
-	jQuery.fn.definePlugin('GluedControl', function ($) {
-		'use strict';
-		
-		var plugin = $.extend({
-			init: function(){
-				Plugin.call(this, this.$el[0], this.options);
-				return this;
-			}
-		}, Plugin.prototype);
-		
-		return plugin;
-		
-	}, true)
-	*/
 })(jQuery, window, document);
 
 

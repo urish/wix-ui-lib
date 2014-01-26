@@ -157,7 +157,7 @@
 
 		var scrollbarVal = getAttribute(element, 'wix-scroll');
 		if (scrollbarVal) {
-			applyPlugin(element, 'ScrollBar', evalOptions(scrollbarVal) || {});
+			applyPlugin(element, 'Scrollbar', evalOptions(scrollbarVal) || {});
 		}
     }
 

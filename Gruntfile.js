@@ -7,8 +7,8 @@ module.exports = function (grunt) {
 	var jsSrc = [
 		'core/definePlugin.js',
 		'core/ColorPickerCore.js',
+		'core/ui-lib.js',
 		'components/**/*.js',
-		'core/ui-lib.js'
 	];
 	var cssSrc = [
 		'stylesheets/bootstrap.css',

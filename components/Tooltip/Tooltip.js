@@ -67,25 +67,25 @@ jQuery.fn.definePlugin('Tooltip', function ($) {
 
 			function setTopPlacement($tooltip){
 				$tooltip.find('.' + styles.arrowClassName).addClass('down');
-				$tooltip.css('left', $elm.offset().left + calcOffsetLeft($tooltip));
+				$tooltip.css('left', $elm.position().left + calcOffsetLeft($tooltip));
 				$tooltip.css('top', $elm.position().top - ($tooltip.outerHeight() + styles.arrowHeight));
 			}
 
 			function setBottomPlacement($tooltip){
 				$tooltip.find('.' + styles.arrowClassName).addClass('up');
-				$tooltip.css('left', $elm.offset().left + calcOffsetLeft($tooltip));
+				$tooltip.css('left', $elm.position().left + calcOffsetLeft($tooltip));
 				$tooltip.css('top', $elm.position().top + $elm.outerHeight() + styles.arrowHeight);
 			}
 
 			function setRightPlacement($tooltip){
 				$tooltip.find('.' + styles.arrowClassName).addClass('left');
-				$tooltip.css('left', $elm.offset().left + $elm.outerWidth() + styles.arrowHeight);
+				$tooltip.css('left', $elm.position().left + $elm.outerWidth() + styles.arrowHeight);
 				$tooltip.css('top', $elm.position().top + calcOffsetTop($tooltip));
 			}
 
 			function setLeftPlacement($tooltip){
 				$tooltip.find('.' + styles.arrowClassName).addClass('right');
-				$tooltip.css('left', $elm.offset().left - ($tooltip.outerWidth() + styles.arrowHeight));
+				$tooltip.css('left', $elm.position().left - ($tooltip.outerWidth() + styles.arrowHeight));
 				$tooltip.css('top', $elm.position().top + calcOffsetTop($tooltip));
 			}
 

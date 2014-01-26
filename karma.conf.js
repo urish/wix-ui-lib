@@ -9,26 +9,25 @@ module.exports = function(config) {
     frameworks: ['jasmine'],
     // list of files / patterns to load in the browser
     files: [
-        'javascripts/components/**/*.css',
-		'stylesheets/bootstrap.css',
+        'components/**/*.css',
 		'stylesheets/buttons.css',
 		'stylesheets/common.css',
 		'stylesheets/settings.css',
+		'stylesheets/header.css',
+
+		'components/Radio/radio.css',
+		'components/Checkbox/checkbox.css',
+		'components/Accordion/accordion.css',
+		'components/Dropdown/dropdown.css',
+		'components/Popup/popup.css',
+		'components/Input/input.css',
+		'components/Spinner/spinner.css',
 		
-		'javascripts/components/radio-button/radio-button.css',
-		'javascripts/components/checkbox/checkbox.css',
-		'javascripts/components/accordion/accordion.css',
-		'javascripts/components/header/header.css',
-		'javascripts/components/dropdown/dropdown.css',
-		'javascripts/components/popup/popup.css',
-		'javascripts/components/input/input.css',
-		'javascripts/components/spinner/spinner.css',
 		
-		
-		'javascripts/components/color-picker2/css/color-picker.css',
-		'javascripts/components/advanced-dropdown/css/dd.css',
-		'javascripts/components/slider2/slider2.css',
-		'javascripts/components/glued-position/css/glued-position.css',
+		'components/ColorPicker/ColorPicker.css',
+		'components/AdvancedDropdown/css/dd.css',
+		'components/Slider/slider.css',
+		'components/GluedControl/GluedControl.css',
 
 	
         'http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js',
@@ -38,9 +37,10 @@ module.exports = function(config) {
 		'tests/mocks/sdk/**.js',
 		'tests/addons/**.js',
 
-        'javascripts/definePlugin.js',
-		'javascripts/ui-lib.js',
-        'javascripts/components/**/*.js',
+		'core/definePlugin.js',
+		'core/ColorPickerCore.js',
+		'core/ui-lib.js',
+		'components/**/*.js',
 		
 		
 		'tests/mocks/*.js',

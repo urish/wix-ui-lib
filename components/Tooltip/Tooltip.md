@@ -6,11 +6,11 @@ Tooltip component, enables content annotation on hover
 
 ### Markup
 ```html
-   <div wix-tooltip=" {placement:'top', text:'Pick Language'}">Hover me</div>
+<span wix-tooltip=" {placement:'top', text:'I am Hovered'}">Hover me</span>
 
-   <div  wix-ctrl="Tooltip" wix=options=="{placement:'right', text:'click me'}">
-        <button class="submit uilib-btn connect">I have a tooltip!!!</button>
-   </div>
+<div wix-ctrl="Tooltip" wix-options="{placement:'right', text:'click me'}">
+	<button class="uilib-btn connect">I have a tooltip!!!</button>
+</div>
 ```
 
 ### Options

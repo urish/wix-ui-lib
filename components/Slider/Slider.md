@@ -6,8 +6,7 @@ Slider component, enables selection from linear range of numeric values through 
 
 ### Markup
 ```html
-    <div  wix-ctrl="Slider" wix=options=="{{ maxValue:500, preLabel:'zero', postLabel:'five hundreds'}">
-    </div>
+<div  wix-ctrl="Slider" wix=options=="{{ maxValue:500, preLabel:'zero', postLabel:'five hundreds'}"></div>
 ```
 
 ### Options

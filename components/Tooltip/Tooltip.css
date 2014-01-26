@@ -3,6 +3,11 @@
     min-width: 100px;
     font-family: Helvetica Neue, Helvetica, Arial;
 }
+
+[wix-ctrl="Tooltip"]{
+	display:inline-block;
+}
+
 .uilib-tooltip .arrow_box {
     position: relative;
     padding: 6px;

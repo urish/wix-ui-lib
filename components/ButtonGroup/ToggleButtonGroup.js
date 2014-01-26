@@ -3,12 +3,12 @@ jQuery.fn.definePlugin('ToggleButtonGroup', function($){
 	
 	return {
 		init: function(){
+			this.options.mode = 'toggle';
 			this.buttonGroup = this.$el.ButtonGroup(this.options).getPlugin();
 		},
 		getDefaults: function(){
 			return {
-				value:0,
-				mode:'toggle'				
+				value:0
 			}
 		},		
 		setValue: function (value) {

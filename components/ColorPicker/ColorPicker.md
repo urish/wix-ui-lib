@@ -6,7 +6,7 @@ Color Picker component, provide Wix style color selection with a 5x5 grid palett
 
 ### Markup
 ```html
-    <div wix-ctrl="ColorPicker" wix-options={startWithColor: 'color-3'}></div>
+<div wix-ctrl="ColorPicker" wix-options="{startWithColor: 'color-3'}"></div>
 ```
 
 ### Options

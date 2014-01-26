@@ -1,140 +1,139 @@
-(function ($, window, document) {
+jQuery.fn.definePlugin('FixedPositionControl', function ($) {
 	'use strict';
 
-	var pluginName = 'GluedControl';
-	
-	function Plugin(element, options) {
-		this.state = {
-			horizontalMargin : 0,
-			verticalMargin : 0,
-			placement : 'TOP_LEFT'
-		};
+	return {
+		init: function(element, options) {
+			options = this.options;
+			element = this.$el[0];
+			this.state = {
+				horizontalMargin : 0,
+				verticalMargin : 0,
+				placement : 'TOP_LEFT'
+			};
+			
+			var defaults = _getDefaults();
 
-		var defaults = _getDefaults();
-
-		this.$el = $(element);
-        this.createControlHTML();
-        if (options.bindToWidget) {
-            this.initWithBinding(defaults, options);
-        } else {
-            this._init(defaults, options);
-        }
-	}
-
-    Plugin.prototype._init = function (defaults, options) {
-        _setUserEvents(defaults, options);
-
-        this.options = $.extend({}, defaults, options);
-		this.slider = this.createSlider(this.options.slider);
-		this.dropdown = this.createDropDown(this.options.dropdown);
-    }
-
-	Plugin.prototype.initWithBinding = function (defaults, options) {
-		var plugin = this;
-		getPlacement(function (state) {		
-            $.extend(plugin.state, state);
-            $.extend(defaults.slider, _getSliderEvents(plugin.state));
-			plugin.options = $.extend({}, defaults, options);			
-			plugin.slider = plugin.createSlider(plugin.options.slider);
-
-			$.extend(plugin.options.dropdown, _getDropdownEvents(plugin.state, plugin.slider));
-			plugin.dropdown = plugin.createDropDown(plugin.options.dropdown);			
-		});
-	};
-
-	Plugin.prototype.createSlider = function(options){
-		options.value = this.state[getPlacementOrientation(this.state)] || 0;
-		this.$slider = this.$el.find('.glued-slider');
-		return this.$slider.Slider(options).data('plugin_Slider');
-	};
-	
-	Plugin.prototype.getDefaults = function(){
-		return _getDefaults();
-	};
-	
-	Plugin.prototype.createDropDown = function(options){
-		options.visibleRows = this.options.placements.length;
-
-		this.$dropdown = this.$el.find(".glued-dropdown")
-			.html(this.dropdownHTML())
-			.find('select')
-			.msDropDown(options);
-
-		return this.$dropdown.data('dd');
-	};
-
-	Plugin.prototype.createControlHTML = function () {
-        this.$el.append('<div class="glued-dropdown"></div>' +
-            '<div class="divider gluedDivider"></div>' +
-            '<div class="slider-wrapper"><div class="glued-slider"></div></div>');
-    }
-
-	Plugin.prototype.dropdownHTML = function () {
-
-		var placements = this.options.placements;
-		if (placements.length === 0) {
-			placements = ['TOP_LEFT', 'TOP_CENTER', 'TOP_RIGHT', 'CENTER_LEFT', 'CENTER_RIGHT', 'BOTTOM_LEFT', 'BOTTOM_CENTER', 'BOTTOM_RIGHT'];
-		}
-
-		function getOption(value, imageSpriteData, title) {
-			return '<option value="' + value + '" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-imagecss="positionIcons ' + imageSpriteData + '" selected="selected">' + title + '</option>';
-		}
-
-		var options = placements.map(function (value) {
-				var imageSpriteData,
-				text;
-
-				switch (value) {
-				case 'TOP_LEFT':
-					imageSpriteData = 'topLeft';
-					text = 'Top Left';
-					break;
-				case 'TOP_RIGHT':
-					imageSpriteData = 'topRight';
-					text = 'Top Right';
-					break;
-				case 'BOTTOM_RIGHT':
-					imageSpriteData = 'bottomRight';
-					text = 'Bottom Right';
-					break;
-				case 'BOTTOM_LEFT':
-					imageSpriteData = 'bottomLeft';
-					text = 'Bottom Left';
-					break;
-				case 'TOP_CENTER':
-					imageSpriteData = 'top';
-					text = 'Top';
-					break;
-				case 'CENTER_RIGHT':
-					imageSpriteData = 'right';
-					text = 'Right';
-					break;
-				case 'BOTTOM_CENTER':
-					imageSpriteData = 'bottom';
-					text = 'Bottom';
-					break;
-				case 'CENTER_LEFT':
-					imageSpriteData = 'left';
-					text = 'Left';
-					break;
-				}
-
-				return getOption(value, imageSpriteData, text);
-			}).join('\n');
-
-		return '<p>Select the position for your widget</p><select name="positionSelection" class="positionSelection">' + options + '</select>';
-	}
-
-	$.fn[pluginName] = function (options) {
-		return this.each(function () {
-			if (!$.data(this, pluginName)) {
-				$.data(this, pluginName,
-					new Plugin(this, options));
+			this.$el = $(element);
+			this.createControlHTML();
+			if(Wix && Wix.Utils && Wix.Utils.getViewMode() === 'standalone'){
+				options.bindToWidget = false;
 			}
-		});
-	};
-	
-	$.fn[pluginName].Constructor = Plugin;
+			if (options.bindToWidget) {
+				this.initWithBinding(defaults, options);
+			} else {
+				this._init(defaults, options);
+			}
+		},
+		_init: function (defaults, options) {
+			_setUserEvents(defaults, options);
+
+			this.options = $.extend({}, defaults, options);
+			this.slider = this.createSlider(this.options.slider);
+			this.dropdown = this.createDropDown(this.options.dropdown);
+		},
+
+		initWithBinding: function (defaults, options) {
+			var plugin = this;
+			getPlacement(function (state) {		
+				$.extend(plugin.state, state);
+				$.extend(defaults.slider, _getSliderEvents(plugin.state));
+				plugin.options = $.extend({}, defaults, options);			
+				plugin.slider = plugin.createSlider(plugin.options.slider);
+
+				$.extend(plugin.options.dropdown, _getDropdownEvents(plugin.state, plugin.slider));
+				plugin.dropdown = plugin.createDropDown(plugin.options.dropdown);			
+			});
+		},
+
+		createSlider: function(options){
+			options.value = this.state[getPlacementOrientation(this.state)] || 0;
+			this.$slider = this.$el.find('.glued-slider');
+			return this.$slider.Slider(options).data('plugin_Slider');
+		},
+		
+		getDefaults: function(){
+			return {bindToWidget:true};
+		},
+		
+		markup: function () {},
+		setValue: function () {},
+		getValue: function () {},
+		bindEvents: function () {},
+		
+		createDropDown: function(options){
+			options.visibleRows = this.options.placements.length;
+
+			this.$dropdown = this.$el.find(".glued-dropdown")
+				.html(this.dropdownHTML())
+				.find('select')
+				.msDropDown(options);
+
+			return this.$dropdown.data('dd');
+		},
+
+		createControlHTML: function () {
+			this.$el.append('<div class="glued-dropdown"></div>' +
+				'<div class="divider gluedDivider"></div>' +
+				'<div class="slider-wrapper"><div class="glued-slider"></div></div>');
+		},
+
+		dropdownHTML: function () {
+
+			var placements = this.options.placements;
+			if (placements.length === 0) {
+				placements = ['TOP_LEFT', 'TOP_CENTER', 'TOP_RIGHT', 'CENTER_LEFT', 'CENTER_RIGHT', 'BOTTOM_LEFT', 'BOTTOM_CENTER', 'BOTTOM_RIGHT'];
+			}
+
+			function getOption(value, imageSpriteData, title) {
+				return '<option value="' + value + '" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-imagecss="positionIcons ' + imageSpriteData + '" selected="selected">' + title + '</option>';
+			}
+
+			var options = placements.map(function (value) {
+					var imageSpriteData,
+					text;
+
+					switch (value) {
+					case 'TOP_LEFT':
+						imageSpriteData = 'topLeft';
+						text = 'Top Left';
+						break;
+					case 'TOP_RIGHT':
+						imageSpriteData = 'topRight';
+						text = 'Top Right';
+						break;
+					case 'BOTTOM_RIGHT':
+						imageSpriteData = 'bottomRight';
+						text = 'Bottom Right';
+						break;
+					case 'BOTTOM_LEFT':
+						imageSpriteData = 'bottomLeft';
+						text = 'Bottom Left';
+						break;
+					case 'TOP_CENTER':
+						imageSpriteData = 'top';
+						text = 'Top';
+						break;
+					case 'CENTER_RIGHT':
+						imageSpriteData = 'right';
+						text = 'Right';
+						break;
+					case 'BOTTOM_CENTER':
+						imageSpriteData = 'bottom';
+						text = 'Bottom';
+						break;
+					case 'CENTER_LEFT':
+						imageSpriteData = 'left';
+						text = 'Left';
+						break;
+					}
+
+					return getOption(value, imageSpriteData, text);
+				}).join('\n');
+
+			return '<p>Select the position for your widget</p><select name="positionSelection" class="positionSelection">' + options + '</select>';
+		}
+	}
+		
 
 	function setPlacement(state) {
 		Wix.Settings.setWindowPlacement(
@@ -231,6 +230,7 @@
 
 		slider.$ribbon = $('<div class="uilib-slider-back">').prependTo(slider.$el);
 	}
+	
 	function updateRibbon(slider, val){
 		var pinWidth = slider.$pin.width() / 2;
 		var elWidth = slider.$el.width() / 4;
@@ -323,6 +323,6 @@
             defaults.dropdown.on.create = options.dropDownCreate;
         }
     }
-})(jQuery, window, document);
+});
 
 

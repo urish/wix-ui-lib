@@ -6,11 +6,12 @@ Scrollbar, mimic native html scrollbars with Wix style and behaviour across all 
 
 ### Markup
 ```html
-    <div  wix-scroll="{height:300}">
-    </div>
-
-    <div  wix-ctrl="Scrollbar" wix=options=="{height:300}">
-    </div>
+<div class="box" wix-scroll="{height:150}">
+	<p style="height:600px;background:rgba(0,0,0,0.3)">Content</p>
+</div>	
+<div class="box" wix-ctrl="Scrollbar" wix-options="{height:150}">
+	<p style="height:600px;background:rgba(0,0,0,0.3)">Content</p>
+</div>
 ```
 
 ### Options

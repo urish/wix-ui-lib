@@ -6,11 +6,11 @@ Radio button component, mimic native html radio buttons
 
 ### Markup
 ```html
-    <div wix-model="imagesToSync" wix-ctrl="Radio">
-        <div data-radio-value="sync10">Sync 10 images</div>
-        <div data-radio-value="sync25">Sync 25 images</div>
-        <div data-radio-value="sync50">Sync 50 images</div>
-    </div>
+<div wix-model="imagesToSync" wix-ctrl="Radio">
+	<div data-radio-value="sync10">Sync 10 images</div>
+	<div data-radio-value="sync25">Sync 25 images</div>
+	<div data-radio-value="sync50">Sync 50 images</div>
+</div>
 ```
 
 ### Options

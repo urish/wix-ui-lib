@@ -12,7 +12,7 @@ Font Style Picker component, control the selection of all relevant properties fo
 
 ### Markup
 ```html
-    <div wix-ctrl="FontStylePicker"></div>
+<div wix-ctrl="FontStylePicker"></div>
 ```
 
 ### Options

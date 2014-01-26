@@ -6,8 +6,7 @@ Spinner component, enables selection from linear range of numeric values one ste
 
 ### Markup
 ```html
-    <div wix-ctrl="Spinner" wix-options="{ maxValue:500 }"></div>
-    </div>
+<div wix-ctrl="Spinner" wix-options="{ maxValue:500 }"></div>
 ```
 
 ### Options

@@ -6,7 +6,7 @@ Color Picker with opacity control component, provide Wix style color selection w
 
 ### Markup
 ```html
-    <div wix-ctrl="ColorPickerWithOpacity" wix-options={startWithColor: 'color-3'}></div>
+<div wix-ctrl="ColorPickerWithOpacity" wix-options="{startWithColor: 'color-3'}"></div>
 ```
 
 ### Options

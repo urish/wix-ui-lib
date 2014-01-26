@@ -3,9 +3,15 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Wix UI-Lib Components demo</title>
-    <link rel="stylesheet" href="../build/ui-lib.min.css"/>
+    <link rel="stylesheet" href="../ui-lib.min.css"/>
 	<link rel="stylesheet" href="DocsApp.css"/>	
 	<link rel="stylesheet" href="google-code-prettify/sunburst.css"/>
+	
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="http://sslstatic.wix.com/services/js-sdk/1.24.0/js/Wix.js"></script>
+    <script src="../ui-lib.min.js"></script>
+	<script type="text/javascript">Wix.__disableStandaloneError__ = true;</script>
 </head>
 <body wix-ui>
     <div class="container">
@@ -21,7 +27,7 @@
 				<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr,  sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr,  sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
 			</div>
 			<div id="docs">
-				<div class="content"></div>
+				<div class="content">${{content}}</div>
 			</div>
 		</div>
     </div>
@@ -29,11 +35,6 @@
 			
 	</div>
 
-
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-    <script src="http://sslstatic.wix.com/services/js-sdk/1.24.0/js/Wix.js"></script>
-    <script src="../build/ui-lib.min.js"></script>
-	
 	<script type="text/javascript" src="google-code-prettify/prettify.js"></script>
 	<script type="text/javascript" src="markdown.min.js"></script>
 	
@@ -44,7 +45,7 @@
 	<script src="PluginDocsData.js"></script>
 	
 	<script type="text/javascript">
-		Wix.__disableStandaloneError__ = true;
+		
         $(function() {
 			DocsApp.init();
 			prettyPrint();

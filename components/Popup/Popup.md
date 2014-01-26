@@ -5,8 +5,26 @@ Popup component,
 ### Example
 
 ### Markup
-```javascript
-  Wix.UI.createPlugin({ctrl: 'Popup', options: {});
+```html
+<button class="uilib-btn btn-secondary" id="popupAnchorBtn">Open Popup</button>
+<button class="uilib-btn btn-secondary" id="modalAnchorBtn">Open Modal</button>
+<script>
+
+	var popup = Wix.UI.createPlugin({ctrl: 'Popup', options: {buttonSet: 'okCancel', fixed:true}});
+	
+	var modal = Wix.UI.createPlugin({ctrl: 'Popup', options: {modal:true, buttonSet: 'okCancel', fixed:true}});
+	
+	$('#popupAnchorBtn').on('click', function(evt){
+		evt.stopPropagation();
+		popup.getPlugin().open();
+	});
+	
+	$('#modalAnchorBtn').on('click', function(evt){
+		evt.stopPropagation();
+		modal.getPlugin().open();
+	});
+	
+</script>
 ```
 
 ### Options

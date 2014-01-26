@@ -110,7 +110,8 @@
                 position: 'relative',
                 overflow: 'hidden',
                 width: this.options.width,
-                height: this.options.height
+                height: this.options.height,
+				padding: '0 0 2px 0'
             });
 
         // update style for the div
@@ -212,7 +213,7 @@
         this.$el.mousewheel(function(evt, delta){
 
             if ($bar.css('display') === 'none') return;
-
+			evt.preventDefault();
             var speed = 10;
             var initPos = $bar.position().top;
             var pos = initPos - (delta * speed);

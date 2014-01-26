@@ -33,6 +33,7 @@ jQuery.fn.definePlugin('Popup', function ($) {
 				height : 'auto',
 				width : 300,
 				buttonSet: '',
+				fixed: false,
 				onclose : function () {},
 				oncancel: function() {},
 				onopen: function(){},
@@ -103,12 +104,23 @@ jQuery.fn.definePlugin('Popup', function ($) {
 				}
 			}
 			
+			function keyHandler(evt){
+				if(evt.which === 27){
+					if(popup.isOpen() && !popup.options.modal){
+						closeHandler('cancel');
+					}
+				}
+			}
+			
+			$(window).on('keyup', keyHandler);
+			
 			$(this.popup).on('click', '.close-popup', closeHandler.bind(null, 'close'));
 			$(this.popup).on('click', '.x-close-popup', closeHandler.bind(null, 'cancel'));
 			$(window).on('click', globalCloseHandler);
 			
 			this.whenDestroy(function(){
 				$(window).off('click', globalCloseHandler);
+				$(window).off('keyup', keyHandler);
 			});
 			
 		},
@@ -128,7 +140,7 @@ jQuery.fn.definePlugin('Popup', function ($) {
 		},
 		setPosition: function () {
 			this.$el.css({
-				position : 'absolute',
+				position : this.options.fixed ? 'fixed':'absolute',
 				width : this.options.width,
 				height : this.options.height,
 				left : '50%',

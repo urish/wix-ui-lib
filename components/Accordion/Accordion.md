@@ -7,20 +7,20 @@ An accordion is divided to a vertical set of panes. By default only a single pan
 
 ### Markup
 ```html
-    <div wix-ctrl="Accordion">
-        <div class="acc-pane">
-            <h3>Accordion Pane</h3>
-            <div class="acc-content">Accordion Content</div>
-        </div>
-        <div class="acc-pane">
-            <h3>Accordion Pane</h3>
-            <div class="acc-content">Accordion Content</div>
-        </div>
-        <div class="acc-pane">
-            <h3>Accordion Pane</h3>
-            <div class="acc-content">Accordion Content</div>
-        </div>
-    </div>
+<div wix-ctrl="Accordion">
+	<div class="acc-pane">
+		<h3>Accordion Pane</h3>
+		<div class="acc-content">Accordion Content</div>
+	</div>
+	<div class="acc-pane">
+		<h3>Accordion Pane</h3>
+		<div class="acc-content">Accordion Content</div>
+	</div>
+	<div class="acc-pane">
+		<h3>Accordion Pane</h3>
+		<div class="acc-content">Accordion Content</div>
+	</div>
+</div>
 ```
 
 ### Options

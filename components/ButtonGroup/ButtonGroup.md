@@ -1,4 +1,4 @@
-# Button Group
+# ButtonGroup
 
 Button Group component, enables selection of multiple options through a group of horizontally ordered buttons
 
@@ -6,11 +6,11 @@ Button Group component, enables selection of multiple options through a group of
 
 ### Markup
 ```html
-    <div wix-ctrl="ButtonGroup">
-        <button value="mini">Mini</button>
-        <button value="medium">Medium</button>
-        <button value="large">Large</button>
-    </div>
+<div wix-ctrl="ButtonGroup">
+	<button value="mini">Mini</button>
+	<button value="medium">Medium</button>
+	<button value="large">Large</button>
+</div>
 ```
 
 ### Options

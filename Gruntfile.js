@@ -8,7 +8,7 @@ module.exports = function (grunt) {
 		'core/definePlugin.js',
 		'core/ColorPickerCore.js',
 		'core/ui-lib.js',
-		'components/**/*.js',
+		'components/**/*.js'
 	];
 	var cssSrc = [
 		'stylesheets/bootstrap.css',
@@ -17,6 +17,9 @@ module.exports = function (grunt) {
 		'stylesheets/common.css',
 		'stylesheets/settings.css',
 		'stylesheets/header.css',
+
+
+		'stylesheets/index.css',
 
 		'components/Radio/Radio.css',
 		'components/Checkbox/Checkbox.css',
@@ -56,7 +59,7 @@ module.exports = function (grunt) {
 				},
 
 				html: {
-					src: 'html/settings.html',
+					src: ['html/settings.html', 'html/index.html'],
 					dest: 'build/settings.html'
 				}
 			}
@@ -97,7 +100,7 @@ module.exports = function (grunt) {
 			dev : {
 				files : [
 					{
-						expand: true, flatten: true,src: ['html/settings.html'], dest: 'build/', filter: 'isFile'
+						expand: true, flatten: true,src: ['html/settings.html', 'html/index.html'], dest: 'build/', filter: 'isFile'
 					}
 				]
 			},

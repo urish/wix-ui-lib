@@ -2,9 +2,20 @@
 <html>
 <head>
     <title>Wix UI-Lib</title>
+	
+    <link rel="stylesheet" href="../ui-lib.min.css"/>
+	<link rel="stylesheet" href="google-code-prettify/sunburst.css"/>
     <link rel="stylesheet" href="index.css"/>
-    <link rel="stylesheet" href="ui-lib.min.css"/>
-    <link rel="stylesheet" href="docs/DocsApp.css"/>
+    <link rel="stylesheet" href="DocsApp.css"/>
+	
+		
+	<!-- jQuery Dependency -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+	<!-- Wix SDK -->
+	<script src="http://sslstatic.wix.com/services/js-sdk/1.25.0/js/Wix.js"></script>
+	<!-- Wix UI -->
+	<script type="text/javascript" src="../ui-lib.min.js"></script>
+	<script type="text/javascript">Wix.__disableStandaloneError__ = true;</script>
 </head>
 <body>
 <nav class="navigation">
@@ -26,6 +37,8 @@
     </div>
 </div>
 
+
+
 <div class="wix" id="demo" style="padding-top:50px">
     <div class="container">
         <h2>Demo</h2>
@@ -42,7 +55,7 @@
                 <div wix-scroll="{height:600}">
                     <header class="box">
                         <div class="logo">
-                            <img width="86" src="images/wix_icon.png" alt="logo"/>
+                            <img width="86" src="../images/wix_icon.png" alt="logo"/>
                         </div>
                         <div class="loggedOut">
                             <p>
@@ -185,10 +198,9 @@
             </div>
         </div>
 
-        <!-- End .container -->
+        
     </div>
 </div>
-
 
 <div class="components" id="components" style="padding-top:50px">
     <div class="container clearfix">
@@ -206,43 +218,21 @@
                 <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr,  sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr,  sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
             </div>
             <div id="docs">
-                <div class="content"></div>
+                <div class="content">${{content}}</div>
             </div>
         </div>
     </div>
+
 </div>
+	<div id="footer">
+			
+	</div>
 
 
-
-<!-- jQuery Dependency -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-<!-- Wix SDK -->
-<script src="http://sslstatic.wix.com/services/js-sdk/1.25.0/js/Wix.js"></script>
-<!-- Wix UI -->
-<script type="text/javascript" src="ui-lib.min.js"></script>
 
 <script type="text/javascript">
-    Wix.__disableStandaloneError__ = true;
 
     $(document).ready(function () {
-
-        Wix.UI.initialize({
-            numOfImages: 100,
-            isIconShown: true,
-            imageVisibility: 'show',
-            imagesToSync: 0,
-            imageMeta: true,
-            imageAlt: false,
-            imageLink: false
-        });
-
-        /**
-         Validate email adress
-         */
-        $('#email').getPlugin().setValidationFunction(function(value) {
-            return (/^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/i.test(value));
-        });
-
         DocsApp.init();
         prettyPrint();
         Wix.UI.initialize({});
@@ -251,14 +241,13 @@
 </script>
 
 
-<script type="text/javascript" src="docs/google-code-prettify/prettify.js"></script>
-<script type="text/javascript" src="docs/markdown.min.js"></script>
+<script type="text/javascript" src="google-code-prettify/prettify.js"></script>
 
-<script src="docs/DocsApp.js"></script>
-<script src="docs/Utils.js"></script>
-<script src="docs/ScrollInterations.js"></script>
-<script src="docs/Templates.js"></script>
-<script src="docs/PluginDocsData.js"></script>
+<script src="DocsApp.js"></script>
+<script src="Utils.js"></script>
+<script src="ScrollInterations.js"></script>
+<script src="Templates.js"></script>
+<script src="PluginDocsData.js"></script>
 
 
 </body>

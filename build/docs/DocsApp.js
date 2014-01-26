@@ -16,11 +16,11 @@ var DocsApp = {
 	},
 	markup : function () {
 		this.$root.hide();
-		this.d();
+		this.updateClasses();
 		this.renderDocs();
 		this.$root.show();
 	},
-	d:function(){
+	updateClasses:function(){
 		this.$docs.find('.content').find('.cmp-plugin-decs-entry').each(function(){			
 			$(this).find('pre').addClass('plugin-markup prettyprint');		
 		});		
@@ -33,31 +33,10 @@ var DocsApp = {
 	},
 	renderDocs : function () {
 		var sidebarHTML = '';
-		var docsHTML = '';
-		var blackList = ['PluginTemplate'];
-		var unregisteredList = ['GluedControl'];
-		var store = jQuery.fn.definePlugin.store;
-		for (var pluginName in store) {
-			if (blackList.indexOf(pluginName) !== -1) {
-				continue;
-			}
-			var Plugin = store[pluginName];
-			sidebarHTML += this.templates.menuTpl(Plugin);
-			docsHTML += this.templates.contentTpl(Plugin);
-		}
-	/*	unregisteredList.forEach(function(pluginName){
-			var Plugin = jQuery.fn[pluginName].Constructor;
-			var PluginMock = {
-				name: pluginName,
-				prototype:{
-					getDefaults: Plugin.prototype.getDefaults
-				}
-			};
-			sidebarHTML += this.templates.menuTpl(PluginMock);
-			docsHTML += this.templates.contentTpl(PluginMock);
-		}, this);
-	*/
+		var that = this;
+		var titles = $('h1[id]').each(function(){
+			sidebarHTML += that.templates.menuTpl({name: this.innerHTML});
+		});		
 		this.$sidebar.find('.content').append(sidebarHTML);
-		//this.$docs.find('.content').append(docsHTML);
 	}
 };

@@ -1,12 +1,12 @@
-# GluedControl
+# FixedPositionControl
 
-GluedControl component, enables positioning of a Fixed Position widget in the Wix editor.
+FixedPositionControl component, enables positioning of a Fixed Position widget in the Wix editor.
 
 ### Example
 
 ### Markup
 ```html
-<div wix-ctrl="GluedControl"></div>
+<div wix-ctrl="FixedPositionControl"></div>
 ```
 
 ### Options

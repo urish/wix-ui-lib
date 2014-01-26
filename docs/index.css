@@ -9,11 +9,13 @@ ul, li {
     padding: 0;
 }
 
+/*
 *, *:before, *:after {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+*/
 
 .white {
     color: #fff;
@@ -80,7 +82,7 @@ ul, li {
     height: 100%;
     position: relative;
     overflow: hidden;
-    background: #292929 url(/images/index/welcome.png) 0 0 repeat fixed;
+    background: #292929 url(images/welcome.png) 0 0 repeat fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;

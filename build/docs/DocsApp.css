@@ -43,7 +43,7 @@ h1{
 
 }
 #footer{
-	height: 210px;
+	height: 160px;
 	clear:both;
 }
 .side-bar ul {
@@ -162,5 +162,8 @@ table th{
 
 .options-table .tb-desc{
 	width:60%
+}
+#Accordion-entry [wix-ctrl]{
+	height:186px;
 }
 

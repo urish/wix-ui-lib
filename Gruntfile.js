@@ -18,9 +18,6 @@ module.exports = function (grunt) {
 		'stylesheets/settings.css',
 		'stylesheets/header.css',
 
-
-		'stylesheets/index.css',
-
 		'components/Radio/Radio.css',
 		'components/Checkbox/Checkbox.css',
 		'components/Accordion/Accordion.css',
@@ -94,6 +91,9 @@ module.exports = function (grunt) {
 					}, // makes all src relative to cwd
 					{
 						expand: true, flatten: true,src: ['html/*.html'], dest: 'build/', filter: 'isFile'
+					},
+					{
+						expand: true, flatten: true,src: ['stylesheets/index.css'], dest: 'build/', filter: 'isFile' 
 					}
 				]
 			},

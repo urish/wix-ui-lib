@@ -29,6 +29,7 @@ var DocsApp = {
 		this.Classes.ScrollInterations().mixin(this);
 		this.bindScrollAnimation();
 		this.bindScrollInteraction();
+		this.bindHeaderScroll();
 	},
 	renderDocs : function () {
 		var sidebarHTML = '';

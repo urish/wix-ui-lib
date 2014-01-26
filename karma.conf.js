@@ -22,12 +22,11 @@ module.exports = function(config) {
 		'components/Popup/popup.css',
 		'components/Input/input.css',
 		'components/Spinner/spinner.css',
-		
-		
+				
 		'components/ColorPicker/ColorPicker.css',
 		'components/AdvancedDropdown/css/dd.css',
 		'components/Slider/slider.css',
-		'components/GluedControl/GluedControl.css',
+		'components/FixedPositionedControl/FixedPositionedControl.css',
 
 	
         'http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js',

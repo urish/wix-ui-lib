@@ -267,7 +267,7 @@ module.exports = function (grunt) {
 		var marked = require('marked');
 		marked.setOptions({
 			renderer : new marked.Renderer(),
-			gfm : true,
+			gfm : true
 		});
 		var done = this.async();
 		var options = this.options();

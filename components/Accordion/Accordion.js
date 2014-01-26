@@ -23,7 +23,7 @@ jQuery.fn.definePlugin('Accordion', function($){
 				ease : 'linear',
 				openByDeafult:'acc-open',
 				value : 0,
-				toggleOpen: false,
+				toggleOpen: false
 			};
 		},
 		showFirst: function () {

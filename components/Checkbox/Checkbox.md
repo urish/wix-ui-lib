@@ -1,6 +1,18 @@
-# title
-Checkbox
+# Checkbox
 
-# description
-Checkbox component, mimic native HTML checkbox by appending wix style
+Checkbox component, mimic native HTML checkbox by applying Wix style
 
+### Example
+
+### Markup
+```html
+    <div wix-ctrl="Checkbox" wix-options={preLabel:'Check me...', checked:true}></div>
+    <br>
+    <div wix-ctrl="Checkbox"></div>
+```
+
+### Options
+
+* checked; false;
+* preLabel; ''; a preceding label/text
+* postLabel; ''; a postceding label/text

@@ -1,6 +1,6 @@
 jQuery.fn.definePlugin('ColorPickerWithOpacity', function ($) {
 	'use strict';
-		
+
 	return {
 		init: function(){
 			this.options.value = this.options.value !== undefined ? this.options.value : this.options.startWithColor;

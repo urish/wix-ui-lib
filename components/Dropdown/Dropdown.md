@@ -1,6 +1,6 @@
 # Dropdown
 
-Dropdown component,
+Dropdown component, expandable selection list with support for max height/scrollabr.
 
 ### Example
 
@@ -13,7 +13,7 @@ Dropdown component,
     </div>
 ```
 
- ### Options
+### Options
 
 * slideTime; 150; animation slide time in ms
 * value; 0; selected entry value attribute in the dropdown

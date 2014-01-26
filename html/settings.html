@@ -103,7 +103,7 @@
                     <p>Sync Meta Data ?</p>
 
                     <div wix-model="imageMeta" wix-ctrl="Checkbox:{ postLabel:'Image Meta'}"></div>
-                    <div wix-model="imageAlt" wix-ctrl="Checkbox:{ postLabel:'Image Alt'}"></div>
+                    <div wix-model="imageAlt" wix-ctrl="Checkbox" wix-options="{ postLabel:'Image Alt', checked:true}"></div>
                     <div wix-model="imageLink" wix-ctrl="Checkbox:{ postLabel:'Image Link'}"></div>
                 </div>
             </div>
@@ -163,8 +163,6 @@
             isIconShown: true,
             imageVisibility: 'show',
             imagesToSync: 0,
-            imageMeta: true,
-            imageAlt: false,
             imageLink: false
         });
         

@@ -14,6 +14,7 @@ DocsApp.Classes.ScrollInterations = function () {
 			}
 			obj.bindScrollAnimation = this.bindScrollAnimation;
 			obj.bindScrollInteraction = this.bindScrollInteraction;
+			obj.bindHeaderScroll = this.bindHeaderScroll;
 		},
 		bindScrollAnimation : function () {
 			$body.on('click', dataInter, function (evt) {
@@ -26,6 +27,23 @@ DocsApp.Classes.ScrollInterations = function () {
 				});
 			});
 		},
+		bindHeaderScroll : function(){
+			var navPos = $('.page-welcome').height() - 50;
+			$win.resize(function() {
+				$('.navigation').toggleClass('shown', $(document).scrollTop() >= navPos);
+			});
+			$doc.bind('scroll touchmove', function() {
+				$('.navigation').toggleClass('shown', $(document).scrollTop() >= navPos);
+				var offset  = $('#components').offset().top - $(window).scrollTop();
+				if ( offset < 40 ) {
+					$(".cmp-sidebar").parent().addClass("scroll");
+				}
+				if (offset > 40) {
+					$(".cmp-sidebar").parent().removeClass("scroll");
+				}
+			});
+		},
+
 		bindScrollInteraction : function startScrollInteraction() {
 			var $inter = $(dataInter);
 			var allHashes = $(dataTarget).toArray();
@@ -63,7 +81,8 @@ DocsApp.Classes.ScrollInterations = function () {
 					window.location.hash = el.id;
 					$('[href="#' + el.id + '"]').addClass(currentViewed);
 				} else {
-					window.location.hash = '';
+					//$(".cmp-sidebar").removeClass("scroll");
+					//window.location.hash = 'demo';
 				}
 			}
 			$win.scroll(function (evt) {

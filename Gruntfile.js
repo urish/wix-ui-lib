@@ -11,7 +11,6 @@ module.exports = function (grunt) {
 		'components/**/*.js'
 	];
 	var cssSrc = [
-		'stylesheets/bootstrap.css',
 		'stylesheets/buttons.css',
 		'stylesheets/icons.css',
 		'stylesheets/common.css',
@@ -176,7 +175,11 @@ module.exports = function (grunt) {
 				inject: 'build/docs/index.html' 
 			}
 		},
-
+		buildHTML:{
+			options:{
+				settingsHTML:'build/settings.html'
+			}
+		},
 		clean : ['build']
 
 	});
@@ -189,6 +192,34 @@ module.exports = function (grunt) {
 	grunt.registerTask('default', ['clean', 'copy', 'uglify', 'cssmin']);
 
 
+	grunt.registerTask('buildHTML', '', function(){
+		var options = this.options();
+		var newContent = '';
+		var content = grunt.file.read(options.settingsHTML);
+		
+		var cssStart = '<!-- css source -->';
+		var cssEnd = '<!-- css source end -->';
+		
+		var jsStart = '<!-- scripts source -->';
+		var jsEnd = '<!-- scripts source end -->';
+		
+		var cssIndexStart = content.indexOf(cssStart);
+		var cssIndexEnd = content.indexOf(cssEnd);
+		
+		var jsIndexStart = content.indexOf(jsStart);
+		var jsIndexEnd = content.indexOf(jsEnd);
+		
+		var deadCssContent = content.slice(cssIndexStart, cssIndexEnd + cssEnd.length);
+		var deadJsContent = content.slice(jsIndexStart, jsIndexEnd + jsEnd.length);
+		
+		newContent = content;
+		newContent = newContent.replace(deadCssContent, '<link rel="stylesheet" href="ui-lib.min.css" />');
+		newContent = newContent.replace(deadJsContent, '<script type="text/javascript" src="ui-lib.min.js"></script>');
+
+		grunt.file.write(options.settingsHTML, newContent);
+		
+	});
+	
 	grunt.registerTask('mdDocs', 'build docs', function () {
 
 		function getDocMdContent(src, fileContent, fileName) {
@@ -298,10 +329,10 @@ module.exports = function (grunt) {
 
 		});
 
-	grunt.registerTask('default', ['clean', 'copy', 'uglify', 'cssmin', 'mdDocs']);
+	grunt.registerTask('default', ['clean', 'copy', 'uglify', 'cssmin', 'buildHTML', 'mdDocs']);
 
 	grunt.registerTask('karma', ['clean', 'copy', 'uglify', 'cssmin', 'karma']);
 	grunt.registerTask('concatall', ['clean', 'copy', 'concat','uglify', 'cssmin']);
 	grunt.registerTask('lint', ['jshint']);
-	grunt.registerTask('dev', ['clean', 'copy', 'uglify', 'cssmin', 'mdDocs', 'watch']);
+	grunt.registerTask('dev', ['default', 'watch']);
 };

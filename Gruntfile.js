@@ -162,7 +162,7 @@ module.exports = function (grunt) {
 				tasks: ["uglify:build"]
 			},
 			css: {
-				files: cssSrc,
+				files: cssSrc.join('docs/index.css'),
 				tasks: ["cssmin:add_banner"]
 			},
 			html: {
@@ -180,6 +180,8 @@ module.exports = function (grunt) {
 		clean : ['build']
 
 	});
+
+
 
 	grunt.loadNpmTasks('grunt-contrib');
 	grunt.loadNpmTasks('grunt-karma');

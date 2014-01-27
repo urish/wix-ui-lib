@@ -215,6 +215,7 @@ module.exports = function (grunt) {
 		newContent = content;
 		newContent = newContent.replace(deadCssContent, '<link rel="stylesheet" href="ui-lib.min.css" />');
 		newContent = newContent.replace(deadJsContent, '<script type="text/javascript" src="ui-lib.min.js"></script>');
+		newContent = newContent.replace('../images/wix_icon.png', 'images/wix_icon.png');
 
 		grunt.file.write(options.settingsHTML, newContent);
 		

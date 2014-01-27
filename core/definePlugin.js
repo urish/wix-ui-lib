@@ -136,7 +136,7 @@
 	
 	
 	$.fn.definePlugin = definePlugin;
-	$.fn.getPlugin = function(){
+	$.fn.getCtrl = function(){
 		if(!this[0]){return null;}
 		return this.data('plugin_' + this[0].$uiLibPluginName);
 	};

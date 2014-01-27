@@ -10,18 +10,18 @@ Popup component,
 <button class="uilib-btn btn-secondary" id="modalAnchorBtn">Open Modal</button>
 <script>
 
-	var popup = Wix.UI.createPlugin({ctrl: 'Popup', options: {buttonSet: 'okCancel', fixed:true}});
+	var popup = Wix.UI.create({ctrl: 'Popup', options: {buttonSet: 'okCancel', fixed:true}});
 	
-	var modal = Wix.UI.createPlugin({ctrl: 'Popup', options: {modal:true, buttonSet: 'okCancel', fixed:true}});
+	var modal = Wix.UI.create({ctrl: 'Popup', options: {modal:true, buttonSet: 'okCancel', fixed:true}});
 	
 	$('#popupAnchorBtn').on('click', function(evt){
 		evt.stopPropagation();
-		popup.getPlugin().open();
+		popup.getCtrl().open();
 	});
 	
 	$('#modalAnchorBtn').on('click', function(evt){
 		evt.stopPropagation();
-		modal.getPlugin().open();
+		modal.getCtrl().open();
 	});
 	
 </script>

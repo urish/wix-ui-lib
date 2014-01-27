@@ -19,7 +19,7 @@ describe('Spinner', function () {
     });
 
     afterEach(function(){
-        Wix.UI.destroyPlugin(element, true);
+        Wix.UI.destroy(element, true);
     });
 
     it('should apply wix markup to given wix-ctrl', function(){
@@ -154,7 +154,7 @@ describe('Spinner', function () {
 		options = options || {};
 		$element.attr('wix-options', JSON.stringify(options));
 		Wix.UI.initializePlugin(element);
-		return $element.getPlugin();
+		return $element.getCtrl();
 	}
 
     function givenEnterPressedEvent() {

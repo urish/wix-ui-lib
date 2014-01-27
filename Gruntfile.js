@@ -310,7 +310,7 @@ module.exports = function (grunt) {
 				var fileNameWithExtention = filepath.split('/').pop();
 				var s = fileNameWithExtention.split('.');
 				var extention = s.pop();
-				var fileName = s.join('.');
+				var fileName = s.pop();
 				var fileContent = grunt.file.read(filepath);
 
 				var parts = getDocMdContent(filepath, fileContent, fileName);

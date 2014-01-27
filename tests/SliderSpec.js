@@ -19,7 +19,7 @@ describe('Slider', function () {
     });
 
     afterEach(function(){
-        Wix.UI.destroyPlugin(element, true);
+        Wix.UI.destroy(element, true);
     });
 
     it('should apply wix markup to given wix-ctrl', function(){

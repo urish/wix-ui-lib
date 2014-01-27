@@ -9,7 +9,7 @@ describe('Input', function () {
 	});
 
 	afterEach(function(){
-		Wix.UI.destroyPlugin(element);
+		Wix.UI.destroy(element);
 	});
 
 	describe('Default Options', function () {
@@ -85,6 +85,6 @@ describe('Input', function () {
 		options = options || {};
 		$element.attr('wix-options', JSON.stringify(options));
 		Wix.UI.initializePlugin(element);
-		return $element.getPlugin();
+		return $element.getCtrl();
 	}
 });

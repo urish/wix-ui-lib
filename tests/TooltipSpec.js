@@ -9,7 +9,7 @@ describe('Tooltip', function () {
 	});
 
 	afterEach(function(){
-		Wix.UI.destroyPlugin(element);
+		Wix.UI.destroy(element);
 	});
 
 	describe('Default Options', function () {

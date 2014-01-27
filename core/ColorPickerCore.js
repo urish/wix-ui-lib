@@ -828,7 +828,6 @@ var createColorBox = (function (){
 
 	function createColorBox(options){
 		var cb = {};
-		debugger
 		createColorBox.instances = createColorBox.instances || [];
 		
 		var pickerInstance = {

@@ -1,12 +1,12 @@
 # Spinner
 
-Spinner component, enables selection from linear range of numeric values one step at a time
+Spinner component, enables selection from linear range of numeric values one step at a time. The Spinner allows to set the selected range and the increment/decrement step.
 
 ### Example
 
 ### Markup
 ```html
-<div wix-ctrl="Spinner" wix-options="{ maxValue:500 }"></div>
+<div wix-model="myInt" wix-ctrl="Spinner" wix-options="{ maxValue:500 }"></div>
 ```
 
 ### Options

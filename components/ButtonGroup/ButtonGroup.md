@@ -6,7 +6,7 @@ Button Group component, enables selection of multiple options through a group of
 
 ### Markup
 ```html
-<div wix-ctrl="ButtonGroup">
+<div wix-model="multiSize" wix-ctrl="ButtonGroup">
 	<button value="mini">Mini</button>
 	<button value="medium">Medium</button>
 	<button value="large">Large</button>

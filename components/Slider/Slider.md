@@ -1,12 +1,12 @@
 # Slider
 
-Slider component, enables selection from linear range of numeric values through a draggable knob
+Slider component, enables selection from linear range of numeric values through a draggable knob. The Slider allows to set the selected range and text labels before and after.
 
 ### Example
 
 ### Markup
 ```html
-<div  wix-ctrl="Slider" wix=options=="{{ maxValue:500, preLabel:'zero', postLabel:'five hundreds'}"></div>
+<div  wix-model="myValue" wix-ctrl="Slider" wix=options=="{{ maxValue:500, preLabel:'zero', postLabel:'five hundreds'}"></div>
 ```
 
 ### Options

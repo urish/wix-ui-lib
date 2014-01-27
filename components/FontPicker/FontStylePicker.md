@@ -8,11 +8,13 @@ Font Style Picker component, control the selection of all relevant properties fo
 * italic
 * underline
 
+**Site parameter, the selected value will be saved inside the Wix site**
+
 ### Example
 
 ### Markup
 ```html
-<div wix-ctrl="FontStylePicker"></div>
+<div wix-param="fontStyle" wix-ctrl="FontStylePicker"></div>
 ```
 
 ### Options

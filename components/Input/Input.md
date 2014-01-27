@@ -1,12 +1,12 @@
 # Input
 
-Input component
+Input component, mimic native HTML input element with Wix style and behaviour
 
 ### Example
 
 ### Markup
 ```html
-<div wix-ctrl="Input"></div>
+<div wix-model="myText" wix-ctrl="Input"></div>
 ```
 
 ### Options

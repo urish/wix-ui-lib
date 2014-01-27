@@ -6,7 +6,7 @@ Toggle Button Group component, enables selection of multiple options through a g
 
 ### Markup
 ```html
-<div wix-ctrl="ToggleButtonGroup">
+<div wix-model="size" wix-ctrl="ToggleButtonGroup">
 	<button value="mini">Mini</button>
 	<button value="medium">Medium</button>
 	<button value="large">Large</button>

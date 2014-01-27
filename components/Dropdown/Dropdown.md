@@ -6,7 +6,7 @@ Dropdown component, expandable selection list with support for max height/scroll
 
 ### Markup
 ```html
-<div wix-ctrl="Dropdown">
+<div wix-model="image" wix-ctrl="Dropdown">
 	<div value="show">Show Images</div>
 		<div value="hide">Hide Images</div>
 	<div value="showhover">Show Images on Hover</div>

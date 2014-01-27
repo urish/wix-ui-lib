@@ -1,6 +1,6 @@
 # FixedPositionControl
 
-FixedPositionControl component, enables positioning of a Fixed Position widget in the Wix editor.
+FixedPositionControl component, enables positioning of a Fixed Position widget in the Wix editor. This control is already synchronized with the Wix site there's no need for wis-model or wix-param
 
 ### Example
 

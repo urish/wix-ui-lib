@@ -6,8 +6,8 @@ Checkbox component, mimic native HTML checkbox by applying Wix style
 
 ### Markup
 ```html
-<div wix-ctrl="Checkbox" wix-options="{preLabel:'Check me...', checked:true}"></div>
-<div wix-ctrl="Checkbox"></div>
+<div wix-model="preChecked" wix-ctrl="Checkbox" wix-options="{preLabel:'Check me...', checked:true}"></div>
+<div wix-model="checkMe" wix-ctrl="Checkbox"></div>
 ```
 
 ### Options

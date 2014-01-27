@@ -6,7 +6,7 @@ Language Picker component, expandable dropdown list of languages. Controls the s
 
 ### Markup
 ```html
-<div wix-ctrl="LanguagePicker"></div>
+<div wix-model="lang" wix-ctrl="LanguagePicker"></div>
 ```
 
 ### Options

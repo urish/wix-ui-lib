@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 
 app.get('/', function(req, res) {
-    res.sendfile("build/docs/index.html");
+    res.redirect("build/docs/index.html");
 });
 
 app.use("/build", express.static(__dirname + '/build'));

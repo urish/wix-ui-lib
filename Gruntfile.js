@@ -331,8 +331,8 @@ module.exports = function (grunt) {
 
 	grunt.registerTask('default', ['clean', 'copy', 'uglify', 'cssmin', 'buildHTML', 'mdDocs']);
 
-	grunt.registerTask('karma', ['clean', 'copy', 'uglify', 'cssmin', 'karma']);
-	grunt.registerTask('concatall', ['clean', 'copy', 'concat','uglify', 'cssmin']);
+	grunt.registerTask('karma', ['default', 'karma']);
+	grunt.registerTask('concatall', ['default', 'concat']);
 	grunt.registerTask('lint', ['jshint']);
 	grunt.registerTask('dev', ['default', 'watch']);
 };

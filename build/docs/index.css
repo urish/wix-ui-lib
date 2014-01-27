@@ -114,6 +114,27 @@ ul, li {
 .page-welcome .get-ui-lib > .uilib-btn > a {
     color: #fff;
     text-decoration: none;
+    font-size: 18px;
+}
+
+.page-welcome .get-ui-lib > .uilib-btn.extra {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.page-welcome .scrollMore {
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    top: 42px;
+    width: 34px;
+    height: 65px;
+    background-image: url(http://static.parastorage.com/services/html-landing/2013/resources/hp_v2/images-v2/1280/scroll_more_out.png);
+    background-position: 0px 0px;
+}
+
+.page-welcome .scrollMore:hover {
+    background-position: 0px -65px;
 }
 
 .demo-container {

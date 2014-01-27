@@ -34,6 +34,8 @@ module.exports = function (grunt) {
 		'components/Tooltip/Tooltip.css',
 		'components/FixedPositionControl/FixedPositionControl.css'];
 
+	var htmlSrc = ['html/settings.html', 'html/index.html', 'docs/index.html'];
+
 
 	grunt.initConfig({
 		pkg : grunt.file.readJSON('./package.json'),
@@ -53,11 +55,6 @@ module.exports = function (grunt) {
 				css: {
 					src: cssSrc,
 					dest: 'build/<%= pkg.name %>.all.css'
-				},
-
-				html: {
-					src: ['html/settings.html', 'html/index.html'],
-					dest: 'build/settings.html'
 				}
 			}
 		},
@@ -169,8 +166,8 @@ module.exports = function (grunt) {
 				tasks: ["cssmin:add_banner"]
 			},
 			html: {
-				files: ["<%= concat.dist.html.src %>"],
-				tasks: ["copy:dev"]
+				files: htmlSrc,
+				tasks: ['copy:dev', 'copy:docs', 'mdDocs']
 			}
 		},
 		mdDocs:{
@@ -179,14 +176,18 @@ module.exports = function (grunt) {
 				inject: 'build/docs/index.html' 
 			}
 		},
+
 		clean : ['build']
 
 	});
 
 	grunt.loadNpmTasks('grunt-contrib');
 	grunt.loadNpmTasks('grunt-karma');
-	grunt.loadNpmTasks('grunt-markdown');	
-	
+	grunt.loadNpmTasks('grunt-markdown');
+	grunt.loadTasks('tasks');
+
+	grunt.registerTask('default', ['clean', 'copy', 'uglify', 'cssmin']);
+
 
 	grunt.registerTask('mdDocs', 'build docs', function () {
 
@@ -296,11 +297,11 @@ module.exports = function (grunt) {
 		done(true);
 
 		});
-	// Default task.
-	grunt.registerTask('gendocs', ['clean','copy', 'uglify', 'cssmin', 'mdDocs']);
-	grunt.registerTask('default', ['clean', 'copy', 'uglify', 'cssmin']);
+
+	grunt.registerTask('default', ['clean', 'copy', 'uglify', 'cssmin', 'mdDocs']);
+
 	grunt.registerTask('karma', ['clean', 'copy', 'uglify', 'cssmin', 'karma']);
 	grunt.registerTask('concatall', ['clean', 'copy', 'concat','uglify', 'cssmin']);
 	grunt.registerTask('lint', ['jshint']);
-	grunt.registerTask('dev', ['clean', 'copy', 'uglify', 'cssmin', 'watch']);
+	grunt.registerTask('dev', ['clean', 'copy', 'uglify', 'cssmin', 'mdDocs', 'watch']);
 };

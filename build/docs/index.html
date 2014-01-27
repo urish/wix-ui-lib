@@ -52,149 +52,14 @@
         <div class="demo">
             <div class="container">
                 <strong class="title">App Name</strong>
-                <div wix-scroll="{height:600}">
-                    <header class="box">
-                        <div class="logo">
-                            <img width="86" src="../images/wix_icon.png" alt="logo"/>
-                        </div>
-                        <div class="loggedOut">
-                            <p>
-                                This is a sample Settings view for widgets and pages created with <a href="http://dev.wix.com"
-                                                                                                     target="_blank">Wix's 3rd Party SDK</a>,
-                                compatible with Wix's product requirements.
-                                This boilerplate is aimed at saving time for developing the UI of your apps, and let the
-                                developer focus on developing logic.
-                            </p>
-
-                            <div class="login-panel">
-                                <p class="create-account">Don't have an<br/>account? <strong><a href="#" target="_blank">Create
-                                    one</a></strong></p>
-                                <button class="submit uilib-btn connect">Connect account</button>
-                            </div>
-                        </div>
-                        <div class="loggedIn hidden">
-                            <p>You are now connected to <strong>John Doe (john@doe.com)</strong> account<br/>
-                                <a class="disconnect-account">Disconnect account</a></p>
-
-                            <div class="premium-panel">
-                                <p class="premium-features ">Premium features</p>
-                                <button class="submit btn upgrade">Upgrade</button>
-                            </div>
-                        </div>
-                    </header>
-
-                    <div class="accordion" wix-ctrl="Accordion" wix-options="{toggleOpen:false}">
-
-                        <div class="acc-pane">
-                            <h3>General Settings: </h3>
-
-                            <div class="acc-content">
-                                <ul class="list">
-                                    <li wix-label="Image Visibility:">
-                                        <div wix-model="imageVisibility" wix-ctrl="Dropdown" wix-options="{width:150}">
-                                            <div value="show">Show Images</div>
-                                            <div value="hide">Hide Images</div>
-                                            <div value="showhover">Show Images on Hover</div>
-                                        </div>
-                                    </li>
-                                    <li wix-label="Glued:">
-                                        <div wix-ctrl="FixedPositionControl"></div>
-                                    </li>
-                                    <li wix-label="Fonts:">
-                                        <div wix-model="myFont" wix-ctrl="FontStylePicker"></div>
-                                    </li>
-                                    <li wix-label="Number of images:">
-                                        <div wix-model="numOfImages" wix-ctrl="Slider" wix-options="{ maxValue:500, preLabel:'0', postLabel:'500', toolTip:true}"></div>
-                                        <div wix-model="numOfImages" wix-ctrl="Spinner" wix-options="{ maxValue:500 }"></div>
-                                    </li>
-                                    <li wix-label="Show Icons:">
-                                        <div wix-model="isIconShown" wix-ctrl="Checkbox"></div>
-                                    </li>
-                                    <li wix-label="Language Picker:">
-                                        <div wix-model="languagePicker" wix-ctrl="LanguagePicker" wix-tooltip=" {placement:'top', text:'Pick Language'}"></div>
-                                    </li>
-                                    <li wix-label="Email address:">
-                                        <div id= "email" wix-ctrl="Input" wix-options="{ placeholder: 'john@wix.com' }"></div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="acc-pane">
-                            <h3>Color Settings: </h3>
-
-                            <div class="acc-content">
-                                <ul class="list">
-                                    <li wix-label="Text Color:">
-                                        <div wix-param="textColor" wix-ctrl="ColorPicker" wix-options="{startWithColor:'color-5'}"></div>
-                                    </li>
-                                    <li wix-label="Background Color:">
-                                        <div wix-param="backgroundColor" wix-ctrl="ColorPickerWithOpacity" wix-options="{startWithColor:'color-1'}"></div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="acc-pane">
-                            <h3>Sync Options</h3>
-
-                            <div class="acc-content">
-                                <p>How many images to sync ?</p>
-
-                                <div wix-model="imagesToSync" wix-ctrl="Radio">
-                                    <div data-radio-value="sync10">Sync 10 images</div>
-                                    <div data-radio-value="sync25">Sync 25 images</div>
-                                    <div data-radio-value="sync50">Sync 50 images</div>
-                                </div>
-                                <p>Sync Meta Data ?</p>
-
-                                <div wix-model="imageMeta" wix-ctrl="Checkbox:{ postLabel:'Image Meta'}"></div>
-                                <div wix-model="imageAlt" wix-ctrl="Checkbox:{ postLabel:'Image Alt'}"></div>
-                                <div wix-model="imageLink" wix-ctrl="Checkbox:{ postLabel:'Image Link'}"></div>
-                            </div>
-                        </div>
-
-
-
-                        <div class="acc-pane">
-                            <h3>Buttons</h3>
-                            <div class="acc-content btn-demo">
-                                <section>
-                                    <button class="submit uilib-btn connect">Connect account</button>
-                                    <button class="submit uilib-btn btn-secondary">Connect account</button>
-                                    <button class="submit uilib-btn btn-upgrade">Upgrade</button>
-                                    <button class="submit uilib-btn btn-black-text">Connect account</button>
-                                </section>
-                                <section>
-                                    <button class="submit uilib-btn btn-purple">Upgrade</button>
-                                    <button class="submit uilib-btn btn-green">Connect account</button>
-                                    <button class="submit uilib-btn disabled">Connect account</button>
-                                    <button class="submit uilib-btn btn-small">Connect account</button>
-                                    <button class="submit uilib-btn btn-large">Connect account</button>
-                                </section>
-
-                                <div wix-model="adsSize" wix-ctrl="ButtonGroup">
-                                    <button value="mini">Mini</button>
-                                    <button value="medium">Medium</button>
-                                    <button value="large">Large</button>
-                                </div>
-
-                                <div wix-model="adsSize" wix-ctrl="ToggleButtonGroup">
-                                    <button value="mini">Mini</button>
-                                    <button value="medium">Medium</button>
-                                    <button value="large">Large</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="demo-container">
+                    <iframe src="../settings.html?viewMode=standalone" frameborder="0" scrolling="no" allowTransparency="true" width="100%" height="100%"></iframe>
                 </div>
                 <footer class="uilib-footer">
                     <div class="support pull-right">
                         Have a question? Please contact us at: <a href="mailto:support@company.com">support@company.com</a>
                     </div>
                 </footer>
-
-
             </div>
         </div>
 
@@ -267,14 +132,14 @@ An accordion is divided to a vertical set of panes. By default only a single pan
 <h1 id="buttongroup">ButtonGroup</h1>
 <p>Button Group component, enables selection of multiple options through a group of horizontally ordered buttons</p>
 <h3 id="example">Example</h3>
-<div wix-ctrl="ButtonGroup">
+<div wix-model="multiSize" wix-ctrl="ButtonGroup">
     <button value="mini">Mini</button>
     <button value="medium">Medium</button>
     <button value="large">Large</button>
 </div>
 
 <h3 id="markup">Markup</h3>
-<pre><code class="lang-html">&lt;div wix-ctrl=&quot;ButtonGroup&quot;&gt;
+<pre><code class="lang-html">&lt;div wix-model=&quot;multiSize&quot; wix-ctrl=&quot;ButtonGroup&quot;&gt;
     &lt;button value=&quot;mini&quot;&gt;Mini&lt;/button&gt;
     &lt;button value=&quot;medium&quot;&gt;Medium&lt;/button&gt;
     &lt;button value=&quot;large&quot;&gt;Large&lt;/button&gt;
@@ -291,14 +156,14 @@ An accordion is divided to a vertical set of panes. By default only a single pan
 <h1 id="togglebuttongroup">ToggleButtonGroup</h1>
 <p>Toggle Button Group component, enables selection of multiple options through a group of horizontally ordered toggle buttons</p>
 <h3 id="example">Example</h3>
-<div wix-ctrl="ToggleButtonGroup">
+<div wix-model="size" wix-ctrl="ToggleButtonGroup">
     <button value="mini">Mini</button>
     <button value="medium">Medium</button>
     <button value="large">Large</button>
 </div>
 
 <h3 id="markup">Markup</h3>
-<pre><code class="lang-html">&lt;div wix-ctrl=&quot;ToggleButtonGroup&quot;&gt;
+<pre><code class="lang-html">&lt;div wix-model=&quot;size&quot; wix-ctrl=&quot;ToggleButtonGroup&quot;&gt;
     &lt;button value=&quot;mini&quot;&gt;Mini&lt;/button&gt;
     &lt;button value=&quot;medium&quot;&gt;Medium&lt;/button&gt;
     &lt;button value=&quot;large&quot;&gt;Large&lt;/button&gt;
@@ -314,12 +179,12 @@ An accordion is divided to a vertical set of panes. By default only a single pan
 <h1 id="checkbox">Checkbox</h1>
 <p>Checkbox component, mimic native HTML checkbox by applying Wix style</p>
 <h3 id="example">Example</h3>
-<div wix-ctrl="Checkbox" wix-options="{preLabel:'Check me...', checked:true}"></div>
-<div wix-ctrl="Checkbox"></div>
+<div wix-model="preChecked" wix-ctrl="Checkbox" wix-options="{preLabel:'Check me...', checked:true}"></div>
+<div wix-model="checkMe" wix-ctrl="Checkbox"></div>
 
 <h3 id="markup">Markup</h3>
-<pre><code class="lang-html">&lt;div wix-ctrl=&quot;Checkbox&quot; wix-options=&quot;{preLabel:&#39;Check me...&#39;, checked:true}&quot;&gt;&lt;/div&gt;
-&lt;div wix-ctrl=&quot;Checkbox&quot;&gt;&lt;/div&gt;
+<pre><code class="lang-html">&lt;div wix-model=&quot;preChecked&quot; wix-ctrl=&quot;Checkbox&quot; wix-options=&quot;{preLabel:&#39;Check me...&#39;, checked:true}&quot;&gt;&lt;/div&gt;
+&lt;div wix-model=&quot;checkMe&quot; wix-ctrl=&quot;Checkbox&quot;&gt;&lt;/div&gt;
 </code></pre>
 <h3 id="options">Options</h3>
 <table class="options-table"><tr><th class="tb-name">Name</th><th class="tb-default">Deafult</th><th class="tb-desc">Descrition</th></tr><tr><td>checked</td><td>false</td><td></td></tr>
@@ -332,11 +197,12 @@ An accordion is divided to a vertical set of panes. By default only a single pan
 <div data-scroll-target id="ColorPicker-entry" class="cmp-plugin-decs-entry">
 <h1 id="colorpicker">ColorPicker</h1>
 <p>Color Picker component, provide Wix style color selection with a 5x5 grid palette. 5 main colors in the middle plus two brighter colors and two darker colors in each direction. In addition a custom style selector is available</p>
+<p><strong>Site parameter, the selected value will be saved inside the Wix site</strong></p>
 <h3 id="example">Example</h3>
-<div wix-ctrl="ColorPicker" wix-options="{startWithColor: 'color-3'}"></div>
+<div wix-param="bgColor" wix-ctrl="ColorPicker" wix-options="{startWithColor: 'color-3'}"></div>
 
 <h3 id="markup">Markup</h3>
-<pre><code class="lang-html">&lt;div wix-ctrl=&quot;ColorPicker&quot; wix-options=&quot;{startWithColor: &#39;color-3&#39;}&quot;&gt;&lt;/div&gt;
+<pre><code class="lang-html">&lt;div wix-param=&quot;bgColor&quot; wix-ctrl=&quot;ColorPicker&quot; wix-options=&quot;{startWithColor: &#39;color-3&#39;}&quot;&gt;&lt;/div&gt;
 </code></pre>
 <h3 id="options">Options</h3>
 <table class="options-table"><tr><th class="tb-name">Name</th><th class="tb-default">Deafult</th><th class="tb-desc">Descrition</th></tr><tr><td>startWithColor</td><td>&quot;#897185&quot;</td><td>initial color to show</td></tr></table>
@@ -348,10 +214,10 @@ An accordion is divided to a vertical set of panes. By default only a single pan
 <h1 id="colorpickerwithopacity">ColorPickerWithOpacity</h1>
 <p>Color Picker with opacity control component, provide Wix style color selection with a 5x5 grid palette. 5 main colors in the middle plus two brighter colors and two darker colors in each direction. In addition a custom style selector is available</p>
 <h3 id="example">Example</h3>
-<div wix-ctrl="ColorPickerWithOpacity" wix-options="{startWithColor: 'color-3'}"></div>
+<div wix-param="colorWOpacity" wix-ctrl="ColorPickerWithOpacity" wix-options="{startWithColor: 'color-3'}"></div>
 
 <h3 id="markup">Markup</h3>
-<pre><code class="lang-html">&lt;div wix-ctrl=&quot;ColorPickerWithOpacity&quot; wix-options=&quot;{startWithColor: &#39;color-3&#39;}&quot;&gt;&lt;/div&gt;
+<pre><code class="lang-html">&lt;div wix-param=&quot;colorWOpacity&quot; wix-ctrl=&quot;ColorPickerWithOpacity&quot; wix-options=&quot;{startWithColor: &#39;color-3&#39;}&quot;&gt;&lt;/div&gt;
 </code></pre>
 <h3 id="options">Options</h3>
 <table class="options-table"><tr><th class="tb-name">Name</th><th class="tb-default">Deafult</th><th class="tb-desc">Descrition</th></tr><tr><td>startWithColor</td><td>&quot;#897185&quot;</td><td>initial color to show</td></tr></table>
@@ -363,14 +229,14 @@ An accordion is divided to a vertical set of panes. By default only a single pan
 <h1 id="dropdown">Dropdown</h1>
 <p>Dropdown component, expandable selection list with support for max height/scrollabr.</p>
 <h3 id="example">Example</h3>
-<div wix-ctrl="Dropdown">
+<div wix-model="image" wix-ctrl="Dropdown">
     <div value="show">Show Images</div>
         <div value="hide">Hide Images</div>
     <div value="showhover">Show Images on Hover</div>
 </div>
 
 <h3 id="markup">Markup</h3>
-<pre><code class="lang-html">&lt;div wix-ctrl=&quot;Dropdown&quot;&gt;
+<pre><code class="lang-html">&lt;div wix-model=&quot;image&quot; wix-ctrl=&quot;Dropdown&quot;&gt;
     &lt;div value=&quot;show&quot;&gt;Show Images&lt;/div&gt;
         &lt;div value=&quot;hide&quot;&gt;Hide Images&lt;/div&gt;
     &lt;div value=&quot;showhover&quot;&gt;Show Images on Hover&lt;/div&gt;
@@ -388,7 +254,7 @@ An accordion is divided to a vertical set of panes. By default only a single pan
 
 <div data-scroll-target id="FixedPositionControl-entry" class="cmp-plugin-decs-entry">
 <h1 id="fixedpositioncontrol">FixedPositionControl</h1>
-<p>FixedPositionControl component, enables positioning of a Fixed Position widget in the Wix editor.</p>
+<p>FixedPositionControl component, enables positioning of a Fixed Position widget in the Wix editor. This control is already synchronized with the Wix site there&#39;s no need for wis-model or wix-param</p>
 <h3 id="example">Example</h3>
 <div wix-ctrl="FixedPositionControl"></div>
 
@@ -405,11 +271,12 @@ An accordion is divided to a vertical set of panes. By default only a single pan
 <div data-scroll-target id="FontPicker-entry" class="cmp-plugin-decs-entry">
 <h1 id="fontpicker">FontPicker</h1>
 <p>FontPicker component, control the selection of a font family for a text field</p>
+<p><strong>Site parameter, the selected value will be saved inside the Wix site</strong></p>
 <h3 id="example">Example</h3>
-<div wix-ctrl="FontPicker"></div>
+<div wix-param="fontFamily" wix-ctrl="FontPicker"></div>
 
 <h3 id="markup">Markup</h3>
-<pre><code class="lang-html">    &lt;div wix-ctrl=&quot;FontPicker&quot;&gt;&lt;/div&gt;
+<pre><code class="lang-html">    &lt;div wix-param=&quot;fontFamily&quot; wix-ctrl=&quot;FontPicker&quot;&gt;&lt;/div&gt;
 </code></pre>
 <h3 id="options">Options</h3>
 <table class="options-table"><tr><th class="tb-name">Name</th><th class="tb-default">Deafult</th><th class="tb-desc">Descrition</th></tr><tr><td>value</td><td>0</td><td>selected font family index in the list of available fonts</td></tr></table>
@@ -428,11 +295,12 @@ An accordion is divided to a vertical set of panes. By default only a single pan
 <li>italic</li>
 <li>underline</li>
 </ul>
+<p><strong>Site parameter, the selected value will be saved inside the Wix site</strong></p>
 <h3 id="example">Example</h3>
-<div wix-ctrl="FontStylePicker"></div>
+<div wix-param="fontStyle" wix-ctrl="FontStylePicker"></div>
 
 <h3 id="markup">Markup</h3>
-<pre><code class="lang-html">&lt;div wix-ctrl=&quot;FontStylePicker&quot;&gt;&lt;/div&gt;
+<pre><code class="lang-html">&lt;div wix-param=&quot;fontStyle&quot; wix-ctrl=&quot;FontStylePicker&quot;&gt;&lt;/div&gt;
 </code></pre>
 <h3 id="options">Options</h3>
 <table class="options-table"><tr><th class="tb-name">Name</th><th class="tb-default">Deafult</th><th class="tb-desc">Descrition</th></tr><tr><td>value</td><td>0</td><td>selected font family index in the list of available fonts</td></tr></table>
@@ -442,12 +310,12 @@ An accordion is divided to a vertical set of panes. By default only a single pan
 
 <div data-scroll-target id="Input-entry" class="cmp-plugin-decs-entry">
 <h1 id="input">Input</h1>
-<p>Input component</p>
+<p>Input component, mimic native HTML input element with Wix style and behaviour</p>
 <h3 id="example">Example</h3>
-<div wix-ctrl="Input"></div>
+<div wix-model="myText" wix-ctrl="Input"></div>
 
 <h3 id="markup">Markup</h3>
-<pre><code class="lang-html">&lt;div wix-ctrl=&quot;Input&quot;&gt;&lt;/div&gt;
+<pre><code class="lang-html">&lt;div wix-model=&quot;myText&quot; wix-ctrl=&quot;Input&quot;&gt;&lt;/div&gt;
 </code></pre>
 <h3 id="options">Options</h3>
 <table class="options-table"><tr><th class="tb-name">Name</th><th class="tb-default">Deafult</th><th class="tb-desc">Descrition</th></tr><tr><td>placeholder</td><td>&#39;&#39;</td><td>text for the input placeholder</td></tr>
@@ -460,10 +328,10 @@ An accordion is divided to a vertical set of panes. By default only a single pan
 <h1 id="languagepicker">LanguagePicker</h1>
 <p>Language Picker component, expandable dropdown list of languages. Controls the selection of a language supported by the app</p>
 <h3 id="example">Example</h3>
-<div wix-ctrl="LanguagePicker"></div>
+<div wix-model="lang" wix-ctrl="LanguagePicker"></div>
 
 <h3 id="markup">Markup</h3>
-<pre><code class="lang-html">&lt;div wix-ctrl=&quot;LanguagePicker&quot;&gt;&lt;/div&gt;
+<pre><code class="lang-html">&lt;div wix-model=&quot;lang&quot; wix-ctrl=&quot;LanguagePicker&quot;&gt;&lt;/div&gt;
 </code></pre>
 <h3 id="options">Options</h3>
 <table class="options-table"><tr><th class="tb-name">Name</th><th class="tb-default">Deafult</th><th class="tb-desc">Descrition</th></tr><tr><td>languages</td><td>[&#39;En&#39;, &#39;De&#39;, &#39;Es&#39;, &#39;Fr&#39;, &#39;It&#39;, &#39;Po&#39;, &#39;Pt&#39;, &#39;Ru&#39;, &#39;Ja&#39;, &#39;Ko&#39;, &#39;Tr&#39;]</td><td>a list of languages to choose from</td></tr>
@@ -592,12 +460,12 @@ An accordion is divided to a vertical set of panes. By default only a single pan
 
 <div data-scroll-target id="Slider-entry" class="cmp-plugin-decs-entry">
 <h1 id="slider">Slider</h1>
-<p>Slider component, enables selection from linear range of numeric values through a draggable knob</p>
+<p>Slider component, enables selection from linear range of numeric values through a draggable knob. The Slider allows to set the selected range and text labels before and after.</p>
 <h3 id="example">Example</h3>
-<div  wix-ctrl="Slider" wix=options=="{{ maxValue:500, preLabel:'zero', postLabel:'five hundreds'}"></div>
+<div  wix-model="myValue" wix-ctrl="Slider" wix=options=="{{ maxValue:500, preLabel:'zero', postLabel:'five hundreds'}"></div>
 
 <h3 id="markup">Markup</h3>
-<pre><code class="lang-html">&lt;div  wix-ctrl=&quot;Slider&quot; wix=options==&quot;{{ maxValue:500, preLabel:&#39;zero&#39;, postLabel:&#39;five hundreds&#39;}&quot;&gt;&lt;/div&gt;
+<pre><code class="lang-html">&lt;div  wix-model=&quot;myValue&quot; wix-ctrl=&quot;Slider&quot; wix=options==&quot;{{ maxValue:500, preLabel:&#39;zero&#39;, postLabel:&#39;five hundreds&#39;}&quot;&gt;&lt;/div&gt;
 </code></pre>
 <h3 id="options">Options</h3>
 <table class="options-table"><tr><th class="tb-name">Name</th><th class="tb-default">Deafult</th><th class="tb-desc">Descrition</th></tr><tr><td>minValue</td><td>0</td><td>minimum value on the slider</td></tr>
@@ -613,12 +481,12 @@ An accordion is divided to a vertical set of panes. By default only a single pan
 
 <div data-scroll-target id="Spinner-entry" class="cmp-plugin-decs-entry">
 <h1 id="spinner">Spinner</h1>
-<p>Spinner component, enables selection from linear range of numeric values one step at a time</p>
+<p>Spinner component, enables selection from linear range of numeric values one step at a time. The Spinner allows to set the selected range and the increment/decrement step.</p>
 <h3 id="example">Example</h3>
-<div wix-ctrl="Spinner" wix-options="{ maxValue:500 }"></div>
+<div wix-model="myInt" wix-ctrl="Spinner" wix-options="{ maxValue:500 }"></div>
 
 <h3 id="markup">Markup</h3>
-<pre><code class="lang-html">&lt;div wix-ctrl=&quot;Spinner&quot; wix-options=&quot;{ maxValue:500 }&quot;&gt;&lt;/div&gt;
+<pre><code class="lang-html">&lt;div wix-model=&quot;myInt&quot; wix-ctrl=&quot;Spinner&quot; wix-options=&quot;{ maxValue:500 }&quot;&gt;&lt;/div&gt;
 </code></pre>
 <h3 id="options">Options</h3>
 <table class="options-table"><tr><th class="tb-name">Name</th><th class="tb-default">Deafult</th><th class="tb-desc">Descrition</th></tr><tr><td>minValue</td><td>0</td><td>minimum value on the spinner</td></tr>

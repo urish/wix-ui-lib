@@ -17,7 +17,7 @@ describe('LanguagePicker', function () {
     });
 
     afterEach(function(){
-        Wix.UI.destroyPlugin(element);
+        Wix.UI.destroy(element);
     });
 
     it('should apply wix markup to given wix-ctrl', function(){

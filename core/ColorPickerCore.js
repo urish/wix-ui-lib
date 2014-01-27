@@ -919,7 +919,7 @@ var createColorBox = (function (){
 					cb.colorBox.appendChild(this.arrow);
 				},
 				onposition: function(){}	
-			}).getPlugin();
+			}).getCtrl();
 			
 			cb.popup.setRelativeElement(cb.colorBox)
 			

@@ -8,8 +8,8 @@
 	exports.UI = {
 		initialize         : initialize,
 		initializePlugin   : initializePlugin,
-		createPlugin       : createPlugin,
-        destroyPlugin      : destroyPlugin,
+		create       	   : createPlugin,
+        destroy            : destroyPlugin,
 		initStyleMigration : initStyleMigration,
 		set                : model.setAndReport,
 		get                : model.get,
@@ -26,6 +26,7 @@
 	
 	function createPlugin(setup) {
 		var $el = $('<div>');
+		setup.id && $el.prop('id', setup.id);
 		$el.attr('wix-ctrl', setup.ctrl);
 		setup.model && $el.attr('wix-model', setup.model);
 		setup.param && $el.attr('wix-param', setup.param);

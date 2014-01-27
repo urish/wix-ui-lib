@@ -67,26 +67,26 @@ jQuery.fn.definePlugin('FontStylePicker', function () {
 			//this.popup.open();			
 		},
 		createFontSizePicker: function(){
-			this.fontSizePicker = this.UI().createPlugin({
+			this.fontSizePicker = this.UI().create({
 				ctrl: 'Spinner',
 				options: {
 					size : 'medium'
 				},
 				appendTo: this.$el
-			}).getPlugin();
+			}).getCtrl();
 		},
 		createTextStylePicker: function(){
-			this.textStylePicker = this.UI().createPlugin({
+			this.textStylePicker = this.UI().create({
 				ctrl: 'ToggleButtonGroup',
 				html: textStyleHtml,
 				appendTo: this.$el
-			}).getPlugin();
+			}).getCtrl();
 		},
 		createFontPicker: function(){
-			this.fontPicker = this.UI().createPlugin({
+			this.fontPicker = this.UI().create({
 				ctrl: 'FontPicker',
 				appendTo: this.$el
-			}).getPlugin();
+			}).getCtrl();
 		},
 		createPresetPicker: function(){
 			var html = '';
@@ -97,7 +97,7 @@ jQuery.fn.definePlugin('FontStylePicker', function () {
 			});
 			html += '<div value="Custom">Custom</div>';
 
-			this.presetSelectPicker = this.UI().createPlugin({
+			this.presetSelectPicker = this.UI().create({
 				ctrl: 'Dropdown',
 				appendTo: this.$el,
 				html: html,
@@ -109,12 +109,12 @@ jQuery.fn.definePlugin('FontStylePicker', function () {
 						return $el;
 					}
 				}
-			}).getPlugin();		
+			}).getCtrl();		
 			
 		},
 		createPopup: function(){
 			var that = this;
-			this.popup = this.UI().createPlugin({
+			this.popup = this.UI().create({
 				ctrl: 'Popup',
 				options: {
 					appendTo: this.$el,
@@ -139,7 +139,7 @@ jQuery.fn.definePlugin('FontStylePicker', function () {
 					},
 					onposition: function(){}
 				}
-			}).getPlugin();
+			}).getCtrl();
 			
 			this.popup.setRelativeElement(that.$el.find('.box-like-drop')[0]);
 		

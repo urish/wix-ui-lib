@@ -33,7 +33,7 @@ describe('ColorPickers', function () {
 			expect(color).toBe('rgb(0,0,0)');
 			expect(color).toBe(color2);
 			
-			Wix.UI.destroyPlugin($el, true);
+			Wix.UI.destroy($el, true);
 			
 		});
 		
@@ -59,7 +59,7 @@ describe('ColorPickers', function () {
 				var color = Wix.UI.Styles.get('color');
 				expect(color.cssColor).toBe('#666');
 				expect(color.color.reference).toBe('color-2');
-				Wix.UI.destroyPlugin($el, true);
+				Wix.UI.destroy($el, true);
 				done();
 			},4500)
 			
@@ -87,7 +87,7 @@ describe('ColorPickers', function () {
 			expect(color).toBe('rgba(0,0,0,1)');
 			expect(color).toBe(color2);
 
-			Wix.UI.destroyPlugin($el, true);
+			Wix.UI.destroy($el, true);
 			
 		});
 		
@@ -109,7 +109,7 @@ describe('ColorPickers', function () {
 			expect(color).toBe('rgba(0,0,0,0.5)');
 			expect(color).toBe(color2);
 			
-			Wix.UI.destroyPlugin($el, true);
+			Wix.UI.destroy($el, true);
 			
 		});
 		
@@ -130,7 +130,7 @@ describe('ColorPickers', function () {
 			expect(color).toBe('rgba(1,2,3,0.4)');
 			expect(color).toBe(color2);
 		
-			Wix.UI.destroyPlugin($el, true);
+			Wix.UI.destroy($el, true);
 			
 		});
 			
@@ -152,7 +152,7 @@ describe('ColorPickers', function () {
 			expect(color).toBe('rgba(1,2,3,1)');
 			expect(color).toBe(color2);
 			
-			Wix.UI.destroyPlugin($el, true);
+			Wix.UI.destroy($el, true);
 			
 		});
 	});

@@ -4,7 +4,7 @@ jQuery.fn.definePlugin('ToggleButtonGroup', function($){
 	return {
 		init: function(){
 			this.options.mode = 'toggle';
-			this.buttonGroup = this.$el.ButtonGroup(this.options).getPlugin();
+			this.buttonGroup = this.$el.ButtonGroup(this.options).getCtrl();
 		},
 		getDefaults: function(){
 			return {

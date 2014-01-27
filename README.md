@@ -185,7 +185,7 @@ In this way you need to subscribe to changes and set values directly on the jQue
 $('#myElement').PluginName(options);
 
 //init Wix.UI bindings on an Wix ready element
-var $el = $('<div wix-ctrl="ColorPicker" wix-model="myColor" wix-options="{startWithColor:'#ffffff'}">');
+var $el = $('<div wix-ctrl="ColorPicker" wix-model="myColor" wix-options="{startWithColor:\'#ffffff\'}">');
 Wix.UI.initializePlugin($el);
 
 //init Wix.UI bindings on an Wix ready element and override the options
@@ -227,9 +227,9 @@ In order to set/get component values, you can add a `wix-model` attribute to the
 **wix-model** attribute sets a key to access the component value from Wix.UI and subscribe to change events.
 
 Then you will be able to use the **Wix.UI.set(key, value)** or **Wix.UI.get(key)** to update the component state and retrieve the component value.
-    
-    <div wix-model="myKey" wix-ctrl="ComponentName" wix-options="{option: 'value'}"></div>
-
+```html    
+<div wix-model="myKey" wix-ctrl="ComponentName" wix-options="{option: 'value'}"></div>
+```
 Components that has `wix-model` attribute can be initialized with default values or values that retrieved from your server.
 ```html
 ...

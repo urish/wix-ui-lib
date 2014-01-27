@@ -29,6 +29,29 @@ module.exports = function (grunt) {
 			css: {
 				src: ['stylesheets/**/*.css', 'components/**/*.css'],
 				dest: dev + '/ui-lib.css'
+			},
+
+
+			docsJs: {
+				src: [
+					'docs/google-code-prettify/prettify.js',
+					'docs/DocsApp.js',
+					'docs/Utils.js',
+					'docs/ScrollInterations.js',
+					'docs/Templates.js',
+					'docs/PluginDocsData.js'
+				],
+				dest: dev + '/docs/docs.js',
+				separator: ";"
+			},
+
+			docsCss: {
+				src: [
+					'docs/google-code-prettify/sunburst.css',
+					'docs/index.css',
+					'docs/DocsApp.css'
+				],
+				dest: dev + '/docs/docs.css'
 			}
 		},
 
@@ -38,7 +61,8 @@ module.exports = function (grunt) {
 			},
 			compress: {
 				files: {
-					"dist/ui-lib.min.css" : "<%= concat.css.dest %>"
+					"dist/ui-lib.min.css" : "<%= concat.css.dest %>",
+					"dist/docs/docs.min.css" : "<%= concat.docsCss.dest %>"
 				}
 			}
 		},
@@ -50,6 +74,10 @@ module.exports = function (grunt) {
 			js: {
 				src: '<%= concat.js.dest %>',
 				dest: dist + '/ui-lib.min.js'
+			},
+			docsJs: {
+				src: '<%= concat.docsJs.dest %>',
+				dest: dist + '/docs/docs.min.js'
 			}
 		},
 
@@ -194,15 +222,33 @@ module.exports = function (grunt) {
 				dest: dev + '/docs/index.html',
 				context: {
 					js: '../ui-lib.js',
-					css: "../ui-lib.css"
+					css: "../ui-lib.css",
+					docs: {
+						js: 'docs.js',
+						css: 'docs.css',
+						settings: '../settings.html?viewMode=standalone'
+					}
 				}
 			},
 			dist: {
 				dest: dist + '/docs/index.html',
 				context: {
-					js: '../ui-lib.min.js',
-					css: '../ui-lib.min.css'
+					js: '/dist/ui-lib.min.js',
+					css: '/dist/ui-lib.min.css',
+					docs: {
+						js: '/dist/docs/docs.min.js',
+						css: '/dist/docs/docs.min.css',
+						settings: '/dist/settings.html?viewMode=standalone'
+					}
 				}
+			}
+		},
+
+		devServer: {
+			base: "dev",
+			dist: "dist",
+			web: {
+				port: 8000
 			}
 		}
 	});
@@ -213,7 +259,7 @@ module.exports = function (grunt) {
 	grunt.loadTasks('tasks');
 
 	grunt.registerTask('default', ['clean:dev', 'concat', 'settings:dev']);
-	grunt.registerTask('dev', ['clean:dev', 'concat', 'copy:devDocs', 'settings:dev', 'docs:dev', 'mdDocs:dev', 'watch']);
+	grunt.registerTask('dev', ['devServer', 'clean:dev', 'concat', 'copy:devDocs', 'settings:dev', 'docs:dev', 'mdDocs:dev', 'watch']);
 	grunt.registerTask('dist', ['clean:dist', 'concat', 'uglify', 'cssmin', 'copy:distImages', 'copy:distDocs', 'settings:dist', 'docs:dist', 'mdDocs:dist']);
 
 	grunt.registerTask('lint', ['jshint']);

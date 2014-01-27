@@ -4,9 +4,7 @@
     <title>Wix UI-Lib</title>
 	
     <link rel="stylesheet" href="<%= css %>"/>
-	<link rel="stylesheet" href="google-code-prettify/sunburst.css"/>
-    <link rel="stylesheet" href="index.css"/>
-    <link rel="stylesheet" href="DocsApp.css"/>
+    <link rel="stylesheet" href="<%= docs.css %>"/>
 	
 		
 	<!-- jQuery Dependency -->
@@ -55,7 +53,7 @@
             <div class="container">
                 <strong class="title">App Name</strong>
                 <div class="demo-container">
-                    <iframe src="../settings.html?viewMode=standalone" frameborder="0" scrolling="no" allowTransparency="true" width="100%" height="100%"></iframe>
+                    <iframe src="<%= docs.settings %>" frameborder="0" scrolling="no" allowTransparency="true" width="100%" height="100%"></iframe>
                 </div>
                 <footer class="uilib-footer">
                     <div class="support pull-right">
@@ -100,24 +98,15 @@
 
 
 <script type="text/javascript">
-
     $(document).ready(function () {
         DocsApp.init();
         prettyPrint();
         Wix.UI.initialize({});
     });
-
 </script>
 
 
-<script type="text/javascript" src="google-code-prettify/prettify.js"></script>
-
-<script src="DocsApp.js"></script>
-<script src="Utils.js"></script>
-<script src="ScrollInterations.js"></script>
-<script src="Templates.js"></script>
-<script src="PluginDocsData.js"></script>
-
+<script type="text/javascript" src="<%= docs.js %>"></script>
 
 </body>
 </html>

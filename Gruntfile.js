@@ -97,8 +97,9 @@ module.exports = function (grunt) {
 			docs: {
 				files: ["<%= docs.template %>",
 					"<%= concat.docsJs.src %>",
+					"<%= concat.docsCss.src %>",
 					"<%= mdDocs.dev.options.files %>"],
-				tasks: ['concat:docsJs', 'copy:devDocs', 'docs:dev', 'mdDocs:dev']
+				tasks: ['concat:docsJs', 'concat:docsCss', 'copy:devDocs', 'docs:dev', 'mdDocs:dev']
 			}
 		},
 

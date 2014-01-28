@@ -23,6 +23,8 @@ jQuery.fn.definePlugin('FixedPositionControl', function ($) {
 			} else {
 				this._init(defaults, options);
 			}
+			
+			
 		},
 		_init: function (defaults, options) {
 			_setUserEvents(defaults, options);
@@ -61,14 +63,25 @@ jQuery.fn.definePlugin('FixedPositionControl', function ($) {
 		bindEvents: function () {},
 		
 		createDropDown: function(options){
-			options.visibleRows = this.options.placements.length;
-
-			this.$dropdown = this.$el.find(".glued-dropdown")
+			var plugin = this;
+			var $div = $('<div>');
+			var $options = this.$el.find(".glued-dropdown")
 				.html(this.dropdownHTML())
-				.find('select')
-				.msDropDown(options);
+				.find('select').replaceWith($div).find('option');				
+			
+			$options.attr('data-icon', 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');		
+			
+			if(this.options.bindToWidget){
+				this.$el.on('Dropdown.change', function(evt, data){
+					updateSliderPlacement(plugin.state, plugin.slider, data.value);
+					setPlacement(plugin.state);			
+				});
+			}
 
-			return this.$dropdown.data('dd');
+			options.width = 180;
+			options.value = plugin.state.placement;
+			return $div.append($options).Dropdown(options).getCtrl();
+
 		},
 
 		createControlHTML: function () {

@@ -19,4 +19,4 @@ Font Style Picker component, control the selection of all relevant properties fo
 
 ### Options
 
-* value; 0; selected font family index in the list of available fonts
+* value; "Body-L"; selected font family index in the list of available fonts

@@ -43,7 +43,7 @@
 			this.isOpen = false;
 			this.isActive = false;
 			this.markup();
-			this.setValue(this.options.selected);
+			this.setValue(this.options.value);
 			this.bindEvents();
 			this.hideOptions(0);
 		},

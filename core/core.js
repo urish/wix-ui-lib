@@ -65,7 +65,7 @@
 			try {
 				initializePlugin(elements[i]);
 			} catch (err) {
-				console.log && console.log('Plugin Initialization Error: ' + err.stack, elements[i]);
+				console.log && console.log(err.stack.replace('Error:', 'Plugin Initialization Error:'), elements[i]);
 			}
 		}
 

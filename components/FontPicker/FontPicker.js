@@ -6,6 +6,7 @@ jQuery.fn.definePlugin('FontPicker', function () {
 			this.isParamMode = this.getParamKey();//this.$el.attr('wix-param') || this.$el.attr('data-wix-param');
 			this.markup();
 			this.bindEvents();
+			this.setValue(this.options.value);
 		},
 		markup : function () {
 			appendSpriteMap(this.options.spriteUrl, this.$el);
@@ -29,7 +30,7 @@ jQuery.fn.definePlugin('FontPicker', function () {
 		},
 		getDefaults : function () {
 			return {
-				value: undefined,
+				value: 'Arial',
 				spriteUrl : getFontsSpriteUrl()
 			};
 		},
@@ -37,7 +38,7 @@ jQuery.fn.definePlugin('FontPicker', function () {
 			return this.dropdown.getFullValue();
 		},
 		setValue : function (value) {
-			if(value.fontParam){
+			if(value && value.fontParam){
 				value = value.family || value.value;
 			}
 			return this.dropdown.setValue(value);

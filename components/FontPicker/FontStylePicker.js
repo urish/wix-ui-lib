@@ -9,7 +9,7 @@ jQuery.fn.definePlugin('FontStylePicker', function () {
 		textStyleClass: 'font-style-picker-text-style' 
 	};
 
-    var boxLikeDrop = '<div class="box-like-drop"><span class="box-like-drop-content">Test</span><span class="box-like-arrow box-like-arrow-down"></span></div>';
+    var boxLikeDrop = '<div class="box-like-drop"><span class="box-like-drop-content">Font Picker</span><span class="box-like-arrow box-like-arrow-down"></span></div>';
 
 
     var contentMarkup = '<div class="uilib-divider-row"><span class="font-picker-label">Style:</span><span class="style-place-holder"></span></div>';
@@ -36,7 +36,7 @@ jQuery.fn.definePlugin('FontStylePicker', function () {
 		},
 		getDefaults : function () {
 			return {
-				value: {preset:'Body-L'}
+				value: 'Body-L'
 			};
 		},
 		markup : function () {
@@ -280,14 +280,31 @@ jQuery.fn.definePlugin('FontStylePicker', function () {
                 }
             });
         },
+		validateValue: function(value){
+			if(value && typeof value === 'object'){
+				var isSizeValid = typeof value.size === 'number' || value.size instanceof Number;
+				var isStyleValid = value.style && typeof value.style === 'object';
+				var isFontFamilyValid = value.family && typeof value.family === 'string';
+				var isPresetValid = value.preset && typeof value.preset === 'string';
+				if(isSizeValid && isStyleValid && isFontFamilyValid && isPresetValid){
+					return true;
+				}
+			}
+			return false;
+		},
         setValueWithKnownPreset:function(value){
-            this.fontSizePicker.setValue(value.size);
-            this.textStylePicker.setValue(value.style);
-            this.fontPicker.setValue(value.family);
-            this.presetSelectPicker.setValue(value.preset);
-            this.updateText();
+			if(this.validateValue(value)){
+				this.fontSizePicker.setValue(value.size);
+				this.textStylePicker.setValue(value.style);
+				this.fontPicker.setValue(value.family);
+				this.presetSelectPicker.setValue(value.preset);
+				this.updateText();
+			} else {
+				throw new Error('Unknown Preset ' + JSON.stringify(value,null,4));
+			}
         },
 		setValue : function (value) {
+			if(typeof value === 'string'){ value = {preset: value}; }
             var preset = this.getTextPreset(value.preset);
             preset ? this.setValueFromPreset(value.preset, preset) : this.setValueWithKnownPreset(value);
 		}

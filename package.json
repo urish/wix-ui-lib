@@ -35,7 +35,7 @@
     "node": "0.10.x"
   },
   "scripts": {
-    "postinstall": "./node_modules/grunt-cli/bin/grunt"
+    "postinstall": "./node_modules/grunt-cli/bin/grunt dist"
   },
   "author": "",
   "license": "MIT",

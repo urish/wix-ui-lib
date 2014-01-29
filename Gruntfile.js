@@ -254,6 +254,7 @@ module.exports = function (grunt) {
 				files: [{
 					expand: true,
 					src: 'docs/md/*.md',
+					dest: dev,
 					ext: '.html'}
 				],
 				options: {
@@ -269,6 +270,7 @@ module.exports = function (grunt) {
 				files: [{
 					expand: true,
 					src: 'docs/md/*.md',
+					dest: dist,
 					ext: '.html'}
 				],
 				options: {

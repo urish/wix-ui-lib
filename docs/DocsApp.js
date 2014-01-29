@@ -22,8 +22,14 @@ var DocsApp = {
 		this.$root.show();
 	},
 	updateClasses:function(){
+		$('.lang-html,.lang-javascript').each(function(){
+			$(this).parents('pre').addClass('prettyprint linenums').css({
+				padding: '5px',
+				borderRadius:'4px'
+			});
+		})
 		this.$docs.find('.content').find('.cmp-plugin-decs-entry').each(function(){			
-			$(this).find('pre').addClass('plugin-markup prettyprint');		
+			$(this).find('pre').addClass('plugin-markup prettyprint linenums');		
 		});		
 	},
 	bindEvents : function () {

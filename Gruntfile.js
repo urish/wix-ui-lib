@@ -1,109 +1,140 @@
 module.exports = function (grunt) {
-
-	// Project configuration.
-	var projectName = 'uiLib';
-	var sourceDirectory = 'src/main/';
-	var buildDirectory = 'build/' + projectName + '/src/main/';
-	var jsSrc = [
-		'core/definePlugin.js',
-		'core/ColorPickerCore.js',
-		'core/ui-lib.js',
-		'components/**/*.js'
-	];
-	var cssSrc = [
-		'stylesheets/buttons.css',
-		'stylesheets/icons.css',
-		'stylesheets/common.css',
-		'stylesheets/settings.css',
-		'stylesheets/header.css',
-
-		'components/Radio/Radio.css',
-		'components/Checkbox/Checkbox.css',
-		'components/Accordion/Accordion.css',
-		'components/Dropdown/Dropdown.css',
-		'components/Popup/Popup.css',
-		'components/Input/Input.css',
-		'components/Spinner/Spinner.css',
-		'components/LanguagePicker/LanguagePicker.css',
-		'components/FontPicker/FontPicker.css',
-		'components/ButtonGroup/ButtonGroup.css',
-		'components/ColorPicker/ColorPicker.css',
-		'components/AdvancedDropdown/css/dd.css',
-		'components/Slider/Slider.css',
-		'components/Tooltip/Tooltip.css',
-		'components/FixedPositionControl/FixedPositionControl.css'];
-
-	var htmlSrc = ['html/settings.html', 'html/index.html', 'docs/index.html'];
-
+	var dev = 'dev';
+	var dist = 'dist';
 
 	grunt.initConfig({
 		pkg : grunt.file.readJSON('./package.json'),
 
-		concat : {
-			options : {
-				separator : ';'
+		clean: {
+			dev: {
+				src: [dev]
 			},
-			dist : {
-				src: jsSrc,
-				dest : 'build/<%= pkg.name %>.all.js',
-				js: {
-					src: jsSrc,
-					dest : 'build/<%= pkg.name %>.all.js'
-				},
-
-				css: {
-					src: cssSrc,
-					dest: 'build/<%= pkg.name %>.all.css'
-				}
+			dist: {
+				src: [dist]
 			}
 		},
 
-		uglify : {
+		concat : {
+			js: {
+				src: [
+					'core/definePlugin.js',
+					'core/ColorPickerCore.js',
+					'core/core.js',
+					'components/**/*.js'
+				],
+				dest: dev + '/ui-lib.js',
+				separator: ";"
+			},
+
+			css: {
+				src: ['stylesheets/**/*.css', 'components/**/*.css'],
+				dest: dev + '/ui-lib.css'
+			},
+
+
+			docsJs: {
+				src: [
+					'docs/google-code-prettify/prettify.js',
+					'docs/DocsApp.js',
+					'docs/Utils.js',
+					'docs/ScrollInterations.js',
+					'docs/Templates.js',
+					'docs/PluginDocsData.js'
+				],
+				dest: dev + '/docs/docs.js',
+				separator: ";"
+			},
+
+			docsCss: {
+				src: [
+					'docs/google-code-prettify/sunburst.css',
+					'docs/index.css',
+					'docs/DocsApp.css'
+				],
+				dest: dev + '/docs/docs.css'
+			}
+		},
+
+		cssmin : {
 			options : {
 				banner : '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
 			},
-			build : {
-				src: jsSrc,
-				dest : 'build/<%= pkg.name %>.min.js'
-			}
-		},
-		cssmin : {
-			add_banner : {
-				options : {
-					banner : '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
-				},
-				files : {
-					'build/<%= pkg.name %>.min.css' : cssSrc
+			compress: {
+				files: {
+					"dist/ui-lib.min.css" : "<%= concat.css.dest %>",
+					"dist/docs/docs.min.css" : "<%= concat.docsCss.dest %>"
 				}
 			}
 		},
+
+		uglify: {
+			options : {
+				banner : '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+			},
+			js: {
+				src: '<%= concat.js.dest %>',
+				dest: dist + '/ui-lib.min.js'
+			},
+			docsJs: {
+				src: '<%= concat.docsJs.dest %>',
+				dest: dist + '/docs/docs.min.js'
+			}
+		},
+
+		watch: {
+			js: {
+				files: ["<%= concat.js.src %>"],
+				tasks: ["concat:js"]
+			},
+			css: {
+				files: ["<%= concat.css.src %>"],
+				tasks: ["concat:css"]
+			},
+			settings: {
+				files: ["<%= settings.template %>"],
+				tasks: ["settings:dev"]
+			},
+			docs: {
+				files: ["<%= docs.template %>",
+					"<%= concat.docsJs.src %>",
+					"<%= concat.docsCss.src %>",
+					"<%= mdDocs.dev.options.files %>"],
+				tasks: ['concat:docsJs', 'concat:docsCss', 'copy:devDocs', 'docs:dev', 'mdDocs:dev']
+			}
+		},
+
 		copy : {
-			main : {
+			devImages : {
 				files : [{
-						expand : true,
-						cwd : 'images',
-						src : ['**'],
-						dest : 'build/images'
-					}, // makes all src relative to cwd
-					{
-						expand: true, flatten: true,src: ['html/*.html'], dest: 'build/', filter: 'isFile'
-					}
-				]
+					expand : true,
+					cwd : 'images',
+					src : ['**'],
+					dest : dev + '/images'
+				}]
 			},
-			dev : {
-				files : [
-					{
-						expand: true, flatten: true,src: ['html/settings.html'], dest: 'build/', filter: 'isFile'
-					}
-				]
-			},
-			docs:{
+			devDocs:{
 				files:[{
 					expand : true,
 					cwd:'docs',
 					src:['**'],
-					dest: 'build/docs'
-				}]				
+					dest: dev + '/docs'
+				}]
+			},
+			distImages : {
+				files : [{
+					expand : true,
+					cwd : 'images',
+					src : ['**'],
+					dest : dist + '/images'
+				}]
+			},
+			distDocs:{
+				files:[{
+					expand : true,
+					cwd:'docs',
+					src:['**'],
+					dest: dist + '/docs'
+				}]
 			}
 		},
 
@@ -155,187 +186,90 @@ module.exports = function (grunt) {
 			}
 		},
 
-		watch: {
-			js: {
-				files: jsSrc,
-				tasks: ["uglify:build"]
-			},
-			css: {
-				files: cssSrc.join('docs/index.css'),
-				tasks: ["cssmin:add_banner"]
-			},
-			html: {
-				files: htmlSrc,
-				tasks: ['copy:dev', 'copy:docs', 'mdDocs']
-			}
-		},
 		mdDocs:{
-			options: {
-				files:['components/**/*.md'],
-				inject: 'build/docs/index.html' 
+			dev: {
+				options: {
+					files:['components/**/*.md'],
+					inject: dev + '/docs/index.html'
+				}
+			},
+			dist: {
+				options: {
+					files:['components/**/*.md'],
+					inject: dist + '/docs/index.html'
+				}
 			}
 		},
-		buildHTML:{
-			options:{
-				settingsHTML:'build/settings.html'
-			}
-		},
-		clean : ['build']
 
+		settings:{
+			template: 'html/template/settings.html',
+			dev: {
+				dest: dev + '/settings.html',
+				context: {
+					js: 'ui-lib.js',
+					css: "ui-lib.css"
+				}
+			},
+			dist: {
+				dest: dist + '/settings.html',
+				context: {
+					js: 'ui-lib.min.js',
+					css: 'ui-lib.min.css'
+				}
+			}
+		},
+
+		docs:{
+			template: 'html/template/docs/index.html',
+			dev: {
+				dest: dev + '/docs/index.html',
+				context: {
+					js: '../ui-lib.js',
+					css: "../ui-lib.css",
+					docs: {
+						js: 'docs.js',
+						css: 'docs.css',
+						settings: '../settings.html?viewMode=standalone'
+					}
+				}
+			},
+			dist: {
+				dest: dist + '/docs/index.html',
+				context: {
+					js: '/dist/ui-lib.min.js',
+					css: '/dist/ui-lib.min.css',
+					docs: {
+						js: '/dist/docs/docs.min.js',
+						css: '/dist/docs/docs.min.css',
+						settings: '/dist/settings.html?viewMode=standalone'
+					}
+				}
+			}
+		},
+
+		devServer: {
+			base: "dev",
+			dist: "dist",
+			web: {
+				port: 8000
+			}
+		}
 	});
 
-
-
-	grunt.loadNpmTasks('grunt-contrib');
+	grunt.loadNpmTasks('grunt-contrib-clean');
+	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-contrib-cssmin');
+	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-karma');
 	grunt.loadNpmTasks('grunt-markdown');
 	grunt.loadTasks('tasks');
 
-	grunt.registerTask('default', ['clean', 'copy', 'uglify', 'cssmin']);
+	grunt.registerTask('default', ['clean:dev', 'concat', 'settings:dev']);
+	grunt.registerTask('dev', ['devServer', 'clean:dev', 'concat', 'copy:devDocs', 'settings:dev', 'docs:dev', 'mdDocs:dev', 'watch']);
+	grunt.registerTask('dist', ['clean:dist', 'concat', 'uglify', 'cssmin', 'copy:distImages', 'copy:distDocs', 'settings:dist', 'docs:dist', 'mdDocs:dist']);
 
-
-	grunt.registerTask('buildHTML', '', function(){
-		var options = this.options();
-		var newContent = '';
-		var content = grunt.file.read(options.settingsHTML);
-		
-		var cssStart = '<!-- css source -->';
-		var cssEnd = '<!-- css source end -->';
-		
-		var jsStart = '<!-- scripts source -->';
-		var jsEnd = '<!-- scripts source end -->';
-		
-		var cssIndexStart = content.indexOf(cssStart);
-		var cssIndexEnd = content.indexOf(cssEnd);
-		
-		var jsIndexStart = content.indexOf(jsStart);
-		var jsIndexEnd = content.indexOf(jsEnd);
-		
-		var deadCssContent = content.slice(cssIndexStart, cssIndexEnd + cssEnd.length);
-		var deadJsContent = content.slice(jsIndexStart, jsIndexEnd + jsEnd.length);
-		
-		newContent = content;
-		newContent = newContent.replace(deadCssContent, '<link rel="stylesheet" href="ui-lib.min.css" />');
-		newContent = newContent.replace(deadJsContent, '<script type="text/javascript" src="ui-lib.min.js"></script>');
-		newContent = newContent.replace('../images/wix_icon.png', 'images/wix_icon.png');
-
-		grunt.file.write(options.settingsHTML, newContent);
-		
-	});
-	
-	grunt.registerTask('mdDocs', 'build docs', function () {
-
-		function getDocMdContent(src, fileContent, fileName) {
-
-			function getTitle(str) {
-				var title = str.match(/#\s*([\w]+)/);
-				return title ? title[1].trim() : null;
-			}
-
-			function getMarkup(str) {
-				var markup = str.match(/###\s*Markup((.|\s)*?)###/m);
-
-				if (markup) {
-					markup = markup[1].trim().replace(/(^```\s*.*\s*)|(```\s*$)/gm, '')
-				}
-				return markup ? markup : null;
-			}
-
-			function getOptions(str) {
-				var header = '<tr><th class="tb-name">Name</th><th class="tb-default">Deafult</th><th class="tb-desc">Descrition</th></tr>';
-				var tpl = '<tr><td>${{name}}</td><td>${{value}}</td><td>${{desc}}</td></tr>';
-
-				var options = str.match(/###\s*Options\s*((.|\s)*)/m);
-				if (options) {
-					options = options[1].trim().split(/\*/gm);
-					options = options.filter(function (option) {
-							return !!option;
-						}).map(function (option) {
-							return option.trim().split(/\s*;\s*/gm);
-						}).map(function (option) {
-
-							if (option.length < 2) {
-								throw new Error('Could not parse all options');
-							}
-							return tpl.replace('${{name}}', option[0] || '')
-							.replace('${{value}}', option[1] || '')
-							.replace('${{desc}}', option[2] || '')
-						}).join('\n');
-					return '<table class="options-table">' + header + options + '</table>';
-				}
-				return options ? options : null;
-			}
-
-			var title = getTitle(fileContent);
-			var markup = getMarkup(fileContent);
-			var options = getOptions(fileContent);
-
-			if (!options) {
-				grunt.log.error('Could not parse options form: ' + src);
-			}
-
-			if (!title) {
-				grunt.log.error('Could not parse title form: ' + src);
-			}
-
-			if (!markup) {
-				grunt.log.error('Could not parse markup form: ' + markup);
-			}
-
-			//console.log('Title\n', title);
-			//console.log('Markup\n', markup);
-			//console.log('Options\n', options);
-			return {
-				title : title,
-				markup : markup,
-				options : options
-			};
-
-		}
-
-		function replaceMdParts(mdStr, parts) {
-			return mdStr.replace(/###\s*Example/, '### Example\n' + parts.markup.trim())
-			.replace(/###\s*Options\s*((.|\s)*)/m, '### Options\n' + parts.options);
-
-		}
-
-		var marked = require('marked');
-		marked.setOptions({
-			renderer : new marked.Renderer(),
-			gfm : true
-		});
-		var done = this.async();
-		var options = this.options();
-
-		var all = grunt.file.expand(options.files).map(function (filepath) {
-
-				var fileNameWithExtention = filepath.split('/').pop();
-				var s = fileNameWithExtention.split('.');
-				var extention = s.pop();
-				var fileName = s.pop();
-				var fileContent = grunt.file.read(filepath);
-
-				var parts = getDocMdContent(filepath, fileContent, fileName);
-				var newContent = replaceMdParts(fileContent, parts);
-
-				grunt.log.ok('file: ' + fileNameWithExtention);
-
-				return '<div data-scroll-target id="' + parts.title + '-entry" class="cmp-plugin-decs-entry">\n' + marked(newContent) + '\n</div>';
-
-			});
-
-		var c = grunt.file.read(options.inject);
-		c = c.replace('${{content}}', all.join('\n\n\n\n'));
-		grunt.file.write(options.inject, c);
-		
-		done(true);
-
-		});
-
-	grunt.registerTask('default', ['clean', 'copy', 'uglify', 'cssmin', 'buildHTML', 'mdDocs']);
-
-	grunt.registerTask('karma', ['default', 'karma']);
-	grunt.registerTask('concatall', ['default', 'concat']);
 	grunt.registerTask('lint', ['jshint']);
-	grunt.registerTask('dev', ['default', 'watch']);
 };

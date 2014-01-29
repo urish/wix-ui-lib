@@ -21,11 +21,11 @@ h1{
 	float:left;
 }
 
-.components .container {
+.components .container,  .css .container {
 	width: 970px;
-	margin: 0 0 100px 100px;
+	margin-left: 100px;
 }
-#main {
+.js-main {
 	float:left;
 	width: 670px;
 	box-shadow: 0 0 10px 1px rgba(0,0,0,0.4);
@@ -35,7 +35,7 @@ h1{
 	overflow: hidden;
 	background: rgba(255,255,255,0.8);
 }	
-#sidebar {
+.js-sidebar {
 	float:left;	
 	width: 230px;
 	min-height: 1px;
@@ -52,11 +52,6 @@ h1{
 
 .side-bar h2 {
     margin: 0;
-}
-
-.cmp-sidebar-wrapper.scroll {
-    position: fixed;
-    top: 80px;
 }
 
 .cmp-sidebar{
@@ -165,5 +160,14 @@ table th{
 }
 #Accordion-entry [wix-ctrl]{
 	height:186px;
+}
+
+.css .icons {
+    padding-top: 10px;
+}
+
+.css ul.icons > li {
+    display: inline-block;
+    margin-right: 10px;
 }
 

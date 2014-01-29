@@ -137,6 +137,11 @@ ul, li {
     background-position: 0px -65px;
 }
 
+.wix#demo .container > p {
+    font-size: 16px;
+    line-height: 25px;
+}
+
 .demo-container {
     height: 646px;
     width: 600px;
@@ -149,9 +154,6 @@ ul, li {
     height:100%;
     display: block;
 }
-
-
-
 
 /*Start DEMO Style*/
 .wix .demo .container{

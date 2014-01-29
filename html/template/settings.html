@@ -3,37 +3,13 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Widget Settings &bull; Wix</title>
-	<!-- css source -->
-	<link rel="stylesheet" href="../stylesheets/buttons.css"/>
-	<link rel="stylesheet" href="../stylesheets/icons.css"/>
-	<link rel="stylesheet" href="../stylesheets/common.css"/>
-	<link rel="stylesheet" href="../stylesheets/settings.css"/>
-	<link rel="stylesheet" href="../stylesheets/header.css"/>
-	
-	<link rel="stylesheet" href="../components/AdvancedDropdown/css/dd.css"/>
-	
-	<link rel="stylesheet" href="../components/Accordion/Accordion.css"/>
-	<link rel="stylesheet" href="../components/ButtonGroup/ButtonGroup.css"/>
-	<link rel="stylesheet" href="../components/Checkbox/Checkbox.css"/>
-	<link rel="stylesheet" href="../components/ColorPicker/ColorPicker.css"/>
-	<link rel="stylesheet" href="../components/Dropdown/Dropdown.css"/>
-	<link rel="stylesheet" href="../components/FixedPositionControl/FixedPositionControl.css"/>
-	<link rel="stylesheet" href="../components/FontPicker/FontPicker.css"/>
-	<link rel="stylesheet" href="../components/Input/Input.css"/>
-	<link rel="stylesheet" href="../components/LanguagePicker/LanguagePicker.css"/>
-	<link rel="stylesheet" href="../components/Popup/Popup.css"/>
-	<link rel="stylesheet" href="../components/Radio/Radio.css"/>
-	<link rel="stylesheet" href="../components/Slider/Slider.css"/>
-	<link rel="stylesheet" href="../components/Spinner/Spinner.css"/>
-	<link rel="stylesheet" href="../components/Tooltip/Tooltip.css"/>
-	<!-- css source end -->
-
+	<link rel="stylesheet" href="<%= css %>"/>
 </head>
 <body wix-uilib>
 <div wix-scroll="{height:646}">
     <header class="box">
         <div class="logo">
-            <img width="86" src="../images/wix_icon.png" alt="logo"/>
+            <img width="86" src="/images/wix_icon.png" alt="logo"/>
         </div>
         <div class="loggedOut">
             <p>
@@ -172,35 +148,9 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 <!-- Wix SDK -->
 <script src="http://sslstatic.wix.com/services/js-sdk/1.25.0/js/Wix.js"></script>
-	
 
-<!-- scripts source -->
-<script type="text/javascript" src="../core/ColorPickerCore.js"></script>
-<script type="text/javascript" src="../core/definePlugin.js"></script>
-<script type="text/javascript" src="../core/ui-lib.js"></script>
+<script type="text/javascript" src="<%= js %>"></script>
 
-<script type="text/javascript" src="../components/AdvancedDropdown/jquery.dd.js"></script>
-
-<script type="text/javascript" src="../components/Accordion/Accordion.js"></script>
-<script type="text/javascript" src="../components/ButtonGroup/ButtonGroup.js"></script>
-<script type="text/javascript" src="../components/ButtonGroup/ToggleButtonGroup.js"></script>
-<script type="text/javascript" src="../components/Checkbox/Checkbox.js"></script>
-<script type="text/javascript" src="../components/ColorPicker/ColorPicker.js"></script>
-<script type="text/javascript" src="../components/ColorPickerWithOpacity/ColorPickerWithOpacity.js"></script>
-<script type="text/javascript" src="../components/Dropdown/Dropdown.js"></script>
-<script type="text/javascript" src="../components/FixedPositionControl/FixedPositionControl.js"></script>
-<script type="text/javascript" src="../components/FontPicker/FontPicker.js"></script>
-<script type="text/javascript" src="../components/FontPicker/FontStylePicker.js"></script>
-<script type="text/javascript" src="../components/Input/Input.js"></script>
-<script type="text/javascript" src="../components/LanguagePicker/LanguagePicker.js"></script>
-<script type="text/javascript" src="../components/Popup/Popup.js"></script>
-<script type="text/javascript" src="../components/Radio/Radio.js"></script>
-<script type="text/javascript" src="../components/Scrollbar/Scrollbar.js"></script>
-<script type="text/javascript" src="../components/Scrollbar/jquery.mousewheel.js"></script>
-<script type="text/javascript" src="../components/Slider/Slider.js"></script>
-<script type="text/javascript" src="../components/Spinner/Spinner.js"></script>
-<script type="text/javascript" src="../components/Tooltip/Tooltip.js"></script>
-<!-- scripts source end -->		
 
 <script type="text/javascript">
     $(document).ready(function () {

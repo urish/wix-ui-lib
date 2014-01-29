@@ -4,15 +4,16 @@ var DocsApp = {
 		this.utils = this.Classes.Utils();
 		this.pluginDocsData = this.Classes.PluginDocsData(this.utils);
 		this.templates = this.Classes.Templates(this.pluginDocsData, this.utils);
-		
+		this.$components = $("#components");
+
 		this.setAppElements();
 		this.markup();
 		this.bindEvents();
 	},
 	setAppElements : function () {
 		this.$root = $('body');
-		this.$sidebar = $('#sidebar');
-		this.$docs = $('#docs');
+		this.$sidebar = this.$components.find('.js-sidebar');
+		this.$docs = this.$components.find('.js-docs');
 	},
 	markup : function () {
 		this.$root.hide();
@@ -34,7 +35,7 @@ var DocsApp = {
 	renderDocs : function () {
 		var sidebarHTML = '';
 		var that = this;
-		var titles = $('h1[id]').each(function(){
+		$('#docs h1[id]').each(function(){
 			sidebarHTML += that.templates.menuTpl({name: this.innerHTML});
 		});		
 		this.$sidebar.find('.content').append(sidebarHTML);

@@ -39,9 +39,49 @@ h1{
 	float:left;	
 	width: 230px;
 	min-height: 1px;
-
-
 }
+
+.js-back-to-top {
+    display: none;
+    background-color: rgba(0,0,0,0.7);
+    cursor: pointer;
+    position: fixed;
+    right: 0px;
+    bottom: 0;
+    margin-bottom: 15px;
+    padding: 10px;
+    -webkit-border-top-left-radius: 4px;
+    -webkit-border-bottom-left-radius: 4px;
+    -moz-border-radius-topleft: 4px;
+    -moz-border-radius-bottomleft: 4px;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+
+    -webkit-transition: color 0.1s linear 0s;
+    -moz-transition: color 0.1s linear 0s;
+    -o-transition: color 0.1s linear 0s;
+    transition: color 0.1s linear 0s;
+}
+
+.js-back-to-top.shown {
+    display: block;
+    animation: fadeIn 0.5s;
+    -moz-animation: fadeIn 0.5s;
+    -o-animation: fadeIn 0.5s;
+    -webkit-animation: fadeIn 0.5s;
+}
+
+.js-back-to-top > a {
+    color: #bbb;
+}
+
+
+.js-back-to-top:hover a {
+    text-decoration: none;
+    color: #fff;
+}
+
+
 #footer{
 	height: 160px;
 	clear:both;
@@ -108,12 +148,10 @@ h1{
 */
 .cmp-plugin-entry a:hover {
 	background: rgba(255,255,255,0.5);
-	.text-indent: 10px;
 }
 
 .cmp-plugin-entry .current-viewed{
 	background-color: rgba(0,0,0,0.25);    
-	.text-indent: 10px;
 }
 
 .nav {

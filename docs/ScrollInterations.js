@@ -48,6 +48,10 @@ DocsApp.Classes.ScrollInterations = function () {
 			});
 			$doc.bind('scroll touchmove', function() {
 				$('.navigation').toggleClass('shown', $doc.scrollTop() >= navPos);
+
+				$(".js-back-to-top").toggleClass('shown', $doc.scrollTop() >= navPos);
+
+
 			});
 		},
 

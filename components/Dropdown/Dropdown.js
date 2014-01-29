@@ -2,6 +2,7 @@
 	'use strict';
 
 	var names = {
+		extendedValueName: 'data-value-extended',
 		valueAttrName : 'data-value',
 		indexAttrName : 'data-index',
 		dropDownClassName : 'dropdown',
@@ -68,14 +69,22 @@
 			var dd = this;
 			var $el = this.$el.addClass(names.dropDownClassName + ' ' + this.options.style);//.css(dropdownCSS);
 			var $options = this.$el.find(this.options.optionSelector).map(function (index) {
-			
+					var style = this.getAttribute('style');
+					var extended = this.getAttribute(names.extendedValueName);
 					var $option = $('<div>')
 						.attr(names.valueAttrName, this.getAttribute(names.optionInitValueAttrName))
 						.attr(names.indexAttrName, index)
 						.addClass(names.optionClassName)
 						.addClass(this.className)
 						.text(this.textContent);
-			
+					
+					
+					if(extended){
+						$option.attr(names.extendedValueName, extended);
+					}
+					if(style){
+						$option.attr('style', style);
+					}
 					if(dd.options.hideText){
 						$option.addClass(names.hideTextClass);
 					}
@@ -151,6 +160,9 @@
 		},
 		getValue: function () {
 			return this.getFullValue();
+		},
+		getExtendedValue: function () {
+			return this.$selected.find('.' + names.optionClassName).attr(names.extendedValueName);
 		},
 		getFullValue: function () {
 			return {

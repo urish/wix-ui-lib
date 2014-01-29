@@ -102,7 +102,7 @@ jQuery.fn.definePlugin('FontStylePicker', function () {
 				appendTo: this.$el,
 				html: html,
 				options:{
-					width : 280,
+					width : 265,
 					height : 180,
 					value: 1,
 					modifier: function($el){
@@ -125,7 +125,7 @@ jQuery.fn.definePlugin('FontStylePicker', function () {
 					modal : false,
 					modalBackground : 'rgba(0,0,0,0.5)',
 					height : 'auto',
-					width : 302,
+					width : 287,
 					onopen: function(){
 						that.$el.append(this.arrow);
 						that.currentValue = that.getValue();
@@ -257,10 +257,12 @@ jQuery.fn.definePlugin('FontStylePicker', function () {
 			this.$el.find('.box-like-drop-content').text(text);
 		},
 		getValue : function () {
+			var family = this.fontPicker.getValue();
 			var val = {
 				size:   this.fontSizePicker.getValue(),
 				style:  this.textStylePicker.getValue(),
-				family: this.fontPicker.getValue().value,
+				family: family.value,
+				cssFontFamily : family.cssFontFamily,
 				preset: this.presetSelectPicker.getValue().value
 			};
 			if(this.getParamKey()){
@@ -311,3 +313,4 @@ jQuery.fn.definePlugin('FontStylePicker', function () {
 	};
 
 });
+

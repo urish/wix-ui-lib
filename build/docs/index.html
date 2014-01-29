@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wix UI-Lib</title>
+	
+    <link rel="stylesheet" href="../ui-lib.min.css"/>
+	<link rel="stylesheet" href="google-code-prettify/sunburst.css"/>
+    <link rel="stylesheet" href="index.css"/>
+    <link rel="stylesheet" href="DocsApp.css"/>
+	
+		
+	<!-- jQuery Dependency -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+	<!-- Wix SDK -->
+	<script src="http://sslstatic.wix.com/services/js-sdk/1.25.0/js/Wix.js"></script>
+	<!-- Wix UI -->
+	<script type="text/javascript" src="../ui-lib.min.js"></script>
+	<script type="text/javascript">Wix.__disableStandaloneError__ = true;</script>
+</head>
+<body>
+<nav class="navigation">
+    <ul>
+        <li><a data-scroll-inter href="#demo">Demo</a></li>
+        <li><a data-scroll-inter href="#components">Components</a></li>
+        <li><a data-scroll-inter href="#css">CSS</a></li>
+    </ul>
+</nav>
+<div class="pages white page-welcome">
+    <div class="container center cell">
+        <h1>Wix UI-LIB</h1>
+        <h2>3rd Party Applications Starter Kit</h2>
+
+        <div class="get-ui-lib">
+            <div class="uilib-btn btn-xlarge"><a href="https://github.com/wix/wix-ui-lib/releases/download/v2.0.4/wix-ui-lib-v2.0.4.zip">Download Wix UI-LIB</a></div>
+            <div class="uilib-btn btn-xlarge"><a href="https://github.com/wix/wix-ui-lib">View on GitHub</a></div>
+        </div>
+
+        <a class="scrollMore" data-scroll-inter href="#demo"></a>
+    </div>
+</div>
+
+
+
+<div class="wix" id="demo" style="padding-top:50px">
+    <div class="container">
+        <h2>Demo</h2>
+        <p>This boilerplate is aimed at helping developers in the process of getting new apps to Wix App Market as quickly as possible. </p>
+        <p>The UI in this project focuses on the App's Settings Panel.</p>
+        <p>The boilerplate offers UI standards and common Javascript components to assist the developer in passing Product tests, and in developing a consistent and uniformed UI for the app.</p>
+
+        <br/>
+        <br/>
+
+        <div class="demo">
+            <div class="container">
+                <strong class="title">App Name</strong>
+                <div class="demo-container">
+                    <iframe src="../settings.html?viewMode=standalone" frameborder="0" scrolling="no" allowTransparency="true" width="100%" height="100%"></iframe>
+                </div>
+                <footer class="uilib-footer">
+                    <div class="support pull-right">
+                        Have a question? Please contact us at: <a href="mailto:support@company.com">support@company.com</a>
+                    </div>
+                </footer>
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+
+<div class="components" id="components" style="padding-top:50px">
+    <div class="container clearfix">
+        <div id="sidebar" class="side-bar">
+           <div class="cmp-sidebar-wrapper">
+               <h2>Components</h2>
+               <ul class="cmp-sidebar content"></ul>
+           </div>
+
+        </div>
+        <div id="main" class="content">
+            <div id="intro">
+                <h2>lorem intro</h2>
+                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr,  sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr,  sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr,  sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr,  sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+            </div>
+            <div id="docs">
+                <div class="content"><div data-scroll-target id="Accordion-entry" class="cmp-plugin-decs-entry">
+<h1 id="accordion">Accordion</h1>
+<p>Accordion Component, displays expandable content panes for presenting information in a limited amount of space.
+An accordion is divided to a vertical set of panes. By default only a single pane is opened.</p>
+<h3 id="example">Example</h3>
+<div wix-ctrl="Accordion">
+    <div class="acc-pane">
+        <h3>Accordion Pane</h3>
+        <div class="acc-content">Accordion Content</div>
+    </div>
+    <div class="acc-pane">
+        <h3>Accordion Pane</h3>
+        <div class="acc-content">Accordion Content</div>
+    </div>
+    <div class="acc-pane">
+        <h3>Accordion Pane</h3>
+        <div class="acc-content">Accordion Content</div>
+    </div>
+</div>
+
+<h3 id="markup">Markup</h3>
+<pre><code class="lang-html">&lt;div wix-ctrl=&quot;Accordion&quot;&gt;
+    &lt;div class=&quot;acc-pane&quot;&gt;
+        &lt;h3&gt;Accordion Pane&lt;/h3&gt;
+        &lt;div class=&quot;acc-content&quot;&gt;Accordion Content&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;acc-pane&quot;&gt;
+        &lt;h3&gt;Accordion Pane&lt;/h3&gt;
+        &lt;div class=&quot;acc-content&quot;&gt;Accordion Content&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;acc-pane&quot;&gt;
+        &lt;h3&gt;Accordion Pane&lt;/h3&gt;
+        &lt;div class=&quot;acc-content&quot;&gt;Accordion Content&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<h3 id="options">Options</h3>
+<table class="options-table"><tr><th class="tb-name">Name</th><th class="tb-default">Deafult</th><th class="tb-desc">Descrition</th></tr><tr><td>animationTime</td><td>150</td><td>expand/collase animation time in ms</td></tr>
+<tr><td>ease</td><td>linear</td><td>easing function</td></tr>
+<tr><td>toggleOpen</td><td>false</td><td>open all panes</td></tr>
+<tr><td>value</td><td>0</td><td>opened pane index</td></tr></table>
+</div>
+
+
+
+<div data-scroll-target id="ButtonGroup-entry" class="cmp-plugin-decs-entry">
+<h1 id="buttongroup">ButtonGroup</h1>
+<p>Button Group component, enables selection of multiple options through a group of horizontally ordered buttons</p>
+<h3 id="example">Example</h3>
+<div wix-model="multiSize" wix-ctrl="ButtonGroup">
+    <button value="mini">Mini</button>
+    <button value="medium">Medium</button>
+    <button value="large">Large</button>
+</div>
+
+<h3 id="markup">Markup</h3>
+<pre><code class="lang-html">&lt;div wix-model=&quot;multiSize&quot; wix-ctrl=&quot;ButtonGroup&quot;&gt;
+    &lt;button value=&quot;mini&quot;&gt;Mini&lt;/button&gt;
+    &lt;button value=&quot;medium&quot;&gt;Medium&lt;/button&gt;
+    &lt;button value=&quot;large&quot;&gt;Large&lt;/button&gt;
+&lt;/div&gt;
+</code></pre>
+<h3 id="options">Options</h3>
+<table class="options-table"><tr><th class="tb-name">Name</th><th class="tb-default">Deafult</th><th class="tb-desc">Descrition</th></tr><tr><td>value</td><td>0</td><td>selected button index</td></tr>
+<tr><td>mode</td><td>&#39;single&#39;</td><td></td></tr></table>
+</div>
+
+
+
+<div data-scroll-target id="ToggleButtonGroup-entry" class="cmp-plugin-decs-entry">
+<h1 id="togglebuttongroup">ToggleButtonGroup</h1>
+<p>Toggle Button Group component, enables selection of multiple options through a group of horizontally ordered toggle buttons</p>
+<h3 id="example">Example</h3>
+<div wix-model="size" wix-ctrl="ToggleButtonGroup">
+    <button value="mini">Mini</button>
+    <button value="medium">Medium</button>
+    <button value="large">Large</button>
+</div>
+
+<h3 id="markup">Markup</h3>
+<pre><code class="lang-html">&lt;div wix-model=&quot;size&quot; wix-ctrl=&quot;ToggleButtonGroup&quot;&gt;
+    &lt;button value=&quot;mini&quot;&gt;Mini&lt;/button&gt;
+    &lt;button value=&quot;medium&quot;&gt;Medium&lt;/button&gt;
+    &lt;button value=&quot;large&quot;&gt;Large&lt;/button&gt;
+&lt;/div&gt;
+</code></pre>
+<h3 id="options">Options</h3>
+<table class="options-table"><tr><th class="tb-name">Name</th><th class="tb-default">Deafult</th><th class="tb-desc">Descrition</th></tr><tr><td>value</td><td>{mini:true,medium:false,large:true}</td><td>selected button index</td></tr></table>
+</div>
+
+
+
+<div data-scroll-target id="Checkbox-entry" class="cmp-plugin-decs-entry">
+<h1 id="checkbox">Checkbox</h1>
+<p>Checkbox component, mimic native HTML checkbox by applying Wix style</p>
+<h3 id="example">Example</h3>
+<div wix-model="preChecked" wix-ctrl="Checkbox" wix-options="{preLabel:'Check me...', checked:true}"></div>
+<div wix-model="checkMe" wix-ctrl="Checkbox"></div>
+
+<h3 id="markup">Markup</h3>
+<pre><code class="lang-html">&lt;div wix-model=&quot;preChecked&quot; wix-ctrl=&quot;Checkbox&quot; wix-options=&quot;{preLabel:&#39;Check me...&#39;, checked:true}&quot;&gt;&lt;/div&gt;
+&lt;div wix-model=&quot;checkMe&quot; wix-ctrl=&quot;Checkbox&quot;&gt;&lt;/div&gt;
+</code></pre>
+<h3 id="options">Options</h3>
+<table class="options-table"><tr><th class="tb-name">Name</th><th class="tb-default">Deafult</th><th class="tb-desc">Descrition</th></tr><tr><td>checked</td><td>false</td><td></td></tr>
+<tr><td>preLabel</td><td>&quot;&quot;</td><td>a preceding label/text</td></tr>
+<tr><td>postLabel</td><td>&quot;&quot;</td><td>a postceding label/text</td></tr></table>
+</div>
+
+
+
+<div data-scroll-target id="ColorPicker-entry" class="cmp-plugin-decs-entry">
+<h1 id="colorpicker">ColorPicker</h1>
+<p>Color Picker component, provide Wix style color selection with a 5x5 grid palette. 5 main colors in the middle plus two brighter colors and two darker colors in each direction. In addition a custom style selector is available</p>
+<p><strong>Site parameter, the selected value will be saved inside the Wix site</strong></p>
+<h3 id="example">Example</h3>
+<div wix-param="bgColor" wix-ctrl="ColorPicker" wix-options="{startWithColor: 'color-3'}"></div>
+
+<h3 id="markup">Markup</h3>
+<pre><code class="lang-html">&lt;div wix-param=&quot;bgColor&quot; wix-ctrl=&quot;ColorPicker&quot; wix-options=&quot;{startWithColor: &#39;color-3&#39;}&quot;&gt;&lt;/div&gt;
+</code></pre>
+<h3 id="options">Options</h3>
+<table class="options-table"><tr><th class="tb-name">Name</th><th class="tb-default">Deafult</th><th class="tb-desc">Descrition</th></tr><tr><td>startWithColor</td><td>&quot;#897185&quot;</td><td>initial color to show</td></tr></table>
+</div>
+
+
+
+<div data-scroll-target id="ColorPickerWithOpacity-entry" class="cmp-plugin-decs-entry">
+<h1 id="colorpickerwithopacity">ColorPickerWithOpacity</h1>
+<p>Color Picker with opacity control component, provide Wix style color selection with a 5x5 grid palette. 5 main colors in the middle plus two brighter colors and two darker colors in each direction. In addition a custom style selector is available</p>
+<h3 id="example">Example</h3>
+<div wix-param="colorWOpacity" wix-ctrl="ColorPickerWithOpacity" wix-options="{startWithColor: 'color-3'}"></div>
+
+<h3 id="markup">Markup</h3>
+<pre><code class="lang-html">&lt;div wix-param=&quot;colorWOpacity&quot; wix-ctrl=&quot;ColorPickerWithOpacity&quot; wix-options=&quot;{startWithColor: &#39;color-3&#39;}&quot;&gt;&lt;/div&gt;
+</code></pre>
+<h3 id="options">Options</h3>
+<table class="options-table"><tr><th class="tb-name">Name</th><th class="tb-default">Deafult</th><th class="tb-desc">Descrition</th></tr><tr><td>startWithColor</td><td>&quot;#897185&quot;</td><td>initial color to show</td></tr></table>
+</div>
+
+
+
+<div data-scroll-target id="Dropdown-entry" class="cmp-plugin-decs-entry">
+<h1 id="dropdown">Dropdown</h1>
+<p>Dropdown component, expandable selection list with support for max height/scrollabr.</p>
+<h3 id="example">Example</h3>
+<div wix-model="image" wix-ctrl="Dropdown">
+    <div value="show">Show Images</div>
+        <div value="hide">Hide Images</div>
+    <div value="showhover">Show Images on Hover</div>
+</div>
+
+<h3 id="markup">Markup</h3>
+<pre><code class="lang-html">&lt;div wix-model=&quot;image&quot; wix-ctrl=&quot;Dropdown&quot;&gt;
+    &lt;div value=&quot;show&quot;&gt;Show Images&lt;/div&gt;
+        &lt;div value=&quot;hide&quot;&gt;Hide Images&lt;/div&gt;
+    &lt;div value=&quot;showhover&quot;&gt;Show Images on Hover&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<h3 id="options">Options</h3>
+<table class="options-table"><tr><th class="tb-name">Name</th><th class="tb-default">Deafult</th><th class="tb-desc">Descrition</th></tr><tr><td>slideTime</td><td>150</td><td>animation slide time in ms</td></tr>
+<tr><td>value</td><td>0</td><td>selected entry value attribute in the dropdown</td></tr>
+<tr><td>width</td><td>&#39;auto&#39;</td><td>width of the dropdown (folded)</td></tr>
+<tr><td>optionsWidth</td><td>&#39;auto&#39;</td><td>overrides the width option for the expanded dropdown list</td></tr>
+<tr><td>height</td><td>&#39;auto&#39;</td><td>expanded options list total height ==&gt; enables scrollbar for longer (than the height) list of entries</td></tr></table>
+</div>
+
+
+
+<div data-scroll-target id="FixedPositionControl-entry" class="cmp-plugin-decs-entry">
+<h1 id="fixedpositioncontrol">FixedPositionControl</h1>
+<p>FixedPositionControl component, enables positioning of a Fixed Position widget in the Wix editor. This control is already synchronized with the Wix site there&#39;s no need for wis-model or wix-param</p>
+<h3 id="example">Example</h3>
+<div wix-ctrl="FixedPositionControl"></div>
+
+<h3 id="markup">Markup</h3>
+<pre><code class="lang-html">&lt;div wix-ctrl=&quot;FixedPositionControl&quot;&gt;&lt;/div&gt;
+</code></pre>
+<h3 id="options">Options</h3>
+<table class="options-table"><tr><th class="tb-name">Name</th><th class="tb-default">Deafult</th><th class="tb-desc">Descrition</th></tr><tr><td>placements</td><td>[&#39;TOP_LEFT&#39;, &#39;TOP_CENTER&#39;, &#39;TOP_RIGHT&#39;, &#39;CENTER_LEFT&#39;, &#39;CENTER_RIGHT&#39;, &#39;BOTTOM_LEFT&#39;, &#39;BOTTOM_CENTER&#39;, &#39;BOTTOM_RIGHT&#39;]</td><td>Supported placements</td></tr>
+<tr><td>bindToWidget</td><td>false</td><td>whether to attach this control data to a widget in the Wix editor</td></tr></table>
+</div>
+
+
+
+<div data-scroll-target id="FontPicker-entry" class="cmp-plugin-decs-entry">
+<h1 id="fontpicker">FontPicker</h1>
+<p>FontPicker component, control the selection of a font family for a text field</p>
+<p><strong>Site parameter, the selected value will be saved inside the Wix site</strong></p>
+<h3 id="example">Example</h3>
+<div wix-param="fontFamily" wix-ctrl="FontPicker"></div>
+
+<h3 id="markup">Markup</h3>
+<pre><code class="lang-html">    &lt;div wix-param=&quot;fontFamily&quot; wix-ctrl=&quot;FontPicker&quot;&gt;&lt;/div&gt;
+</code></pre>
+<h3 id="options">Options</h3>
+<table class="options-table"><tr><th class="tb-name">Name</th><th class="tb-default">Deafult</th><th class="tb-desc">Descrition</th></tr><tr><td>value</td><td>0</td><td>selected font family index in the list of available fonts</td></tr></table>
+</div>
+
+
+
+<div data-scroll-target id="FontStylePicker-entry" class="cmp-plugin-decs-entry">
+<h1 id="fontstylepicker">FontStylePicker</h1>
+<p>Font Style Picker component, control the selection of all relevant properties for a text field</p>
+<ul>
+<li>font style</li>
+<li>font family</li>
+<li>font size</li>
+<li>bold</li>
+<li>italic</li>
+<li>underline</li>
+</ul>
+<p><strong>Site parameter, the selected value will be saved inside the Wix site</strong></p>
+<h3 id="example">Example</h3>
+<div wix-param="fontStyle" wix-ctrl="FontStylePicker"></div>
+
+<h3 id="markup">Markup</h3>
+<pre><code class="lang-html">&lt;div wix-param=&quot;fontStyle&quot; wix-ctrl=&quot;FontStylePicker&quot;&gt;&lt;/div&gt;
+</code></pre>
+<h3 id="options">Options</h3>
+<table class="options-table"><tr><th class="tb-name">Name</th><th class="tb-default">Deafult</th><th class="tb-desc">Descrition</th></tr><tr><td>value</td><td>&quot;Body-L&quot;</td><td>selected font family index in the list of available fonts</td></tr></table>
+</div>
+
+
+
+<div data-scroll-target id="Input-entry" class="cmp-plugin-decs-entry">
+<h1 id="input">Input</h1>
+<p>Input component, mimic native HTML input element with Wix style and behaviour</p>
+<h3 id="example">Example</h3>
+<div wix-model="myText" wix-ctrl="Input"></div>
+
+<h3 id="markup">Markup</h3>
+<pre><code class="lang-html">&lt;div wix-model=&quot;myText&quot; wix-ctrl=&quot;Input&quot;&gt;&lt;/div&gt;
+</code></pre>
+<h3 id="options">Options</h3>
+<table class="options-table"><tr><th class="tb-name">Name</th><th class="tb-default">Deafult</th><th class="tb-desc">Descrition</th></tr><tr><td>placeholder</td><td>&#39;&#39;</td><td>text for the input placeholder</td></tr>
+<tr><td>disabled</td><td>false</td><td>whether this text input is disabled</td></tr></table>
+</div>
+
+
+
+<div data-scroll-target id="LanguagePicker-entry" class="cmp-plugin-decs-entry">
+<h1 id="languagepicker">LanguagePicker</h1>
+<p>Language Picker component, expandable dropdown list of languages. Controls the selection of a language supported by the app</p>
+<h3 id="example">Example</h3>
+<div wix-model="lang" wix-ctrl="LanguagePicker"></div>
+
+<h3 id="markup">Markup</h3>
+<pre><code class="lang-html">&lt;div wix-model=&quot;lang&quot; wix-ctrl=&quot;LanguagePicker&quot;&gt;&lt;/div&gt;
+</code></pre>
+<h3 id="options">Options</h3>
+<table class="options-table"><tr><th class="tb-name">Name</th><th class="tb-default">Deafult</th><th class="tb-desc">Descrition</th></tr><tr><td>languages</td><td>[&#39;En&#39;, &#39;De&#39;, &#39;Es&#39;, &#39;Fr&#39;, &#39;It&#39;, &#39;Po&#39;, &#39;Pt&#39;, &#39;Ru&#39;, &#39;Ja&#39;, &#39;Ko&#39;, &#39;Tr&#39;]</td><td>a list of languages to choose from</td></tr>
+<tr><td>height</td><td>&#39;auto&#39;</td><td>expandable list height, extra content will cam be accessed by scrolling the list</td></tr></table>
+</div>
+
+
+
+<div data-scroll-target id="Popup-entry" class="cmp-plugin-decs-entry">
+<h1 id="popup">Popup</h1>
+<p>Popup component,</p>
+<h3 id="example">Example</h3>
+<p><button class="uilib-btn btn-secondary" id="popupAnchorBtn">Open Popup</button></p>
+<p><button class="uilib-btn btn-secondary" id="modalAnchorBtn">Open Modal</button></p>
+<script>
+
+    var popup = Wix.UI.create({ctrl: 'Popup', options: {buttonSet: 'okCancel', fixed:true}});
+
+    var modal = Wix.UI.create({ctrl: 'Popup', options: {modal:true, buttonSet: 'okCancel', fixed:true}});
+
+    $('#popupAnchorBtn').on('click', function(evt){
+        evt.stopPropagation();
+        popup.getCtrl().open();
+    });
+
+    $('#modalAnchorBtn').on('click', function(evt){
+        evt.stopPropagation();
+        modal.getCtrl().open();
+    });
+
+</script>
+
+<h3 id="markup">Markup</h3>
+<pre><code class="lang-html">&lt;button class=&quot;uilib-btn btn-secondary&quot; id=&quot;popupAnchorBtn&quot;&gt;Open Popup&lt;/button&gt;
+&lt;button class=&quot;uilib-btn btn-secondary&quot; id=&quot;modalAnchorBtn&quot;&gt;Open Modal&lt;/button&gt;
+&lt;script&gt;
+
+    var popup = Wix.UI.create({ctrl: &#39;Popup&#39;, options: {buttonSet: &#39;okCancel&#39;, fixed:true}});
+
+    var modal = Wix.UI.create({ctrl: &#39;Popup&#39;, options: {modal:true, buttonSet: &#39;okCancel&#39;, fixed:true}});
+
+    $(&#39;#popupAnchorBtn&#39;).on(&#39;click&#39;, function(evt){
+        evt.stopPropagation();
+        popup.getCtrl().open();
+    });
+
+    $(&#39;#modalAnchorBtn&#39;).on(&#39;click&#39;, function(evt){
+        evt.stopPropagation();
+        modal.getCtrl().open();
+    });
+
+&lt;/script&gt;
+</code></pre>
+<h3 id="options">Options</h3>
+<table class="options-table"><tr><th class="tb-name">Name</th><th class="tb-default">Deafult</th><th class="tb-desc">Descrition</th></tr><tr><td>appendTo</td><td>&#39;body&#39;</td><td>HTML element to append the popup to</td></tr>
+<tr><td>title</td><td>&#39;Popup&#39;</td><td>popup text title</td></tr>
+<tr><td>content</td><td>&#39;&#39;</td><td>inner content</td></tr>
+<tr><td>footer</td><td>&#39;&#39;</td><td>footer content</td></tr>
+<tr><td>modal</td><td>false</td><td>modal indication</td></tr>
+<tr><td>modalBackground</td><td>&#39;rgba(0,0,0,0.5)&#39;</td><td></td></tr>
+<tr><td>height</td><td>&#39;auto&#39;</td><td>popup height in pixels</td></tr>
+<tr><td>width</td><td>300</td><td>popup width in pixels</td></tr>
+<tr><td>onclose</td><td>function () {}</td><td>on close callback function</td></tr>
+<tr><td>oncancel</td><td>function() {}</td><td>on cancel callback function</td></tr>
+<tr><td>onopen</td><td>function() {}</td><td>on open callback function</td></tr>
+<tr><td>onposition</td><td>function(){}</td><td>on position callback function</td></tr></table>
+</div>
+
+
+
+<div data-scroll-target id="Radio-entry" class="cmp-plugin-decs-entry">
+<h1 id="radio">Radio</h1>
+<p>Radio button component, mimic native html radio buttons</p>
+<h3 id="example">Example</h3>
+<div wix-model="imagesToSync" wix-ctrl="Radio">
+    <div data-radio-value="sync10">Sync 10 images</div>
+    <div data-radio-value="sync25">Sync 25 images</div>
+    <div data-radio-value="sync50">Sync 50 images</div>
+</div>
+
+<h3 id="markup">Markup</h3>
+<pre><code class="lang-html">&lt;div wix-model=&quot;imagesToSync&quot; wix-ctrl=&quot;Radio&quot;&gt;
+    &lt;div data-radio-value=&quot;sync10&quot;&gt;Sync 10 images&lt;/div&gt;
+    &lt;div data-radio-value=&quot;sync25&quot;&gt;Sync 25 images&lt;/div&gt;
+    &lt;div data-radio-value=&quot;sync50&quot;&gt;Sync 50 images&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<h3 id="options">Options</h3>
+<table class="options-table"><tr><th class="tb-name">Name</th><th class="tb-default">Deafult</th><th class="tb-desc">Descrition</th></tr><tr><td>checked</td><td>0</td><td>checked item index</td></tr></table>
+</div>
+
+
+
+<div data-scroll-target id="Scrollbar-entry" class="cmp-plugin-decs-entry">
+<h1 id="scrollbar">Scrollbar</h1>
+<p>Scrollbar, mimic native html scrollbars with Wix style and behaviour across all supported browsers</p>
+<h3 id="example">Example</h3>
+<div class="box" wix-scroll="{height:150}">
+    <p style="height:600px;background:rgba(0,0,0,0.3)">Content</p>
+</div><br><div class="box" wix-ctrl="Scrollbar" wix-options="{height:150}">
+    <p style="height:600px;background:rgba(0,0,0,0.3)">Content</p>
+</div>
+
+<h3 id="markup">Markup</h3>
+<pre><code class="lang-html">&lt;div class=&quot;box&quot; wix-scroll=&quot;{height:150}&quot;&gt;
+    &lt;p style=&quot;height:600px;background:rgba(0,0,0,0.3)&quot;&gt;Content&lt;/p&gt;
+&lt;/div&gt;    
+&lt;div class=&quot;box&quot; wix-ctrl=&quot;Scrollbar&quot; wix-options=&quot;{height:150}&quot;&gt;
+    &lt;p style=&quot;height:600px;background:rgba(0,0,0,0.3)&quot;&gt;Content&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+<h3 id="options">Options</h3>
+<table class="options-table"><tr><th class="tb-name">Name</th><th class="tb-default">Deafult</th><th class="tb-desc">Descrition</th></tr><tr><td>width</td><td>&#39;auto&#39;</td><td></td></tr>
+<tr><td>height</td><td>&#39;250px&#39;</td><td>height in pixels of the visible scroll area</td></tr>
+<tr><td>color</td><td>&#39;#a4d9fc&#39;</td><td>scroll bar color</td></tr>
+<tr><td>opacity</td><td>1</td><td>scroll bar opacity</td></tr>
+<tr><td>hoverColor: &#39;#35aeff&#39;</td><td>bar hover color, accepts any hex/color value</td><td></td></tr>
+<tr><td>hoverOpacity</td><td>0</td><td>bar hover opacity</td></tr>
+<tr><td>position</td><td>&#39;right&#39;</td><td>scrollbar position - left/right</td></tr>
+<tr><td>railVisible</td><td>true</td><td>whether to show the scroll rail</td></tr>
+<tr><td>railColor</td><td>&#39;#333&#39;</td><td>scroll rail color</td></tr>
+<tr><td>railOpacity</td><td>0</td><td>scroll rail opacity</td></tr></table>
+</div>
+
+
+
+<div data-scroll-target id="Slider-entry" class="cmp-plugin-decs-entry">
+<h1 id="slider">Slider</h1>
+<p>Slider component, enables selection from linear range of numeric values through a draggable knob. The Slider allows to set the selected range and text labels before and after.</p>
+<h3 id="example">Example</h3>
+<div  wix-model="myValue" wix-ctrl="Slider" wix=options=="{{ maxValue:500, preLabel:'zero', postLabel:'five hundreds'}"></div>
+
+<h3 id="markup">Markup</h3>
+<pre><code class="lang-html">&lt;div  wix-model=&quot;myValue&quot; wix-ctrl=&quot;Slider&quot; wix=options==&quot;{{ maxValue:500, preLabel:&#39;zero&#39;, postLabel:&#39;five hundreds&#39;}&quot;&gt;&lt;/div&gt;
+</code></pre>
+<h3 id="options">Options</h3>
+<table class="options-table"><tr><th class="tb-name">Name</th><th class="tb-default">Deafult</th><th class="tb-desc">Descrition</th></tr><tr><td>minValue</td><td>0</td><td>minimum value on the slider</td></tr>
+<tr><td>maxValue</td><td>100</td><td>maximum value on the slider</td></tr>
+<tr><td>value</td><td>0</td><td>current value</td></tr>
+<tr><td>width</td><td>80</td><td>component&#39;s width</td></tr>
+<tr><td>preLabel</td><td>&#39;&#39;</td><td>a label to the right of the slider</td></tr>
+<tr><td>postLabel</td><td>&#39;&#39;</td><td>a label to the left of the slider</td></tr>
+<tr><td>tooltip</td><td>false</td><td>whether to show a tooltip for the current value</td></tr></table>
+</div>
+
+
+
+<div data-scroll-target id="Spinner-entry" class="cmp-plugin-decs-entry">
+<h1 id="spinner">Spinner</h1>
+<p>Spinner component, enables selection from linear range of numeric values one step at a time. The Spinner allows to set the selected range and the increment/decrement step.</p>
+<h3 id="example">Example</h3>
+<div wix-model="myInt" wix-ctrl="Spinner" wix-options="{ maxValue:500 }"></div>
+
+<h3 id="markup">Markup</h3>
+<pre><code class="lang-html">&lt;div wix-model=&quot;myInt&quot; wix-ctrl=&quot;Spinner&quot; wix-options=&quot;{ maxValue:500 }&quot;&gt;&lt;/div&gt;
+</code></pre>
+<h3 id="options">Options</h3>
+<table class="options-table"><tr><th class="tb-name">Name</th><th class="tb-default">Deafult</th><th class="tb-desc">Descrition</th></tr><tr><td>minValue</td><td>0</td><td>minimum value on the spinner</td></tr>
+<tr><td>maxValue</td><td>1000</td><td>maximum value on the spinner</td></tr>
+<tr><td>value</td><td>0</td><td>current value</td></tr>
+<tr><td>step</td><td>1</td><td>step size both for increment &amp; decrement</td></tr>
+<tr><td>precision</td><td>0</td><td></td></tr></table>
+</div>
+
+
+
+<div data-scroll-target id="Tooltip-entry" class="cmp-plugin-decs-entry">
+<h1 id="tooltip">Tooltip</h1>
+<p>Tooltip component, enables content annotation on hover</p>
+<h3 id="example">Example</h3>
+<p><span wix-tooltip=" {placement:'top', text:'I am Hovered'}">Hover me</span></p>
+<div wix-ctrl="Tooltip" wix-options="{placement:'right', text:'click me'}">
+    <button class="uilib-btn connect">I have a tooltip!!!</button>
+</div>
+
+<h3 id="markup">Markup</h3>
+<pre><code class="lang-html">&lt;span wix-tooltip=&quot; {placement:&#39;top&#39;, text:&#39;I am Hovered&#39;}&quot;&gt;Hover me&lt;/span&gt;
+
+&lt;div wix-ctrl=&quot;Tooltip&quot; wix-options=&quot;{placement:&#39;right&#39;, text:&#39;click me&#39;}&quot;&gt;
+    &lt;button class=&quot;uilib-btn connect&quot;&gt;I have a tooltip!!!&lt;/button&gt;
+&lt;/div&gt;
+</code></pre>
+<h3 id="options">Options</h3>
+<table class="options-table"><tr><th class="tb-name">Name</th><th class="tb-default">Deafult</th><th class="tb-desc">Descrition</th></tr><tr><td>placement</td><td>&#39;top&#39;</td><td>tooltip placement - &#39;top&#39;, &#39;right&#39;, &#39;left&#39;, &#39;bottom&#39;</td></tr>
+<tr><td>text</td><td>&quot;&quot;</td><td>tooltip content</td></tr>
+<tr><td>animation</td><td>true</td><td>show tooltip with/out animation</td></tr></table>
+</div></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+	<div id="footer">
+			
+	</div>
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        DocsApp.init();
+        prettyPrint();
+        Wix.UI.initialize({});
+    });
+
+</script>
+
+
+<script type="text/javascript" src="google-code-prettify/prettify.js"></script>
+
+<script src="DocsApp.js"></script>
+<script src="Utils.js"></script>
+<script src="ScrollInterations.js"></script>
+<script src="Templates.js"></script>
+<script src="PluginDocsData.js"></script>
+
+
+</body>
+</html>

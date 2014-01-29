@@ -228,6 +228,7 @@ module.exports = function (grunt) {
 					css: "../ui-lib.css",
 					docs: {
 						js: 'docs.js',
+						vendorJs: 'jquery.sticky-kit.min.js',
 						css: 'docs.css',
 						settings: '../settings.html?viewMode=standalone'
 					}
@@ -240,6 +241,7 @@ module.exports = function (grunt) {
 					css: '/dist/ui-lib.min.css',
 					docs: {
 						js: '/dist/docs/docs.min.js',
+						vendorJs: '/dist/docs/jquery.sticky-kit.min.js',
 						css: '/dist/docs/docs.min.css',
 						settings: '/dist/settings.html?viewMode=standalone'
 					}

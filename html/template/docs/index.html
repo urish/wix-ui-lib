@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wix UI-Lib</title>
+	
+    <link rel="stylesheet" href="<%= css %>"/>
+    <link rel="stylesheet" href="<%= docs.css %>"/>
+	
+		
+	<!-- jQuery Dependency -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+	<!-- Wix SDK -->
+	<script src="http://sslstatic.wix.com/services/js-sdk/1.25.0/js/Wix.js"></script>
+	<!-- Wix UI -->
+	<script type="text/javascript" src="<%= js %>"></script>
+    <!-- Vendor Js -->
+    <script type="text/javascript" src="<%= docs.vendorJs %>"></script>
+	<script type="text/javascript">Wix.__disableStandaloneError__ = true;</script>
+
+    <!-- HTML5 shim IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+<nav class="navigation">
+    <ul>
+        <li><a data-scroll-inter data-no-scroll href="#home">Wix UI-LIB</a></li>
+        <li><a data-scroll-inter data-no-scroll href="#getting-started">Getting Started</a></li>
+        <li><a data-scroll-inter data-no-scroll href="#demo">Demo</a></li>
+        <li><a data-scroll-inter data-no-scroll href="#components">Components</a></li>
+        <li><a data-scroll-inter data-no-scroll href="#css">CSS</a></li>
+    </ul>
+</nav>
+<div id="home" class="pages white page-welcome">
+    <div class="container center cell">
+        <aside class="wix-logo"></aside>
+        <h1>Wix UI-LIB</h1>
+        <h2>3rd Party Applications Starter Kit</h2>
+
+        <div class="get-ui-lib">
+            <div class="uilib-btn btn-xlarge"><a href="https://github.com/wix/wix-ui-lib/releases/download/v2.0.4/wix-ui-lib-v2.0.4.zip">Download Wix UI-LIB</a></div>
+            <div class="uilib-btn btn-xlarge"><a href="https://github.com/wix/wix-ui-lib">View on GitHub</a></div>
+        </div>
+
+        <a class="scrollMore" data-scroll-inter href="#getting-started"></a>
+
+    </div>
+</div>
+
+<div class="getting-started page-getting-started" id="getting-started" style="padding-top:50px;">
+    <div class="container">
+        ${{getting-started}}
+    </div>
+</div>
+
+<div class="wix page-demo" id="demo" style="padding-top:50px;">
+    <div class="container">
+        <h2>Demo</h2>
+        <p>This boilerplate is aimed at helping developers in the process of getting new apps to Wix App Market as quickly as possible. </p>
+        <p>The UI in this project focuses on the App's Settings Panel.</p>
+        <p>The boilerplate offers UI standards and common Javascript components to assist the developer in passing Product tests, and in developing a consistent and uniformed UI for the app.</p>
+
+        <br/>
+        <br/>
+
+        <div class="demo">
+            <div class="container">
+                <strong class="title">App Name</strong>
+                <div class="demo-container">
+                    <iframe src="<%= docs.settings %>" frameborder="0" scrolling="no" allowTransparency="true" width="100%" height="100%"></iframe>
+                </div>
+                <footer class="uilib-footer">
+                    <div class="support pull-right">
+                        Have a question? Please contact us at: <a href="mailto:support@company.com">support@company.com</a>
+                    </div>
+                </footer>
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+
+<div class="components page-components" id="components" style="padding-top:50px; border-top:1px solid #f0f0f0">
+    <div class="container clearfix">
+        <div class="side-bar js-sidebar">
+           <div class="js-cmp-sidebar-wrapper">
+               <h2>Components</h2>
+               <ul class="cmp-sidebar content"></ul>
+           </div>
+
+        </div>
+        <div class="content js-main">
+            <div id="intro js-intro">
+                <h2>lorem intro</h2>
+                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr,  sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr,  sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr,  sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr,  sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+            </div>
+            <div id="docs" class="js-docs">
+                <div class="content">${{content}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="css" id="css" style="padding-top:50px; border-top:1px solid #f0f0f0">
+    <div class="container clearfix">
+        <div class="side-bar js-sidebar">
+            <div class="js-cmp-sidebar-wrapper">
+                <h2>CSS</h2>
+                <ul class="cmp-sidebar content">
+                    <li class="cmp-plugin-entry"><a data-scroll-inter="" href="#Buttons-entry">Buttons</a><ul class="nav"><li><a href="#Buttons-examples">Examples</a></li><li><a href="#Buttons-usage">Usage</a></li></ul></li>
+                    <li class="cmp-plugin-entry"><a data-scroll-inter="" href="#Icons-entry">Icons</a><ul class="nav"><li><a href="#Icons-examples">Examples</a></li><li><a href="#Icons-usage">Usage</a></li></ul></li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="content js-main">
+            <div id="intro js-intro">
+                <h2>lorem intro</h2>
+                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr,  sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr,  sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+            </div>
+            <div class="js-docs">
+                <div class="content">
+
+                    <div data-scroll-target id="Buttons-entry" class="cmp-plugin-decs-entry">
+                        <h1 id="buttons">Buttons</h1>
+                        <p>Use Wix button classes to create a styled button.</p>
+                        <h3 id="example">Example</h3>
+                        <div class="acc-content btn-demo">
+                            <section>
+                                <button class="submit uilib-btn connect">Connect account</button>
+                                <button class="submit uilib-btn btn-secondary">Connect account</button>
+                                <button class="submit uilib-btn btn-upgrade">Upgrade</button>
+                                <button class="submit uilib-btn btn-black-text">Connect account</button>
+                            </section>
+                            <section>
+                                <button class="submit uilib-btn btn-purple">Upgrade</button>
+                                <button class="submit uilib-btn btn-green">Connect account</button>
+                                <button class="submit uilib-btn disabled">Connect account</button>
+                                <button class="submit uilib-btn btn-small">Connect account</button>
+                            </section>
+                            <section>
+                                <button class="submit uilib-btn btn-large">Connect account</button>
+                            </section>
+
+
+                        </div>
+                        <h3 id="markup">Markup</h3>
+<pre class="plugin-markup prettyprint"><code class="lang-html">&lt;button class=&quot;uilib-btn&quot;&gt;&lt;/button&gt;
+</code></pre>
+                    </div>
+
+
+
+                    <div data-scroll-target id="Icons-entry" class="cmp-plugin-decs-entry">
+                        <h1 id="icons">Icons</h1>
+                        <p>Wix designed icons, can be used as part of your app buttons or as a stand alone element.</p>
+                        <h3 id="example">Example</h3>
+                        <button class="uilib-btn btn-secondary"><i class="icon-edit"></i>Edit settings</button>
+                        <ul class="icons">
+                            <li><span class="icon-watch"></span></li>
+                            <li><span class="icon-unwatch"></span></li>
+                            <li><span class="icon-refresh"></span></li>
+                            <li><span class="icon-download"></span></li>
+                            <li><span class="icon-edit"></span></li>
+                            <li><span class="icon-close"></span></li>
+                        </ul>
+
+                        <h3 id="markup">Markup</h3>
+<pre class="plugin-markup prettyprint"><code class="lang-html">&lt;button class=&quot;uilib-btn btn-secondary&quot;&gt;&lt;i class=&quot;icon-edit&quot;&lt;/i&gt&lt;Edit Settings&lt;/button&gt;
+</code></pre>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<aside class="js-back-to-top"><a data-scroll-inter href="#home">Back to top</a></aside>
+
+
+<div id="footer">
+
+</div>
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        DocsApp.init();
+        prettyPrint();
+        Wix.UI.initialize({});
+    });
+</script>
+
+
+<script type="text/javascript" src="<%= docs.js %>"></script>
+
+</body>
+</html>

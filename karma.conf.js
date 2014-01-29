@@ -26,7 +26,7 @@ module.exports = function(config) {
 		'components/ColorPicker/ColorPicker.css',
 		'components/AdvancedDropdown/css/dd.css',
 		'components/Slider/slider.css',
-		'components/FixedPositionedControl/FixedPositionedControl.css',
+		'components/FixedPositionControl/FixedPositionControl.css',
 
 	
         'http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js',
@@ -38,7 +38,7 @@ module.exports = function(config) {
 
 		'core/definePlugin.js',
 		'core/ColorPickerCore.js',
-		'core/ui-lib.js',
+		'core/core.js',
 		'components/**/*.js',
 		
 		

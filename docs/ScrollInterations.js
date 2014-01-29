@@ -38,6 +38,12 @@ DocsApp.Classes.ScrollInterations = function () {
 				$(".js-sidebar").stick_in_parent({offset_top: 80});
 			}, 100);
 
+			$(".js-back-to-top").on('click', function(){
+				$body.animate({
+					scrollTop : 0
+				}, 260);
+			});
+
 
 		},
 

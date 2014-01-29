@@ -2,11 +2,11 @@ Getting Started
 ========================
 
 ## Get the Code
-Download the latest relaese of the ui lib from [here](https://github.com/wix/wix-ui-lib/releases/download/v2.0.4/wix-ui-lib-v2.0.4.zip) and add it to your project folder
+Download the latest relaese of the ui lib from [here](https://github.com/wix/wix-ui-lib/releases/download/v2.0.4/wix-ui-lib-v2.0.4.zip) and add it to your project folder.
 
 ## Dependencies
 
-Wix UI lib dependencies are jQuery from version 1.9.0 and Wix SDK from version 1.25.0 make sure you include them in your HTML
+Wix UI lib dependencies are jQuery from version 1.9.0 and Wix SDK from version 1.25.0 make sure you include them in your HTML.
 
 ## HTML file setup
 
@@ -42,11 +42,11 @@ To get started, include the minified ui lib JS and CSS files in your App Setting
 
 ## Namespace and programming
 
-**Wix** is the global namespace deployed by the Wix SDK. The UI Lib will deploy itself as a sub namespace of the SDK under **Wix.UI**
+**Wix** is the global namespace deployed by the Wix SDK. The UI Lib will deploy itself as a sub namespace of the SDK under **Wix.UI**.
 
 ## Using Components
 
-The Wix UI Lib include two types of components - CSS & Javascript
+The Wix UI Lib include two types of components - CSS & Javascript.
 
 ### CSS Components
 
@@ -60,16 +60,16 @@ Css components are several css classes that can help you build the ui of the set
 
 ### Javascript Components
 
-These are basically a set of [jQuery][jquery] Plugins with aspecific structure
+These are basically a set of [jQuery][jquery] Plugins with specific structure.
 
 [jquery]: http://jquery.com/
 
 ## Wix custom HTML attributes
 The Wix UI Lib defines custom attributes which enable components initialization from within the HTML markup.
 
-**wix-ctrl -** component's controller declaration
+**wix-ctrl -** component's controller declaration.
 
-**wix-options -** component initialization options
+**wix-options -** component initialization options.
 
 **wix-ctrl:{options} - ** Alternative for combining the two attributes in one.
 
@@ -77,13 +77,13 @@ The Wix UI Lib defines custom attributes which enable components initialization 
 
 **wix-model -** define app model key for a component - this is a two way data item that it's value is accessable by the app through the Wix.UI.get/set methods. Changes to this item can tracked by subscribing to change events Wix.UI.onChange method.
 
-`Warning: wix-pram & wix-model are mutually exclusive and can not co-exist on the same controller. Only one of them should be used`
+`Warning: wix-pram & wix-model are mutually exclusive and can not co-exist on the same controller. Only one of them should be used.`
 
 All attributes can be prefixed with **data-** to be W3C compliant (Optional).
 
 ###Initialization
 
-There are 2 ways to initialize the components
+There are 2 ways to initialize the components:
 
 * initialize with markup (prefered)
 * initialize with javascript (advance)
@@ -92,7 +92,7 @@ There are 2 ways to initialize the components
 #### Initialize with markup
 
 Each component can be initialized with a simple markup and two important attributes
-`wix-ctrl` and `wix-options`
+`wix-ctrl` and `wix-options`:
 ```html
 <div wix-model="myKey" wix-ctrl="ComponentName" wix-options="{Options}"></div>
 ```

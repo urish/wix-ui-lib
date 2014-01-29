@@ -29,7 +29,7 @@ module.exports = function(grunt) {
         if(username && password && tag_name && name && body){
             _.bind(execCommon, this, 'curl', ['-u', username + ':' + password,
                 '-d', '{"tag_name":"' + tag_name + '","target_commitish": "master","name": "' + name + '","body":"' + body + '","draft": false,"prerelease": false}',
-                'https://api.github.com/repos/liors/TVPirate/releases'], function(data){
+                'https://api.github.com/repos/wix/wix-ui-lib/releases'], function(data){
                 _.bind(upload, this, username, password, data.id, data.name)();
             }.bind(this))();
         } else {

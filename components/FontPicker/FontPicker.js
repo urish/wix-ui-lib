@@ -1,6 +1,7 @@
 jQuery.fn.definePlugin('FontPicker', function () {
 	'use strict';
-
+	var imageMock = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+	
 	return {
 		init : function () {
 			this.isParamMode = this.getParamKey();//this.$el.attr('wix-param') || this.$el.attr('data-wix-param');
@@ -14,7 +15,7 @@ jQuery.fn.definePlugin('FontPicker', function () {
 			this.$el.append($dropEl);
 			
 			this.dropdown = $dropEl.Dropdown({
-					hideText : !!this.options.spriteUrl,
+					hideText : this.options.spriteUrl !== imageMock,
 					width : 265,
 					height : 200,
 					value: this.options.value
@@ -51,7 +52,7 @@ jQuery.fn.definePlugin('FontPicker', function () {
 	};
 
 	function getFontsSpriteUrl(){
-		return window.Wix && Wix.Styles && Wix.Styles.getFontsSpriteUrl() || null;
+		return window.Wix && Wix.Styles && Wix.Styles.getFontsSpriteUrl() || imageMock;
 	}
 	
 	function getEditorFonts(){

@@ -54,12 +54,6 @@ h1{
     margin: 0;
 }
 
-
-.js-cmp-sidebar-wrapper.scroll {
-    position: fixed;
-    top: 80px;
-}
-
 .cmp-sidebar{
 	width: 210px;
 

@@ -54,11 +54,11 @@ Css components are several css classes that can help you build the ui of the set
 
 #### Buttons
 
-#### General 
+#### General
 
 
 
-### Javascript Components 
+### Javascript Components
 
 These are basically a set of [jQuery][jquery] Plugins with aspecific structure
 
@@ -79,11 +79,11 @@ The Wix UI Lib defines custom attributes which enable components initialization 
 
 `Warning: wix-pram & wix-model are mutually exclusive and can not co-exist on the same controller. Only one of them should be used`
 
-All attributes can be prefixed with **data-** to be W3C compliant (Optional). 
+All attributes can be prefixed with **data-** to be W3C compliant (Optional).
 
 ###Initialization
 
-There are 2 ways to initialize the components 
+There are 2 ways to initialize the components
 
 * initialize with markup (prefered)
 * initialize with javascript (advance)
@@ -100,11 +100,11 @@ Each component can be initialized with a simple markup and two important attribu
 The **Wix.UI** library manages all components that were decalred through markup or created dynamically.  **Wix.UI.initialize()** must be called on DOM ready to start the compoenets creations process and to display the document body. The compoenets will get created with the options that were specified inside the markup using the `wix-option` attribute.
 
 All the **Wix.UI** components should be initialized after the DOM is ready.
-```javascript 
+```javascript
 $( document ).ready(function(){
 
     Wix.UI.initialize({});
-    
+
 });
 ```
 
@@ -123,23 +123,23 @@ Components that has `wix-model` attribute can be initialized with default values
 
 <script>
     $( document ).ready(function(){
-       
+
       Wix.UI.initialize({
           showTweets: true
       });
-      
+
       Wix.UI.get('showTweets'); //returns true
-      
+
       Wix.UI.set('showTweets', false);
-      
+
       Wix.UI.get('showTweets'); //returns false
-      
+
       Wix.UI.set('showTweets', false, true); //sets the value and not fire change event
-        
+
     });
 </script>
 ...
-```    
+```
 ####Subscribe to model change events
 
 You can subscribe to changes in the wix-model with the following code:
@@ -153,7 +153,7 @@ Wix.UI.onChange('myKey', function(value, key){
 Wix.UI.onChange('*', function(value, key){
     //do some awesome stuff with the value
 });
-```    
+```
 #### Save Wix.UI Model
 
 When you want to save the state of your components you can simply call the toJSON function on the **Wix.UI** to get it's current state. This saved json representation can be later used to (re)initialize the **Wix.UI**. E.g. you can save it in your database and read on next invocations of the App Settings.
@@ -210,7 +210,7 @@ wix-param can also be consumed inside the App's Widget/Page. You can use **Wix S
 ```javascript
 Wix.getStyleParams(function(styleParams){
     // styleParams is a map with all style values {colors:{}, numbers:{}, booleans:{}}
-}); 
+});
 ```
 ###Style paramerters in a CSS stylesheet
 
@@ -222,19 +222,19 @@ You can use the color style parameters inside a **inline CSS style** within your
         background-color: {{style.myParam}}; /* style parameter */
         color: {{color-1}}; /* style from the template */
     }
-    
+
     #myElement2 {
         background-color: {{style.myParam color-1}}; /* style parameter with fallback value*/
     }
-    
+
     @media(wix-device-type:mobile){ /* wix media query for device type */
         #myElement {
             border: 1px solid {{color-1}};
         }
-    }        
-    
+    }
+
 </style>
-```    
+```
 Color style parameters can use reserved theme colors in the stylesheet using the following references:
 
 * white/black - primary white, black if the site theme is inverted
@@ -248,7 +248,7 @@ Color style parameters can use reserved theme colors in the stylesheet using the
 #### Initialize with javascript
 
 In this way you need to subscribe to changes and set values directly on the jQuery plugin.
-```javascript    
+```javascript
 //create plugin on existing element
 $('#myElement').PluginName(options);
 
@@ -264,7 +264,7 @@ Wix.UI.initializePlugin($('<div wix-ctrl="ColorPicker" wix-model="myColor">'), {
 
 ### Dynamic creation of javascript components
 
-```javascript    
+```javascript
 //create plugin and element that are conected to wix param or model
 var jQueryElement = Wix.UI.create({
     id:'myElement', //DOM element id
@@ -279,8 +279,8 @@ var jQueryElement = Wix.UI.create({
 });
 ```
 
-### Get component controller instance dynamically 
-```javascript  
+### Get component controller instance dynamically
+```javascript
 //get the plugin instance from jQuery element
 var pluginInstance = jQueryElement.getCtrl();
 var pluginInstance = $('#myElement').getCtrl();
@@ -289,7 +289,7 @@ var pluginInstance = $('#myElement').getCtrl();
 #### Dynamic component destruction
 
 when you need to remove a component form the page to avoid memeory leaks use **Wix.UI.destroyPlugin**
-```javascript        
+```javascript
 //destroy the component and remove all listeners
 Wix.UI.destroy($('#myElement'));
 

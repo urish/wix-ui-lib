@@ -17,6 +17,16 @@ ul, li {
 }
 */
 
+.wix-logo {
+    position: absolute;
+    right: 5px;
+    top: 49px;
+    background: url(images/wix-logo.png) no-repeat;
+    height: 77px;
+    width: 65px;
+    z-index: 9999999;
+}
+
 .white {
     color: #fff;
 }
@@ -31,7 +41,6 @@ ul, li {
 }
 
 .navigation {
-    display: none;
     position: fixed;
     margin: 0;
     top: 0;
@@ -47,11 +56,13 @@ ul, li {
 @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 
 .navigation.shown {
+    /*
     display: inline-block;
     animation: fadeIn 0.5s;
     -moz-animation: fadeIn 0.5s;
     -o-animation: fadeIn 0.5s;
     -webkit-animation: fadeIn 0.5s;
+    */
 }
 
 .navigation > ul {

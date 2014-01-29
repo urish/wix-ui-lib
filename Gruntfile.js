@@ -99,7 +99,7 @@ module.exports = function (grunt) {
 					"<%= concat.docsJs.src %>",
 					"<%= concat.docsCss.src %>",
 					"<%= mdDocs.dev.options.files %>"],
-				tasks: ['concat:docsJs', 'concat:docsCss', 'copy:devDocs', 'docs:dev', 'mdDocs:dev']
+				tasks: ['concat:docsJs', 'concat:docsCss', 'copy:devDocs', 'docs:dev', 'markdown:dev', 'mdDocs:dev']
 			}
 		},
 
@@ -249,13 +249,47 @@ module.exports = function (grunt) {
 			}
 		},
 
+		markdown: {
+			dev: {
+				files: [{
+					expand: true,
+					src: 'docs/md/*.md',
+					ext: '.html'}
+				],
+				options: {
+					postCompile: function(html, context) {
+						var source = grunt.file.read(dev + '/docs/index.html');
+						source = source.replace('${{getting-started}}', html);
+						grunt.file.write(dev + '/docs/index.html', source);
+					}
+				}
+			},
+
+			dist: {
+				files: [{
+					expand: true,
+					src: 'docs/md/*.md',
+					ext: '.html'}
+				],
+				options: {
+					postCompile: function(html, context) {
+						var source = grunt.file.read(dist + '/docs/index.html');
+						source = source.replace('${{getting-started}}', html);
+						grunt.file.write(dist + '/docs/index.html', source);
+					}
+				}
+			}
+		},
+
 		devServer: {
 			base: "dev",
-			dist: "dist",
-			web: {
+				dist: "dist",
+				web: {
 				port: 8000
 			}
 		}
+
+
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-clean');
@@ -270,8 +304,8 @@ module.exports = function (grunt) {
 	grunt.loadTasks('tasks');
 
 	grunt.registerTask('default', ['clean:dev', 'concat', 'settings:dev']);
-	grunt.registerTask('dev', ['devServer', 'clean:dev', 'concat', 'copy:devDocs', 'settings:dev', 'docs:dev', 'mdDocs:dev', 'watch']);
-	grunt.registerTask('dist', ['clean:dist', 'concat', 'uglify', 'cssmin', 'copy:distImages', 'copy:distDocs', 'settings:dist', 'docs:dist', 'mdDocs:dist']);
+	grunt.registerTask('dev', ['devServer', 'clean:dev', 'concat', 'copy:devDocs', 'settings:dev', 'docs:dev', 'markdown:dev',  'mdDocs:dev', 'watch']);
+	grunt.registerTask('dist', ['clean:dist', 'concat', 'uglify', 'cssmin', 'copy:distImages', 'copy:distDocs', 'settings:dist', 'docs:dist', 'markdown:dist', 'mdDocs:dist']);
 
 	grunt.registerTask('lint', ['jshint']);
 };

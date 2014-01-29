@@ -305,7 +305,7 @@ An accordion is divided to a vertical set of panes. By default only a single pan
 <pre><code class="lang-html">&lt;div wix-param=&quot;fontStyle&quot; wix-ctrl=&quot;FontStylePicker&quot;&gt;&lt;/div&gt;
 </code></pre>
 <h3 id="options">Options</h3>
-<table class="options-table"><tr><th class="tb-name">Name</th><th class="tb-default">Deafult</th><th class="tb-desc">Descrition</th></tr><tr><td>value</td><td>0</td><td>selected font family index in the list of available fonts</td></tr></table>
+<table class="options-table"><tr><th class="tb-name">Name</th><th class="tb-default">Deafult</th><th class="tb-desc">Descrition</th></tr><tr><td>value</td><td>&quot;Body-L&quot;</td><td>selected font family index in the list of available fonts</td></tr></table>
 </div>
 
 
@@ -350,18 +350,18 @@ An accordion is divided to a vertical set of panes. By default only a single pan
 <p><button class="uilib-btn btn-secondary" id="modalAnchorBtn">Open Modal</button></p>
 <script>
 
-    var popup = Wix.UI.createPlugin({ctrl: 'Popup', options: {buttonSet: 'okCancel', fixed:true}});
+    var popup = Wix.UI.create({ctrl: 'Popup', options: {buttonSet: 'okCancel', fixed:true}});
 
-    var modal = Wix.UI.createPlugin({ctrl: 'Popup', options: {modal:true, buttonSet: 'okCancel', fixed:true}});
+    var modal = Wix.UI.create({ctrl: 'Popup', options: {modal:true, buttonSet: 'okCancel', fixed:true}});
 
     $('#popupAnchorBtn').on('click', function(evt){
         evt.stopPropagation();
-        popup.getPlugin().open();
+        popup.getCtrl().open();
     });
 
     $('#modalAnchorBtn').on('click', function(evt){
         evt.stopPropagation();
-        modal.getPlugin().open();
+        modal.getCtrl().open();
     });
 
 </script>
@@ -371,18 +371,18 @@ An accordion is divided to a vertical set of panes. By default only a single pan
 &lt;button class=&quot;uilib-btn btn-secondary&quot; id=&quot;modalAnchorBtn&quot;&gt;Open Modal&lt;/button&gt;
 &lt;script&gt;
 
-    var popup = Wix.UI.createPlugin({ctrl: &#39;Popup&#39;, options: {buttonSet: &#39;okCancel&#39;, fixed:true}});
+    var popup = Wix.UI.create({ctrl: &#39;Popup&#39;, options: {buttonSet: &#39;okCancel&#39;, fixed:true}});
 
-    var modal = Wix.UI.createPlugin({ctrl: &#39;Popup&#39;, options: {modal:true, buttonSet: &#39;okCancel&#39;, fixed:true}});
+    var modal = Wix.UI.create({ctrl: &#39;Popup&#39;, options: {modal:true, buttonSet: &#39;okCancel&#39;, fixed:true}});
 
     $(&#39;#popupAnchorBtn&#39;).on(&#39;click&#39;, function(evt){
         evt.stopPropagation();
-        popup.getPlugin().open();
+        popup.getCtrl().open();
     });
 
     $(&#39;#modalAnchorBtn&#39;).on(&#39;click&#39;, function(evt){
         evt.stopPropagation();
-        modal.getPlugin().open();
+        modal.getCtrl().open();
     });
 
 &lt;/script&gt;

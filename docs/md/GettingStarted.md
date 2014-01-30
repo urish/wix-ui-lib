@@ -54,9 +54,11 @@ Css components are several css classes that can help you build the ui of the set
 
 #### Buttons
 
-#### General
+Wix button classes to create styled buttons.
 
+#### Icons
 
+Wix designed icons, can be used as part of your app buttons or as a standalone element.
 
 ### Javascript Components
 

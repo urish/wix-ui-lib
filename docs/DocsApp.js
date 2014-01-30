@@ -5,7 +5,6 @@ var DocsApp = {
 		this.pluginDocsData = this.Classes.PluginDocsData(this.utils);
 		this.templates = this.Classes.Templates(this.pluginDocsData, this.utils);
 		this.$components = $("#components");
-
 		this.setAppElements();
 		this.markup();
 		this.bindEvents();
@@ -17,11 +16,11 @@ var DocsApp = {
 	},
 	markup : function () {
 		this.$root.hide();
-		this.updateClasses();
+		this.updatePrettifyClasses();
 		this.renderDocs();
 		this.$root.show();
 	},
-	updateClasses:function(){
+	updatePrettifyClasses:function(){
 		$('.lang-html,.lang-javascript').each(function(){
 			$(this).parents('pre').addClass('prettyprint linenums').css({
 				padding: '5px',
@@ -29,8 +28,8 @@ var DocsApp = {
 			});
 		})
 		this.$docs.find('.content').find('.cmp-plugin-decs-entry').each(function(){			
-			$(this).find('pre').addClass('plugin-markup prettyprint linenums');		
-		});		
+			$(this).find('pre').addClass('plugin-markup prettyprint linenums');
+		});
 	},
 	bindEvents : function () {
 		this.Classes.ScrollInterations().mixin(this);

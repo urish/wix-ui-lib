@@ -73,22 +73,19 @@ DocsApp.Classes.ScrollInterations = function () {
 			var dir = 0;
 			var UP = 1
 			var DOWN = -1
-			var update = function () {
-				winHeight = $win.height();
-				docHeight = $doc.height();
+			var updateDirectionAndCurrentWinScroll = function () {
 				_winScrollTop = $win.scrollTop();
 				dir = winScrollTop >= _winScrollTop ? UP : DOWN;
 				winScrollTop = _winScrollTop;
 			};
 			var findElementOverTheScroll = function () {
+				updateDirectionAndCurrentWinScroll();
 				var elements = allHashes.filter(function (el, i) {
-					if (winScrollTop + winHeight > docHeight - $(allHashes[allHashes.length - 1]).height() / 8) {
-						return true;
-					}
+					var currentElementTop = $(el).position().top;
 					if (dir === UP) {
-						return winScrollTop > ($(el).position().top - ($(allHashes[i - 1]).height() / 2 || 0));
+						return winScrollTop > (currentElementTop - ($(allHashes[i - 1]).height() / 2 || 0));
 					} else {
-						return winScrollTop + tollerace > $(el).position().top;
+						return winScrollTop + tollerace > currentElementTop;
 					}
 				});
 				return elements.pop();
@@ -104,7 +101,6 @@ DocsApp.Classes.ScrollInterations = function () {
 				clearTimeout(timeout);
 				timeout = setTimeout(function () {
 						if(noScroll) return;
-						update();
 						var element = findElementOverTheScroll();
 						updateCss(element);
 					}, 20);

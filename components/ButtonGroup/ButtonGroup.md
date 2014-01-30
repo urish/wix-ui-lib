@@ -1,8 +1,14 @@
 # ButtonGroup
 
-Button Group component, enables selection of multiple options through a group of horizontally ordered buttons
+Button Group component, enables selection of one option from a group of horizontally ordered buttons.
 
 ### Example
+
+<div wix-model="multiSize" wix-ctrl="ButtonGroup">
+	<button value="mini">Mini</button>
+	<button value="medium">Medium</button>
+	<button value="large">Large</button>
+</div>
 
 ### Markup
 ```html
@@ -15,5 +21,7 @@ Button Group component, enables selection of multiple options through a group of
 
 ### Options
 
-* value; 0; selected button index
-* mode; 'single';
+Name         | Default   | Description
+-------------|-----------|------------
+value        | `0`       | selected button index
+mode         | `single`  | single or toggle modes

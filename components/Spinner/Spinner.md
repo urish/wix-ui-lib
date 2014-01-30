@@ -4,6 +4,9 @@ Spinner component, enables selection from linear range of numeric values one ste
 
 ### Example
 
+<div wix-model="myInt" wix-ctrl="Spinner" wix-options="{ maxValue:500 }"></div>
+
+
 ### Markup
 ```html
 <div wix-model="myInt" wix-ctrl="Spinner" wix-options="{ maxValue:500 }"></div>
@@ -11,9 +14,11 @@ Spinner component, enables selection from linear range of numeric values one ste
 
 ### Options
 
-* minValue; 0; minimum value on the spinner
-* maxValue; 1000; maximum value on the spinner
-* value; 0; current value
-* step; 1; step size both for increment & decrement
-* precision; 0;
-* size; default;spinner size options are default, medium or large
+Name      | Default   | Description
+----------|-----------|------------
+minValue  | `0`       | minimum value on the spinner
+maxValue  | `1000`    | maximum value on the spinner
+value     | `0`       | current value
+step      | `1`       | step size both for increment & decrement
+precision | `0`       | spinner precision
+size      | `default` | spinner size options are `default`, `medium` or `large`

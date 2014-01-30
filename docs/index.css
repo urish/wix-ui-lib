@@ -341,7 +341,7 @@ h1{
     display:none;
 }
 
-.page-components table.options-table, .page-css table.options-table {
+.cmp-plugin-decs-entry > table {
     border-spacing: 0;
     font-size: 14px;
     color: #4f4f4f;
@@ -351,35 +351,24 @@ h1{
     width: 100%;
 }
 
-table.options-table th, td {
+.cmp-plugin-decs-entry > table th, .cmp-plugin-decs-entry > table td {
     padding: 0.25rem;
     text-align: left;
     border: 1px solid rgba(0,0,0,0.1);
     white-space: pre-wrap;
 }
 
+.cmp-plugin-decs-entry > table tbody, .cmp-plugin-decs-entry > table thead {
+    border: none;
+}
 
-table.options-table tbody tr:nth-child(odd) {
+
+.cmp-plugin-decs-entry > table tbody tr:nth-child(odd) {
     background: rgba(0,0,0,0.015);
 }
 
-
-table.options-table th{
+.cmp-plugin-decs-entry > table th{
     background: rgba(0,0,0,0.15);
-}
-
-
-.options-table .tb-name{
-    width:20%
-}
-
-.options-table .tb-default{
-    width:20%
-}
-
-
-.options-table .tb-desc{
-    width:60%
 }
 
 #Accordion-entry [wix-ctrl]{
@@ -393,6 +382,12 @@ table.options-table th{
 .page-css ul.icons > li {
     display: inline-block;
     margin-right: 10px;
+}
+
+.page-components .content ul {
+    margin-left: 16px;
+    list-style: inherit;
+    font-size: 12px;
 }
 
 #footer{

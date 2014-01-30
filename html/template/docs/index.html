@@ -217,6 +217,10 @@
         DocsApp.init();
         prettyPrint();
         Wix.UI.initialize({});
+
+        $("[wix-model='mySmallNumber']").getCtrl().setValidationFunction(function(value){
+            return value < 100;
+        });
     });
 </script>
 

@@ -1,8 +1,14 @@
 # ToggleButtonGroup
 
-Toggle Button Group component, enables selection of multiple options through a group of horizontally ordered toggle buttons
+Toggle Button Group component, enables selection of multiple options through a group of horizontally ordered toggle buttons.
 
 ### Example
+
+<div wix-model="size" wix-ctrl="ToggleButtonGroup">
+	<button value="mini">Mini</button>
+	<button value="medium">Medium</button>
+	<button value="large">Large</button>
+</div>
 
 ### Markup
 ```html
@@ -15,4 +21,6 @@ Toggle Button Group component, enables selection of multiple options through a g
 
 ### Options
 
-* value; {mini:true,medium:false,large:true}; selected button index
+Name         | Default   | Description
+-------------|-----------|------------
+value        | `0`       | selected buttons for example: `{mini:true,medium:false,large:true}`

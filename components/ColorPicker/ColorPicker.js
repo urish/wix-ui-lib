@@ -20,7 +20,7 @@ jQuery.fn.definePlugin('ColorPicker', function ($) {
 		},
 		getDefaults: function(){
 			return {
-				startWithColor : "#897185",
+				startWithColor : "color-1",
 				value:undefined
 			};
 		},

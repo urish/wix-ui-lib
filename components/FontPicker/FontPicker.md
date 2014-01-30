@@ -1,10 +1,12 @@
 # FontPicker
 
-FontPicker component, control the selection of a font family for a text field
+Font picker component, control the selection of a font family for a text field. The fonts list is taken from the Wix site.
 
-**Site parameter, the selected value will be saved inside the Wix site**
+**Note that the selected value will be saved inside the Wix site, there is no need to listen to an onChange event.**
 
 ### Example
+
+<div wix-param="fontFamily" wix-ctrl="FontPicker"></div>
 
 ### Markup
 ```html
@@ -13,4 +15,6 @@ FontPicker component, control the selection of a font family for a text field
 
 ### Options
 
-* value; 0; selected font family index in the list of available fonts
+Name   | Default  | Description
+-------|----------|------------
+value  | `0`      | selected font family index in the list of available fonts

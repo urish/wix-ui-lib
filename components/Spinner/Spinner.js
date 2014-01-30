@@ -29,7 +29,8 @@ jQuery.fn.definePlugin('Spinner', function ($) {
 				maxValue : 1000,
 				value : 0,
 				step: 1,
-				precision: 0
+				precision: 0,
+				size: styles.default
 			}; 
 		},
 		markup: function () {

@@ -16,3 +16,4 @@ Spinner component, enables selection from linear range of numeric values one ste
 * value; 0; current value
 * step; 1; step size both for increment & decrement
 * precision; 0;
+* size; default;spinner size options are default, medium or large

@@ -9,13 +9,10 @@ ul, li {
     padding: 0;
 }
 
-/*
-*, *:before, *:after {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+h1{
+    padding: 10px 0;
+    margin: 0;
 }
-*/
 
 .wix-logo {
     position: relative;
@@ -40,6 +37,10 @@ ul, li {
 
 .page {
     display: table;
+}
+
+.page-css, .page-components, .page-demo, .page-getting-started {
+    padding-top: 50px;
 }
 
 .navigation {
@@ -89,11 +90,8 @@ ul, li {
     width: 775px;
 }
 
-.pages {
-    display: table;
-}
-
 .page-welcome {
+    display: table;
     width: 100%;
     height: 100%;
     position: relative;
@@ -158,13 +156,13 @@ ul, li {
     line-height: 25px;
 }
 
-.demo-container {
+.wix#demo .demo .demo-container {
     height: 646px;
     width: 600px;
     padding: 0 11px;
 }
 
-.demo-container > iframe {
+.wix#demo .demo .demo-container > iframe {
     overflow:hidden;
     width:100%;
     height:100%;
@@ -213,3 +211,189 @@ ul, li {
 }
 
 /*End DEMO Style*/
+
+.page-components .container,  .page-css .container {
+    width: 970px;
+    margin-left: 100px;
+}
+.js-main {
+    float:left;
+    width: 670px;
+    box-shadow: 0 0 10px 1px rgba(0,0,0,0.4);
+    padding: 0 10px;
+    margin: 18px 0;
+    border-radius: 4px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.8);
+}
+.js-sidebar {
+    float:left;
+    width: 230px;
+    min-height: 1px;
+}
+
+.js-back-to-top {
+    display: none;
+    background-color: rgba(0,0,0,0.7);
+    cursor: pointer;
+    position: fixed;
+    right: 0px;
+    bottom: 0;
+    margin-bottom: 15px;
+    padding: 10px;
+    -webkit-border-top-left-radius: 4px;
+    -webkit-border-bottom-left-radius: 4px;
+    -moz-border-radius-topleft: 4px;
+    -moz-border-radius-bottomleft: 4px;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+
+    -webkit-transition: color 0.1s linear 0s;
+    -moz-transition: color 0.1s linear 0s;
+    -o-transition: color 0.1s linear 0s;
+    transition: color 0.1s linear 0s;
+}
+
+.js-back-to-top.shown {
+    display: block;
+    animation: fadeIn 0.5s;
+    -moz-animation: fadeIn 0.5s;
+    -o-animation: fadeIn 0.5s;
+    -webkit-animation: fadeIn 0.5s;
+}
+
+.js-back-to-top > a {
+    color: #bbb;
+}
+
+
+.js-back-to-top:hover a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.side-bar ul {
+    list-style: none;
+}
+
+.side-bar h2 {
+    margin: 0;
+}
+
+.cmp-sidebar{
+    width: 210px;
+
+    color: #ffffff;
+    /*padding: 20px 15px;*/
+
+    border-radius: 3px;
+    background-color: #0099FF;
+    background-color: rgba(0, 153, 255, 0.8);
+    border: 1px solid rgba(0,0,0,0.3);
+    padding: 3px 0;
+}
+.plugin-markup, .plugin-options{
+    word-break: break-word;
+    padding: 5px;
+    background-color:rgba(127,127,127,0.04);
+    border: 1px solid rgba(127,127,127,0.3);
+    border-radius:4px;
+}
+.plugin-demo{
+    margin: 10px 0;
+}
+
+.cmp-plugin-decs-entry{
+    padding: 50px 0 20px 0;
+}
+.cmp-plugin-entry{
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+.cmp-plugin-entry:last-child{
+    border-bottom: 0;
+}
+
+
+.cmp-plugin-entry > a{
+    color: #ffffff;
+    display:block;
+    text-decoration: none;
+    padding: 4px 15px;
+    transition:all 0.3s;
+    background:transparent;
+}
+
+.cmp-plugin-entry a:hover {
+    background: rgba(255,255,255,0.5);
+}
+
+.cmp-plugin-entry .current-viewed{
+    background-color: rgba(0,0,0,0.25);
+}
+
+.cmp-plugin-decs-entry:last-child{
+    padding-bottom: 200px;
+}
+
+
+.js-cmp-sidebar-wrapper .nav {
+    list-style: none;
+    display:none;
+}
+
+.page-components, .page-css table.options-table {
+
+    border-collapse: separate !important;
+    border-radius: 4px;
+    border: 1px solid rgba(0,0,0,0.1);
+    width: 100%;
+}
+
+table.options-table th, td {
+    padding: 0.25rem;
+    text-align: left;
+    border: 1px solid rgba(0,0,0,0.1);
+    white-space: pre-wrap;
+}
+
+
+table.options-table tbody tr:nth-child(odd) {
+    background: rgba(0,0,0,0.015);
+}
+
+
+table.options-table th{
+    background: rgba(0,0,0,0.15);
+}
+
+
+.options-table .tb-name{
+    width:20%
+}
+
+.options-table .tb-default{
+    width:20%
+}
+
+
+.options-table .tb-desc{
+    width:60%
+}
+
+#Accordion-entry [wix-ctrl]{
+    height:186px;
+}
+
+.page-css .icons {
+    padding-top: 10px;
+}
+
+.page-css ul.icons > li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+#footer{
+    height: 160px;
+    clear:both;
+}

@@ -47,9 +47,8 @@ module.exports = function (grunt) {
 
 			docsCss: {
 				src: [
-					'docs/google-code-prettify/sunburst.css',
-					'docs/index.css',
-					'docs/DocsApp.css'
+					'docs/google-code-prettify/tomorrow.css',
+					'docs/index.css'
 				],
 				dest: dev + '/docs/docs.css'
 			}

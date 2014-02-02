@@ -4,12 +4,18 @@ Spinner component, enables selection from linear range of numeric values one ste
 
 ### Example
 
-<div wix-model="myInt" wix-ctrl="Spinner" wix-options="{ maxValue:500 }"></div>
+<div wix-model="myInt" wix-ctrl="Spinner" wix-options="{ maxValue:500 }" style="margin-bottom:5px"></div>
+
+<div wix-model="mySecondInt" wix-ctrl="Spinner" wix-options="{ maxValue:500, value: 5, size: 'medium' }" style="margin-bottom:5px"></div>
+
+<div wix-model="myThirdInt" wix-ctrl="Spinner" wix-options="{ maxValue:500, value: 10, size: 'large' }"></div>
 
 
 ### Markup
 ```html
 <div wix-model="myInt" wix-ctrl="Spinner" wix-options="{ maxValue:500 }"></div>
+<div wix-model="mySecondInt" wix-ctrl="Spinner" wix-options="{ maxValue:500, value, 5, size: 'medium' }"></div>
+<div wix-model="myThirdInt" wix-ctrl="Spinner" wix-options="{ maxValue:500, value, 10, size: 'large' }"></div>
 ```
 
 ### Options

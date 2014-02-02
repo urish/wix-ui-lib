@@ -1,6 +1,6 @@
 # Tooltip
 
-Tooltip component, enables content annotation on hover
+Tooltip component, enables content annotation on hover.
 
 ### Example
 

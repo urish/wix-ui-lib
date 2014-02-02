@@ -5,6 +5,29 @@ Popup component.
 
 ### Example
 
+<button class="uilib-btn btn-secondary" id="popupAnchorBtn">Open Popup</button>
+<button class="uilib-btn btn-secondary" id="modalAnchorBtn">Open Modal</button>
+
+<script>
+
+var popup = Wix.UI.create({ctrl: 'Popup',
+                        options: {buttonSet: 'okCancel', fixed:true}});
+
+var modal = Wix.UI.create({ctrl: 'Popup',
+                        options: {modal:true, buttonSet: 'okCancel', fixed:true}});
+
+$('#popupAnchorBtn').on('click', function(evt){
+    evt.stopPropagation();
+    popup.getCtrl().open();
+});
+
+$('#modalAnchorBtn').on('click', function(evt){
+    evt.stopPropagation();
+    modal.getCtrl().open();
+});
+
+</script>
+
 ### HTML
 ```html
 <button class="uilib-btn btn-secondary" id="popupAnchorBtn">Open Popup</button>

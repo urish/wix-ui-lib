@@ -1,9 +1,7 @@
 var DocsApp = {
 	Classes:{},
 	init : function () {
-		this.utils = this.Classes.Utils();
-		this.pluginDocsData = this.Classes.PluginDocsData(this.utils);
-		this.templates = this.Classes.Templates(this.pluginDocsData, this.utils);
+		this.templates = this.Classes.Templates();
 		this.$components = $("#components");
 		this.setAppElements();
 		this.markup();
@@ -15,10 +13,8 @@ var DocsApp = {
 		this.$docs = this.$components.find('.js-docs');
 	},
 	markup : function () {
-		this.$root.hide();
 		this.updatePrettifyClasses();
 		this.renderDocs();
-		this.$root.show();
 	},
 	updatePrettifyClasses:function(){
 		$('.lang-html,.lang-javascript').each(function(){
@@ -42,7 +38,7 @@ var DocsApp = {
 		var that = this;
 		$('#docs h1[id]').each(function(){
 			sidebarHTML += that.templates.menuTpl({name: this.innerHTML});
-		});		
+		});
 		this.$sidebar.find('.content').append(sidebarHTML);
 	}
 };

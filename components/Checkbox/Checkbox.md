@@ -1,4 +1,5 @@
 # Checkbox
+<!-- Checkbox -->
 
 Checkbox component, mimic native HTML checkbox by applying Wix style.
 

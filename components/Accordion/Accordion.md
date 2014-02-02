@@ -1,4 +1,5 @@
 # Accordion
+<!-- Accordion -->
 
 Accordion component, displays expandable content panes for presenting information in a limited amount of space.
 An accordion is divided to a vertical set of panes. By default only a single pane is opened.

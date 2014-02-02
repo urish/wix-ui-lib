@@ -36,8 +36,10 @@ var DocsApp = {
 	renderDocs : function () {
 		var sidebarHTML = '';
 		var that = this;
-		$('#docs h1[id]').each(function(){
-			sidebarHTML += that.templates.menuTpl({name: this.innerHTML});
+		$('#docs [data-scroll-target]').each(function(){
+			sidebarHTML += that.templates.menuTpl({ name: $(this).attr('data-name'),
+													id: $(this).attr('id')
+			});
 		});
 		this.$sidebar.find('.content').append(sidebarHTML);
 	}

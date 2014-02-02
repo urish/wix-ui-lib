@@ -1,4 +1,5 @@
-# ButtonGroup
+# Button Group
+<!-- ButtonGroup -->
 
 Button Group component, enables selection of one option from a group of horizontally ordered buttons.
 

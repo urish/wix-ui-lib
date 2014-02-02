@@ -2,22 +2,27 @@ module.exports = function(grunt) {
 	var _ = grunt.util._;
 	grunt.registerTask('mdDocs', 'Generate markup docs from components markdown', function (target) {
 
-		function getDocMdContent(src, fileContent) {
-			function getTitle(str) {
-				var title = str.match(/#\s*([\w]+)/);
-				return title ? title[1].trim() : null;
+		function getDocMdPluginContent(src, fileContent) {
+			function getId(str) {
+				var id = str.match(/<!--(.*)-->/);
+				return id ? id[1].trim() : null;
 			}
-			var title = getTitle(fileContent);
-			if (!title) {
-				grunt.log.error('Could not parse title form: ' + src);
+			function getName(str) {
+				var name = str.match(/#(.*)/);
+				return name ? name[1].trim() : null;
+			}
+			var id = getId(fileContent);
+			if (!id) {
+				grunt.log.error('Could not parse plugin id form: ' + src);
+			}
+			var name = getName(fileContent);
+			if (!name) {
+				grunt.log.error('Could not parse plugin id form: ' + src);
 			}
 			return {
-				title : title
-			};
-		}
-
-		function replaceMdParts(mdStr, parts) {
-			return mdStr.replace(/###\s*Example/, '### Example\n' + parts.markup.trim());
+				id : id,
+				name: name
+			}
 		}
 
 		var marked = require('marked');
@@ -29,10 +34,9 @@ module.exports = function(grunt) {
 		var options = grunt.config.get("mdDocs." + target).options;
 		var all = grunt.file.expand(options.files).map(function (filepath) {
 			var fileContent = grunt.file.read(filepath);
-			var parts = getDocMdContent(filepath, fileContent);
+			var plugin = getDocMdPluginContent(filepath, fileContent);
 			grunt.log.ok('file: ' + filepath);
-			return '<div data-scroll-target id="' + parts.title + '-entry" class="cmp-plugin-decs-entry">\n' + marked(fileContent) + '\n</div>';
-
+			return '<div data-scroll-target data-name="' + plugin.name + "\"" + 'id="' + plugin.id + '-entry" class="cmp-plugin-decs-entry">\n' + marked(fileContent) + '\n</div>';
 		});
 
 		var c = grunt.file.read(options.inject);

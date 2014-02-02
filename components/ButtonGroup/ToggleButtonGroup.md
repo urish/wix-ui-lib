@@ -1,4 +1,5 @@
-# ToggleButtonGroup
+# Toggle Button Group
+<!-- ToggleButtonGroup -->
 
 Toggle Button Group component, enables selection of multiple options through a group of horizontally ordered toggle buttons.
 

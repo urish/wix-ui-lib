@@ -1,4 +1,5 @@
-# ColorPicker
+# Color Picker
+<!-- ColorPicker -->
 
 Color Picker component, provide Wix style color selection with a 5x5 grid palette. Five main colors in the middle plus two brighter colors and two darker colors in each direction. These colors are defined according to the color palette of Wix user that added your App. In addition a custom style selector is available.
 

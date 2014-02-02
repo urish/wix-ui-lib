@@ -1,4 +1,5 @@
-# FontPicker
+# Font Picker
+<!-- FontPicker -->
 
 Font picker component, control the selection of a font family for a text field. The fonts list is taken from the Wix site.
 

@@ -1,4 +1,5 @@
-# LanguagePicker
+# Language Picker
+<!-- LanguagePicker -->
 
 Language Picker component, expandable dropdown list of languages. Use it to control the selection of a language supported by the app.
 

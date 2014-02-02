@@ -1,4 +1,5 @@
 # Tooltip
+<!-- Tooltip -->
 
 Tooltip component, enables content annotation on hover.
 

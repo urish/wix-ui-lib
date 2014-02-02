@@ -1,4 +1,5 @@
 # Spinner
+<!-- Spinner -->
 
 Spinner component, enables selection from linear range of numeric values one step at a time. The Spinner allows to set the selected range and the increment/decrement step.
 

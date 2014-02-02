@@ -1,4 +1,6 @@
 # Slider
+<!-- Slider -->
+
 
 Slider component, enables selection from linear range of numeric values through a draggable knob. The Slider allows to set the selected range and text labels before and after. It also allows to add a tooltip indication.
 

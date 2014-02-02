@@ -1,4 +1,5 @@
-# FontStylePicker
+# Font Style Picker
+<!-- FontStylePicker -->
 
 Font Style Picker component, control the selection of all relevant properties for a text field. The style list is based on the styles that are defined in the site of the Wix user that added your App.
 

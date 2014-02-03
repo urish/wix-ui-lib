@@ -45,6 +45,6 @@ Name            | Default   | Description
 ----------------|-----------|------------
 animationTime   | `150`     | expand/collase animation time in ms
 ease            | `linear`  | easing function
-toggleOpen      | `false`   | open all panes
-value           | `0`       |  opened pane at index
+toggleOpen      | `true`    | allow active pane to be toggled
+value           | `0`       | opened pane at index
 

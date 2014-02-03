@@ -17,4 +17,4 @@ Fixed position control component, enables positioning of a Fixed Position widget
 Name         | Default                                                                                                                     | Description
 -------------|-----------------------------------------------------------------------------------------------------------------------------|------------
 placements   | `['TOP_LEFT', 'TOP_CENTER', 'TOP_RIGHT', 'CENTER_LEFT', 'CENTER_RIGHT', 'BOTTOM_LEFT', 'BOTTOM_CENTER', 'BOTTOM_RIGHT']`    | Supported placements
-bindToWidget | `false`                                                                                                                     | whether to attach this control data to a widget in the Wix editor
+bindToWidget | `true`                                                                                                                      | whether to attach this control data to a widget in the Wix editor

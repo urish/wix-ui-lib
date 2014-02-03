@@ -282,6 +282,17 @@ module.exports = function (grunt) {
 			}
 		},
 
+		compress: {
+			main: {
+				options: {
+					archive: 'archive.zip'
+				},
+				files: [
+					{src: ['dist/images/**', 'dist/settings.html', 'dist/ui-lib**'], dest: '/'}
+				]
+			}
+		},
+
 		devServer: {
 			base: "dev",
 				dist: "dist",
@@ -300,13 +311,15 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-contrib-compress');
 	grunt.loadNpmTasks('grunt-karma');
 	grunt.loadNpmTasks('grunt-markdown');
 	grunt.loadTasks('tasks');
 
-	grunt.registerTask('default', ['clean:dev', 'concat', 'settings:dev']);
+	grunt.registerTask('default', 'dist');
 	grunt.registerTask('dev', ['devServer', 'clean:dev', 'concat', 'copy:devDocs', 'settings:dev', 'docs:dev', 'markdown:dev',  'mdDocs:dev', 'watch']);
 	grunt.registerTask('dist', ['clean:dist', 'concat', 'uglify', 'cssmin', 'copy:distImages', 'copy:distDocs', 'settings:dist', 'docs:dist', 'markdown:dist', 'mdDocs:dist']);
+	grunt.registerTask('release', ['dist', 'compress', 'release-create-upload']);
 
 	grunt.registerTask('lint', ['jshint']);
 };

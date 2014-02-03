@@ -4,14 +4,14 @@
 ## About
 This project is aimed at helping developers in the process of getting new apps to <a href="http://dev.wix.com" target="_blank">Wix Dev Center</a> as quickly as possible. The UI in this project focuses on the App's Settings Panel. The boilerplate offers UI standards and common Javascript components to assist the developer in passing Product tests, and in developing a consistent and uniformed UI for the app.
 
-##### Click here for <a href="http://wix.github.com/wix-ui-lib" target="_blank">demo</a> and documentation.
+##### Click here for <a href="http://wix.github.io/wix-ui-lib/" target="_blank">demo</a> and documentation.
 
 ## Overview
 Wix UI Library is a extension of the Wix SDK. It provides common CSS, HTML and JS Components which follow Wix product guide for Apps. Wix UI library will deploy itself as a sub namespace of the Wix SDK as Wix.UI.
 
 ### Dependencies
 
-Wix UI lib dependencies are jQuery from version 1.9.0 and Wix SDK from version 1.23.0
+Wix UI lib dependencies are jQuery from version 1.9.0 and Wix SDK from version 1.26.0
 
 ### Usage
 

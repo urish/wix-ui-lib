@@ -311,6 +311,7 @@ h1{
 
 .cmp-plugin-entry > a{
     color: #ffffff;
+    font-size: 15px;
     display:block;
     text-decoration: none;
     padding: 4px 15px;
@@ -325,11 +326,6 @@ h1{
 .cmp-plugin-entry .current-viewed{
     background-color: rgba(0,0,0,0.25);
 }
-
-.cmp-plugin-decs-entry:last-child{
-    padding-bottom: 200px;
-}
-
 
 .js-cmp-sidebar-wrapper .nav {
     list-style: none;

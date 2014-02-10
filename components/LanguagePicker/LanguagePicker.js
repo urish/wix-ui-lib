@@ -16,7 +16,8 @@ jQuery.fn.definePlugin('LanguagePicker', function () {
 		'Ru': 'Русский', 
 		'Ja': '日本語', 
 		'Ko': '한국어', 
-		'Tr': 'Türkçe'
+		'Tr': 'Türkçe',
+		'He': 'עברית'
 	};
 	
 	return {

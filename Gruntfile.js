@@ -236,13 +236,13 @@ module.exports = function (grunt) {
 			dist: {
 				dest: dist + '/docs/index.html',
 				context: {
-					js: '/dist/ui-lib.min.js',
-					css: '/dist/ui-lib.min.css',
+					js: '../ui-lib.min.js',
+					css: '../ui-lib.min.css',
 					docs: {
-						js: '/dist/docs/docs.min.js',
-						vendorJs: '/dist/docs/jquery.sticky-kit.min.js',
-						css: '/dist/docs/docs.min.css',
-						settings: '/dist/settings.html?viewMode=standalone'
+						js: '../docs/docs.min.js',
+						vendorJs: '../docs/jquery.sticky-kit.min.js',
+						css: '../docs/docs.min.css',
+						settings: '../settings.html?viewMode=standalone'
 					}
 				}
 			}
@@ -293,10 +293,10 @@ module.exports = function (grunt) {
 			}
 		},
 
-		devServer: {
+		server: {
 			base: "dev",
-				dist: "dist",
-				web: {
+			dist: "dist",
+			web: {
 				port: 8000
 			}
 		}
@@ -317,7 +317,7 @@ module.exports = function (grunt) {
 	grunt.loadTasks('tasks');
 
 	grunt.registerTask('default', 'dist');
-	grunt.registerTask('dev', ['devServer', 'clean:dev', 'concat', 'copy:devDocs', 'settings:dev', 'docs:dev', 'markdown:dev',  'mdDocs:dev', 'watch']);
+	grunt.registerTask('dev', ['server', 'clean:dev', 'concat', 'copy:devDocs', 'settings:dev', 'docs:dev', 'markdown:dev',  'mdDocs:dev', 'watch']);
 	grunt.registerTask('dist', ['clean:dist', 'concat', 'uglify', 'cssmin', 'copy:distImages', 'copy:distDocs', 'settings:dist', 'docs:dist', 'markdown:dist', 'mdDocs:dist']);
 	grunt.registerTask('release', ['dist', 'compress', 'release-create-upload']);
 

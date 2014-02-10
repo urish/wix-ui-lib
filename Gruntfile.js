@@ -236,13 +236,13 @@ module.exports = function (grunt) {
 			dist: {
 				dest: dist + '/docs/index.html',
 				context: {
-					js: '../ui-lib.min.js',
-					css: '../ui-lib.min.css',
+					js: 'dist/ui-lib.min.js',
+					css: 'dist/ui-lib.min.css',
 					docs: {
-						js: '../docs/docs.min.js',
-						vendorJs: '../docs/jquery.sticky-kit.min.js',
-						css: '../docs/docs.min.css',
-						settings: '../settings.html?viewMode=standalone'
+						js: 'dist/docs/docs.min.js',
+						vendorJs: 'dist/docs/jquery.sticky-kit.min.js',
+						css: 'dist/docs/docs.min.css',
+						settings: 'dist/settings.html?viewMode=standalone'
 					}
 				}
 			}

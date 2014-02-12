@@ -17,6 +17,7 @@ module.exports = function (grunt) {
 		concat : {
 			js: {
 				src: [
+					'vendor/plugins.js',
 					'core/definePlugin.js',
 					'core/ColorPickerCore.js',
 					'core/core.js',

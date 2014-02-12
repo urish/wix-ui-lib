@@ -65,7 +65,12 @@
 			try {
 				initializePlugin(elements[i]);
 			} catch (err) {
-				console.log && console.log(err.stack.replace('Error:', 'Plugin Initialization Error:'), elements[i]);
+				if(console.log){
+					var getStack = function(err){
+						return err.stack ? err.stack : err;
+					}
+					console.log(getStack(err).replace('Error:', 'Plugin Initialization Error:'), elements[i]);
+				}
 			}
 		}
 

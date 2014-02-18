@@ -207,8 +207,8 @@ h1{
 
 /*End DEMO Style*/
 
-.page-components .container,  .page-css .container {
-    width: 970px;
+.page-getting-started .container, .page-components .container,  .page-css .container {
+    width: 935px;
     margin-left: 100px;
 }
 .js-main {
@@ -221,6 +221,18 @@ h1{
     overflow: hidden;
     background: rgba(255,255,255,0.8);
 }
+
+.js-getting-started {
+    float:left;
+    width: 670px;
+    box-shadow: 0 0 10px 1px rgba(0,0,0,0.4);
+    padding: 0 10px;
+    margin: 18px 0;
+    border-radius: 4px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.8);
+}
+
 .js-sidebar {
     float:left;
     width: 230px;
@@ -375,7 +387,7 @@ h1{
     margin-right: 10px;
 }
 
-.page-getting-started ul, .page-components .content ul {
+.page-getting-started .content ul, .page-components .content ul {
     margin-left: 16px;
     list-style: inherit;
     font-size: 12px;

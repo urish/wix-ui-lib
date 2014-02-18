@@ -99,7 +99,7 @@ module.exports = function (grunt) {
 					"<%= concat.docsJs.src %>",
 					"<%= concat.docsCss.src %>",
 					"<%= mdDocs.dev.options.files %>"],
-				tasks: ['concat:docsJs', 'concat:docsCss', 'copy:devDocs', 'docs:dev', 'markdown:dev', 'mdDocs:dev']
+				tasks: ['concat:docsJs', 'concat:docsCss', 'copy:devDocs', 'docs:dev', 'markdownProcessor:mdGettingStarted:dev', 'markdownProcessor:mdDocs:dev']
 			}
 		},
 
@@ -186,21 +186,6 @@ module.exports = function (grunt) {
 			}
 		},
 
-		mdDocs:{
-			dev: {
-				options: {
-					files:['components/**/*.md'],
-					inject: dev + '/docs/index.html'
-				}
-			},
-			dist: {
-				options: {
-					files:['components/**/*.md'],
-					inject: dist + '/docs/index.html'
-				}
-			}
-		},
-
 		settings:{
 			template: 'html/template/settings.html',
 			dev: {
@@ -249,39 +234,41 @@ module.exports = function (grunt) {
 			}
 		},
 
-		markdown: {
-			dev: {
-				files: [{
-					expand: true,
-					src: 'docs/md/*.md',
-					dest: dev,
-					ext: '.html'}
-				],
-				options: {
-					postCompile: function(html, context) {
-						var source = grunt.file.read(dev + '/docs/index.html');
-						source = source.replace('${{getting-started}}', html);
-						grunt.file.write(dev + '/docs/index.html', source);
-					}
-				}
-			},
+        mdGettingStarted:{
+            dev: {
+                options: {
+                    template: '${{getting-started}}',
+                    files:['docs/md/GetTheCode.md','docs/md/Dependencies.md', 'docs/md/HtmlFileSetup.md',
+                        'docs/md/NamespaceAndProgramming.md', 'docs/md/UsingComponents.md', 'docs/md/WixCustomHtmlAttributes.md'],
+                    inject: dev + '/docs/index.html'
+                }
+            },
+            dist: {
+                options: {
+                    template: '${{getting-started}}',
+                    files:['docs/md/GetTheCode.md','docs/md/Dependencies.md', 'docs/md/HtmlFileSetup.md',
+                        'docs/md/NamespaceAndProgramming.md', 'docs/md/UsingComponents.md', 'docs/md/WixCustomHtmlAttributes.md'],
+                    inject: dist + '/docs/index.html'
+                }
+            }
+        },
 
-			dist: {
-				files: [{
-					expand: true,
-					src: 'docs/md/*.md',
-					dest: dist,
-					ext: '.html'}
-				],
-				options: {
-					postCompile: function(html, context) {
-						var source = grunt.file.read(dist + '/docs/index.html');
-						source = source.replace('${{getting-started}}', html);
-						grunt.file.write(dist + '/docs/index.html', source);
-					}
-				}
-			}
-		},
+        mdDocs:{
+            dev: {
+                options: {
+                    template: '${{content}}',
+                    files:['components/**/*.md'],
+                    inject: dev + '/docs/index.html'
+                }
+            },
+            dist: {
+                options: {
+                    template: '${{content}}',
+                    files:['components/**/*.md'],
+                    inject: dist + '/docs/index.html'
+                }
+            }
+        },
 
 		compress: {
 			main: {
@@ -318,8 +305,8 @@ module.exports = function (grunt) {
 	grunt.loadTasks('tasks');
 
 	grunt.registerTask('default', 'dist');
-	grunt.registerTask('dev', ['server', 'clean:dev', 'concat', 'copy:devDocs', 'settings:dev', 'docs:dev', 'markdown:dev',  'mdDocs:dev', 'watch']);
-	grunt.registerTask('dist', ['clean:dist', 'concat', 'uglify', 'cssmin', 'copy:distImages', 'copy:distDocs', 'settings:dist', 'docs:dist', 'markdown:dist', 'mdDocs:dist']);
+	grunt.registerTask('dev', ['server', 'clean:dev', 'concat', 'copy:devDocs', 'settings:dev', 'docs:dev', 'markdownProcessor:mdGettingStarted:dev',  'markdownProcessor:mdDocs:dev', 'watch']);
+	grunt.registerTask('dist', ['clean:dist', 'concat', 'uglify', 'cssmin', 'copy:distImages', 'copy:distDocs', 'settings:dist', 'docs:dist', 'markdownProcessor:mdGettingStarted:dist', 'markdownProcessor:mdDocs:dist']);
 	grunt.registerTask('release', ['dist', 'compress', 'release-create-upload']);
 
 	grunt.registerTask('lint', ['jshint']);

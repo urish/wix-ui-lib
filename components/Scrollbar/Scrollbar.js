@@ -162,7 +162,7 @@
         });
 
         // set position
-        var posCss = (this.options.position == 'right') ? { right: this.options.distance } : { left: this.options.distance };
+        var posCss = (this.options.position == 'right') ? { right: 0 } : { left: this.options.distance };
         this.$rail.css(posCss);
         this.$bar.css(posCss);
 

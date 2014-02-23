@@ -27,9 +27,9 @@ DocsApp.Classes.ScrollInterations = function () {
 				} else {
 					noScroll = false;
 				}
-				$body.animate({
+                $body.animate({
 					scrollTop : $(id).offset().top
-				}, 160, function () {
+                }, 250, function () {
 					window.location.hash = id;
 				});
 			});

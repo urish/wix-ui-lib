@@ -239,7 +239,16 @@ module.exports = function (grunt) {
                 options: {
                     template: '${{getting-started}}',
                     files:['docs/md/GetTheCode.md','docs/md/Dependencies.md', 'docs/md/HtmlFileSetup.md',
-                        'docs/md/NamespaceAndProgramming.md', 'docs/md/UsingComponents.md', 'docs/md/WixCustomHtmlAttributes.md'],
+                        'docs/md/NamespaceAndProgramming.md',
+                        'docs/md/UsingComponents.md',
+                        'docs/md/WixCustomHtmlAttributes.md',
+                        'docs/md/WixCustomHtmlAttributes/Initialization.md',
+                        'docs/md/WixCustomHtmlAttributes/Model.md',
+                        'docs/md/WixCustomHtmlAttributes/WixStyleParameters.md',
+                        'docs/md/WixCustomHtmlAttributes/StyleParametersInCssStylesheet.md',
+                        'docs/md/WixCustomHtmlAttributes/AdvanceUsage.md',
+                        'docs/md/WixCustomHtmlAttributes/DynamicCreationOfjavascriptComponents.md',
+                        'docs/md/WixCustomHtmlAttributes/GetComponentControllerInstanceDynamically.md'],
                     inject: dev + '/docs/index.html'
                 }
             },
@@ -247,7 +256,16 @@ module.exports = function (grunt) {
                 options: {
                     template: '${{getting-started}}',
                     files:['docs/md/GetTheCode.md','docs/md/Dependencies.md', 'docs/md/HtmlFileSetup.md',
-                        'docs/md/NamespaceAndProgramming.md', 'docs/md/UsingComponents.md', 'docs/md/WixCustomHtmlAttributes.md'],
+                        'docs/md/NamespaceAndProgramming.md',
+                        'docs/md/UsingComponents.md',
+                        'docs/md/WixCustomHtmlAttributes.md',
+                        'docs/md/WixCustomHtmlAttributes/Initialization.md',
+                        'docs/md/WixCustomHtmlAttributes/Model.md',
+                        'docs/md/WixCustomHtmlAttributes/WixStyleParameters.md',
+                        'docs/md/WixCustomHtmlAttributes/StyleParametersInCssStylesheet.md',
+                        'docs/md/WixCustomHtmlAttributes/AdvanceUsage.md',
+                        'docs/md/WixCustomHtmlAttributes/DynamicCreationOfjavascriptComponents.md',
+                        'docs/md/WixCustomHtmlAttributes/GetComponentControllerInstanceDynamically.md'],
                     inject: dist + '/docs/index.html'
                 }
             }

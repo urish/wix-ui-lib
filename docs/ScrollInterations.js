@@ -56,18 +56,14 @@ DocsApp.Classes.ScrollInterations = function () {
 				$('.navigation').toggleClass('shown', $doc.scrollTop() >= navPos);
 
 				$(".js-back-to-top").toggleClass('shown', $doc.scrollTop() >= navPos);
-
-
 			});
 		},
 
 		bindScrollInteraction : function() {
 			var $inter = $(dataInter);
 			var allHashes = $(dataTarget).toArray();
-			var tollerace = 30;
+            var tollerace = 30;
 			var winScrollTop = $win.scrollTop();
-			var winHeight = $win.height();
-			var docHeight = $doc.height();
 			var timeout;
 			var _winScrollTop;
 			var dir = 0;
@@ -91,10 +87,12 @@ DocsApp.Classes.ScrollInterations = function () {
 				return elements.pop();
 			};
 			var updateCss = function (el) {
-				$inter.removeClass(currentViewed);
-				if (el) {
-					//window.location.hash = el.id;
-					$('[href="#' + el.id + '"]').addClass(currentViewed);
+                $inter.parent().removeClass(currentViewed);
+                $('ul.nav').hide();
+                if (el) {
+                    var $elm = $('[href="#' + el.id + '"]');
+                    $elm.parent().addClass(currentViewed);
+                    $elm.closest('ul.nav').show();
 				}
 			}
 			$win.scroll(function (evt) {

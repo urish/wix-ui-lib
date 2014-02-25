@@ -92,6 +92,7 @@ DocsApp.Classes.ScrollInterations = function () {
                 if (el) {
                     var $elm = $('[href="#' + el.id + '"]');
                     $elm.parent().addClass(currentViewed);
+                    $elm.parent().find('ul.nav').show();
                     $elm.closest('ul.nav').show();
 				}
 			}

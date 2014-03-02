@@ -1,4 +1,4 @@
-###Advavnce Usage
+###Advance Usage
 <!-- WixCustomHTMLAttributes-AdvanceUsage -->
 
 #### Initialize with javascript
